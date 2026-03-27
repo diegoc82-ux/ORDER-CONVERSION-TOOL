@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U1P Order Conversion Tool</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; min-height: 100vh; }
+
+header {
+  background: #0d2b4e; color: #fff;
+  padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+header h1 { font-size: 1.2rem; letter-spacing: .4px; }
+#dispatch-badge {
+  background: #e85a2b; color: #fff;
+  padding: 5px 16px; border-radius: 20px; font-size: .85rem; font-weight: bold;
+}
+
+main { max-width: 1380px; margin: 26px auto; padding: 0 16px 50px; }
+
+.card {
+  background: #fff; border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.1); padding: 22px; margin-bottom: 18px;
+}
+.card h2 { font-size: .92rem; color: #0d2b4e; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+
+.tab-bar { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 14px; }
+.tab { padding: 8px 20px; cursor: pointer; font-size: .9rem; color: #666; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.tab.active { color: #0d2b4e; border-bottom-color: #0d2b4e; font-weight: bold; }
+
+#drop-zone {
+  border: 2px dashed #b0b8c4; border-radius: 8px;
+  padding: 38px; text-align: center; cursor: pointer; background: #fafbfc;
+  transition: .2s;
+}
+#drop-zone:hover, #drop-zone.drag-over { border-color: #0d2b4e; background: #eef2f8; }
+#drop-zone .icon { font-size: 2.2rem; margin-bottom: 8px; }
+#drop-zone p { color: #666; font-size: .88rem; }
+#drop-zone p strong { color: #0d2b4e; }
+#file-input { display: none; }
+#file-name { margin-top: 8px; font-size: .83rem; color: #0d2b4e; font-weight: bold; }
+
+textarea {
+  width: 100%; border: 1px solid #ccc; border-radius: 8px;
+  padding: 11px; font-size: .87rem; line-height: 1.5; resize: vertical; min-height: 170px;
+}
+textarea:focus { outline: none; border-color: #0d2b4e; }
+
+.btn { border: none; border-radius: 7px; cursor: pointer; font-size: .9rem; font-weight: bold; padding: 10px 24px; transition: background .2s; }
+.btn-primary  { background: #0d2b4e; color: #fff; margin-top: 12px; }
+.btn-primary:hover { background: #16406e; }
+.btn-primary:disabled { background: #9ab; cursor: default; }
+.btn-success  { background: #1a7a3c; color: #fff; }
+.btn-success:hover { background: #22a050; }
+.btn-neutral  { background: #555; color: #fff; }
+.btn-neutral:hover { background: #444; }
+.btn-sm { padding: 5px 13px; font-size: .8rem; }
+.btn-add-row { background: #e8f0fe; color: #0d2b4e; border: 1px dashed #0d2b4e; border-radius: 6px; cursor: pointer; padding: 6px 16px; font-size: .82rem; margin-top: 8px; }
+.btn-add-row:hover { background: #d0e0fc; }
+.btn-del { background: none; border: none; color: #c0392b; cursor: pointer; font-size: 1rem; padding: 0 4px; }
+.btn-del:hover { color: #922b21; }
+
+/* Order meta fields */
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin-bottom: 18px; }
+.field-group { display: flex; flex-direction: column; gap: 4px; }
+.field-group label { font-size: .75rem; text-transform: uppercase; color: #666; letter-spacing: .4px; }
+.field-group input {
+  border: 1px solid #ccc; border-radius: 6px; padding: 7px 10px; font-size: .9rem; width: 100%;
+}
+.field-group input:focus { outline: none; border-color: #0d2b4e; }
+
+/* Tote prompt */
+#tote-prompt {
+  display: none; background: #fff8e6; border: 1px solid #f0c040;
+  border-radius: 8px; padding: 14px 18px; margin-bottom: 16px;
+}
+#tote-prompt p { font-size: .9rem; margin-bottom: 10px; }
+.tote-btns { display: flex; gap: 10px; }
+.btn-tote-yes { background: #1a7a3c; color: #fff; border: none; padding: 7px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-tote-no  { background: #6c757d; color: #fff; border: none; padding: 7px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-tote-yes:hover { background: #22a050; }
+.btn-tote-no:hover  { background: #5a6268; }
+.tote-badge { display: inline-block; font-size: .74rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-left: 6px; }
+.badge-yes { background: #d4edda; color: #155724; }
+.badge-no  { background: #e2e3e5; color: #383d41; }
+
+/* Items table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+thead tr { background: #0d2b4e; color: #fff; }
+thead th { padding: 8px 8px; text-align: left; white-space: nowrap; font-size: .75rem; letter-spacing: .3px; }
+tbody tr:nth-child(even) { background: #f6f8fb; }
+tbody tr:hover { background: #eef2f8; }
+tbody td { padding: 5px 6px; vertical-align: middle; }
+tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: .82rem; }
+.num { text-align: right; }
+
+/* Editable inputs in table */
+.tbl-input {
+  border: 1px solid #ddd; border-radius: 4px; padding: 4px 6px;
+  font-size: .79rem; width: 100%; background: #fff;
+}
+.tbl-input:focus { outline: none; border-color: #0d2b4e; background: #f0f6ff; }
+.tbl-select { border: 1px solid #ddd; border-radius: 4px; padding: 4px 4px; font-size: .78rem; width: 100%; background: #fff; }
+.tbl-select:focus { outline: none; border-color: #0d2b4e; }
+.derived { color: #555; font-size: .78rem; }
+.warn-txt { color: #c0392b; font-size: .73rem; }
+
+/* Spinner */
+#spinner { display: none; text-align: center; padding: 28px; }
+.ring { width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: #0d2b4e; border-radius: 50%; animation: spin .8s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#spinner p { margin-top: 10px; color: #555; font-size: .88rem; }
+
+#error-msg  { display: none; background: #fdecea; border: 1px solid #f5c6cb; border-radius: 7px; padding: 13px 16px; color: #721c24; font-size: .88rem; margin-bottom: 14px; }
+#ok-msg     { display: none; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 7px; padding: 13px 16px; color: #155724; font-size: .88rem; margin-bottom: 14px; }
+
+#results { display: none; }
+.actions-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+#generate-btn { display: none; }
+
+@media (max-width:600px) { .meta-grid { grid-template-columns: 1fr; } header h1 { font-size: 1rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>&#x1F6E2;&#xFE0F; U1P Order Conversion Tool &nbsp;<span style="opacity:.6;font-size:.8rem;font-weight:normal;">Ultra1Plus</span></h1>
+  <span id="dispatch-badge">Loading...</span>
+</header>
+
+<main>
+
+  <!-- Input card -->
+  <div class="card">
+    <h2>Upload or Paste Purchase Order</h2>
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchTab('file')">&#128206; Upload File</div>
+      <div class="tab" onclick="switchTab('text')">&#9998;&#65039; Paste Text / Email</div>
+    </div>
+
+    <div id="tab-file">
+      <div id="drop-zone" onclick="document.getElementById('file-input').click()"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
+           ondragleave="this.classList.remove('drag-over')"
+           ondrop="handleDrop(event)">
+        <div class="icon">&#128196;</div>
+        <p>Drag &amp; drop a <strong>PDF</strong> or <strong>Excel (.xlsx)</strong> here, or <strong>click to browse</strong></p>
+        <p style="margin-top:5px;font-size:.78rem;color:#aaa;">Supports PDF and Excel (.xlsx) purchase orders</p>
+        <div id="file-name"></div>
+      </div>
+      <input type="file" id="file-input" accept=".pdf,.xlsx,.xls,.txt" onchange="fileSelected(this)">
+    </div>
+
+    <div id="tab-text" style="display:none">
+      <textarea id="text-input" placeholder="Paste the purchase order text or email content here..."></textarea>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center;">
+      <button class="btn btn-primary" id="parse-btn" onclick="parseOrder()" style="margin-top:0;margin-bottom:0;">&#128269; Process Order</button>
+      <button class="btn" style="background:#c0392b;color:#fff;" onclick="clearAll()">&#128465;&#65039; Clear All</button>
+    </div>
+  </div>
+
+  <div id="spinner"><div class="ring"></div><p>Extracting order information...</p></div>
+  <div id="error-msg"></div>
+  <div id="ok-msg"></div>
+
+  <!-- Debug panel — hidden by default, shown when a PDF is processed -->
+  <div id="debug-panel" class="card" style="display:none;background:#f9f9f9;border:1px solid #ccc;">
+    <h2 style="display:flex;justify-content:space-between;align-items:center;">
+      Raw Extracted Text <button onclick="document.getElementById('debug-panel').style.display='none'" class="btn btn-sm btn-neutral">✕ Close</button>
+    </h2>
+    <textarea id="debug-text" style="width:100%;height:260px;font-size:.75rem;font-family:monospace;background:#fff;border:1px solid #ddd;border-radius:4px;padding:8px;" readonly placeholder="Raw PDF text will appear here after processing…"></textarea>
+  </div>
+
+  <!-- Results card -->
+  <div id="results" class="card">
+    <h2>Dispatch Note — Review &amp; Edit</h2>
+
+    <div id="tote-prompt">
+      <p>&#x1F6E2;&#xFE0F; <strong>Tote(s) detected.</strong> Is <span id="tote-client"></span> approved for the <strong>Tote Return Program</strong>?</p>
+      <div class="tote-btns">
+        <button class="btn-tote-yes" onclick="setToteReturn(true)">&#x2705; Yes — Tote Return</button>
+        <button class="btn-tote-no"  onclick="setToteReturn(false)">&#x274C; No — Standard</button>
+      </div>
+    </div>
+
+    <!-- Order meta (editable) -->
+    <div class="meta-grid">
+      <div class="field-group"><label>Client Name</label><input id="f-client" type="text" placeholder="Client name"></div>
+      <div class="field-group"><label>PO Number</label><input id="f-po" type="text" placeholder="Auto-detected"></div>
+      <div class="field-group"><label>Address Line 1</label><input id="f-addr1" type="text" placeholder="Street address"></div>
+      <div class="field-group"><label>Order Date</label><input id="f-date" type="text" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>Address Line 2</label><input id="f-addr2" type="text" placeholder="City, State ZIP"></div>
+      <div class="field-group"><label>Delivery Date <span style="color:#aaa;font-weight:normal">(leave blank if none)</span></label><input id="f-delivery" type="text" placeholder="MM/DD/YYYY"></div>
+    </div>
+
+    <!-- Items table -->
+    <div class="table-wrap">
+      <table id="items-table">
+        <thead>
+          <tr>
+            <th style="width:64px">CODE</th>
+            <th style="width:112px">PRESENTATION</th>
+            <th style="width:56px" class="num">CASES<br><span style="font-weight:normal;font-size:.65rem;opacity:.75">(dispatch)</span></th>
+            <th style="width:52px" class="num">PO QTY<br><span style="font-weight:normal;font-size:.65rem;opacity:.75">(ordered)</span></th>
+            <th style="width:78px">SKU</th>
+            <th>DESCRIPTION</th>
+            <th style="width:74px">SPEC</th>
+            <th style="width:55px" class="num">UNIT QTY</th>
+            <th style="width:56px" class="num">PALLETS</th>
+            <th style="width:62px" class="num">EST WEIGHT</th>
+            <th style="width:70px" class="num">PRICE/CASE</th>
+            <th style="width:68px" class="num">TOTAL</th>
+            <th style="width:22px"></th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="8" style="text-align:right;color:#666;">TOTALS</td>
+            <td class="num" id="total-pallets">—</td>
+            <td class="num" id="total-weight">—</td>
+            <td></td>
+            <td class="num" id="total-amount">—</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <button class="btn-add-row" onclick="addRow()">+ Add Row</button>
+
+    <!-- MAXILUB-only freight input -->
+    <div id="freight-bar" style="display:none; margin:10px 0; align-items:center; gap:10px;">
+      <label style="font-weight:600; font-size:13px;">FREIGHT COST ($)</label>
+      <input type="number" id="freight-cost" min="0" step="0.01" placeholder="e.g. 3400.00"
+             style="width:140px; padding:6px 8px; border:1px solid #ccc; border-radius:4px; font-size:13px;">
+      <span style="font-size:12px; color:#666;">— will be distributed by weight % in CSV</span>
+    </div>
+
+    <div class="actions-bar">
+      <button class="btn btn-success" id="generate-btn" onclick="generateCSV()">&#11015;&#65039; Download Dispatch CSV</button>
+      <button class="btn btn-neutral"  onclick="recalcAll()" title="Recalculate all rows after manual edits">&#8635; Update</button>
+      <button class="btn btn-neutral"  onclick="resetForm()">&#8634; New Order</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── State ───────────────────────────────────────────────────────────────────
+let catalog = {};
+let imporcarsaPrices = {};
+let a8Prices = {};
+let cePrices  = {};
+let beicruzPrices = {};
+let garnerPrices  = {};
+let pagsaPrices   = {};
+let trebolPrices  = {};
+let maxilubPrices = {};
+let servistarPrices = {};
+let frenoseguroPrices = {};
+let currentClientName = '';
+let toteReturn = false;
+let hasTotes   = false;
+let activeTab  = 'file';
+let selectedFile = null;
+
+// ── Calculation rules ─────────────────────────────────────────────────────
+// units_per_case: how many customer-facing units make one case (null = already ordered in cases)
+// unit_label: the label customers use when ordering by individual units
+const PRES_CALC = {
+  'DRUM (55G)':      { pallet_div:  4,   weight_mult: 1800, unit_mult:   1, tote: false, dispatch_spec: 'DRUM (55G)',      units_per_case: null,  unit_label: null    },
+  'PAIL (5G)':       { pallet_div: 56,   weight_mult: 2260, unit_mult:   1, tote: false, dispatch_spec: 'PAIL (5G)',       units_per_case: null,  unit_label: null    },
+  'TOTE (265G)':     { pallet_div: 265,  weight_mult: 2126, unit_mult: 265, tote: true,  dispatch_spec: 'BULK (OIL)',      units_per_case: null,  unit_label: null    },
+  'TOTE (250G)':     { pallet_div: 250,  weight_mult: 2364, unit_mult: 250, tote: true,  dispatch_spec: 'BULK (COOL)',     units_per_case: null,  unit_label: null    },
+  'TOTE (330G)':     { pallet_div:  1,   weight_mult: 2635, unit_mult:   1, tote: true,  dispatch_spec: 'TOTE (330G)',     units_per_case: null,  unit_label: null    },
+  'BULK (OIL)':      { pallet_div: 265,  weight_mult: 2126, unit_mult:   1, tote: true,  dispatch_spec: 'BULK (OIL)',      units_per_case: null,  unit_label: null    },
+  'BULK (COOL)':     { pallet_div: 250,  weight_mult: 2364, unit_mult:   1, tote: true,  dispatch_spec: 'BULK (COOL)',     units_per_case: null,  unit_label: null    },
+  'BOX (12Q)':       { pallet_div:  84,  weight_mult: 2184, unit_mult:   1, tote: false, dispatch_spec: 'BOX (12Q)',       units_per_case:  12,   unit_label: 'QT'   },
+  'BOX (6G)':        { pallet_div:  36,  weight_mult: 2000, unit_mult:   1, tote: false, dispatch_spec: 'BOX (6G)',        units_per_case:   6,   unit_label: 'GAL'  },
+  'BOX (4G)':        { pallet_div:  60,  weight_mult: 1850, unit_mult:   1, tote: false, dispatch_spec: 'BOX (4G)',        units_per_case:   4,   unit_label: 'GAL'  },
+  'BOX (3/5QTS)':    { pallet_div:  60,  weight_mult: 1950, unit_mult:   1, tote: false, dispatch_spec: 'BOX (3/5QTS)',    units_per_case:   3,   unit_label: '5QT'  },
+  'BOX (1 X 2.5G)':  { pallet_div:  92,  weight_mult: 2325, unit_mult:   1, tote: false, dispatch_spec: 'BOX (1 X 2.5G)', units_per_case:   1,   unit_label: '2.5G' },
+  'BOX (2 X 2.5G)':  { pallet_div:  44,  weight_mult: 2204, unit_mult:   1, tote: false, dispatch_spec: 'BOX (2 X 2.5G)', units_per_case:   2,   unit_label: '2.5G' },
+  'JERRYCAN (20L)':  { pallet_div:  48,  weight_mult: 2323, unit_mult:   1, tote: false, dispatch_spec: 'JERRYCAN (20L)', units_per_case: null,  unit_label: null    },
+  'CASE 10/1':       { pallet_div: 165,  weight_mult: 1450, unit_mult:   1, tote: false, dispatch_spec: 'CASE 10/1',      units_per_case:  10,   unit_label: '1QT'  },
+  'KEG (120LBS)':    { pallet_div:   9,  weight_mult: 1200, unit_mult:   1, tote: false, dispatch_spec: 'KEG (120LBS)',   units_per_case: null,  unit_label: null    },
+};
+const PRESENTATIONS = Object.keys(PRES_CALC);
+
+// ── Init ──────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    const [catRes, cntRes, priceRes, a8Res, ceRes, beiRes, garnerRes, pagsaRes, trebolRes, maxilubRes, servistarRes, frenoseguroRes] = await Promise.all([
+      fetch('/products.json'),
+      fetch('/api/counter'),
+      fetch('/imporcarsa_prices.json'),
+      fetch('/8a_prices.json'),
+      fetch('/competitive_edge_prices.json'),
+      fetch('/beicruz_prices.json'),
+      fetch('/garner_prices.json'),
+      fetch('/pagsa_prices.json'),
+      fetch('/trebol_prices.json'),
+      fetch('/maxilub_prices.json'),
+      fetch('/servistar_prices.json'),
+      fetch('/frenoseguro_prices.json'),
+    ]);
+    catalog           = await catRes.json();
+    imporcarsaPrices  = await priceRes.json();
+    a8Prices          = await a8Res.json();
+    cePrices          = await ceRes.json();
+    beicruzPrices     = await beiRes.json();
+    garnerPrices      = await garnerRes.json();
+    pagsaPrices       = await pagsaRes.json();
+    trebolPrices      = await trebolRes.json();
+    maxilubPrices     = await maxilubRes.json();
+    servistarPrices   = await servistarRes.json();
+    frenoseguroPrices = await frenoseguroRes.json();
+    const cnt = await cntRes.json();
+    updateDispatchBadge(cnt.last + 1);
+  } catch(e) {
+    console.warn('Init error', e);
+  }
+}
+
+function updateDispatchBadge(n) {
+  document.getElementById('dispatch-badge').textContent = 'Next Dispatch: #' + n;
+}
+
+// ── Tab / file helpers ────────────────────────────────────────────────────
+function switchTab(t) {
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', (i===0?'file':'text')===t));
+  document.getElementById('tab-file').style.display  = t==='file'?'':'none';
+  document.getElementById('tab-text').style.display  = t==='text'?'':'none';
+}
+function fileSelected(inp) { if(inp.files[0]){ selectedFile=inp.files[0]; document.getElementById('file-name').textContent='📎 '+selectedFile.name; } }
+function handleDrop(e) {
+  e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if(f){ selectedFile=f; document.getElementById('file-name').textContent='📎 '+f.name; }
+}
+
+// ── Parsing ───────────────────────────────────────────────────────────────
+async function parseOrder() {
+  hideMessages();
+  document.getElementById('results').style.display = 'none';
+
+  const btn = document.getElementById('parse-btn');
+  btn.disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+
+  try {
+    let parsed = null;
+
+    if (activeTab === 'file') {
+      if (!selectedFile) { showError('Please select a file first.'); return; }
+
+      if (/\.xlsx?$/i.test(selectedFile.name)) {
+        // ── Excel path ──────────────────────────────────────────────────────
+        const buf = await selectedFile.arrayBuffer();
+        const wb  = XLSX.read(buf, { type: 'array', cellDates: true });
+        parsed = parseExcelPO(wb);
+        if (!parsed) { showError('Could not parse Excel file — unsupported format.'); return; }
+      } else {
+        // ── PDF path ─────────────────────────────────────────────────────────
+        const form = new FormData();
+        form.append('file', selectedFile);
+        const res  = await fetch('/api/extract-pdf', { method:'POST', body: form });
+        const data = await res.json();
+        if (!res.ok) { showError(data.error || 'PDF extraction failed.'); return; }
+        const text = data.text;
+        console.warn('--- RAW PDF TEXT ---\n', text);
+        const dbgArea = document.getElementById('debug-text');
+        if (dbgArea) { dbgArea.value = text; document.getElementById('debug-panel').style.display = 'block'; }
+
+        // ── Our dispatch note format (used as input for PAGSA / TREBOL) ───────
+        if (/Dispatch\s+Note\s+\d+/i.test(text) && /Partes\s+Automotrices/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'PARTES AUTOMOTRICES GEO S.A. DE C.V',
+            address1:     '3era. Ave. 11 calle S.O. Bo. Lempira,',
+            address2:     'San Pedro Sula, Honduras',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for MAXILUB ──────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /MAXILUB/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'MAXILUB LLC',
+            address1:     '1444 NW 82nd Ave',
+            address2:     'DORAL, FL 33126',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for TREBOL ───────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /TREBOL/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'IMPORTADORA TREBOL, S.R.L.',
+            address1:     'C. Juan Ballenilla 24,',
+            address2:     'Santo Domingo, DR',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for 8A DOMINUS ───────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /8A\s+DOMINUS/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   '8A DOMINUS INC.',
+            address1:     'KS FORWARDING LLC - 1100 E MILITARY HWY 281 SUITE B',
+            address2:     'PHARR, TX 78577',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for IMPORCARSA ───────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /IMPORCARSA/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'IMPORCARSA M & M S.A.',
+            address1:     'Barreal de Heredia, Ofibodegas Barreal Local 29',
+            address2:     '106 Barreal Heredia, CR 40104',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for BEICRUZ ───────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /BEICRUZ/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'BEICRUZ S.A.',
+            address1:     'Avenida Cristo Redentor N\u00b0 3205',
+            address2:     'Santa Cruz de la Sierra, Bolivia',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for COMPETITIVE EDGE ─────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /COMPETITIVE\s+EDGE/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'COMPETITIVE EDGE DISTRIBUTING',
+            address1:     '408 E James St',
+            address2:     'Cleburne, TX 76033',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for FRENOSEGURO ──────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /FRENOSEGURO/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'FRENOSEGURO',
+            address1:     'Av. Juan Tanca Marengo Km 5.5',
+            address2:     'Guayaquil, Ecuador',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Garner order form: coordinate-based column parsing ───────────────
+        } else if (/ORDER\s+FORM/i.test(text) && /6\/1-Gal/i.test(text)) {
+          const gForm = new FormData();
+          gForm.append('file', selectedFile);
+          const gRes  = await fetch('/api/extract-garner', { method:'POST', body: gForm });
+          const gData = await gRes.json();
+          if (!gRes.ok) { showError(gData.error || 'Garner extraction failed.'); return; }
+          parsed = {
+            clientName:   'GARNER OIL COMPANY',
+            address1:     '10631 HARWIN DRIVE, SUITE 612',
+            address2:     'HOUSTON, TX 77036',
+            poNumber:     gData.poNumber || '',
+            orderDate:    gData.orderDate || '',
+            deliveryDate: '',
+            items: gData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+        // ── Dispatch note used as input for SERVISTAR ────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /SERVISTAR/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'SERVISTAR CONSTRUMUNDO SAS',
+            address1:     'ATLATLANTIC OVERSEAS EXPRESS INC - 8501 NW 17th St. #102',
+            address2:     'DORAL, FL 33126',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Servistar customer PO PDF (Spanish format: "No. OC XXXX") ────────
+        } else if (/No\.\s+OC\s+\d+/i.test(text)) {
+          parsed = parseServistarPO(text);
+          if (!parsed || !parsed.items.length) { showError('Could not parse Servistar PO — no items found.'); return; }
+
+        } else {
+          parsed = parsePOText(text);
+        }
+      }
+    } else {
+      const text = document.getElementById('text-input').value.trim();
+      if (!text) { showError('Please paste the purchase order text.'); return; }
+      console.warn('--- RAW TEXT ---\n', text);
+      if (/Referencia\s+interna/i.test(text)) {
+        parsed = parse8AEmail(text);
+        if (!parsed || !parsed.items.length) { showError('Could not parse 8A order — no items found.'); return; }
+      } else if (/IMPORTADORA\s+TREBOL/i.test(text) || /trebol\.com\.do/i.test(text)) {
+        parsed = parseTrebolEmail(text);
+        if (!parsed || !parsed.items.length) { showError('Could not parse Trebol order — no items found.'); return; }
+      } else {
+        parsed = parsePOText(text);
+      }
+    }
+
+    console.warn('--- PARSE RESULT ---\n', JSON.stringify({ poNumber: parsed.poNumber, items: parsed.items.length }, null, 2));
+    renderForm(parsed);
+  } finally {
+    document.getElementById('spinner').style.display = 'none';
+    btn.disabled = false;
+  }
+}
+
+// ── Excel PO parser ───────────────────────────────────────────────────────
+// Handles Beicruz "ORDER TEMPLATE" and Imporcarsa-style Excel worksheets.
+function parseExcelPO(workbook) {
+  // ── Beicruz detection ──────────────────────────────────────────────────
+  if (workbook.SheetNames.includes('ORDER TEMPLATE')) {
+    return parseBeicruzExcel(workbook);
+  }
+
+  // ── Imporcarsa format ─────────────────────────────────────────────────
+  const SUFFIX_PRES = { Q: 'BOX (12Q)', G: 'BOX (4G)', E: 'DRUM (55G)', C: 'PAIL (5G)' };
+
+  // Scan all sheets for one that has both a Código-like and Sugerido-like header
+  let rows = null, headerIdx = -1, codeCol = -1, sugeridoCol = -1, poNumber = '';
+
+  for (const sheetName of workbook.SheetNames) {
+    const ws      = workbook.Sheets[sheetName];
+    const sheetRows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+
+    for (let i = 0; i < sheetRows.length; i++) {
+      const row = sheetRows[i];
+      let cc = -1, sc = -1, po = '';
+      for (let j = 0; j < row.length; j++) {
+        const cell = String(row[j] ?? '').trim();
+        if (/^c[oó]d/i.test(cell))  cc = j;
+        if (/^sug/i.test(cell)) {
+          sc = j;
+          const poM = cell.match(/Ultra[-\s]?(\w+)/i);
+          if (poM) po = poM[1];
+        }
+      }
+      if (cc >= 0 && sc >= 0) {
+        rows = sheetRows; headerIdx = i; codeCol = cc; sugeridoCol = sc; poNumber = po;
+        break;
+      }
+    }
+    if (rows) break; // Found a matching sheet
+  }
+
+  if (!rows || headerIdx < 0) return null;
+
+  const items = [], seen = new Set();
+
+  for (let i = headerIdx + 1; i < rows.length; i++) {
+    const row      = rows[i];
+    const rawCode  = String(row[codeCol] ?? '').trim();
+    const rawQty   = Number(row[sugeridoCol]);
+    if (!rawCode || !rawQty || isNaN(rawQty) || rawQty <= 0) continue;
+
+    // "UL-706Q" → code="UL706", suffix="Q"
+    const m = rawCode.match(/^UL-?(\d{3,4})([A-Z])$/i);
+    if (!m) continue;
+
+    const code         = 'UL' + m[1].toUpperCase();
+    const impSuffix    = m[2].toUpperCase();
+    const presentation = SUFFIX_PRES[impSuffix];
+    if (!presentation) continue;
+
+    const key = code + '|' + presentation;
+    if (seen.has(key)) { seen.add(key); continue; }
+    seen.add(key);
+
+    // Look up unit price from Imporcarsa pricing file
+    // Imporcarsa suffix → QB pricing suffix: Q→L, G→G, E→D, C→P
+    const QB_SUFFIX = { Q: 'L', G: 'G', E: 'D', C: 'P' };
+    const qbSuffix  = QB_SUFFIX[impSuffix];
+    const unitPrice = (imporcarsaPrices[code] || {})[qbSuffix] || 0;
+
+    // Sugerido is already in CASES for all presentations
+    // units_per_case is kept only for PRICE/CASE multiplication
+    const UNITS_PER_CASE = { Q: 12, G: 4, E: null, C: null };
+    const upc = UNITS_PER_CASE[impSuffix];
+
+    items.push({ ul_code: code, presentation, qty: rawQty,
+      po_qty_label: '', unit_price: unitPrice, amount: 0,
+      units_per_case: upc, desc_matched: false });
+  }
+
+  return {
+    clientName:   'IMPORCARSA M & M S.A.',
+    address1:     'Barreal de Heredia, Ofibodegas Barreal Local 29',
+    address2:     '106 Barreal Heredia, CR 40104',
+    poNumber:     poNumber ? 'PO#' + poNumber : '',
+    orderDate:    '',
+    deliveryDate: '',
+    items
+  };
+}
+
+// ── Beicruz Excel parser ──────────────────────────────────────────────────
+function parseBeicruzExcel(workbook) {
+  const ws   = workbook.Sheets['ORDER TEMPLATE'];
+  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+
+  let poNumber = '', orderDate = '', deliveryDate = '', headerIdx = -1;
+
+  function fmtDate(v) {
+    if (v instanceof Date) {
+      return String(v.getMonth() + 1).padStart(2, '0') + '/' +
+             String(v.getDate()).padStart(2, '0') + '/' + v.getFullYear();
+    }
+    return String(v ?? '').trim();
+  }
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    for (let j = 0; j < row.length; j++) {
+      const cell = String(row[j] ?? '').trim();
+      if (/Customer PO Number/i.test(cell)) {
+        for (let k = j + 1; k < row.length; k++) {
+          if (row[k] != null) { poNumber = String(row[k]).trim(); break; }
+        }
+      }
+      if (/Date of order/i.test(cell)) {
+        for (let k = j + 1; k < row.length; k++) {
+          if (row[k] != null) { orderDate = fmtDate(row[k]); break; }
+        }
+      }
+      if (/Desired Shipping date/i.test(cell)) {
+        for (let k = j + 1; k < row.length; k++) {
+          if (row[k] != null) {
+            const s = fmtDate(row[k]);
+            deliveryDate = /^asap$/i.test(s) ? '' : s;
+            break;
+          }
+        }
+      }
+      if (/^UL\s*Number$/i.test(cell) && j === 0) headerIdx = i;
+    }
+  }
+
+  if (headerIdx < 0) return null;
+
+  // Locate columns from header row
+  const hdr = rows[headerIdx];
+  let presCol = -1, qtyCol = -1;
+  for (let j = 0; j < hdr.length; j++) {
+    const h = String(hdr[j] ?? '').trim();
+    if (/PACKAGE.SIZE/i.test(h)) presCol = j;
+    if (/UNIT.QTY/i.test(h))     qtyCol  = j;
+  }
+  if (presCol < 0 || qtyCol < 0) return null;
+
+  const items = [];
+  for (let i = headerIdx + 1; i < rows.length; i++) {
+    const row  = rows[i];
+    const code = String(row[0] ?? '').trim().toUpperCase();
+    if (!/^UL\d+$/.test(code)) continue;
+    const presentation = String(row[presCol] ?? '').trim();
+    const qty = Number(row[qtyCol]);
+    if (!presentation || !qty || isNaN(qty) || qty <= 0) continue;
+    const casePrice = (beicruzPrices[code] || {})[presentation] || 0;
+    items.push({ ul_code: code, presentation, qty,
+      po_qty_label: '', unit_price: casePrice, amount: 0,
+      units_per_case: null, desc_matched: false });
+  }
+
+  return {
+    clientName:   'BEICRUZ S.A.',
+    address1:     'Avenida Cristo Redentor N\u00b0 3205',
+    address2:     'Santa Cruz de la Sierra, Bolivia',
+    poNumber,
+    orderDate,
+    deliveryDate,
+    items
+  };
+}
+
+// ── Description-based matching helpers ────────────────────────────────────
+// Extract semantic tokens from a product name or description for fuzzy matching
+function buildDescTokens(name) {
+  const t = name.toLowerCase();
+  const tokens = new Set();
+  // Viscosity grades e.g. 15w-40, 5w-20
+  const viscM = t.match(/\d+w-?\d+/g);
+  if (viscM) viscM.forEach(v => tokens.add(v));
+  // Blend type
+  if (t.includes('full synthetic'))   tokens.add('full synthetic');
+  else if (t.includes('synthetic blend')) tokens.add('synthetic blend');
+  // Heavy duty flag
+  if (t.includes('heavy-duty') || t.includes('heavy duty')) tokens.add('heavy duty');
+  // Normalize API specs split across PDF lines (e.g. "CK- 4" → "ck-4")
+  const normT = t.replace(/(ck|cj|ci|ch)[\s\-]+4/g, '$1-4');
+  const apiM = normT.match(/\b(ck-4|cj-4|ci-4|ch-4|cf|sp|sn|sl|sj)\b/g);
+  if (apiM) apiM.forEach(a => tokens.add(a));
+  // Product category keywords
+  ['motor oil','atf','automatic transmission','hydraulic','gear oil','coolant','antifreeze','def','brake'].forEach(kw => {
+    if (t.includes(kw)) tokens.add(kw);
+  });
+  return tokens;
+}
+
+// Score description text against all catalog products; return best UL code or null
+// minScore: 3 for general use (strict), 1 for specific single-keyword types (DEF, ATF)
+function matchByDescription(descText, minScore = 3) {
+  const descTokens = buildDescTokens(descText);
+  if (descTokens.size < 1) return null;
+  let best = null, bestScore = 0, bestCount = 0;
+  for (const [code, info] of Object.entries(catalog)) {
+    const nameTokens = buildDescTokens(info.name || '');
+    let score = 0;
+    for (const t of nameTokens) { if (descTokens.has(t)) score++; }
+    if (score > bestScore)                   { bestScore = score; best = code; bestCount = 1; }
+    else if (score === bestScore && score > 0) bestCount++;
+  }
+  return (bestScore >= minScore && bestCount === 1) ? best : null;
+}
+
+// Reverse-lookup a UL code + presentation by a known SKU string (e.g. "UCDIIIMMPD")
+function findBySkuCode(skuStr) {
+  const s = skuStr.toUpperCase().trim();
+  for (const [ulCode, info] of Object.entries(catalog)) {
+    for (const [pres, sku] of Object.entries(info.presentations || {})) {
+      if (sku.toUpperCase() === s) return { ulCode, pres };
+    }
+  }
+  return null;
+}
+
+// Guess presentation from free-form description text (drums, totes, pails, etc.)
+// Note: avoid \b around numbers followed immediately by letters (e.g. "330G", "265GAL", "2.5GAL")
+function guessPresFromDesc(text) {
+  const t = text.toUpperCase();
+  // Tote sizes — check largest/most-specific first to avoid false matches
+  if (/330\s*G(AL)?|TOTE.*330|330.*TOTE/.test(t)) return 'TOTE (330G)';
+  if (/265\s*G(AL)?|TOTE.*265|265.*TOTE/.test(t)) return 'TOTE (265G)';
+  if (/250\s*G(AL)?|TOTE.*250|250.*TOTE/.test(t)) return 'TOTE (250G)';
+  // Drums
+  if (/\b55\s*G(AL)?/.test(t))                      return 'DRUM (55G)';
+  // 2.5G check BEFORE the 5GAL/pail check (2.5 ends in "5")
+  if (/2\.5\s*G(AL)?/.test(t))                     return 'BOX (1 X 2.5G)';
+  // Pails
+  if (/PAIL|\b5\s*GAL\b|\b5G\b/.test(t))           return 'PAIL (5G)';
+  if (/DRUM/.test(t))                               return 'DRUM (55G)';
+  if (/TOTE/.test(t))                               return 'TOTE (265G)';
+  return null;
+}
+
+// ── 8A Dominus Email Parser ───────────────────────────────────────────────
+// Detects: "Referencia interna" header + PALET column (tab-separated table)
+// Quantities in email are PALLETS → convert to cases using PRES_CALC.pallet_div
+function parse8AEmail(text) {
+  const PRES_MAP = {
+    '12/1': 'BOX (12Q)',
+    '3/5':  'BOX (3/5QTS)',
+    'DRUM': 'DRUM (55G)',
+    'PAIL': 'PAIL (5G)',
+    'TOTE': 'TOTE (265G)',
+    '6/1':  'BOX (6G)',
+  };
+
+  // Parse Spanish date e.g. "mar, 10 de mar de 2026" → "03/10/2026"
+  const ES_MONTH = { ene:'01',feb:'02',mar:'03',abr:'04',may:'05',jun:'06',jul:'07',ago:'08',sep:'09',oct:'10',nov:'11',dic:'12' };
+  let orderDate = '';
+  const dateM = text.match(/Date:\s*\w+,?\s*(\d{1,2})\s+de\s+(\w{3})\w*\s+de\s+(\d{4})/i);
+  if (dateM) {
+    const mm = ES_MONTH[dateM[2].toLowerCase().slice(0,3)] || '01';
+    orderDate = mm + '/' + String(dateM[1]).padStart(2,'0') + '/' + dateM[3];
+  }
+
+  const lines = text.split('\n');
+  let inTable = false;
+  const items = [], seen = new Set();
+
+  for (const line of lines) {
+    if (/Referencia\s+interna/i.test(line)) { inTable = true; continue; }
+    if (!inTable) continue;
+
+    // Works for both tab-separated and space-separated (Gmail copy) formats.
+    // Line must start with UL code + presentation key.
+    const m = line.match(/^(UL\d{3,4})\s*(12\/1|3\/5|DRUM|PAIL|TOTE|6\/1)\b/i);
+    if (!m) continue;
+
+    const code         = m[1].toUpperCase();
+    const presentation = PRES_MAP[m[2].toUpperCase()];
+    if (!presentation) continue;
+
+    // Pallet qty is the last number on the line (may be decimal like 0.5 or 1.5)
+    const qtyM = line.match(/(\d+(?:\.\d+)?)\s*$/);
+    if (!qtyM) continue;
+    const pallets = parseFloat(qtyM[1]);
+    if (!pallets || pallets <= 0) continue;
+
+    const presCalc = PRES_CALC[presentation];
+    if (!presCalc) continue;
+    const cases = Math.round(pallets * presCalc.pallet_div);
+
+    const key = code + '|' + presentation;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    const casePrice = (a8Prices[code] || {})[presentation] || 0;
+
+    items.push({
+      ul_code: code, presentation, qty: cases,
+      po_qty_label: pallets + ' PLT',
+      unit_price: casePrice, amount: cases * casePrice,
+      units_per_case: null, desc_matched: false,
+    });
+  }
+
+  return {
+    clientName:   '8A DOMINUS INC.',
+    address1:     'KS FORWARDING LLC - 1100 E MILITARY HWY 281 SUITE B',
+    address2:     'PHARR, TX 78577',
+    poNumber:     '',
+    orderDate,
+    deliveryDate: '',
+    items,
+  };
+}
+
+// ── Importadora Trebol Email Parser ──────────────────────────────────────
+// Detects: "IMPORTADORA TREBOL" or "trebol.com.do" in text
+// Lines format: "UL### DESCRIPTION.......QTY CAJAS" or "L## DESCRIPTION...QTY CAJAS"
+// Presentation inferred from keywords: 12/1 QT→BOX(12Q), DRUM→DRUM(55G), 2/2.5→BOX(2X2.5G), GALONES→BOX(6G)
+function parseTrebolEmail(text) {
+  const lines = text.split('\n');
+  const items = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    // Match lines starting with UL### or L## codes
+    const codeM = trimmed.match(/^(UL\d{3,4}|L\d{2,3})\b/i);
+    if (!codeM) continue;
+
+    const code = codeM[1].toUpperCase();
+    const rest = trimmed.slice(codeM[0].length).toUpperCase();
+
+    // Quantity is the last number before CAJAS or DRUMS at end of line
+    const qtyM = rest.match(/(\d+)\s*(?:CAJAS|DRUMS)\s*$/i);
+    if (!qtyM) continue;
+    const qty = parseInt(qtyM[1]);
+    if (!qty || qty <= 0) continue;
+
+    // Determine presentation from description keywords (order matters)
+    let presentation = null;
+    if (/DRUM\s*\(55G?L?N?\)/.test(rest) || /55\s*G?L?N/.test(rest)) {
+      presentation = 'DRUM (55G)';
+    } else if (/2\/2\.5/.test(rest) || /2X2\.5/.test(rest)) {
+      presentation = 'BOX (2 X 2.5G)';
+    } else if (/12\/1\s*QT/.test(rest) || /CAJAS\s+DE\s+12/.test(rest)) {
+      presentation = 'BOX (12Q)';
+    } else if (/PAIL/.test(rest)) {
+      presentation = 'PAIL (5G)';
+    } else if (/GALONES/.test(rest)) {
+      // Gallon coolant/oil boxes → BOX (6G)
+      presentation = 'BOX (6G)';
+    }
+    if (!presentation) continue;
+
+    items.push({
+      ul_code: code, presentation, qty,
+      po_qty_label: '', unit_price: 0, amount: 0,
+      units_per_case: null, desc_matched: false,
+    });
+  }
+
+  return {
+    clientName:   'IMPORTADORA TREBOL, S.R.L.',
+    address1:     'C. Juan Ballenilla 24,',
+    address2:     'Santo Domingo, DR',
+    poNumber:     '',
+    orderDate:    '',
+    deliveryDate: '',
+    items,
+  };
+}
+
+// ── Servistar Construmundo PO Parser ─────────────────────────────────────
+// Detects: "No. OC XXXX" + "ULTRAPLUS" in extracted PDF text
+// Format: UL402-1QT  QT ACEITE ...  84,00  (Spanish comma-decimal, suffix→presentation)
+function parseServistarPO(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+
+  // PO number: "No. OC 2003"
+  let poNumber = '';
+  const poM = text.match(/No\.\s+OC\s+[_]?(\S+)/i);
+  if (poM) poNumber = 'OC_' + poM[1];
+
+  // Date: Spanish "4 de noviembre de 2025"
+  const MONTHS_ES = {
+    enero:1, febrero:2, marzo:3, abril:4, mayo:5, junio:6,
+    julio:7, agosto:8, septiembre:9, octubre:10, noviembre:11, diciembre:12
+  };
+  let orderDate = '';
+  const dateM = text.match(/(\d{1,2})\s+de\s+(\w+)\s+de\s+(\d{4})/i);
+  if (dateM) {
+    const day   = dateM[1].padStart(2, '0');
+    const month = MONTHS_ES[dateM[2].toLowerCase()];
+    const year  = dateM[3];
+    if (month) orderDate = String(month).padStart(2, '0') + '/' + day + '/' + year;
+  }
+
+  // Suffix → presentation
+  // 1GL/GL: oils (UL1xx-8xx) → BOX (4G); coolants (UL9xx) → BOX (6G)
+  const SUFFIX_MAP = {
+    'QT':  'BOX (12Q)', '1QT': 'BOX (12Q)', 'BL': 'BOX (12Q)',
+    '5QT': 'BOX (3/5QTS)', 'BJ': 'BOX (3/5QTS)',
+    '5GL': 'PAIL (5G)',
+  };
+  // Servistar internal code → UL code mapping
+  const CODE_ALIAS = {
+    'UC85140GL5': 'UL702',
+    'UC8090GL5':  'UL701',
+    'UC68AW':     'UL803',
+  };
+
+  // Find header line with "REFERENCIA"
+  let headerIdx = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/REFERENCIA/i.test(lines[i])) { headerIdx = i; break; }
+  }
+  if (headerIdx < 0) return null;
+
+  const items = [];
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    const line = lines[i];
+    // Match lines starting with UL or UC product codes: CODE-SUFFIX  description  84,00
+    const m = line.match(/^([A-Z]{2}[\w]+?)(?:-(\w+))?\s+.+\s+(\d+),\d{2}\s*$/i);
+    if (!m) continue;
+    const rawCode = m[1].toUpperCase();
+    const suffix  = (m[2] || '').toUpperCase();
+    const qty     = parseInt(m[3], 10);
+    if (!qty || qty <= 0) continue;
+    // Resolve UL code (handle UC aliases)
+    const ulCode = CODE_ALIAS[rawCode] || (/^UL\d+$/.test(rawCode) ? rawCode : null);
+    if (!ulCode) continue;
+    const isCoolant = /^UL9\d{2}$/.test(ulCode);
+    let presentation = SUFFIX_MAP[suffix];
+    if (!presentation) {
+      if (suffix === '1GL' || suffix === 'GL') {
+        presentation = isCoolant ? 'BOX (6G)' : 'BOX (4G)';
+      } else {
+        presentation = isCoolant ? 'BOX (6G)' : 'BOX (12Q)';
+      }
+    }
+    items.push({ ul_code: ulCode, presentation, qty,
+      po_qty_label: '', unit_price: 0, amount: 0,
+      units_per_case: null, desc_matched: false });
+  }
+
+  return {
+    clientName:   'SERVISTAR CONSTRUMUNDO SAS',
+    address1:     'ATLATLANTIC OVERSEAS EXPRESS INC - 8501 NW 17th St. #102',
+    address2:     'DORAL, FL 33126',
+    poNumber,
+    orderDate,
+    deliveryDate: '',
+    items,
+  };
+}
+
+// ── PO Text Parser ────────────────────────────────────────────────────────
+function parsePOText(text) {
+  const lines = text.split('\n').map(l => l.trim());
+
+  // ── PO Number ────────────────────────────────────────────────────────────
+  let poNumber = '';
+  // Try patterns from most-specific to least-specific.
+  // The broad /PO\s?(\d+)/ fallback was removed — it caused false matches
+  // on vendor account numbers and other 5-digit fields in the document.
+  const poM =
+    text.match(/P\.?O\.?\s*#\s*:?\s*(\w[\w\-]+)/i)    ||  // "PO #: 99P084906" or "PO#99P084906"
+    text.match(/P\.?O\.?\s*N[Oo]\.?\s*:?\s*(\w[\w\-]+)/i) ||  // "P.O. No.: 99P084906"
+    text.match(/Purchase\s+Order\s+(?:No\.?|Number|#)\s*:?\s*(\w[\w\-]+)/i) ||  // "Purchase Order No. 12345"
+    text.match(/\bOrder\s+(?:No\.?|Number|#)\s*:?\s*((?:\d{4,}|\w{3,})[\w\-]*)/i);  // "Order No: 12345"
+  console.warn('[PO#] poM result:', poM ? poM[0] : 'NO MATCH');
+  if (poM) {
+    const raw = poM[1].replace(/^PO_?/i, '');
+    // If it's a pure numeric PO number, zero-pad to 5 digits; otherwise keep as-is
+    poNumber = /^\d+$/.test(raw) ? 'PO_' + raw.padStart(5, '0') : raw;
+    console.warn('[PO#] poNumber =', poNumber);
+  }
+
+  // ── Order date ───────────────────────────────────────────────────────────
+  let orderDate = '';
+  const dateM =
+    text.match(/DATE\s+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i) ||
+    text.match(/Date[:\s]+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i) ||
+    text.match(/(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/);
+  if (dateM) {
+    let d = dateM[1].replace(/-/g, '/');
+    // Expand 2-digit year: 03/10/26 → 03/10/2026
+    if (/^\d{1,2}\/\d{1,2}\/\d{2}$/.test(d)) d = d.replace(/(\d{2})$/, '20$1');
+    orderDate = d;
+  }
+
+  // ── Delivery date ───────────────────────────────────────────────────────
+  let deliveryDate = '';
+  const delivM =
+    text.match(/(?:ship(?:ping)?\s*date|deliver(?:y)?\s*(?:date|by)|required\s*(?:by|date))[:\s]+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i) ||
+    text.match(/Date\s*Req'?d[:\s]+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i);
+  if (delivM) {
+    let d = delivM[1].replace(/-/g, '/');
+    if (/^\d{1,2}\/\d{1,2}\/\d{2}$/.test(d)) d = d.replace(/(\d{2})$/, '20$1');
+    deliveryDate = d;
+  }
+
+  // ── Ship To / client info ─────────────────────────────────────────────────
+  let clientName = '', address1 = '', address2 = '';
+
+  // Method A: "VENDOR ... SHIP TO" combined header (two-column layout, e.g. QuickBooks POs)
+  // Format: next line has "Our Vendor Name  Client Name  DATE XX/XX/XXXX"
+  const vendorShipIdx = lines.findIndex(l => /VENDOR.+SHIP\s*TO/i.test(l));
+  if (vendorShipIdx >= 0) {
+    const infoLine = lines[vendorShipIdx + 1] || '';
+    // Strip our company name and the DATE portion to isolate client name
+    let clientPart = infoLine
+      .replace(/Ultra\s*1?\s*Plus\b/gi, '')
+      .replace(/DATE\s+[\d\/\-]+/i, '')
+      .trim();
+    if (clientPart) clientName = clientPart;
+
+    // Subsequent lines: address continuation or more company name
+    for (let k = vendorShipIdx + 2; k <= Math.min(vendorShipIdx + 8, lines.length - 1); k++) {
+      const l = lines[k];
+      if (!l || /^(QTY|CE\s|CE\s+WAREHOUSE|CE\s+DFW|SHIP|AMOUNT)/i.test(l)) break;
+      if (/^\d+\s+[A-Z]/i.test(l) && !address1) {
+        address1 = l;          // line starting with number = street
+      } else if (/[A-Z]{2}\s+\d{5}/.test(l) && !address2) {
+        address2 = l;          // line with ST 00000 = city/state/zip
+      } else if (!address1) {
+        // No address found yet → this is continuation of company name
+        clientName = (clientName + ' ' + l).trim();
+      }
+    }
+
+  } else {
+    // Method B: standalone "SHIP TO" line
+    const stIdx = lines.findIndex(l => /^SHIP\s*TO\s*:?$/i.test(l));
+    if (stIdx >= 0) {
+      const block = [];
+      for (let i = stIdx + 1; i < Math.min(stIdx + 8, lines.length); i++) {
+        const l = lines[i];
+        if (!l || /^(VENDOR|P\.O\.|DATE|QTY|RATE|AMOUNT|CE\s|SHIP)/i.test(l)) break;
+        block.push(l);
+      }
+      if (block[0]) clientName = block[0];
+      const streetLine = block.slice(1).find(l => /\d/.test(l));
+      if (streetLine) address1 = streetLine;
+      const cityLine = block.find(l => /[A-Z]{2}\s+\d{5}/.test(l));
+      if (cityLine && cityLine !== address1) address2 = cityLine;
+      else if (block[2]) address2 = block[2];
+    }
+  }
+
+  // Method C: ABC Auto style — "Date Req'd:" marks the ship-to block
+  // The ship-to block has: Date: / CLIENT NAME / Ordered By: ... / ADDRESS / CITY STATE ZIP / Date Req'd:
+  if (!clientName) {
+    const dateReqIdx = lines.findIndex(l => /Date\s*Req'?d/i.test(l));
+    if (dateReqIdx > 0) {
+      const dateHdrIdx = lines.slice(0, dateReqIdx).findLastIndex(l => /^Date:?$/i.test(l));
+      if (dateHdrIdx >= 0) {
+        for (let k = dateHdrIdx + 1; k < dateReqIdx; k++) {
+          const l = lines[k];
+          if (!l || /^(Ordered\s+By|Phone|Terms|Fax)/i.test(l)) continue;
+          if (!clientName)                       clientName = l;
+          else if (!address1 && /^\d+\s+\S/i.test(l)) address1 = l;
+          else if (!address2 && /[A-Z]{2}\s+\d{5}/.test(l)) address2 = l;
+        }
+      }
+    }
+    // Fallback: company name appears before "** Purchase Order **"
+    if (!clientName) {
+      const poHdrIdx = lines.findIndex(l => /\*+\s*Purchase\s*Order\s*\*+/i.test(l));
+      if (poHdrIdx > 0) {
+        clientName = lines[poHdrIdx - 1] || '';
+        if (poHdrIdx >= 2 && /^\d+\s+\S/i.test(lines[poHdrIdx - 2])) address1 = lines[poHdrIdx - 2];
+      }
+    }
+  }
+
+  // ── Line items ────────────────────────────────────────────────────────────
+  // In many PO formats (QuickBooks) the qty appears on the FIRST line of the
+  // item description — BEFORE the UL code — so we search BACKWARDS first.
+  // Pattern: "Some description text  QTY  RATE  AMOUNT"
+  // Note: QTY can include a thousands comma  e.g. "1,008 3.06 3,084.48"
+  const QTY_LINE = /([\d,]+)\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s*$/;
+
+  const items = [];
+  const seen  = new Set();
+
+  for (let i = 0; i < lines.length; i++) {
+    // Match UL codes — no $ so trailing text like "Tote" is allowed
+    // e.g. UL802-265-Gallon Tote, UL206-55GAL, UL501-5GAl
+    const skuM = lines[i].match(/^(UL\d{3,4})[\s\-]*([\w\-\.\/]+)/i);
+    if (!skuM) continue;
+
+    const code   = skuM[1].toUpperCase();
+    const suffix = skuM[2];
+    const mapped = mapPresentation(suffix, code);
+    if (!mapped) continue;
+
+    const key = code + '|' + mapped.pres;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    let rawQty = 0, unitPrice = 0, amount = 0;
+
+    // ── 1. Look BACKWARDS (most common: qty is on the first description line) ──
+    for (let j = i - 1; j >= Math.max(0, i - 8); j--) {
+      const m = lines[j].match(QTY_LINE);
+      if (m) {
+        const q = parseInt(m[1].replace(/,/g, ''));   // strip thousands comma e.g. 1,008 → 1008
+        const r = parseFloat(m[2].replace(/,/g, ''));
+        // Sanity: qty ≥ 1, rate > 0 (avoids matching zip codes etc.)
+        if (q > 0 && r > 0) {
+          rawQty    = q;
+          unitPrice = r;
+          amount    = parseFloat(m[3].replace(/,/g, ''));
+          break;
+        }
+      }
+    }
+
+    // ── 2. Look FORWARDS (fallback for formats that put qty after the code) ──
+    if (!rawQty) {
+      for (let j = i + 1; j <= Math.min(i + 3, lines.length - 1); j++) {
+        const m = lines[j].match(/^(\d+)\s+([\d,]+\.?\d*)\s+([\d,]+\.?\d*)/);
+        if (m) {
+          rawQty    = parseInt(m[1]);
+          unitPrice = parseFloat(m[2].replace(/,/g, ''));
+          amount    = parseFloat(m[3].replace(/,/g, ''));
+          break;
+        }
+        const qOnly = lines[j].match(/^(\d+)$/);
+        if (qOnly) { rawQty = parseInt(qOnly[1]); break; }
+      }
+    }
+
+    if (!rawQty) rawQty = 1;
+
+    // ── Unit conversion ───────────────────────────────────────────────────
+    let caseQty = rawQty;
+    let poQtyLabel = '';
+    if (mapped.unitsPerCase && mapped.unitsPerCase > 1) {
+      caseQty    = Math.ceil(rawQty / mapped.unitsPerCase);
+      poQtyLabel = rawQty + ' ' + mapped.poUnit;
+    } else if (mapped.unitsPerCase === 1 && mapped.poUnit) {
+      poQtyLabel = rawQty + ' ' + mapped.poUnit;
+    }
+
+    items.push({
+      ul_code:        code,
+      presentation:   mapped.pres,
+      qty:            caseQty,
+      po_qty_label:   poQtyLabel,
+      unit_price:     unitPrice,
+      amount,
+      units_per_case: mapped.unitsPerCase ?? null,
+    });
+  }
+
+  // ── ABC Auto pass: tabular format "Qty SupplierPart PartNum (Internal) Desc Price Ext" ──
+  // Detected by the presence of the "Qty Supplier Part No." column header.
+  // Part numbers use short suffixes: UL308-P (Pail), UL964D (Drum).
+  // Non-UL parts (e.g. UCDIIIMMPD, 2.5GAL) matched via SKU lookup or description.
+  const abcHeaderIdx = lines.findIndex(l => /Qty\s+Supplier\s+Part/i.test(l));
+  if (abcHeaderIdx >= 0) {
+    console.warn('[ABC Auto] header found at line', abcHeaderIdx, ':', lines[abcHeaderIdx]);
+    // ABC Auto item: QTY PARTNUM [PARTNUM] [(INTERNAL)] DESCRIPTION UNITPRICE EXTENDED
+    // Internal code in parens can contain dots/hyphens e.g. (DEF2.5GAL) (UTRUL308-P)
+    // pdfplumber sometimes wraps long lines — join continuation if prices are missing.
+    const ABC_ITEM  = /^(\d[\d,]*)\s+(\S+)\s+\S+\s+\(\S+\)\s+(.*?)\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s*$/;
+    const ENDS_WITH_PRICES = /([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s*$/;
+    for (let i = abcHeaderIdx + 1; i < lines.length; i++) {
+      // Join with next line if this line starts with a digit but has no trailing prices
+      let lineText = lines[i];
+      if (/^\d/.test(lineText) && !ENDS_WITH_PRICES.test(lineText) && lines[i + 1]) {
+        lineText = lineText + ' ' + lines[i + 1];
+        console.warn('[ABC Auto] joined lines', i, '+', i+1, ':', JSON.stringify(lineText));
+      }
+      const m = lineText.match(ABC_ITEM);
+      console.warn('[ABC Auto] line', i, m ? '[MATCH]' : '[no match]', ':', JSON.stringify(lineText));
+      if (!m) continue;
+      // Skip header-like lines that sneak through (e.g. "Qty Supplier...")
+      if (/^Qty\s/i.test(lineText)) continue;
+      const rawQty    = parseInt(m[1].replace(/,/g, ''));
+      const partNum   = m[2].toUpperCase().trim();
+      const desc      = m[3].trim();
+      const unitPrice = parseFloat(m[4].replace(/,/g, ''));
+      const extended  = parseFloat(m[5].replace(/,/g, ''));
+      let code = null, presentation = null, descMatched = false;
+
+      // Strategy 1: UL code in part number with letter suffix (e.g. UL308-P, UL964D)
+      const ulM = partNum.match(/^(UL\d{3,4})[\s\-]*([A-Z]?)$/i);
+      if (ulM) {
+        code = ulM[1].toUpperCase();
+        const suffix = ulM[2] || '';
+        const mapped = suffix ? mapPresentation(suffix, code) : null;
+        presentation = mapped ? mapped.pres : guessPresFromDesc(desc);
+      }
+      // Strategy 2: SKU reverse-lookup (e.g. UCDIIIMMPD → UL501 DRUM 55G)
+      if (!code) {
+        const bysku = findBySkuCode(partNum);
+        if (bysku) { code = bysku.ulCode; presentation = bysku.pres; descMatched = true; }
+      }
+      // Strategy 3: description + partNum keyword matching (DEF, ATF, etc.)
+      if (!code) {
+        const fullDesc = partNum + ' ' + desc;
+        presentation = guessPresFromDesc(desc + ' ' + partNum) || 'DRUM (55G)';
+        // Use loose threshold (1) since these are specific single-keyword products
+        code = matchByDescription(fullDesc, 1);
+        descMatched = true;
+      }
+      console.warn('[ABC Auto]  → code:', code, '| pres:', presentation, '| descMatched:', descMatched);
+      if (!code || !presentation) { console.warn('[ABC Auto]  → SKIPPED (no code/presentation)'); continue; }
+
+      const key = code + '|' + presentation;
+      if (seen.has(key)) { console.warn('[ABC Auto]  → SKIPPED (already seen key:', key, ')'); continue; }
+      seen.add(key);
+
+      // Unit conversion if applicable
+      const abcCalc = PRES_CALC[presentation] || {};
+      let caseQty = rawQty, poQtyLabel = '';
+      if (abcCalc.units_per_case && abcCalc.units_per_case > 1) {
+        caseQty    = Math.ceil(rawQty / abcCalc.units_per_case);
+        poQtyLabel = rawQty + ' ' + (abcCalc.unit_label || '');
+      }
+      items.push({ ul_code: code, presentation, qty: caseQty, po_qty_label: poQtyLabel,
+        unit_price: unitPrice, amount: extended,
+        units_per_case: abcCalc.units_per_case || null, desc_matched: descMatched });
+    }
+  }
+
+  // ── Second pass: orphan blocks (items whose PDF entry has NO UL code) ────
+  // Some POs describe items fully in text but omit the UL code reference.
+  // We find qty/price lines that have no UL code in the surrounding lines,
+  // collect the description, and match it against the catalog by keyword scoring.
+  const ORPHAN_QTY = /([\d,]+)\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s*$/;
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(ORPHAN_QTY);
+    if (!m) continue;
+    const qty  = parseInt(m[1].replace(/,/g, ''));
+    const rate = parseFloat(m[2].replace(/,/g, ''));
+    const amt  = parseFloat(m[3].replace(/,/g, ''));
+    if (qty <= 0 || rate <= 0) continue;
+
+    // Skip if a UL code appears within the next 12 lines (already handled above)
+    let hasUL = false;
+    for (let j = i + 1; j < Math.min(lines.length, i + 12); j++) {
+      if (/^UL\d{3,4}/i.test(lines[j])) { hasUL = true; break; }
+      if (j > i + 1 && lines[j].match(ORPHAN_QTY)) break; // next item started
+    }
+    if (hasUL) continue;
+
+    // Collect description lines until the next qty/price line
+    const descLines = [];
+    for (let j = i + 1; j < lines.length; j++) {
+      if (lines[j].match(ORPHAN_QTY)) break;
+      if (/^(QTY|RATE|AMOUNT|TOTAL\b)/i.test(lines[j])) break;
+      if (lines[j]) descLines.push(lines[j]);
+    }
+    const descText = (lines[i] + ' ' + descLines.join(' ')).trim();
+    if (!descText) continue;
+
+    const presentation = guessPresFromDesc(descText);
+    if (!presentation) continue;
+
+    const matchedCode = matchByDescription(descText);
+    if (!matchedCode) continue;
+
+    const key = matchedCode + '|' + presentation;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    items.push({
+      ul_code: matchedCode, presentation, qty,
+      po_qty_label: '', unit_price: rate, amount: amt,
+      units_per_case: null, desc_matched: true,
+    });
+  }
+
+  return { poNumber, orderDate, deliveryDate, clientName, address1, address2, items };
+}
+
+// mapPresentation returns { pres, poUnit, unitsPerCase }
+// poUnit/unitsPerCase are set when the customer ordered in individual units
+// (e.g. QT, GAL) so we can show the conversion and store original PO qty.
+// ulCode is used to distinguish coolant/WW (UL9xx) from oil (all others)
+// for the ambiguous "GAL" suffix → BOX (6G) vs BOX (4G).
+function mapPresentation(suffix, ulCode = '') {
+  const s = suffix.toUpperCase().replace(/\s+/g, '');
+  // UL900–UL999 = coolants & windshield washer fluid → BOX (6G) / 6 per case
+  const isCoolant = /^UL9\d{2}$/i.test(ulCode.trim());
+
+  // ── Bulk / drums / pails ─────────────────────────────────────────────────
+  if (/55G(AL)?$/.test(s))            return { pres: 'DRUM (55G)',      poUnit: null, unitsPerCase: null };
+  if (/^5G(AL|AI)?$/.test(s))         return { pres: 'PAIL (5G)',       poUnit: null, unitsPerCase: null };
+  // Single-letter shorthand used by some customers (e.g. ABC Auto: UL308-P, UL964D, UL964G)
+  if (/^P$/.test(s))                  return { pres: 'PAIL (5G)',       poUnit: null, unitsPerCase: null };
+  if (/^D$/.test(s))                  return { pres: 'DRUM (55G)',      poUnit: null, unitsPerCase: null };
+  // Bare "G" suffix = ordered by gallon → BOX (6G) for coolants (UL9xx), BOX (4G) for oils
+  if (/^G$/.test(s))  return isCoolant
+    ? { pres: 'BOX (6G)', poUnit: 'GAL', unitsPerCase: 6 }
+    : { pres: 'BOX (4G)', poUnit: 'GAL', unitsPerCase: 4 };
+  if (/265/.test(s))                  return { pres: 'TOTE (265G)',     poUnit: null, unitsPerCase: null };
+  if (/250/.test(s))                  return { pres: 'TOTE (250G)',     poUnit: null, unitsPerCase: null };
+  if (/330/.test(s))                  return { pres: 'TOTE (330G)',     poUnit: null, unitsPerCase: null };
+
+  // ── Box / case formats — customer ordered by full CASE already ───────────
+  if (/^12Q|^12\//.test(s))                      return { pres: 'BOX (12Q)',      poUnit: null, unitsPerCase: null };
+  if (/^2X2\.5G?|^2-2\.5G?/.test(s))            return { pres: 'BOX (2 X 2.5G)', poUnit: '2.5G', unitsPerCase: 2 };
+  if (/^1X2\.5G?|^1-2\.5G?/.test(s))            return { pres: 'BOX (1 X 2.5G)', poUnit: null, unitsPerCase: null };
+  if (/^4G(AL)?$/.test(s))                       return { pres: 'BOX (4G)',       poUnit: null, unitsPerCase: null };
+  if (/^6G(AL)?$/.test(s))                       return { pres: 'BOX (6G)',       poUnit: null, unitsPerCase: null };
+  if (/^3[\/\-]5QT/.test(s))                     return { pres: 'BOX (3/5QTS)',   poUnit: null, unitsPerCase: null };
+
+  // ── Unit-based ordering — customer ordered in individual units ────────────
+  // QT / 1QT  →  BOX (12Q),  divide by 12
+  if (/^1?QT$/.test(s))                          return { pres: 'BOX (12Q)',      poUnit: 'QT',  unitsPerCase: 12 };
+  // 5QT  →  BOX (3/5QTS),  divide by 3
+  if (/^5QT$/.test(s))                           return { pres: 'BOX (3/5QTS)',   poUnit: '5QT', unitsPerCase:  3 };
+  // 1GAL / GAL  →  BOX (6G) for coolants & WW (UL9xx), BOX (4G) for oils
+  if (/^1?GAL$/.test(s))  return isCoolant
+    ? { pres: 'BOX (6G)', poUnit: 'GAL', unitsPerCase: 6 }
+    : { pres: 'BOX (4G)', poUnit: 'GAL', unitsPerCase: 4 };
+  // 2.5G / 2.5GAL  →  BOX (1 x 2.5G),  divide by 1
+  if (/^2\.5G(AL)?$/.test(s))                    return { pres: 'BOX (1 X 2.5G)', poUnit: '2.5G', unitsPerCase: 1 };
+
+  // ── Other ────────────────────────────────────────────────────────────────
+  if (/JC$|JERRCAN|JERRYCAN/.test(s))            return { pres: 'JERRYCAN (20L)', poUnit: null, unitsPerCase: null };
+  if (/CASE/.test(s))                            return { pres: 'CASE 10/1',      poUnit: null, unitsPerCase: null };
+  if (/KEG/.test(s))                             return { pres: 'KEG (120LBS)',   poUnit: null, unitsPerCase: null };
+  return null;
+}
+
+// ── Calculations ──────────────────────────────────────────────────────────
+function calcItem(code, presentation, qty) {
+  const calc = PRES_CALC[presentation] || {};
+  const dispatchSpec = calc.dispatch_spec || presentation;
+  const unitQty   = qty * (calc.unit_mult || 1);
+  const palletDiv = calc.pallet_div;
+  const palletQty = palletDiv ? +(unitQty / palletDiv).toFixed(2) : null;
+  const estWeight = palletQty !== null ? +(palletQty * (calc.weight_mult || 0)).toFixed(2) : null;
+
+  const product = catalog[code] || {};
+  const sku     = (product.presentations || {})[dispatchSpec] || '';
+  const desc    = product.name || '';
+
+  return { dispatchSpec, unitQty, palletQty, estWeight, sku, desc };
+}
+
+// ── Form rendering ────────────────────────────────────────────────────────
+function renderForm(parsed) {
+  currentClientName = parsed.clientName || '';
+  document.getElementById('f-client').value   = parsed.clientName  || '';
+  document.getElementById('f-po').value       = parsed.poNumber    || '';
+  document.getElementById('f-addr1').value    = parsed.address1    || '';
+  document.getElementById('f-addr2').value    = parsed.address2    || '';
+  document.getElementById('f-date').value     = parsed.orderDate   || '';
+  document.getElementById('f-delivery').value = parsed.deliveryDate|| '';
+
+  hasTotes = parsed.items.some(it => (PRES_CALC[it.presentation]||{}).tote);
+  toteReturn = false;
+  // Show freight input for MAXILUB only
+  const freightBar = document.getElementById('freight-bar');
+  if (freightBar) {
+    freightBar.style.display = currentClientName.includes('MAXILUB') ? 'flex' : 'none';
+    document.getElementById('freight-cost').value = '';
+  }
+
+  const prompt = document.getElementById('tote-prompt');
+  if (hasTotes) {
+    document.getElementById('tote-client').textContent = parsed.clientName || 'this client';
+    prompt.style.display = 'block';
+    document.getElementById('generate-btn').style.display = 'none';
+  } else {
+    prompt.style.display = 'none';
+    document.getElementById('generate-btn').style.display = 'inline-block';
+  }
+
+  const tbody = document.getElementById('items-body');
+  tbody.innerHTML = '';
+  parsed.items.forEach(it => appendRow(it.ul_code, it.presentation, it.qty, it.po_qty_label || '', it.unit_price || 0, it.units_per_case ?? null, it.desc_matched || false));
+  refreshTotals();
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function appendRow(code, presentation, qty, poQtyLabel = '', unitPrice = 0, unitsPerCase = null, descMatched = false) {
+  const c = calcItem(code, presentation, qty);
+  const tbody = document.getElementById('items-body');
+  const tr = document.createElement('tr');
+  tr.dataset.code = code;
+  if (descMatched) {
+    tr.style.background = '#fffbe6';
+    tr.title = 'No UL code in PO — matched by description. Please verify.';
+  }
+
+  const presOptions = PRESENTATIONS.map(p =>
+    `<option value="${p}" ${p===presentation?'selected':''}>${p}</option>`
+  ).join('');
+
+  // PO QTY cell: shows original ordered units if a conversion happened
+  const poQtyHtml = poQtyLabel
+    ? `<span style="color:#1a5c9a;font-weight:bold;font-size:.78rem;">${esc(poQtyLabel)}</span>`
+    : `<span style="color:#aaa;font-size:.73rem;">—</span>`;
+
+  // If customer ordered in units (e.g. QT, GAL), unitPrice is per-unit → convert to per-case
+  let casePrice = unitPrice > 0 && unitsPerCase && unitsPerCase > 1
+    ? +(unitPrice * unitsPerCase).toFixed(2)
+    : unitPrice;
+  // Auto-fill from price list if no price was provided
+  if (casePrice <= 0 && code) casePrice = lookupCasePrice(code, presentation);
+  const total = qty * casePrice;
+
+  const descBadge = descMatched
+    ? `<span title="Matched by description — no UL code in PO. Please verify." style="display:block;font-size:.6rem;color:#7a5c00;background:#f0c040;border-radius:3px;padding:1px 4px;margin-top:2px;cursor:help;">🔍 desc</span>`
+    : '';
+  tr.innerHTML = `
+    <td><input class="tbl-input" style="width:56px;text-transform:uppercase" value="${esc(code)}" onchange="onCodeChange(this)" oninput="this.value=this.value.toUpperCase()">${descBadge}</td>
+    <td><select class="tbl-select" onchange="onPresChange(this)">${presOptions}</select></td>
+    <td class="num"><input class="tbl-input cases-input" style="width:46px;text-align:right" type="number" min="1" value="${qty}" onchange="onRowChange(this)"></td>
+    <td class="derived poqty-cell num">${poQtyHtml}</td>
+    <td class="derived sku-cell" style="font-size:.75rem;color:#555;">${esc(c.sku)||'<span class="warn-txt">?</span>'}</td>
+    <td class="derived desc-cell" style="font-size:.75rem;">${esc(c.desc)}</td>
+    <td class="derived spec-cell" style="font-size:.75rem;"><code>${esc(c.dispatchSpec)}</code></td>
+    <td class="derived uqty-cell num">${c.unitQty}</td>
+    <td class="derived pqty-cell num">${c.palletQty !== null ? c.palletQty.toFixed(2) : '<span class="warn-txt">?</span>'}</td>
+    <td class="derived ewt-cell num">${c.estWeight !== null ? c.estWeight.toLocaleString() : '<span class="warn-txt">?</span>'}</td>
+    <td class="num"><input class="tbl-input price-input" style="width:62px;text-align:right" type="number" min="0" step="0.01" value="${casePrice > 0 ? casePrice.toFixed(2) : ''}" placeholder="0.00" onchange="onRowChange(this)"></td>
+    <td class="derived total-cell num" data-raw="${total.toFixed(2)}">${total > 0 ? '$' + fmtMoney(total) : '<span style="color:#aaa">—</span>'}</td>
+    <td><button class="btn-del" onclick="deleteRow(this)" title="Remove">&#x2715;</button></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+// ── Price auto-fill ────────────────────────────────────────────────────────
+// Returns the per-case price for the current customer, or 0 if not found.
+function lookupCasePrice(code, presentation) {
+  if (!code) return 0;
+  if (currentClientName === 'IMPORCARSA M & M S.A.') {
+    const PRES_TO_QB = {
+      'BOX (12Q)':  { suffix: 'L', upc: 12 },
+      'BOX (4G)':   { suffix: 'G', upc: 4  },
+      'BOX (6G)':   { suffix: 'G', upc: 6  },
+      'DRUM (55G)': { suffix: 'D', upc: 1  },
+      'PAIL (5G)':  { suffix: 'P', upc: 1  },
+    };
+    const map = PRES_TO_QB[presentation];
+    if (!map) return 0;
+    const unitPrice = (imporcarsaPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('8A DOMINUS') || currentClientName.includes('8A ')) {
+    return (a8Prices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('BEICRUZ')) {
+    return (beicruzPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('GARNER')) {
+    return (garnerPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('PAGSA') || currentClientName.includes('PARTES AUTOMOTRICES')) {
+    return (pagsaPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('TREBOL')) {
+    return (trebolPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('MAXILUB')) {
+    return (maxilubPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('SERVISTAR')) {
+    return (servistarPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('FRENOSEGURO')) {
+    return (frenoseguroPrices[code] || {})[presentation] || 0;
+  }
+  if (currentClientName.includes('COMPETITIVE EDGE') || currentClientName.includes('COMP EDGE')) {
+    const isCoolant = /^UL9\d{2}$/i.test(code);
+    const PRES_TO_CE = {
+      'BOX (12Q)':       { suffix: 'L',    upc: 12  },
+      'BOX (3/5QTS)':    { suffix: 'J',    upc: 3   },
+      'DRUM (55G)':      { suffix: 'D',    upc: 1   },
+      'PAIL (5G)':       { suffix: 'P',    upc: 1   },
+      'BOX (4G)':        { suffix: 'G',    upc: 4   },
+      'BOX (6G)':        { suffix: 'G',    upc: 6   },
+      'BOX (2 X 2.5G)':  { suffix: 'G',    upc: 2   },
+      'BOX (1 X 2.5G)':  { suffix: 'G',    upc: 1   },
+      'BULK (OIL)':      { suffix: 'Oil',  upc: 265 },
+      'BULK (COOL)':     { suffix: 'Cool', upc: 250 },
+    };
+    const map = PRES_TO_CE[presentation];
+    if (!map) return 0;
+    const unitPrice = (cePrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  return 0;
+}
+
+function autofillPrice(tr) {
+  const code = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+  const pres = tr.querySelector('select').value;
+  const looked = lookupCasePrice(code, pres);
+  if (looked > 0) tr.querySelector('.price-input').value = looked.toFixed(2);
+}
+
+function onCodeChange(input) {
+  input.value = input.value.toUpperCase().trim();
+  autofillPrice(input.closest('tr'));
+  onRowChange(input);
+}
+
+// When presentation changes, recalculate PO QTY label from stored raw qty if possible
+function onPresChange(select) {
+  const tr = select.closest('tr');
+  const pres = select.value;
+  const calc = PRES_CALC[pres] || {};
+  // If there's already a PO qty shown (blue text), recalculate cases from it
+  const poCell = tr.querySelector('.poqty-cell');
+  const existingLabel = poCell?.querySelector('span[style*="1a5c9a"]')?.textContent?.trim();
+  if (existingLabel && calc.units_per_case) {
+    const rawMatch = existingLabel.match(/^(\d+)/);
+    if (rawMatch) {
+      const rawQty = parseInt(rawMatch[1]);
+      const newCaseQty = Math.ceil(rawQty / calc.units_per_case);
+      tr.querySelector('input[type=number]').value = newCaseQty;
+    }
+  }
+  autofillPrice(tr);
+  onRowChange(select);
+}
+
+function onRowChange(el) {
+  const tr = el.closest('tr');
+  const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+  const pres  = tr.querySelector('select').value;
+  const qty   = parseInt(tr.querySelector('.cases-input').value) || 1;
+  const price = parseFloat(tr.querySelector('.price-input').value) || 0;
+  const total = qty * price;
+  const c = calcItem(code, pres, qty);
+
+  tr.querySelector('.sku-cell').innerHTML    = c.sku  ? esc(c.sku)  : '<span class="warn-txt">Not found</span>';
+  tr.querySelector('.desc-cell').innerHTML   = esc(c.desc);
+  tr.querySelector('.spec-cell').innerHTML   = `<code>${esc(c.dispatchSpec)}</code>`;
+  tr.querySelector('.uqty-cell').textContent = c.unitQty;
+  tr.querySelector('.pqty-cell').innerHTML   = c.palletQty !== null ? c.palletQty.toFixed(2) : '<span class="warn-txt">?</span>';
+  tr.querySelector('.ewt-cell').innerHTML    = c.estWeight !== null ? c.estWeight.toLocaleString() : '<span class="warn-txt">?</span>';
+  const totalCell = tr.querySelector('.total-cell');
+  totalCell.dataset.raw = total.toFixed(2);
+  totalCell.innerHTML   = total > 0 ? '$' + fmtMoney(total) : '<span style="color:#aaa">—</span>';
+
+  refreshTotals();
+  refreshTotePrompt();
+}
+
+function deleteRow(btn) {
+  btn.closest('tr').remove();
+  refreshTotals();
+  refreshTotePrompt();
+}
+
+function addRow() {
+  appendRow('', PRESENTATIONS[0], 1, '', 0, null);
+  refreshTotals();
+}
+
+function recalcAll() {
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const sel = tr.querySelector('select');
+    if (sel) onRowChange(sel);
+  });
+  showOk('✅ All rows recalculated.');
+}
+
+function refreshTotals() {
+  let totalP = 0, totalW = 0, totalAmt = 0;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const pqty = parseFloat(tr.querySelector('.pqty-cell').textContent) || 0;
+    const ewt  = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    const amt  = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+    totalP += pqty; totalW += ewt; totalAmt += amt;
+  });
+  document.getElementById('total-pallets').textContent = totalP.toFixed(2);
+  document.getElementById('total-weight').textContent  = totalW.toLocaleString();
+  document.getElementById('total-amount').innerHTML    = totalAmt > 0 ? '<strong>$' + fmtMoney(totalAmt) + '</strong>' : '—';
+}
+
+function refreshTotePrompt() {
+  hasTotes = false;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const pres = tr.querySelector('select')?.value;
+    if (pres && (PRES_CALC[pres]||{}).tote) hasTotes = true;
+  });
+  if (!hasTotes) {
+    document.getElementById('tote-prompt').style.display = 'none';
+    document.getElementById('generate-btn').style.display = 'inline-block';
+  }
+}
+
+// ── Tote return ───────────────────────────────────────────────────────────
+function setToteReturn(val) {
+  toteReturn = val;
+  document.getElementById('tote-prompt').innerHTML =
+    `<p>Tote Return Program: <span class="tote-badge ${val?'badge-yes':'badge-no'}">${val?'✅ Approved':'❌ Standard Billing'}</span></p>`;
+  document.getElementById('generate-btn').style.display = 'inline-block';
+}
+
+// ── CSV Generation ────────────────────────────────────────────────────────
+async function generateCSV() {
+  const client = document.getElementById('f-client').value.trim();
+  const po     = document.getElementById('f-po').value.trim();
+  const addr1  = document.getElementById('f-addr1').value.trim();
+  const addr2  = document.getElementById('f-addr2').value.trim();
+  const date   = document.getElementById('f-date').value.trim();
+  const delivery = document.getElementById('f-delivery').value.trim();
+
+  if (!client || !po) { showError('Client name and PO Number are required.'); return; }
+  const isMaxilub  = client.toUpperCase().includes('MAXILUB');
+  const freightCost = isMaxilub ? (parseFloat(document.getElementById('freight-cost').value) || 0) : 0;
+
+  // Fetch current counter
+  let lastDispatch = 3086;
+  try {
+    const r = await fetch('/api/counter');
+    const d = await r.json();
+    lastDispatch = d.last;
+  } catch(e) {}
+  const dispatchNum = lastDispatch + 1;
+
+  // Build rows
+  const rows = [];
+  rows.push(['Dispatch Note', '#' + dispatchNum, '', '', '', '', '', '']);
+  rows.push(['Ultra1Plus',    '',                 '', '', '', '', '', '']);
+  rows.push(['',              '',                 '', '', '', '', '', '']);
+  rows.push(['SHIP TO:', '', '', '', 'Customer PO Number:', po, '', '']);
+  rows.push([client,    '', '', '', 'Date of order:',       date, '', '']);
+  rows.push([addr1,     '', '', '', 'Shipping date:',       delivery, '', '']);
+  rows.push([addr2,     '', '', '', 'Shipping time:',       '', '', '']);
+  rows.push(['',        '', '', '', '', '', '', '']);
+  const baseHeader = ['CODE', 'CASES (DISPATCH)', 'PO QTY (ORDERED)', 'SKU', 'DESCRIPTION', 'SPEC', 'UNIT QTY', 'PALLET QTY', 'EST WEIGHT', 'PRICE/CASE', 'TOTAL', 'PO'];
+  if (isMaxilub) baseHeader.push('% WEIGHT', 'LANDED FREIGHT');
+  rows.push(baseHeader);
+
+  // Collect row data first (need total weight for % calc)
+  let totalPallets = 0, totalWeight = 0, grandTotal = 0;
+  const lineData = [];
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+    if (!code) return;
+    const cases    = tr.querySelector('.cases-input').value.trim();
+    const poQtyRaw = tr.querySelector('.poqty-cell span[style*="1a5c9a"]')?.textContent?.trim() || '';
+    const sku      = tr.querySelector('.sku-cell').textContent.trim();
+    const desc     = tr.querySelector('.desc-cell').textContent.trim();
+    const spec     = tr.querySelector('.spec-cell').textContent.trim();
+    const uqty     = tr.querySelector('.uqty-cell').textContent.trim();
+    const pqty     = parseFloat(tr.querySelector('.pqty-cell').textContent) || 0;
+    const ewt      = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    const priceVal = parseFloat(tr.querySelector('.price-input').value) || 0;
+    const totalVal = parseFloat(tr.querySelector('.total-cell').dataset.raw || 0);
+    lineData.push({ code, cases, poQtyRaw, sku, desc, spec, uqty, pqty, ewt, priceVal, totalVal });
+    totalPallets += pqty;
+    totalWeight  += ewt;
+    grandTotal   += totalVal;
+  });
+
+  lineData.forEach(d => {
+    const row = [d.code, d.cases, d.poQtyRaw, d.sku, d.desc, d.spec, d.uqty,
+                 d.pqty.toFixed(2), d.ewt.toLocaleString(),
+                 d.priceVal > 0 ? d.priceVal.toFixed(2) : '',
+                 d.totalVal > 0 ? d.totalVal.toFixed(2) : '', po];
+    if (isMaxilub) {
+      const pctW   = totalWeight > 0 ? d.ewt / totalWeight : 0;
+      const landed = freightCost > 0 ? +(pctW * freightCost).toFixed(2) : '';
+      row.push((pctW * 100).toFixed(4) + '%', landed);
+    }
+    rows.push(row);
+  });
+
+  const totalsRow = ['', '', '', '', '', '', '', totalPallets.toFixed(2), totalWeight.toLocaleString(), '', grandTotal > 0 ? grandTotal.toFixed(2) : '', ''];
+  if (isMaxilub) totalsRow.push('', '');
+  rows.push(totalsRow);
+
+  if (isMaxilub && freightCost > 0) {
+    const freightRow = ['FREIGHT', '', '', '', '', '', '', '', '', '', freightCost.toFixed(2), '', '', freightCost.toFixed(2)];
+    rows.push(freightRow);
+    const grandRow = ['GRAND TOTAL', '', '', '', '', '', '', '', '', '', (grandTotal + freightCost).toFixed(2), '', '', ''];
+    rows.push(grandRow);
+  }
+  rows.push(['', '', '', '', '', '', '', '', '', '', '', '']);
+
+  const notes = toteReturn ? 'Tote Return Program applied — containers to be returned by customer' : '';
+  rows.push(['NOTES:', notes, '', '', '', '', '', '', '', '', '', '']);
+
+  // Save counter
+  try { await fetch('/api/counter', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({last: dispatchNum}) }); } catch(e){}
+  updateDispatchBadge(dispatchNum + 1);
+
+  // Build and download CSV
+  const csvContent = '\uFEFF' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `Dispatch_${dispatchNum}_${po.replace(/[^\w]/g,'_')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showOk('✅ Dispatch #' + dispatchNum + ' downloaded successfully!');
+}
+
+function csvCell(val) {
+  const s = String(val ?? '');
+  return (s.includes(',') || s.includes('"') || s.includes('\n')) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function resetForm() {
+  selectedFile = null;
+  document.getElementById('file-name').textContent = '';
+  document.getElementById('file-input').value = '';
+  document.getElementById('text-input').value = '';
+  document.getElementById('results').style.display = 'none';
+  hideMessages();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function clearAll() {
+  // Clear input area
+  selectedFile = null;
+  document.getElementById('file-name').textContent = '';
+  document.getElementById('file-input').value = '';
+  document.getElementById('text-input').value = '';
+  // Clear all meta fields
+  ['f-client','f-po','f-addr1','f-addr2','f-date','f-delivery'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  // Clear items table
+  document.getElementById('items-body').innerHTML = '';
+  document.getElementById('total-pallets').textContent = '—';
+  document.getElementById('total-weight').textContent  = '—';
+  document.getElementById('total-amount').innerHTML    = '—';
+  // Hide results, tote prompt, messages
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('tote-prompt').style.display = 'none';
+  document.getElementById('generate-btn').style.display = 'none';
+  hideMessages();
+  toteReturn = false;
+  hasTotes   = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function showError(msg) {
+  document.getElementById('error-msg').textContent = '❌ ' + msg;
+  document.getElementById('error-msg').style.display = 'block';
+  document.getElementById('ok-msg').style.display   = 'none';
+  document.getElementById('spinner').style.display  = 'none';
+}
+function showOk(msg) {
+  document.getElementById('ok-msg').textContent   = msg;
+  document.getElementById('ok-msg').style.display = 'block';
+  document.getElementById('error-msg').style.display = 'none';
+}
+function hideMessages() {
+  document.getElementById('error-msg').style.display = 'none';
+  document.getElementById('ok-msg').style.display    = 'none';
+}
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function fmtMoney(n) {
+  return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+init();
+</script>
+</body>
+</html>

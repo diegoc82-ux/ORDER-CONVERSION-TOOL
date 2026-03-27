@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U1P Order Conversion Tool</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; min-height: 100vh; }
+
+header {
+  background: #0d2b4e; color: #fff;
+  padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+header h1 { font-size: 1.2rem; letter-spacing: .4px; }
+#dispatch-badge {
+  background: #e85a2b; color: #fff;
+  padding: 5px 16px; border-radius: 20px; font-size: .85rem; font-weight: bold;
+}
+
+main { max-width: 1060px; margin: 26px auto; padding: 0 16px 50px; }
+
+.card {
+  background: #fff; border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.1); padding: 22px; margin-bottom: 18px;
+}
+.card h2 { font-size: .92rem; color: #0d2b4e; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+
+.tab-bar { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 14px; }
+.tab { padding: 8px 20px; cursor: pointer; font-size: .9rem; color: #666; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.tab.active { color: #0d2b4e; border-bottom-color: #0d2b4e; font-weight: bold; }
+
+#drop-zone {
+  border: 2px dashed #b0b8c4; border-radius: 8px;
+  padding: 38px; text-align: center; cursor: pointer; background: #fafbfc;
+  transition: .2s;
+}
+#drop-zone:hover, #drop-zone.drag-over { border-color: #0d2b4e; background: #eef2f8; }
+#drop-zone .icon { font-size: 2.2rem; margin-bottom: 8px; }
+#drop-zone p { color: #666; font-size: .88rem; }
+#drop-zone p strong { color: #0d2b4e; }
+#file-input { display: none; }
+#file-name { margin-top: 8px; font-size: .83rem; color: #0d2b4e; font-weight: bold; }
+
+textarea {
+  width: 100%; border: 1px solid #ccc; border-radius: 8px;
+  padding: 11px; font-size: .87rem; line-height: 1.5; resize: vertical; min-height: 170px;
+}
+textarea:focus { outline: none; border-color: #0d2b4e; }
+
+.btn { border: none; border-radius: 7px; cursor: pointer; font-size: .9rem; font-weight: bold; padding: 10px 24px; transition: background .2s; }
+.btn-primary  { background: #0d2b4e; color: #fff; margin-top: 12px; }
+.btn-primary:hover { background: #16406e; }
+.btn-primary:disabled { background: #9ab; cursor: default; }
+.btn-success  { background: #1a7a3c; color: #fff; }
+.btn-success:hover { background: #22a050; }
+.btn-neutral  { background: #555; color: #fff; }
+.btn-neutral:hover { background: #444; }
+.btn-sm { padding: 5px 13px; font-size: .8rem; }
+.btn-add-row { background: #e8f0fe; color: #0d2b4e; border: 1px dashed #0d2b4e; border-radius: 6px; cursor: pointer; padding: 6px 16px; font-size: .82rem; margin-top: 8px; }
+.btn-add-row:hover { background: #d0e0fc; }
+.btn-del { background: none; border: none; color: #c0392b; cursor: pointer; font-size: 1rem; padding: 0 4px; }
+.btn-del:hover { color: #922b21; }
+
+/* Order meta fields */
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin-bottom: 18px; }
+.field-group { display: flex; flex-direction: column; gap: 4px; }
+.field-group label { font-size: .75rem; text-transform: uppercase; color: #666; letter-spacing: .4px; }
+.field-group input {
+  border: 1px solid #ccc; border-radius: 6px; padding: 7px 10px; font-size: .9rem; width: 100%;
+}
+.field-group input:focus { outline: none; border-color: #0d2b4e; }
+
+/* Tote prompt */
+#tote-prompt {
+  display: none; background: #fff8e6; border: 1px solid #f0c040;
+  border-radius: 8px; padding: 14px 18px; margin-bottom: 16px;
+}
+#tote-prompt p { font-size: .9rem; margin-bottom: 10px; }
+.tote-btns { display: flex; gap: 10px; }
+.btn-tote-yes { background: #1a7a3c; color: #fff; border: none; padding: 7px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-tote-no  { background: #6c757d; color: #fff; border: none; padding: 7px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-tote-yes:hover { background: #22a050; }
+.btn-tote-no:hover  { background: #5a6268; }
+.tote-badge { display: inline-block; font-size: .74rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-left: 6px; }
+.badge-yes { background: #d4edda; color: #155724; }
+.badge-no  { background: #e2e3e5; color: #383d41; }
+
+/* Items table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+thead tr { background: #0d2b4e; color: #fff; }
+thead th { padding: 8px 8px; text-align: left; white-space: nowrap; font-size: .75rem; letter-spacing: .3px; }
+tbody tr:nth-child(even) { background: #f6f8fb; }
+tbody tr:hover { background: #eef2f8; }
+tbody td { padding: 5px 6px; vertical-align: middle; }
+tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: .82rem; }
+.num { text-align: right; }
+
+/* Editable inputs in table */
+.tbl-input {
+  border: 1px solid #ddd; border-radius: 4px; padding: 4px 6px;
+  font-size: .79rem; width: 100%; background: #fff;
+}
+.tbl-input:focus { outline: none; border-color: #0d2b4e; background: #f0f6ff; }
+.tbl-select { border: 1px solid #ddd; border-radius: 4px; padding: 4px 4px; font-size: .78rem; width: 100%; background: #fff; }
+.tbl-select:focus { outline: none; border-color: #0d2b4e; }
+.derived { color: #555; font-size: .78rem; }
+.warn-txt { color: #c0392b; font-size: .73rem; }
+
+/* Spinner */
+#spinner { display: none; text-align: center; padding: 28px; }
+.ring { width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: #0d2b4e; border-radius: 50%; animation: spin .8s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#spinner p { margin-top: 10px; color: #555; font-size: .88rem; }
+
+#error-msg  { display: none; background: #fdecea; border: 1px solid #f5c6cb; border-radius: 7px; padding: 13px 16px; color: #721c24; font-size: .88rem; margin-bottom: 14px; }
+#ok-msg     { display: none; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 7px; padding: 13px 16px; color: #155724; font-size: .88rem; margin-bottom: 14px; }
+
+#results { display: none; }
+.actions-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+#generate-btn { display: none; }
+
+@media (max-width:600px) { .meta-grid { grid-template-columns: 1fr; } header h1 { font-size: 1rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>&#x1F6E2;&#xFE0F; U1P Order Conversion Tool &nbsp;<span style="opacity:.6;font-size:.8rem;font-weight:normal;">Ultra1Plus</span></h1>
+  <span id="dispatch-badge">Loading...</span>
+</header>
+
+<main>
+
+  <!-- Input card -->
+  <div class="card">
+    <h2>Upload or Paste Purchase Order</h2>
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchTab('file')">&#128206; Upload PDF</div>
+      <div class="tab" onclick="switchTab('text')">&#9998;&#65039; Paste Text / Email</div>
+    </div>
+
+    <div id="tab-file">
+      <div id="drop-zone" onclick="document.getElementById('file-input').click()"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
+           ondragleave="this.classList.remove('drag-over')"
+           ondrop="handleDrop(event)">
+        <div class="icon">&#128196;</div>
+        <p>Drag &amp; drop a <strong>PDF</strong> here, or <strong>click to browse</strong></p>
+        <p style="margin-top:5px;font-size:.78rem;color:#aaa;">Supports PDF purchase orders</p>
+        <div id="file-name"></div>
+      </div>
+      <input type="file" id="file-input" accept=".pdf,.txt" onchange="fileSelected(this)">
+    </div>
+
+    <div id="tab-text" style="display:none">
+      <textarea id="text-input" placeholder="Paste the purchase order text or email content here..."></textarea>
+    </div>
+
+    <button class="btn btn-primary" id="parse-btn" onclick="parseOrder()">&#128269; Process Order</button>
+  </div>
+
+  <div id="spinner"><div class="ring"></div><p>Extracting order information...</p></div>
+  <div id="error-msg"></div>
+  <div id="ok-msg"></div>
+
+  <!-- Results card -->
+  <div id="results" class="card">
+    <h2>Dispatch Note — Review &amp; Edit</h2>
+
+    <div id="tote-prompt">
+      <p>&#x1F6E2;&#xFE0F; <strong>Tote(s) detected.</strong> Is <span id="tote-client"></span> approved for the <strong>Tote Return Program</strong>?</p>
+      <div class="tote-btns">
+        <button class="btn-tote-yes" onclick="setToteReturn(true)">&#x2705; Yes — Tote Return</button>
+        <button class="btn-tote-no"  onclick="setToteReturn(false)">&#x274C; No — Standard</button>
+      </div>
+    </div>
+
+    <!-- Order meta (editable) -->
+    <div class="meta-grid">
+      <div class="field-group"><label>Client Name</label><input id="f-client" type="text" placeholder="Client name"></div>
+      <div class="field-group"><label>PO Number</label><input id="f-po" type="text" placeholder="PO_02222"></div>
+      <div class="field-group"><label>Address Line 1</label><input id="f-addr1" type="text" placeholder="Street address"></div>
+      <div class="field-group"><label>Order Date</label><input id="f-date" type="text" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>Address Line 2</label><input id="f-addr2" type="text" placeholder="City, State ZIP"></div>
+      <div class="field-group"><label>Delivery Date <span style="color:#aaa;font-weight:normal">(leave blank if none)</span></label><input id="f-delivery" type="text" placeholder="MM/DD/YYYY"></div>
+    </div>
+
+    <!-- Items table -->
+    <div class="table-wrap">
+      <table id="items-table">
+        <thead>
+          <tr>
+            <th style="width:70px">CODE</th>
+            <th style="width:130px">PRESENTATION</th>
+            <th style="width:68px" class="num">CASES<br><span style="font-weight:normal;font-size:.68rem;opacity:.75">(dispatch)</span></th>
+            <th style="width:72px" class="num">PO QTY<br><span style="font-weight:normal;font-size:.68rem;opacity:.75">(ordered)</span></th>
+            <th style="width:90px">SKU</th>
+            <th>DESCRIPTION</th>
+            <th style="width:90px">SPEC</th>
+            <th style="width:70px" class="num">UNIT QTY</th>
+            <th style="width:75px" class="num">PALLETS</th>
+            <th style="width:80px" class="num">EST WEIGHT</th>
+            <th style="width:82px" class="num">PRICE/CASE</th>
+            <th style="width:82px" class="num">TOTAL</th>
+            <th style="width:28px"></th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="8" style="text-align:right;color:#666;">TOTALS</td>
+            <td class="num" id="total-pallets">—</td>
+            <td class="num" id="total-weight">—</td>
+            <td></td>
+            <td class="num" id="total-amount">—</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <button class="btn-add-row" onclick="addRow()">+ Add Row</button>
+
+    <div class="actions-bar">
+      <button class="btn btn-success" id="generate-btn" onclick="generateCSV()">&#11015;&#65039; Download Dispatch CSV</button>
+      <button class="btn btn-neutral"  onclick="recalcAll()" title="Recalculate all rows after manual edits">&#8635; Update</button>
+      <button class="btn btn-neutral"  onclick="resetForm()">&#8634; New Order</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── State ───────────────────────────────────────────────────────────────────
+let catalog = {};
+let toteReturn = false;
+let hasTotes   = false;
+let activeTab  = 'file';
+let selectedFile = null;
+
+// ── Calculation rules ─────────────────────────────────────────────────────
+// units_per_case: how many customer-facing units make one case (null = already ordered in cases)
+// unit_label: the label customers use when ordering by individual units
+const PRES_CALC = {
+  'DRUM (55G)':      { pallet_div:  4,   weight_mult: 1800, unit_mult:   1, tote: false, dispatch_spec: 'DRUM (55G)',      units_per_case: null,  unit_label: null    },
+  'PAIL (5G)':       { pallet_div: 56,   weight_mult: 2260, unit_mult:   1, tote: false, dispatch_spec: 'PAIL (5G)',       units_per_case: null,  unit_label: null    },
+  'TOTE (265G)':     { pallet_div: 265,  weight_mult: 2126, unit_mult: 265, tote: true,  dispatch_spec: 'BULK (OIL)',      units_per_case: null,  unit_label: null    },
+  'TOTE (250G)':     { pallet_div: 250,  weight_mult: 2364, unit_mult: 250, tote: true,  dispatch_spec: 'BULK (COOL)',     units_per_case: null,  unit_label: null    },
+  'TOTE (330G)':     { pallet_div:  1,   weight_mult: 2635, unit_mult:   1, tote: true,  dispatch_spec: 'TOTE (330G)',     units_per_case: null,  unit_label: null    },
+  'BULK (OIL)':      { pallet_div: 265,  weight_mult: 2126, unit_mult: 265, tote: true,  dispatch_spec: 'BULK (OIL)',      units_per_case: null,  unit_label: null    },
+  'BULK (COOL)':     { pallet_div: 250,  weight_mult: 2364, unit_mult: 250, tote: true,  dispatch_spec: 'BULK (COOL)',     units_per_case: null,  unit_label: null    },
+  'BOX (12Q)':       { pallet_div:  84,  weight_mult: 2184, unit_mult:   1, tote: false, dispatch_spec: 'BOX (12Q)',       units_per_case:  12,   unit_label: 'QT'   },
+  'BOX (6G)':        { pallet_div:  36,  weight_mult: 2000, unit_mult:   1, tote: false, dispatch_spec: 'BOX (6G)',        units_per_case:   6,   unit_label: 'GAL'  },
+  'BOX (4G)':        { pallet_div:  60,  weight_mult: 1850, unit_mult:   1, tote: false, dispatch_spec: 'BOX (4G)',        units_per_case:   4,   unit_label: 'GAL'  },
+  'BOX (3/5QTS)':    { pallet_div:  60,  weight_mult: 1950, unit_mult:   1, tote: false, dispatch_spec: 'BOX (3/5QTS)',    units_per_case:   3,   unit_label: '5QT'  },
+  'BOX (1 X 2.5G)':  { pallet_div:  92,  weight_mult: 2325, unit_mult:   1, tote: false, dispatch_spec: 'BOX (1 X 2.5G)', units_per_case:   1,   unit_label: '2.5G' },
+  'BOX (2 X 2.5G)':  { pallet_div:  44,  weight_mult: 2204, unit_mult:   1, tote: false, dispatch_spec: 'BOX (2 X 2.5G)', units_per_case:   2,   unit_label: '2.5G' },
+  'JERRYCAN (20L)':  { pallet_div:  48,  weight_mult: 2323, unit_mult:   1, tote: false, dispatch_spec: 'JERRYCAN (20L)', units_per_case: null,  unit_label: null    },
+  'CASE 10/1':       { pallet_div: 165,  weight_mult: 1450, unit_mult:   1, tote: false, dispatch_spec: 'CASE 10/1',      units_per_case:  10,   unit_label: '1QT'  },
+  'KEG (120LBS)':    { pallet_div:   9,  weight_mult: 1200, unit_mult:   1, tote: false, dispatch_spec: 'KEG (120LBS)',   units_per_case: null,  unit_label: null    },
+};
+const PRESENTATIONS = Object.keys(PRES_CALC);
+
+// ── Init ──────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    const [catRes, cntRes] = await Promise.all([
+      fetch('/products.json'),
+      fetch('/api/counter'),
+    ]);
+    catalog = await catRes.json();
+    const cnt = await cntRes.json();
+    updateDispatchBadge(cnt.last + 1);
+  } catch(e) {
+    console.warn('Init error', e);
+  }
+}
+
+function updateDispatchBadge(n) {
+  document.getElementById('dispatch-badge').textContent = 'Next Dispatch: #' + n;
+}
+
+// ── Tab / file helpers ────────────────────────────────────────────────────
+function switchTab(t) {
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', (i===0?'file':'text')===t));
+  document.getElementById('tab-file').style.display  = t==='file'?'':'none';
+  document.getElementById('tab-text').style.display  = t==='text'?'':'none';
+}
+function fileSelected(inp) { if(inp.files[0]){ selectedFile=inp.files[0]; document.getElementById('file-name').textContent='📎 '+selectedFile.name; } }
+function handleDrop(e) {
+  e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if(f){ selectedFile=f; document.getElementById('file-name').textContent='📎 '+f.name; }
+}
+
+// ── Parsing ───────────────────────────────────────────────────────────────
+async function parseOrder() {
+  hideMessages();
+  document.getElementById('results').style.display = 'none';
+
+  const btn = document.getElementById('parse-btn');
+  btn.disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+
+  try {
+    let text = '';
+
+    if (activeTab === 'file') {
+      if (!selectedFile) { showError('Please select a PDF file first.'); return; }
+      const form = new FormData();
+      form.append('file', selectedFile);
+      const res = await fetch('/api/extract-pdf', { method:'POST', body: form });
+      const data = await res.json();
+      if (!res.ok) { showError(data.error || 'PDF extraction failed.'); return; }
+      text = data.text;
+    } else {
+      text = document.getElementById('text-input').value.trim();
+      if (!text) { showError('Please paste the purchase order text.'); return; }
+    }
+
+    const parsed = parsePOText(text);
+    renderForm(parsed);
+  } finally {
+    document.getElementById('spinner').style.display = 'none';
+    btn.disabled = false;
+  }
+}
+
+// ── PO Text Parser ────────────────────────────────────────────────────────
+function parsePOText(text) {
+  const lines = text.split('\n').map(l => l.trim());
+
+  // ── PO Number ────────────────────────────────────────────────────────────
+  let poNumber = '';
+  const poM =
+    text.match(/P\.?O\.?\s*NO\.?\s+(\w+)/i)   ||
+    text.match(/P\.?O\.?\s*#\s*(\w+)/i)        ||
+    text.match(/PO[_\-\s]?(\d{4,6})/i);
+  if (poM) {
+    const raw = poM[1].replace(/^PO_?/i, '');
+    poNumber = 'PO_' + raw.padStart(5, '0');
+  }
+
+  // ── Order date ───────────────────────────────────────────────────────────
+  let orderDate = '';
+  const dateM =
+    text.match(/DATE\s+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})/i) ||
+    text.match(/Date[:\s]+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})/i) ||
+    text.match(/(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})/);
+  if (dateM) orderDate = dateM[1].replace(/-/g, '/');
+
+  // ── Delivery date ───────────────────────────────────────────────────────
+  let deliveryDate = '';
+  const delivM = text.match(/(?:ship(?:ping)?\s*date|deliver(?:y)?\s*(?:date|by)|required\s*(?:by|date))[:\s]+(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})/i);
+  if (delivM) deliveryDate = delivM[1].replace(/-/g, '/');
+
+  // ── Ship To / client info ─────────────────────────────────────────────────
+  let clientName = '', address1 = '', address2 = '';
+
+  // Method A: "VENDOR ... SHIP TO" combined header (two-column layout, e.g. QuickBooks POs)
+  // Format: next line has "Our Vendor Name  Client Name  DATE XX/XX/XXXX"
+  const vendorShipIdx = lines.findIndex(l => /VENDOR.+SHIP\s*TO/i.test(l));
+  if (vendorShipIdx >= 0) {
+    const infoLine = lines[vendorShipIdx + 1] || '';
+    // Strip our company name and the DATE portion to isolate client name
+    let clientPart = infoLine
+      .replace(/Ultra\s*1?\s*Plus\b/gi, '')
+      .replace(/DATE\s+[\d\/\-]+/i, '')
+      .trim();
+    if (clientPart) clientName = clientPart;
+
+    // Subsequent lines: address continuation or more company name
+    for (let k = vendorShipIdx + 2; k <= Math.min(vendorShipIdx + 8, lines.length - 1); k++) {
+      const l = lines[k];
+      if (!l || /^(QTY|CE\s|CE\s+WAREHOUSE|CE\s+DFW|SHIP|AMOUNT)/i.test(l)) break;
+      if (/^\d+\s+[A-Z]/i.test(l) && !address1) {
+        address1 = l;          // line starting with number = street
+      } else if (/[A-Z]{2}\s+\d{5}/.test(l) && !address2) {
+        address2 = l;          // line with ST 00000 = city/state/zip
+      } else if (!address1) {
+        // No address found yet → this is continuation of company name
+        clientName = (clientName + ' ' + l).trim();
+      }
+    }
+
+  } else {
+    // Method B: standalone "SHIP TO" line
+    const stIdx = lines.findIndex(l => /^SHIP\s*TO\s*:?$/i.test(l));
+    if (stIdx >= 0) {
+      const block = [];
+      for (let i = stIdx + 1; i < Math.min(stIdx + 8, lines.length); i++) {
+        const l = lines[i];
+        if (!l || /^(VENDOR|P\.O\.|DATE|QTY|RATE|AMOUNT|CE\s|SHIP)/i.test(l)) break;
+        block.push(l);
+      }
+      if (block[0]) clientName = block[0];
+      const streetLine = block.slice(1).find(l => /\d/.test(l));
+      if (streetLine) address1 = streetLine;
+      const cityLine = block.find(l => /[A-Z]{2}\s+\d{5}/.test(l));
+      if (cityLine && cityLine !== address1) address2 = cityLine;
+      else if (block[2]) address2 = block[2];
+    }
+  }
+
+  // ── Line items ────────────────────────────────────────────────────────────
+  // In many PO formats (QuickBooks) the qty appears on the FIRST line of the
+  // item description — BEFORE the UL code — so we search BACKWARDS first.
+  // Pattern: "Some description text  QTY  RATE  AMOUNT"
+  // Note: QTY can include a thousands comma  e.g. "1,008 3.06 3,084.48"
+  const QTY_LINE = /([\d,]+)\s+([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s*$/;
+
+  const items = [];
+  const seen  = new Set();
+
+  for (let i = 0; i < lines.length; i++) {
+    // Match UL codes — no $ so trailing text like "Tote" is allowed
+    // e.g. UL802-265-Gallon Tote, UL206-55GAL, UL501-5GAl
+    const skuM = lines[i].match(/^(UL\d{3,4})[\s\-]*([\w\-\.]+)/i);
+    if (!skuM) continue;
+
+    const code   = skuM[1].toUpperCase();
+    const suffix = skuM[2];
+    const mapped = mapPresentation(suffix, code);
+    if (!mapped) continue;
+
+    const key = code + '|' + mapped.pres;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    let rawQty = 0, unitPrice = 0, amount = 0;
+
+    // ── 1. Look BACKWARDS (most common: qty is on the first description line) ──
+    for (let j = i - 1; j >= Math.max(0, i - 8); j--) {
+      const m = lines[j].match(QTY_LINE);
+      if (m) {
+        const q = parseInt(m[1].replace(/,/g, ''));   // strip thousands comma e.g. 1,008 → 1008
+        const r = parseFloat(m[2].replace(/,/g, ''));
+        // Sanity: qty ≥ 1, rate > 0 (avoids matching zip codes etc.)
+        if (q > 0 && r > 0) {
+          rawQty    = q;
+          unitPrice = r;
+          amount    = parseFloat(m[3].replace(/,/g, ''));
+          break;
+        }
+      }
+    }
+
+    // ── 2. Look FORWARDS (fallback for formats that put qty after the code) ──
+    if (!rawQty) {
+      for (let j = i + 1; j <= Math.min(i + 3, lines.length - 1); j++) {
+        const m = lines[j].match(/^(\d+)\s+([\d,]+\.?\d*)\s+([\d,]+\.?\d*)/);
+        if (m) {
+          rawQty    = parseInt(m[1]);
+          unitPrice = parseFloat(m[2].replace(/,/g, ''));
+          amount    = parseFloat(m[3].replace(/,/g, ''));
+          break;
+        }
+        const qOnly = lines[j].match(/^(\d+)$/);
+        if (qOnly) { rawQty = parseInt(qOnly[1]); break; }
+      }
+    }
+
+    if (!rawQty) rawQty = 1;
+
+    // ── Unit conversion ───────────────────────────────────────────────────
+    let caseQty = rawQty;
+    let poQtyLabel = '';
+    if (mapped.unitsPerCase && mapped.unitsPerCase > 1) {
+      caseQty    = Math.ceil(rawQty / mapped.unitsPerCase);
+      poQtyLabel = rawQty + ' ' + mapped.poUnit;
+    } else if (mapped.unitsPerCase === 1 && mapped.poUnit) {
+      poQtyLabel = rawQty + ' ' + mapped.poUnit;
+    }
+
+    items.push({
+      ul_code:        code,
+      presentation:   mapped.pres,
+      qty:            caseQty,
+      po_qty_label:   poQtyLabel,
+      unit_price:     unitPrice,
+      amount,
+      units_per_case: mapped.unitsPerCase ?? null,
+    });
+  }
+
+  return { poNumber, orderDate, deliveryDate, clientName, address1, address2, items };
+}
+
+// mapPresentation returns { pres, poUnit, unitsPerCase }
+// poUnit/unitsPerCase are set when the customer ordered in individual units
+// (e.g. QT, GAL) so we can show the conversion and store original PO qty.
+// ulCode is used to distinguish coolant/WW (UL9xx) from oil (all others)
+// for the ambiguous "GAL" suffix → BOX (6G) vs BOX (4G).
+function mapPresentation(suffix, ulCode = '') {
+  const s = suffix.toUpperCase().replace(/\s+/g, '');
+  // UL900–UL999 = coolants & windshield washer fluid → BOX (6G) / 6 per case
+  const isCoolant = /^UL9\d{2}$/i.test(ulCode.trim());
+
+  // ── Bulk / drums / pails ─────────────────────────────────────────────────
+  if (/55G(AL)?$/.test(s))            return { pres: 'DRUM (55G)',      poUnit: null, unitsPerCase: null };
+  if (/^5G(AL|AI)?$/.test(s))         return { pres: 'PAIL (5G)',       poUnit: null, unitsPerCase: null };
+  if (/265/.test(s))                  return { pres: 'TOTE (265G)',     poUnit: null, unitsPerCase: null };
+  if (/250/.test(s))                  return { pres: 'TOTE (250G)',     poUnit: null, unitsPerCase: null };
+  if (/330/.test(s))                  return { pres: 'TOTE (330G)',     poUnit: null, unitsPerCase: null };
+
+  // ── Box / case formats — customer ordered by full CASE already ───────────
+  if (/^12Q/.test(s))                            return { pres: 'BOX (12Q)',      poUnit: null, unitsPerCase: null };
+  if (/^2X2\.5G?|^2-2\.5G?/.test(s))            return { pres: 'BOX (2 X 2.5G)', poUnit: '2.5G', unitsPerCase: 2 };
+  if (/^1X2\.5G?|^1-2\.5G?/.test(s))            return { pres: 'BOX (1 X 2.5G)', poUnit: null, unitsPerCase: null };
+  if (/^4G(AL)?$/.test(s))                       return { pres: 'BOX (4G)',       poUnit: null, unitsPerCase: null };
+  if (/^6G(AL)?$/.test(s))                       return { pres: 'BOX (6G)',       poUnit: null, unitsPerCase: null };
+  if (/^3[\/\-]5QT/.test(s))                     return { pres: 'BOX (3/5QTS)',   poUnit: null, unitsPerCase: null };
+
+  // ── Unit-based ordering — customer ordered in individual units ────────────
+  // QT / 1QT  →  BOX (12Q),  divide by 12
+  if (/^1?QT$/.test(s))                          return { pres: 'BOX (12Q)',      poUnit: 'QT',  unitsPerCase: 12 };
+  // 5QT  →  BOX (3/5QTS),  divide by 3
+  if (/^5QT$/.test(s))                           return { pres: 'BOX (3/5QTS)',   poUnit: '5QT', unitsPerCase:  3 };
+  // 1GAL / GAL  →  BOX (6G) for coolants & WW (UL9xx), BOX (4G) for oils
+  if (/^1?GAL$/.test(s))  return isCoolant
+    ? { pres: 'BOX (6G)', poUnit: 'GAL', unitsPerCase: 6 }
+    : { pres: 'BOX (4G)', poUnit: 'GAL', unitsPerCase: 4 };
+  // 2.5G / 2.5GAL  →  BOX (1 x 2.5G),  divide by 1
+  if (/^2\.5G(AL)?$/.test(s))                    return { pres: 'BOX (1 X 2.5G)', poUnit: '2.5G', unitsPerCase: 1 };
+
+  // ── Other ────────────────────────────────────────────────────────────────
+  if (/JC$|JERRCAN|JERRYCAN/.test(s))            return { pres: 'JERRYCAN (20L)', poUnit: null, unitsPerCase: null };
+  if (/CASE/.test(s))                            return { pres: 'CASE 10/1',      poUnit: null, unitsPerCase: null };
+  if (/KEG/.test(s))                             return { pres: 'KEG (120LBS)',   poUnit: null, unitsPerCase: null };
+  return null;
+}
+
+// ── Calculations ──────────────────────────────────────────────────────────
+function calcItem(code, presentation, qty) {
+  const calc = PRES_CALC[presentation] || {};
+  const dispatchSpec = calc.dispatch_spec || presentation;
+  const unitQty   = qty * (calc.unit_mult || 1);
+  const palletDiv = calc.pallet_div;
+  const palletQty = palletDiv ? +(unitQty / palletDiv).toFixed(2) : null;
+  const estWeight = palletQty !== null ? +(palletQty * (calc.weight_mult || 0)).toFixed(2) : null;
+
+  const product = catalog[code] || {};
+  const sku     = (product.presentations || {})[dispatchSpec] || '';
+  const desc    = product.name || '';
+
+  return { dispatchSpec, unitQty, palletQty, estWeight, sku, desc };
+}
+
+// ── Form rendering ────────────────────────────────────────────────────────
+function renderForm(parsed) {
+  document.getElementById('f-client').value   = parsed.clientName  || '';
+  document.getElementById('f-po').value       = parsed.poNumber    || '';
+  document.getElementById('f-addr1').value    = parsed.address1    || '';
+  document.getElementById('f-addr2').value    = parsed.address2    || '';
+  document.getElementById('f-date').value     = parsed.orderDate   || '';
+  document.getElementById('f-delivery').value = parsed.deliveryDate|| '';
+
+  hasTotes = parsed.items.some(it => (PRES_CALC[it.presentation]||{}).tote);
+  toteReturn = false;
+
+  const prompt = document.getElementById('tote-prompt');
+  if (hasTotes) {
+    document.getElementById('tote-client').textContent = parsed.clientName || 'this client';
+    prompt.style.display = 'block';
+    document.getElementById('generate-btn').style.display = 'none';
+  } else {
+    prompt.style.display = 'none';
+    document.getElementById('generate-btn').style.display = 'inline-block';
+  }
+
+  const tbody = document.getElementById('items-body');
+  tbody.innerHTML = '';
+  parsed.items.forEach(it => appendRow(it.ul_code, it.presentation, it.qty, it.po_qty_label || '', it.unit_price || 0, it.units_per_case ?? null));
+  refreshTotals();
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function appendRow(code, presentation, qty, poQtyLabel = '', unitPrice = 0, unitsPerCase = null) {
+  const c = calcItem(code, presentation, qty);
+  const tbody = document.getElementById('items-body');
+  const tr = document.createElement('tr');
+  tr.dataset.code = code;
+
+  const presOptions = PRESENTATIONS.map(p =>
+    `<option value="${p}" ${p===presentation?'selected':''}>${p}</option>`
+  ).join('');
+
+  // PO QTY cell: shows original ordered units if a conversion happened
+  const poQtyHtml = poQtyLabel
+    ? `<span style="color:#1a5c9a;font-weight:bold;font-size:.78rem;">${esc(poQtyLabel)}</span>`
+    : `<span style="color:#aaa;font-size:.73rem;">—</span>`;
+
+  // If customer ordered in units (e.g. QT, GAL), unitPrice is per-unit → convert to per-case
+  const casePrice = unitPrice > 0 && unitsPerCase && unitsPerCase > 1
+    ? +(unitPrice * unitsPerCase).toFixed(2)
+    : unitPrice;
+  const total = qty * casePrice;
+
+  tr.innerHTML = `
+    <td><input class="tbl-input" style="width:64px;text-transform:uppercase" value="${esc(code)}" onchange="onCodeChange(this)" oninput="this.value=this.value.toUpperCase()"></td>
+    <td><select class="tbl-select" onchange="onPresChange(this)">${presOptions}</select></td>
+    <td class="num"><input class="tbl-input cases-input" style="width:54px;text-align:right" type="number" min="1" value="${qty}" onchange="onRowChange(this)"></td>
+    <td class="derived poqty-cell num">${poQtyHtml}</td>
+    <td class="derived sku-cell" style="font-size:.75rem;color:#555;">${esc(c.sku)||'<span class="warn-txt">?</span>'}</td>
+    <td class="derived desc-cell" style="font-size:.75rem;">${esc(c.desc)}</td>
+    <td class="derived spec-cell" style="font-size:.75rem;"><code>${esc(c.dispatchSpec)}</code></td>
+    <td class="derived uqty-cell num">${c.unitQty}</td>
+    <td class="derived pqty-cell num">${c.palletQty !== null ? c.palletQty.toFixed(2) : '<span class="warn-txt">?</span>'}</td>
+    <td class="derived ewt-cell num">${c.estWeight !== null ? c.estWeight.toLocaleString() : '<span class="warn-txt">?</span>'}</td>
+    <td class="num"><input class="tbl-input price-input" style="width:68px;text-align:right" type="number" min="0" step="0.01" value="${casePrice > 0 ? casePrice.toFixed(2) : ''}" placeholder="0.00" onchange="onRowChange(this)"></td>
+    <td class="derived total-cell num" data-raw="${total.toFixed(2)}">${total > 0 ? '$' + fmtMoney(total) : '<span style="color:#aaa">—</span>'}</td>
+    <td><button class="btn-del" onclick="deleteRow(this)" title="Remove">&#x2715;</button></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+function onCodeChange(input) {
+  input.value = input.value.toUpperCase().trim();
+  onRowChange(input);
+}
+
+// When presentation changes, recalculate PO QTY label from stored raw qty if possible
+function onPresChange(select) {
+  const tr = select.closest('tr');
+  const pres = select.value;
+  const calc = PRES_CALC[pres] || {};
+  // If there's already a PO qty shown (blue text), recalculate cases from it
+  const poCell = tr.querySelector('.poqty-cell');
+  const existingLabel = poCell?.querySelector('span[style*="1a5c9a"]')?.textContent?.trim();
+  if (existingLabel && calc.units_per_case) {
+    const rawMatch = existingLabel.match(/^(\d+)/);
+    if (rawMatch) {
+      const rawQty = parseInt(rawMatch[1]);
+      const newCaseQty = Math.ceil(rawQty / calc.units_per_case);
+      tr.querySelector('input[type=number]').value = newCaseQty;
+    }
+  }
+  onRowChange(select);
+}
+
+function onRowChange(el) {
+  const tr = el.closest('tr');
+  const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+  const pres  = tr.querySelector('select').value;
+  const qty   = parseInt(tr.querySelector('.cases-input').value) || 1;
+  const price = parseFloat(tr.querySelector('.price-input').value) || 0;
+  const total = qty * price;
+  const c = calcItem(code, pres, qty);
+
+  tr.querySelector('.sku-cell').innerHTML    = c.sku  ? esc(c.sku)  : '<span class="warn-txt">Not found</span>';
+  tr.querySelector('.desc-cell').innerHTML   = esc(c.desc);
+  tr.querySelector('.spec-cell').innerHTML   = `<code>${esc(c.dispatchSpec)}</code>`;
+  tr.querySelector('.uqty-cell').textContent = c.unitQty;
+  tr.querySelector('.pqty-cell').innerHTML   = c.palletQty !== null ? c.palletQty.toFixed(2) : '<span class="warn-txt">?</span>';
+  tr.querySelector('.ewt-cell').innerHTML    = c.estWeight !== null ? c.estWeight.toLocaleString() : '<span class="warn-txt">?</span>';
+  const totalCell = tr.querySelector('.total-cell');
+  totalCell.dataset.raw = total.toFixed(2);
+  totalCell.innerHTML   = total > 0 ? '$' + fmtMoney(total) : '<span style="color:#aaa">—</span>';
+
+  refreshTotals();
+  refreshTotePrompt();
+}
+
+function deleteRow(btn) {
+  btn.closest('tr').remove();
+  refreshTotals();
+  refreshTotePrompt();
+}
+
+function addRow() {
+  appendRow('', PRESENTATIONS[0], 1, '', 0, null);
+  refreshTotals();
+}
+
+function recalcAll() {
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const sel = tr.querySelector('select');
+    if (sel) onRowChange(sel);
+  });
+  showOk('✅ All rows recalculated.');
+}
+
+function refreshTotals() {
+  let totalP = 0, totalW = 0, totalAmt = 0;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const pqty = parseFloat(tr.querySelector('.pqty-cell').textContent) || 0;
+    const ewt  = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    const amt  = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+    totalP += pqty; totalW += ewt; totalAmt += amt;
+  });
+  document.getElementById('total-pallets').textContent = totalP.toFixed(2);
+  document.getElementById('total-weight').textContent  = totalW.toLocaleString();
+  document.getElementById('total-amount').innerHTML    = totalAmt > 0 ? '<strong>$' + fmtMoney(totalAmt) + '</strong>' : '—';
+}
+
+function refreshTotePrompt() {
+  hasTotes = false;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const pres = tr.querySelector('select')?.value;
+    if (pres && (PRES_CALC[pres]||{}).tote) hasTotes = true;
+  });
+  if (!hasTotes) {
+    document.getElementById('tote-prompt').style.display = 'none';
+    document.getElementById('generate-btn').style.display = 'inline-block';
+  }
+}
+
+// ── Tote return ───────────────────────────────────────────────────────────
+function setToteReturn(val) {
+  toteReturn = val;
+  document.getElementById('tote-prompt').innerHTML =
+    `<p>Tote Return Program: <span class="tote-badge ${val?'badge-yes':'badge-no'}">${val?'✅ Approved':'❌ Standard Billing'}</span></p>`;
+  document.getElementById('generate-btn').style.display = 'inline-block';
+}
+
+// ── CSV Generation ────────────────────────────────────────────────────────
+async function generateCSV() {
+  const client = document.getElementById('f-client').value.trim();
+  const po     = document.getElementById('f-po').value.trim();
+  const addr1  = document.getElementById('f-addr1').value.trim();
+  const addr2  = document.getElementById('f-addr2').value.trim();
+  const date   = document.getElementById('f-date').value.trim();
+  const delivery = document.getElementById('f-delivery').value.trim();
+
+  if (!client || !po) { showError('Client name and PO Number are required.'); return; }
+
+  // Fetch current counter
+  let lastDispatch = 3086;
+  try {
+    const r = await fetch('/api/counter');
+    const d = await r.json();
+    lastDispatch = d.last;
+  } catch(e) {}
+  const dispatchNum = lastDispatch + 1;
+
+  // Build rows
+  const rows = [];
+  rows.push(['Dispatch Note', '#' + dispatchNum, '', '', '', '', '', '']);
+  rows.push(['Ultra1Plus',    '',                 '', '', '', '', '', '']);
+  rows.push(['',              '',                 '', '', '', '', '', '']);
+  rows.push(['SHIP TO:', '', '', '', 'Customer PO Number:', po, '', '']);
+  rows.push([client,    '', '', '', 'Date of order:',       date, '', '']);
+  rows.push([addr1,     '', '', '', 'Shipping date:',       delivery, '', '']);
+  rows.push([addr2,     '', '', '', 'Shipping time:',       '', '', '']);
+  rows.push(['',        '', '', '', '', '', '', '']);
+  rows.push(['CODE', 'CASES (DISPATCH)', 'PO QTY (ORDERED)', 'SKU', 'DESCRIPTION', 'SPEC', 'UNIT QTY', 'PALLET QTY', 'EST WEIGHT', 'PRICE/CASE', 'TOTAL', 'PO']);
+
+  let totalPallets = 0, totalWeight = 0;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+    if (!code) return;
+    const cases    = tr.querySelector('.cases-input').value.trim();
+    const poQtyRaw = tr.querySelector('.poqty-cell span[style*="1a5c9a"]')?.textContent?.trim() || '';
+    const sku      = tr.querySelector('.sku-cell').textContent.trim();
+    const desc     = tr.querySelector('.desc-cell').textContent.trim();
+    const spec     = tr.querySelector('.spec-cell').textContent.trim();
+    const uqty     = tr.querySelector('.uqty-cell').textContent.trim();
+    const pqty     = parseFloat(tr.querySelector('.pqty-cell').textContent) || 0;
+    const ewt      = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    const priceVal = parseFloat(tr.querySelector('.price-input').value) || 0;
+    const totalVal = parseFloat(tr.querySelector('.total-cell').dataset.raw || 0);
+    rows.push([code, cases, poQtyRaw, sku, desc, spec, uqty, pqty.toFixed(2), ewt.toLocaleString(), priceVal > 0 ? priceVal.toFixed(2) : '', totalVal > 0 ? totalVal.toFixed(2) : '', po]);
+    totalPallets += pqty;
+    totalWeight  += ewt;
+  });
+
+  let grandTotal = 0;
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    grandTotal += parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+  });
+  rows.push(['', '', '', '', '', '', '', totalPallets.toFixed(2), totalWeight.toLocaleString(), '', grandTotal > 0 ? grandTotal.toFixed(2) : '', '']);
+  rows.push(['', '', '', '', '', '', '', '', '', '', '', '']);
+
+  const notes = toteReturn ? 'Tote Return Program applied — containers to be returned by customer' : '';
+  rows.push(['NOTES:', notes, '', '', '', '', '', '', '', '', '', '']);
+
+  // Save counter
+  try { await fetch('/api/counter', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({last: dispatchNum}) }); } catch(e){}
+  updateDispatchBadge(dispatchNum + 1);
+
+  // Build and download CSV
+  const csvContent = '\uFEFF' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `Dispatch_${dispatchNum}_${po.replace(/[^\w]/g,'_')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showOk('✅ Dispatch #' + dispatchNum + ' downloaded successfully!');
+}
+
+function csvCell(val) {
+  const s = String(val ?? '');
+  return (s.includes(',') || s.includes('"') || s.includes('\n')) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function resetForm() {
+  selectedFile = null;
+  document.getElementById('file-name').textContent = '';
+  document.getElementById('file-input').value = '';
+  document.getElementById('text-input').value = '';
+  document.getElementById('results').style.display = 'none';
+  hideMessages();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function showError(msg) {
+  document.getElementById('error-msg').textContent = '❌ ' + msg;
+  document.getElementById('error-msg').style.display = 'block';
+  document.getElementById('ok-msg').style.display   = 'none';
+  document.getElementById('spinner').style.display  = 'none';
+}
+function showOk(msg) {
+  document.getElementById('ok-msg').textContent   = msg;
+  document.getElementById('ok-msg').style.display = 'block';
+  document.getElementById('error-msg').style.display = 'none';
+}
+function hideMessages() {
+  document.getElementById('error-msg').style.display = 'none';
+  document.getElementById('ok-msg').style.display    = 'none';
+}
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function fmtMoney(n) {
+  return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+init();
+</script>
+</body>
+</html>

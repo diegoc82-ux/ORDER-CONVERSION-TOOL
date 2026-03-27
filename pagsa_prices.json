@@ -1,0 +1,13 @@
+{
+  "_note": "Per-case prices. 1 drum = 1 case, 1 pail = 1 case. Sources: D2956 Invoice 17477 (Jan 2026) for UL210/UL304/UL312/UL501/UL702/UL708/UL803; D2664 COST ANALYSIS (Sep 2025) for UL106/UL107; D2663 COST ANALYSIS (Sep 2025) for UL206/UL803 PAIL; D2612 PRICING (Jul 2025) for UL702 DRUM fallback.",
+  "UL106": { "DRUM (55G)": 464.00 },
+  "UL107": { "DRUM (55G)": 464.00 },
+  "UL206": { "PAIL (5G)": 33.20, "DRUM (55G)": 329.00 },
+  "UL210": { "DRUM (55G)": 385.00 },
+  "UL304": { "DRUM (55G)": 319.86, "PAIL (5G)": 31.35 },
+  "UL312": { "DRUM (55G)": 317.00, "PAIL (5G)": 31.35 },
+  "UL501": { "DRUM (55G)": 330.00 },
+  "UL702": { "PAIL (5G)": 41.80, "DRUM (55G)": 430.67 },
+  "UL708": { "DRUM (55G)": 428.54 },
+  "UL803": { "PAIL (5G)": 30.41, "DRUM (55G)": 291.69 }
+}

@@ -1,0 +1,3378 @@
+{
+  "UL100": {
+    "name": "U1P-DRIVE SAE 0W-16 Full Synthetic Motor Oil, API SP, ILSAC GF-6B",
+    "presentations": {
+      "TOTE (265G)": "UFS016SPGF6BT",
+      "DRUM (55G)": "UFS016SPGF6BD",
+      "PAIL (5G)": "UFS016SPGF6BP",
+      "JERRYCAN (20L)": "UFS016SPGF6BJC",
+      "JUG": "UFS016SPGF6BJ",
+      "2X5 QTS JUG": "UFS016SPGF6B-2J",
+      "GAL": "UFS016SPGF6BG",
+      "BOX (2G)": "UFS016SPGF6B-2G",
+      "BOX (4G)": "UFS016SPGF6B-BG",
+      "QUART": "UFS016SPGF6BL",
+      "BOX (3Q)": "UFS016SPGF6B-3L",
+      "BOX (6Q)": "UFS016SPGF6B-6L",
+      "5 Pack QT (Gal + QT)": "UFS016SPGF6B-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS016SPGF6B-G2L",
+      "BOX (12Q)": "UFS016SPGF6B-BL",
+      "BOX (3/5QTS)": "UFS016SPGF6B-BJ",
+      "BULK (OIL)": "UFS016SPGF6B-oil"
+    }
+  },
+  "UL1000": {
+    "name": "",
+    "presentations": {
+      "14OZ GREASE CARTRIDGE": "UMGLCHTRC",
+      "KEG (120LBS)": "UMGLCHTRK",
+      "CASE 10/1": "UMGLCHTR-BC"
+    }
+  },
+  "UL101": {
+    "name": "U1P-DRIVE SAE 0W-20 Full Synthetic Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "UFS020SPGF6AT",
+      "DRUM (55G)": "UFS020SPGF6AD",
+      "PAIL (5G)": "UFS020SPGF6AP",
+      "JERRYCAN (20L)": "UFS020SPGF6AJC",
+      "JUG": "UFS020SPGF6AJ",
+      "2X5 QTS JUG": "UFS020SPGF6A-2J",
+      "GAL": "UFS020SPGF6AG",
+      "BOX (2G)": "UFS020SPGF6A-2G",
+      "BOX (4G)": "UFS020SPGF6A-BG",
+      "QUART": "UFS020SPGF6AL",
+      "BOX (3Q)": "UFS020SPGF6A-3L",
+      "BOX (6Q)": "UFS020SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "UFS020SPGF6A-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS020SPGF6A-G2L",
+      "BOX (12Q)": "UFS020SPGF6A-BL",
+      "BOX (3/5QTS)": "UFS020SPGF6A-BJ",
+      "BULK (OIL)": "UFS020SPGF6A-oil"
+    }
+  },
+  "UL102": {
+    "name": "U1P-DRIVE SAE 5W-20 Full Synthetic Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "UFS0520SPGF6AT",
+      "DRUM (55G)": "UFS0520SPGF6AD",
+      "PAIL (5G)": "UFS0520SPGF6AP",
+      "JERRYCAN (20L)": "UFS0520SPGF6AJC",
+      "JUG": "UFS0520SPGF6AJ",
+      "2X5 QTS JUG": "UFS0520SPGF6A-2J",
+      "GAL": "UFS0520SPGF6AG",
+      "BOX (2G)": "UFS0520SPGF6A-2G",
+      "BOX (4G)": "UFS0520SPGF6A-BG",
+      "QUART": "UFS0520SPGF6AL",
+      "BOX (3Q)": "UFS0520SPGF6A-3L",
+      "BOX (6Q)": "UFS0520SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "UFS016SPGF6B-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS0520SPGF6A-G2L",
+      "BOX (12Q)": "UFS0520SPGF6A-BL",
+      "BOX (3/5QTS)": "UFS0520SPGF6A-BJ",
+      "BULK (OIL)": "UFS0520SPGF6A-oil"
+    }
+  },
+  "UL103": {
+    "name": "U1P-DRIVE SAE 5W-30 Full Synthetic Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "UFS0530SPGF6AT",
+      "DRUM (55G)": "UFS0530SPGF6AD",
+      "PAIL (5G)": "UFS0530SPGF6AP",
+      "JUG": "UFS0530SPGF6AJ",
+      "2X5 QTS JUG": "UFS0530SPGF6AD-2J",
+      "GAL": "UFS0530SPGF6AG",
+      "BOX (2G)": "UFS0530SPGF6A-2G",
+      "BOX (4G)": "UFS0530SPGF6A-BG",
+      "QUART": "UFS0530SPGF6AL",
+      "BOX (3Q)": "UFS0530SPGF6A-3L",
+      "BOX (6Q)": "UFS0530SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530SPGF6A-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS0530SPGF6A-G2L",
+      "BOX (12Q)": "UFS0530SPGF6A-BL",
+      "BOX (3/5QTS)": "UFS0530SPGF6A-BJ",
+      "BULK (OIL)": "UFS0530SPGF6A-oil",
+      "JERRYCAN (20L)": "UFS0530SPGF6AJC"
+    }
+  },
+  "UL104": {
+    "name": "U1P-DRIVE SAE 10W-30 Full Synthetic Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "UFS1030SPGF6AT",
+      "DRUM (55G)": "UFS1030SPGF6AD",
+      "PAIL (5G)": "UFS1030SPGF6AP",
+      "JUG": "UFS1030SPGF6AJ",
+      "2X5 QTS JUG": "UFS1030SPGF6A-2J",
+      "GAL": "UFS1030SPGF6AG",
+      "BOX (2G)": "UFS1030SPGF6A-2G",
+      "BOX (4G)": "UFS1030SPGF6A-BG",
+      "QUART": "UFS1030SPGF6AL",
+      "BOX (3Q)": "UFS1030SPGF6A-3L",
+      "BOX (6Q)": "UFS1030SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "UFS1030SPGF6A-GL",
+      "BOX (12Q)": "UFS1030SPGF6A-BL",
+      "BOX (3/5QTS)": "UFS1030SPGF6A-BJ",
+      "BULK (OIL)": "UFS1030SPGF6A-oil",
+      "JERRYCAN (20L)": "UFS1030SPGF6AJC",
+      "6 Pack QT (Gal + 2QT)": "UFS1030SPGF6A-G2L"
+    }
+  },
+  "UL105": {
+    "name": "U1P-DRIVE SAE 5W-40 Full Synthetic Motor Oil, API SP*",
+    "presentations": {
+      "TOTE (265G)": "UFS0540SPT",
+      "DRUM (55G)": "UFS0540SPD",
+      "PAIL (5G)": "UFS0540SPP",
+      "JUG": "UFS0540SPJ",
+      "2X5 QTS JUG": "UFS0540SP-2J",
+      "GAL": "UFS0540SPG",
+      "BOX (2G)": "UFS0540SPG-2G",
+      "BOX (4G)": "UFS0540SP-BG",
+      "QUART": "UFS0540SPL",
+      "BOX (3Q)": "UFS0540SPG-3L",
+      "BOX (6Q)": "UFS0540SP-6L",
+      "5 Pack QT (Gal + QT)": "UFS0540SP-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS0540SP-G2L",
+      "BOX (12Q)": "UFS0540SP-BL",
+      "BOX (3/5QTS)": "UFS0540SP-BJ",
+      "BULK (OIL)": "UFS0540SP-oil",
+      "JERRYCAN (20L)": "UFS0540SPJC"
+    }
+  },
+  "UL106": {
+    "name": "U1P-DUTY SAE 5W-40 Full Synthetic Heavy-Duty Motor Oil, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "UFS0540CK4SNT",
+      "DRUM (55G)": "UFS0540CK4SND",
+      "PAIL (5G)": "UFS0540CK4SNP",
+      "JUG": "UFS0540CK4SNJ",
+      "2X5 QTS JUG": "UFS0540CK4SN-2J",
+      "GAL": "UFS0540CK4SNG",
+      "BOX (2G)": "UFS0540CK4SN-2G",
+      "BOX (4G)": "UFS0540CK4SN-BG",
+      "QUART": "UFS0540CK4SNL",
+      "BOX (3Q)": "UFS0540CK4SN-3L",
+      "BOX (6Q)": "UFS0540CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "UFS0540CK4SN-GL",
+      "BOX (12Q)": "UFS0540CK4SN-BL",
+      "BOX (3/5QTS)": "UFS0540CK4SN-BJ",
+      "BULK (OIL)": "UFS0540CK4SN-oil",
+      "JERRYCAN (20L)": "UFS0540CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "UFS0540CK4SN-G2L"
+    }
+  },
+  "UL107": {
+    "name": "U1P-DUTY SAE 5W-30 Full Synthetic Heavy-Duty Motor Oil, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "UFS0530CK4SNT",
+      "DRUM (55G)": "UFS0530CK4SND",
+      "PAIL (5G)": "UFS0530CK4SNP",
+      "JUG": "UFS0530CK4SNJ",
+      "2X5 QTS JUG": "UFS0530CK4SN-2J",
+      "GAL": "UFS0530CK4SNG",
+      "BOX (2G)": "UFS0530CK4SNG-2G",
+      "BOX (4G)": "UFS0530CK4SN-BG",
+      "QUART": "UFS0530CK4SNL",
+      "BOX (3Q)": "UFS0530CK4SNG-3L",
+      "BOX (6Q)": "UFS0530CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530CK4SN-GL",
+      "BOX (12Q)": "UFS0530CK4SN-BL",
+      "BOX (3/5QTS)": "UFS0530CK4SN-BJ",
+      "BULK (OIL)": "UFS0530CK4SN-oil",
+      "JERRYCAN (20L)": "UFS0530CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "UFS0530CK4SN-G2L"
+    }
+  },
+  "UL108": {
+    "name": "U1P-DUTY SAE 15W-40 Full Synthetic Heavy-Duty Motor Oil, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "UFS1540CK4SNT",
+      "DRUM (55G)": "UFS1540CK4SND",
+      "PAIL (5G)": "UFS1540CK4SNP",
+      "JUG": "UFS1540CK4SNJ",
+      "2X5 QTS JUG": "UFS1540CK4SN-2J",
+      "GAL": "UFS1540CK4SNG",
+      "BOX (2G)": "UFS1540CK4SN-2G",
+      "BOX (4G)": "UFS1540CK4SN-BG",
+      "QUART": "UFS1540CK4SNL",
+      "BOX (3Q)": "UFS1540CK4SN-3L",
+      "BOX (6Q)": "UFS1540CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "UFS1540CK4SN-GL",
+      "BOX (12Q)": "UFS1540CK4SN-BL",
+      "BOX (3/5QTS)": "UFS1540CK4SN-BJ",
+      "BULK (OIL)": "UFS1540CK4SN-oil",
+      "JERRYCAN (20L)": "UFS1540CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "UFS1540CK4SN-G2L"
+    }
+  },
+  "UL109": {
+    "name": "U1P-DRIVE SAE 10W-40 Full Synthetic Motor Oil, API SP",
+    "presentations": {
+      "TOTE (265G)": "UFS1040SPT",
+      "DRUM (55G)": "UFS1040SPD",
+      "PAIL (5G)": "UFS1040SPP",
+      "JUG": "UFS1040SPJ",
+      "2X5 QTS JUG": "UFS1040SP-2J",
+      "GAL": "UFS1040SPG",
+      "BOX (2G)": "UFS1040SP-2G",
+      "BOX (4G)": "UFS1040SP-BG",
+      "QUART": "UFS1040SPL",
+      "BOX (3Q)": "UFS1040SP-3L",
+      "BOX (6Q)": "UFS1040SP-6L",
+      "5 Pack QT (Gal + QT)": "UFS1040SP-GL",
+      "BOX (12Q)": "UFS1040SP-BL",
+      "BOX (3/5QTS)": "UFS1040SP-BJ",
+      "BULK (OIL)": "UFS1040SP-oil",
+      "JERRYCAN (20L)": "UFS1040SPJC",
+      "6 Pack QT (Gal + 2QT)": "UFS1040SP-G2L"
+    }
+  },
+  "UL110": {
+    "name": "U1P-DRIVE SAE 5W-30 Euro Rennsport Full Synthetic Motor Oil, ACEA C4",
+    "presentations": {
+      "TOTE (265G)": "UFS0530ACEAC4T",
+      "DRUM (55G)": "UFS0530ACEAC4D",
+      "PAIL (5G)": "UFS0530ACEAC4P",
+      "JUG": "UFS0530ACEAC4J",
+      "2X5 QTS JUG": "UFS0530ACEAC4-2J",
+      "GAL": "UFS0530ACEAC4G",
+      "BOX (2G)": "UFS0530ACEAC4-2G",
+      "BOX (4G)": "UFS0530ACEAC4-BG",
+      "QUART": "UFS0530ACEAC4L",
+      "BOX (3Q)": "UFS0530ACEAC4-3L",
+      "BOX (6Q)": "UFS0530ACEAC4-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530ACEAC4-GL",
+      "BOX (12Q)": "UFS0530ACEAC4-BL",
+      "BOX (3/5QTS)": "UFS0530ACEAC4-BJ",
+      "BULK (OIL)": "UFS0530ACEAC4-oil",
+      "JERRYCAN (20L)": "UFS0530ACEAC4JC",
+      "6 Pack QT (Gal + 2QT)": "UFS0530ACEAC4-G2L"
+    }
+  },
+  "UL111": {
+    "name": "U1P-DRIVE SAE 5W-30 Euro Rennsport Full Synthetic Motor Oil, ACEA C3",
+    "presentations": {
+      "TOTE (265G)": "UFS0530ACEAC3T",
+      "DRUM (55G)": "UFS0530ACEAC3D",
+      "PAIL (5G)": "UFS0530ACEAC3P",
+      "JUG": "UFS0530ACEAC3J",
+      "2X5 QTS JUG": "UFS0530ACEAC3-2J",
+      "GAL": "UFS0530ACEAC3G",
+      "BOX (2G)": "UFS0530ACEAC3-2G",
+      "BOX (4G)": "UFS0530ACEAC3-BG",
+      "QUART": "UFS0530ACEAC3L",
+      "BOX (3Q)": "UFS0530ACEAC3-3L",
+      "BOX (6Q)": "UFS0530ACEAC3-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530ACEAC3-GL",
+      "BOX (12Q)": "UFS0530ACEAC3-BL",
+      "BOX (3/5QTS)": "UFS0530ACEAC3-BJ",
+      "BULK (OIL)": "UFS0530ACEAC3-oil",
+      "JERRYCAN (20L)": "UFS0530ACEAC3JC",
+      "6 Pack QT (Gal + 2QT)": "UFS0530ACEAC3-G2L"
+    }
+  },
+  "UL112": {
+    "name": "U1P-DRIVE SAE 0W-20 Full Synthetic Motor Oil, API SP, ILSAC GF-6A, dexos1® Gen3 Approved",
+    "presentations": {
+      "TOTE (265G)": "UFS020SPGF6AD1T",
+      "DRUM (55G)": "UFS020SPGF6AD1D",
+      "PAIL (5G)": "UFS020SPGF6AD1P",
+      "JUG": "UFS020SPGF6AD1j",
+      "2X5 QTS JUG": "UFS020SPGF6AD1-2J",
+      "GAL": "UFS020SPGF6AD1G",
+      "BOX (2G)": "UFS020SPGF6AD1-2G",
+      "BOX (4G)": "UFS020SPGF6AD1-BG",
+      "QUART": "UFS020SPGF6AD1L",
+      "BOX (3Q)": "UFS020SPGF6AD1-3L",
+      "BOX (6Q)": "UFS020SPGF6AD1-6L",
+      "5 Pack QT (Gal + QT)": "UFS020SPGF6AD1-GL",
+      "BOX (12Q)": "UFS020SPGF6AD1-BL",
+      "BOX (3/5QTS)": "UFS020SPGF6AD1-BJ",
+      "BULK (OIL)": "UFS020SPGF6AD1-oil",
+      "JERRYCAN (20L)": "UFS020SPGF6AD1JC",
+      "6 Pack QT (Gal + 2QT)": "UFS020SPGF6AD1-G2L"
+    }
+  },
+  "UL113": {
+    "name": "U1P-DRIVE SAE 5W-30 Full Synthetic Motor Oil, API SP, ILSAC GF-6A, dexos1® Gen3 Approved",
+    "presentations": {
+      "TOTE (265G)": "UFS0530SPGF6AD1T",
+      "DRUM (55G)": "UFS0530SPGF6AD1D",
+      "PAIL (5G)": "UFS0530SPGF6AD1P",
+      "JUG": "UFS0530SPGF6AD1J",
+      "2X5 QTS JUG": "UFS0530SPGF6AD1-2J",
+      "GAL": "UFS0530SPGF6AD1G",
+      "BOX (2G)": "UFS0530SPGF6AD1-2G",
+      "BOX (4G)": "UFS0530SPGF6AD1-BG",
+      "QUART": "UFS0530SPGF6AD1L",
+      "BOX (3Q)": "UFS0530SPGF6AD1-3L",
+      "BOX (6Q)": "UFS0530SPGF6AD1-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530SPGF6AD1-GL",
+      "BOX (12Q)": "UFS0530SPGF6AD1-BL",
+      "BOX (3/5QTS)": "UFS0530SPGF6AD1-BJ",
+      "BULK (OIL)": "UFS0530SPGF6AD1-oil",
+      "JERRYCAN (20L)": "UFS0530SPGF6AD1JC",
+      "6 Pack QT (Gal + 2QT)": "UFS0530SPGF6AD1-G2L"
+    }
+  },
+  "UL114": {
+    "name": "U1P-DRIVE SAE 5W-40 Euro Rennsport Full Synthetic Motor Oil, ACEA A3/B4-21",
+    "presentations": {
+      "DRUM (55G)": "UFS0540SNA3B4D",
+      "TOTE (265G)": "UFS0540SNA3B4T",
+      "PAIL (5G)": "UFS0540SNA3B4P",
+      "BOX (6Q)": "UFS0540SNA3B4-6L",
+      "BOX (12Q)": "UFS0540SNA3B4-BL",
+      "BOX (4G)": "UFS0540SNA3B4-BG",
+      "BOX (3/5QTS)": "UFS0540SNA3B4-BJ",
+      "BULK (OIL)": "UFS0540SNA3B4-oil",
+      "JERRYCAN (20L)": "UFS0540SNA3B4JC",
+      "6 Pack QT (Gal + 2QT)": "UFS0540SNA3B4-G2L"
+    }
+  },
+  "UL115": {
+    "name": "U1P-DRIVE SAE 0W-20 Euro Rennsport Full Synthetic Motor Oil, ACEA C5/C6 API SP",
+    "presentations": {
+      "TOTE (265G)": "UFS020SPC5C6T",
+      "DRUM (55G)": "UFS020SPC5C6D",
+      "PAIL (5G)": "UFS020SPC5C6P",
+      "BOX (6Q)": "UFS020SPC5C6-6L",
+      "BOX (12Q)": "UFS020SPC5C6-BL",
+      "BOX (4G)": "UFS020SPC5C6-BG",
+      "BOX (3/5QTS)": "UFS020SPC5C6-BJ",
+      "BULK (COOL)": "UFS020SPC5C6-oil",
+      "JERRYCAN (20L)": "UFS020SPC5C6JC",
+      "6 Pack QT (Gal + 2QT)": "UFS020SPC5C6-G2L"
+    }
+  },
+  "UL116": {
+    "name": "U1P-DRIVE SAE 5W-30 Euro Rennsport Full Synthetic Motor Oil, ACEA A3/B4-16",
+    "presentations": {
+      "TOTE (265G)": "UFS0530SNA3B4T",
+      "DRUM (55G)": "UFS0530SNA3B4D",
+      "PAIL (5G)": "UFS0530SNA3B4P",
+      "BOX (6Q)": "UFS0530SNA3B4-6L",
+      "BOX (12Q)": "UFS0530SNA3B4-BL",
+      "BOX (4G)": "UFS0530SNA3B4-BG",
+      "BOX (3/5QTS)": "UFS0530SNA3B4-BJ",
+      "BULK (COOL)": "UFS0530SNA3B4-oil",
+      "JERRYCAN (20L)": "UFS0530SNA3B4JC",
+      "6 Pack QT (Gal + 2QT)": "UFS0530SNA3B4-G2L"
+    }
+  },
+  "UL118": {
+    "name": "U1P-Drive SAE 0W-40 Full Synthetic Motor Oil, API SP",
+    "presentations": {
+      "TOTE (265G)": "UFS040SPT",
+      "DRUM (55G)": "UFS040SPD",
+      "PAIL (5G)": "UFS040SPP",
+      "JUG": "UFS040SPJ",
+      "2X5 QTS JUG": "UFS040SP-2J",
+      "GAL": "UFS040SPG",
+      "BOX (2G)": "UFS040SP-2G",
+      "BOX (4G)": "UFS040SP-BG",
+      "QUART": "UFS040SPL",
+      "BOX (3Q)": "UFS040SP-3L",
+      "BOX (6Q)": "UFS040SP-6L",
+      "6 Pack QT (Gal + 2QT)": "UFS040SP-G2L",
+      "5 Pack QT (Gal + QT)": "UFS040SP-GL",
+      "BOX (12Q)": "UFS040SP-BL",
+      "BOX (3/5QTS)": "UFS040SP-BJ",
+      "BULK (OIL)": "UFS040SP-oil",
+      "JERRYCAN (20L)": "UFS040SPJC"
+    }
+  },
+  "UL121": {
+    "name": "U1P-DRIVE SAE 0W-20 High Mileage Full Synthetic Motor Oil, API SQ, ILSAC GF-7",
+    "presentations": {
+      "TOTE (265G)": "UFS020HMSQGF7T",
+      "DRUM (55G)": "UFS020HMSQGF7D",
+      "PAIL (5G)": "UFS020HMSQGF7P",
+      "JERRYCAN (20L)": "UFS020HMSQGF7JC",
+      "JUG": "UFS020HMSQGF7J",
+      "2X5 QTS JUG": "UFS020HMSQGF7-2J",
+      "GAL": "UFS020HMSQGF7G",
+      "BOX (2G)": "UFS020HMSQGF7-2G",
+      "BOX (4G)": "UFS020HMSQGF7-BG",
+      "QUART": "UFS020HMSQGF7L",
+      "BOX (3Q)": "UFS020HMSQGF7-3L",
+      "BOX (6Q)": "UFS020HMSQGF7-6L",
+      "5 Pack QT (Gal + QT)": "UFS020HMSQGF7-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS020HMSQGF7-G2L",
+      "BOX (12Q)": "UFS020HMSQGF7-BL",
+      "BOX (3/5QTS)": "UFS020HMSQGF7-BJ",
+      "BULK (OIL)": "UFS020HMSQGF7-Oil"
+    }
+  },
+  "UL122": {
+    "name": "U1P-DRIVE SAE 5W-20 High Mileage Full Synthetic Motor Oil, API SQ, ILSAC GF-7",
+    "presentations": {
+      "TOTE (265G)": "UFS0520HMSQGF7T",
+      "DRUM (55G)": "UFS0520HMSQGF7D",
+      "PAIL (5G)": "UFS0520HMSQGF7P",
+      "JERRYCAN (20L)": "UFS0520HMSQGF7JC",
+      "JUG": "UFS0520HMSQGF7J",
+      "2X5 QTS JUG": "UFS0520HMSQGF7-2J",
+      "GAL": "UFS0520HMSQGF7G",
+      "BOX (2G)": "UFS0520HMSQGF7-2G",
+      "BOX (4G)": "UFS0520HMSQGF7-BG",
+      "QUART": "UFS0520HMSQGF7L",
+      "BOX (3Q)": "UFS0520HMSQGF7-3L",
+      "BOX (6Q)": "UFS0520HMSQGF7-6L",
+      "5 Pack QT (Gal + QT)": "UFS0520HMSQGF7-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS0520HMSQGF7-G2L",
+      "BOX (12Q)": "UFS0520HMSQGF7-BL",
+      "BOX (3/5QTS)": "UFS0520HMSQGF7-BJ",
+      "BULK (OIL)": "UFS0520HMSQGF7-Oil"
+    }
+  },
+  "UL123": {
+    "name": "U1P-DRIVE SAE 5W-30 High Mileage Full Synthetic Motor Oil, API SQ, ILSAC GF-7",
+    "presentations": {
+      "TOTE (265G)": "UFS0530HMSQGF7T",
+      "DRUM (55G)": "UFS0530HMSQGF7D",
+      "PAIL (5G)": "UFS0530HMSQGF7P",
+      "JERRYCAN (20L)": "UFS0530HMSQGF7JC",
+      "JUG": "UFS0530HMSQGF7J",
+      "2X5 QTS JUG": "UFS0530HMSQGF7-2J",
+      "GAL": "UFS0530HMSQGF7G",
+      "BOX (2G)": "UFS0530HMSQGF7-2G",
+      "BOX (4G)": "UFS0530HMSQGF7-BG",
+      "QUART": "UFS0530HMSQGF7L",
+      "BOX (3Q)": "UFS0530HMSQGF7-3L",
+      "BOX (6Q)": "UFS0530HMSQGF7-6L",
+      "5 Pack QT (Gal + QT)": "UFS0530HMSQGF7-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS0530HMSQGF7-G2L",
+      "BOX (12Q)": "UFS0530HMSQGF7-BL",
+      "BOX (3/5QTS)": "UFS0530HMSQGF7-BJ",
+      "BULK (OIL)": "UFS0530HMSQGF7-Oil"
+    }
+  },
+  "UL124": {
+    "name": "U1P-DRIVE SAE 10W-30 High Mileage Full Synthetic Motor Oil, API SQ, ILSAC GF-7",
+    "presentations": {
+      "TOTE (265G)": "UFS1030HMSQGF7T",
+      "DRUM (55G)": "UFS1030HMSQGF7D",
+      "PAIL (5G)": "UFS1030HMSQGF7P",
+      "JERRYCAN (20L)": "UFS1030HMSQGF7JC",
+      "JUG": "UFS1030HMSQGF7J",
+      "2X5 QTS JUG": "UFS1030HMSQGF7-2J",
+      "GAL": "UFS1030HMSQGF7G",
+      "BOX (2G)": "UFS1030HMSQGF7-2G",
+      "BOX (4G)": "UFS1030HMSQGF7-BG",
+      "QUART": "UFS1030HMSQGF7L",
+      "BOX (3Q)": "UFS1030HMSQGF7-3L",
+      "BOX (6Q)": "UFS1030HMSQGF7-6L",
+      "5 Pack QT (Gal + QT)": "UFS1030HMSQGF7-GL",
+      "6 Pack QT (Gal + 2QT)": "UFS1030HMSQGF7-G2L",
+      "BOX (12Q)": "UFS1030HMSQGF7-BL",
+      "BOX (3/5QTS)": "UFS1030HMSQGF7-BJ",
+      "BULK (OIL)": "UFS1030HMSQGF7-Oil"
+    }
+  },
+  "UL201": {
+    "name": "U1P-DRIVE SAE 5W-20 Synthetic Blend Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "USB0520SPGF6AT",
+      "DRUM (55G)": "USB0520SPGF6AD",
+      "PAIL (5G)": "USB0520SPGF6AP",
+      "JUG": "USB0520SPGF6AJ",
+      "2X5 QTS JUG": "USB0520SPGF6A-2J",
+      "GAL": "USB0520SPGF6AG",
+      "BOX (2G)": "USB0520SPGF6A-2G",
+      "BOX (4G)": "USB0520SPGF6A-BG",
+      "QUART": "USB0520SPGF6AL",
+      "BOX (3Q)": "USB0520SPGF6A-3L",
+      "BOX (6Q)": "USB0520SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "USB0520SPGF6A-GL",
+      "BOX (12Q)": "USB0520SPGF6A-BL",
+      "BOX (3/5QTS)": "USB0520SPGF6A-BJ",
+      "BULK (OIL)": "USB0520SPGF6A-oil",
+      "JERRYCAN (20L)": "USB0520SPGF6AJC",
+      "6 Pack QT (Gal + 2QT)": "USB0520SPGF6A-G2L"
+    }
+  },
+  "UL202": {
+    "name": "U1P-DRIVE SAE 5W-30 Synthetic Blend Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "USB0530SPGF6AT",
+      "DRUM (55G)": "USB0530SPGF6AD",
+      "PAIL (5G)": "USB0530SPGF6AP",
+      "JUG": "USB0530SPGF6AJ",
+      "2X5 QTS JUG": "USB0530SPGF6A-2J",
+      "GAL": "USB0530SPGF6AG",
+      "BOX (2G)": "USB0530SPGF6A-2G",
+      "BOX (4G)": "USB0530SPGF6A-BG",
+      "QUART": "USB0530SPGF6AL",
+      "BOX (3Q)": "USB0530SPGF6A-3L",
+      "BOX (6Q)": "USB0530SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "USB0530SPGF6A-GL",
+      "BOX (12Q)": "USB0530SPGF6A-BL",
+      "BOX (3/5QTS)": "USB0530SPGF6A-BJ",
+      "BULK (OIL)": "USB0530SPGF6A-oil",
+      "JERRYCAN (20L)": "USB0530SPGF6AJC",
+      "6 Pack QT (Gal + 2QT)": "USB0530SPGF6A-G2L"
+    }
+  },
+  "UL203": {
+    "name": "U1P-DRIVE SAE 10W-30 Synthetic Blend Motor Oil, API SP, ILSAC GF",
+    "presentations": {
+      "TOTE (265G)": "USB1030SPGF6AT",
+      "DRUM (55G)": "USB1030SPGF6AD",
+      "PAIL (5G)": "USB1030SPGF6AP",
+      "JUG": "USB1030SPGF6AJ",
+      "2X5 QTS JUG": "USB1030SPGF6A-2J",
+      "GAL": "USB1030SPGF6AG",
+      "BOX (2G)": "USB1030SPGF6A-2G",
+      "BOX (4G)": "USB1030SPGF6A-BG",
+      "QUART": "USB1030SPGF6AL",
+      "BOX (3Q)": "USB1030SPGF6A-3L",
+      "BOX (6Q)": "USB1030SPGF6A-6L",
+      "5 Pack QT (Gal + QT)": "USB1030SPGF6A-GL",
+      "BOX (12Q)": "USB1030SPGF6A-BL",
+      "BOX (3/5QTS)": "USB1030SPGF6A-BJ",
+      "BULK (OIL)": "USB1030SPGF6A-oil",
+      "JERRYCAN (20L)": "USB1030SPGF6AJC",
+      "6 Pack QT (Gal + 2QT)": "USB1030SPGF6A-G2L"
+    }
+  },
+  "UL204": {
+    "name": "U1P-DRIVE SAE 10W-40 Synthetic Blend Motor Oil, API SP",
+    "presentations": {
+      "TOTE (265G)": "USB1040SPT",
+      "DRUM (55G)": "USB1040SPD",
+      "PAIL (5G)": "USB1040SPP",
+      "JUG": "USB1040SPJ",
+      "2X5 QTS JUG": "USB1040SP-2J",
+      "GAL": "USB1040SPG",
+      "BOX (2G)": "USB1040SP-2G",
+      "BOX (4G)": "USB1040SP-BG",
+      "QUART": "USB1040SPL",
+      "BOX (3Q)": "USB1040SP-3L",
+      "BOX (6Q)": "USB1040SP-6L",
+      "5 Pack QT (Gal + QT)": "USB1040SP-GL",
+      "BOX (12Q)": "USB1040SP-BL",
+      "BOX (3/5QTS)": "USB1040SP-BJ",
+      "BULK (OIL)": "USB1040SP-oil",
+      "JERRYCAN (20L)": "USB1040SPJC",
+      "6 Pack QT (Gal + 2QT)": "USB1040SP-G2L"
+    }
+  },
+  "UL205": {
+    "name": "U1P-DRIVE SAE 20W-50 Synthetic Blend Motor Oil, API SP",
+    "presentations": {
+      "TOTE (265G)": "USB2050SPT",
+      "DRUM (55G)": "USB2050SPD",
+      "PAIL (5G)": "USB2050SPP",
+      "JUG": "USB2050SPJ",
+      "2X5 QTS JUG": "USB2050SP-2J",
+      "GAL": "USB2050SPG",
+      "BOX (2G)": "USB2050SP-2G",
+      "BOX (4G)": "USB2050SP-BG",
+      "QUART": "USB2050SPL",
+      "BOX (3Q)": "USB2050SP-3L",
+      "BOX (6Q)": "USB2050SP-6L",
+      "5 Pack QT (Gal + QT)": "USB2050SP-GL",
+      "BOX (12Q)": "USB2050SP-BL",
+      "BOX (3/5QTS)": "USB2050SP-BJ",
+      "BULK (OIL)": "USB2050SP-oil",
+      "JERRYCAN (20L)": "USB2050SPJC",
+      "6 Pack QT (Gal + 2QT)": "USB2050SP-G2L"
+    }
+  },
+  "UL206": {
+    "name": "U1P-DUTY SAE 15W-40 Synthetic Blend Heavy-Duty Motor Oil, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "USB1540CK4SNT",
+      "DRUM (55G)": "USB1540CK4SND",
+      "PAIL (5G)": "USB1540CK4SNP",
+      "JUG": "USB1540CK4SNJ",
+      "2X5 QTS JUG": "USB1540CK4SN-2J",
+      "GAL": "USB1540CK4SNG",
+      "BOX (2G)": "USB1540CK4SN-2G",
+      "BOX (4G)": "USB1540CK4SN-BG",
+      "QUART": "USB1540CK4SNL",
+      "BOX (3Q)": "USB1540CK4SN-3L",
+      "BOX (6Q)": "USB1540CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "USB1540CK4SN-GL",
+      "BOX (12Q)": "USB1540CK4SN-BL",
+      "BOX (3/5QTS)": "USB1540CK4SN-BJ",
+      "BULK (OIL)": "USB1540CK4SN-oil",
+      "JERRYCAN (20L)": "USB1540CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "USB1540CK4SN-G2L"
+    }
+  },
+  "UL206F": {
+    "name": "",
+    "presentations": {
+      "TOTE (265G)": "USB1540CK4SNFT",
+      "DRUM (55G)": "USB1540CK4SNFD",
+      "PAIL (5G)": "USB1540CK4SNFP",
+      "JUG": "USB1540CK4SNFJ",
+      "2X5 QTS JUG": "USB1540CK4SNF-2J",
+      "GAL": "USB1540CK4SNFG",
+      "BOX (2G)": "USB1540CK4SNF-2G",
+      "BOX (4G)": "USB1540CK4SNF-BG",
+      "QUART": "USB1540CK4SNFL",
+      "BOX (3Q)": "USB1540CK4SNF-3L",
+      "5 Pack QT (Gal + QT)": "USB1540CK4SNF-GL",
+      "BOX (12Q)": "USB1540CK4SNF-BL",
+      "BOX (3/5QTS)": "USB1540CK4SNF-BJ",
+      "BULK (OIL)": "USB1540CK4SNF-oil",
+      "JERRYCAN (20L)": "USB1540CK4SNFJC"
+    }
+  },
+  "UL207": {
+    "name": "U1P-DUTY 15W-40 Synthetic Blend Heavy-Duty Motor Oil, API CI-4/SL, CI-4 Plus",
+    "presentations": {
+      "TOTE (265G)": "USB1540CI4SLT",
+      "DRUM (55G)": "USB1540CI4SLD",
+      "PAIL (5G)": "USB1540CI4SLP",
+      "JUG": "USB1540CI4SLJ",
+      "2X5 QTS JUG": "USB1540CI4SL-2J",
+      "GAL": "USB1540CI4SLG",
+      "BOX (2G)": "USB1540CI4SL-2G",
+      "BOX (4G)": "USB1540CI4SL-BG",
+      "QUART": "USB1540CI4SLL",
+      "BOX (3Q)": "USB1540CI4SL-3L",
+      "BOX (6Q)": "USB1540CI4SL-6L",
+      "5 Pack QT (Gal + QT)": "USB1540CI4SL-GL",
+      "BOX (12Q)": "USB1540CI4SL-BL",
+      "BOX (3/5QTS)": "USB1540CI4SL-BJ",
+      "BULK (OIL)": "USB1540CI4SL-oil",
+      "JERRYCAN (20L)": "USB1540CI4SLJC",
+      "6 Pack QT (Gal + 2QT)": "USB1540CI4SL-G2L"
+    }
+  },
+  "UL208": {
+    "name": "U1P-DUTY SAE 20W-50 Synthetic Blend Heavy-Duty Motor Oil, API CJ-4/SN, CI-4 Plus",
+    "presentations": {
+      "TOTE (265G)": "USB2050SNCJ4T",
+      "DRUM (55G)": "USB2050SNCJ4D",
+      "PAIL (5G)": "USB2050SNCJ4P",
+      "JUG": "USB2050SNCJ4J",
+      "2X5 QTS JUG": "USB2050SNCJ4-2J",
+      "GAL": "USB2050SNCJ4G",
+      "BOX (2G)": "USB2050SNCJ4-2G",
+      "BOX (4G)": "USB2050SNCJ4-BG",
+      "QUART": "USB2050SNCJ4L",
+      "BOX (3Q)": "USB2050SNCJ4-3L",
+      "BOX (6Q)": "USB2050SNCJ4-6L",
+      "5 Pack QT (Gal + QT)": "USB2050SNCJ4-GL",
+      "BOX (12Q)": "USB2050SNCJ4-BL",
+      "BOX (3/5QTS)": "USB2050SNCJ4-BJ",
+      "BULK (OIL)": "USB2050SNCJ4-oil",
+      "JERRYCAN (20L)": "USB2050SNCJ4JC",
+      "6 Pack QT (Gal + 2QT)": "USB2050SNCJ4-G2L"
+    }
+  },
+  "UL209": {
+    "name": "U1P-DUTY SAE 25W-60 Synthetic Blend Heavy-Duty Motor Oil, API CH-4/SJ (Green)",
+    "presentations": {
+      "TOTE (265G)": "USB2560CH4SJT",
+      "DRUM (55G)": "USB2560CH4SJD",
+      "PAIL (5G)": "USB2560CH4SJP",
+      "JUG": "USB2560CH4SJJ",
+      "2X5 QTS JUG": "USB2560CH4SJ-2J",
+      "GAL": "USB2560CH4SJG",
+      "BOX (2G)": "USB2560CH4SJ-2G",
+      "BOX (4G)": "USB2560CH4SJ-BG",
+      "QUART": "USB2560CH4SJL",
+      "BOX (3Q)": "USB2560CH4SJG2L",
+      "BOX (6Q)": "USB2560CH4SJ-6L",
+      "5 Pack QT (Gal + QT)": "USB2560CH4SJ-GL",
+      "BOX (12Q)": "USB2560CH4SJ-BL",
+      "BOX (3/5QTS)": "USB2560CH4SJ-BJ",
+      "BULK (OIL)": "USB2560CH4SJ-oil",
+      "JERRYCAN (20L)": "USB2560CH4SJJC",
+      "6 Pack QT (Gal + 2QT)": "USB2560CH4SJ-G2L"
+    }
+  },
+  "UL210": {
+    "name": "U1P-DUTY SAE 10W-30 Synthetic Blend Heavy-Duty Motor Oil, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "USB1030CK4SNT",
+      "DRUM (55G)": "USB1030CK4SND",
+      "PAIL (5G)": "USB1030CK4SNP",
+      "JUG": "USB1030CK4SNJ",
+      "2X5 QTS JUG": "USB1030CK4SN-2J",
+      "GAL": "USB1030CK4SNG",
+      "BOX (2G)": "USB1030CK4SN-2G",
+      "BOX (4G)": "USB1030CK4SN-BG",
+      "QUART": "USB1030CK4SNL",
+      "BOX (3Q)": "USB1030CK4SN-3L",
+      "BOX (6Q)": "USB1030CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "USB1030CK4SN-GL",
+      "BOX (12Q)": "USB1030CK4SN-BL",
+      "BOX (3/5QTS)": "USB1030CK4SN-BJ",
+      "BULK (OIL)": "USB1030CK4SN-oil",
+      "JERRYCAN (20L)": "USB1030CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "USB1030CK4SN-G2L"
+    }
+  },
+  "UL211": {
+    "name": "U1P-DRIVE SAE 10W-30 EURORENNSPORT Synthetic Blend Motor Oil, ACEA C4",
+    "presentations": {
+      "TOTE (265G)": "USB1030ACEAC4T",
+      "DRUM (55G)": "USB1030ACEAC4D",
+      "PAIL (5G)": "USB1030ACEAC4P",
+      "JUG": "USB1030ACEAC4J",
+      "2X5 QTS JUG": "USB1030ACEAC4-2J",
+      "GAL": "USB1030ACEAC4G",
+      "BOX (2G)": "USB1030ACEAC4-2G",
+      "BOX (4G)": "USB1030ACEAC4-BG",
+      "QUART": "USB1030ACEAC4L",
+      "BOX (3Q)": "USB1030ACEAC4-3L",
+      "BOX (6Q)": "USB1030ACEAC4-6L",
+      "5 Pack QT (Gal + QT)": "USB1030ACEAC4-GL",
+      "BOX (12Q)": "USB1030ACEAC4-BL",
+      "BOX (3/5QTS)": "USB1030ACEAC4-BJ",
+      "BULK (OIL)": "USB1030ACEAC4-oil",
+      "JERRYCAN (20L)": "USB1030ACEAC4JC",
+      "6 Pack QT (Gal + 2QT)": "USB1030ACEAC4-G2L"
+    }
+  },
+  "UL212": {
+    "name": "U1P-DRIVE SAE 10W-40 EURORENNSPORT Synthetic Blend Motor Oil, ACEA C4",
+    "presentations": {
+      "TOTE (265G)": "USB1040ACEAC4T",
+      "DRUM (55G)": "USB1040ACEAC4D",
+      "PAIL (5G)": "USB1040ACEAC4P",
+      "JUG": "USB1040ACEAC4J",
+      "2X5 QTS JUG": "USB1040ACEAC4-2J",
+      "GAL": "USB1040ACEAC4G",
+      "BOX (2G)": "USB1040ACEAC4-2G",
+      "BOX (4G)": "USB1040ACEAC4-BG",
+      "QUART": "USB1040ACEAC4L",
+      "BOX (3Q)": "USB1040ACEAC4-3L",
+      "BOX (6Q)": "USB1040ACEAC4-6L",
+      "5 Pack QT (Gal + QT)": "USB1040ACEAC4-GL",
+      "BOX (12Q)": "USB1040ACEAC4-BL",
+      "BOX (3/5QTS)": "USB1040ACEAC4-BJ",
+      "BULK (OIL)": "USB1040ACEAC4-oil",
+      "JERRYCAN (20L)": "USB1040ACEAC4JC",
+      "6 Pack QT (Gal + 2QT)": "USB1040ACEAC4-G2L"
+    }
+  },
+  "UL213": {
+    "name": "U1P-DUTY SAE 15W-50 Synthetic Blend HDMO, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "USB1550CK4SNT",
+      "DRUM (55G)": "USB1550CK4SND",
+      "PAIL (5G)": "USB1550CK4SNP",
+      "JUG": "USB1550CK4SNJ",
+      "2X5 QTS JUG": "USB1550CK4SN-2J",
+      "GAL": "USB1550CK4SNG",
+      "BOX (2G)": "USB1550CK4SN-2G",
+      "BOX (4G)": "USB1550CK4SN-BG",
+      "QUART": "USB1550CK4SNL",
+      "BOX (3Q)": "USB1550CK4SN-3L",
+      "BOX (6Q)": "USB1550CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "USB1550CK4SN-GL",
+      "BOX (12Q)": "USB1550CK4SN-BL",
+      "BOX (3/5QTS)": "USB1550CK4SN-BG",
+      "BULK (OIL)": "USB1550CK4SN-oil",
+      "JERRYCAN (20L)": "USB1550CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "USB1550CK4SN-G2L"
+    }
+  },
+  "UL214": {
+    "name": "U1P-DUTY SAE 15W-40 Synthetic Blend HDMO Diesel-Natural Gas, API CK-4/SN",
+    "presentations": {
+      "BULK (OIL)": "USB1540DNGCK4SN-Oil",
+      "PAIL (5G)": "USB1540DNGCK4SNP",
+      "JERRYCAN (20L)": "USB1540DNGCK4SNJC"
+    }
+  },
+  "UL216": {
+    "name": "U1P-DRIVE SAE 15W-40 Synthetic Blend Motor Oil, API SP",
+    "presentations": {
+      "BOX (12Q)": "USB1540SP-BL",
+      "QUART": "USB1540SPL",
+      "BULK (OIL)": "USB1540SP-oil"
+    }
+  },
+  "UL217": {
+    "name": "U1P-DUTY SAE 20W-50 Synthetic Blend  Heavy-Duty Motor Oil, API CK-4/SN *",
+    "presentations": {
+      "DRUM (55G)": "USB2050CK4SND",
+      "PAIL (5G)": "USB2050CK4SNP",
+      "BULK (OIL)": "USB2050CK4SN-Oil",
+      "JERRYCAN (20L)": "USB2050CK4SNJC"
+    }
+  },
+  "UL301": {
+    "name": "U1P-DRIVE SAE 10W-30 Motor Oil, API SL",
+    "presentations": {
+      "TOTE (265G)": "UC1030SLT",
+      "DRUM (55G)": "UC1030SLD",
+      "PAIL (5G)": "UC1030SLP",
+      "JUG": "UC1030SLJ",
+      "2X5 QTS JUG": "UC1030SL-2J",
+      "GAL": "UC1030SGG",
+      "BOX (2G)": "UC1030SL-2G",
+      "BOX (4G)": "UC1030SL-BG",
+      "QUART": "UC1030SLL",
+      "BOX (3Q)": "UC1030SL-3L",
+      "BOX (6Q)": "UC1030SL-6L",
+      "5 Pack QT (Gal + QT)": "UC1030SL-GL",
+      "BOX (12Q)": "UC1030SL-BL",
+      "BOX (3/5QTS)": "UC1030SL-BJ",
+      "BULK (OIL)": "UC1030SL-oil",
+      "JERRYCAN (20L)": "UC1030SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC1030SL-G2L"
+    }
+  },
+  "UL302": {
+    "name": "U1P-DRIVE SAE 15W-40 Motor Oil, API SL",
+    "presentations": {
+      "TOTE (265G)": "UC1540SLT",
+      "DRUM (55G)": "UC1540SLD",
+      "PAIL (5G)": "UC1540SLP",
+      "JUG": "UC1540SLJ",
+      "2X5 QTS JUG": "UC1540SL-2J",
+      "GAL": "UC1540SGG",
+      "BOX (2G)": "UC1540SL-2G",
+      "BOX (4G)": "UC1540SL-BG",
+      "QUART": "UC1540SLL",
+      "BOX (3Q)": "UC1540SL-3L",
+      "BOX (6Q)": "UC1540SL-6L",
+      "5 Pack QT (Gal + QT)": "UC1540SL-GL",
+      "BOX (12Q)": "UC1540SL-BL",
+      "BOX (3/5QTS)": "UC1540SL-BJ",
+      "BULK (OIL)": "UC1540SL-oil",
+      "JERRYCAN (20L)": "UC1540SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC1540SL-G2L"
+    }
+  },
+  "UL303": {
+    "name": "U1P-DRIVE SAE 20W-50 Motor Oil, API SL",
+    "presentations": {
+      "TOTE (265G)": "UC2050SLT",
+      "DRUM (55G)": "UC2050SLD",
+      "PAIL (5G)": "UC2050SLP",
+      "JUG": "UC2050SLJ",
+      "2X5 QTS JUG": "UC2050SL-2J",
+      "GAL": "UC2050SGG",
+      "BOX (2G)": "UC2050SL-2G",
+      "BOX (4G)": "UC2050SL-BG",
+      "QUART": "UC2050SLL",
+      "BOX (3Q)": "UC2050SL-3L",
+      "BOX (6Q)": "UC2050SL-6L",
+      "5 Pack QT (Gal + QT)": "UC2050SL-GL",
+      "BOX (12Q)": "UC2050SL-BL",
+      "BOX (3/5QTS)": "UC2050SL-BJ",
+      "BULK (OIL)": "UC2050SL-oil",
+      "JERRYCAN (20L)": "UC2050SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC2050SL-G2L"
+    }
+  },
+  "UL304": {
+    "name": "U1P-DUTY SAE 40 Heavy-Duty Motor Oil, API CH-4/SG",
+    "presentations": {
+      "TOTE (265G)": "UC40CH4SGT",
+      "DRUM (55G)": "UC40CH4SGD",
+      "PAIL (5G)": "UC40CH4SGP",
+      "JUG": "UC40CH4SGJ",
+      "2X5 QTS JUG": "UC40CH4SG-2J",
+      "GAL": "UC40CH4SGG",
+      "BOX (2G)": "UC40CH4SG-2G",
+      "BOX (4G)": "UC40CH4SG-BG",
+      "QUART": "UC40CH4SGL",
+      "BOX (3Q)": "UC40CH4SG-3L",
+      "BOX (6Q)": "UC40CH4SG-6L",
+      "5 Pack QT (Gal + QT)": "UC40CH4SG-GL",
+      "BOX (12Q)": "UC40CH4SG-BL",
+      "BOX (3/5QTS)": "UC40CH4SG-BJ",
+      "BULK (OIL)": "UC40CH4SG-oil",
+      "JERRYCAN (20L)": "UC40CH4SGJC",
+      "6 Pack QT (Gal + 2QT)": "UC40CH4SG-G2L"
+    }
+  },
+  "UL305": {
+    "name": "U1P-DUTY SAE 50 Heavy-Duty Motor Oil, API CH-4/SG",
+    "presentations": {
+      "TOTE (265G)": "UC50CH4SGT",
+      "DRUM (55G)": "UC50CH4SGD",
+      "PAIL (5G)": "UC50CH4SGP",
+      "JUG": "UC50CH4SGJ",
+      "2X5 QTS JUG": "UC50CH4Sg-2J",
+      "GAL": "UC50CH4SGG",
+      "BOX (2G)": "UC50CH4SG-2G",
+      "BOX (4G)": "UC50CH4SG-BG",
+      "QUART": "UC50CH4SGL",
+      "BOX (3Q)": "UC50CH4SG-3L",
+      "BOX (6Q)": "UC50CH4SG-6L",
+      "5 Pack QT (Gal + QT)": "UC50CH4SG-GL",
+      "BOX (12Q)": "UC50CH4SG-BL",
+      "BOX (3/5QTS)": "UC50CH4SG-BJ",
+      "BULK (OIL)": "UC50CH4SG-oil",
+      "JERRYCAN (20L)": "UC50CH4SGJC",
+      "6 Pack QT (Gal + 2QT)": "UC50CH4SG-G2L"
+    }
+  },
+  "UL306": {
+    "name": "U1P-DUTY SAE 15W-40 Heavy-Duty Motor Oil, API CI-4/SL",
+    "presentations": {
+      "TOTE (265G)": "UC1540CI4SLT",
+      "DRUM (55G)": "UC1540CI4SLD",
+      "PAIL (5G)": "UC1540CI4SLP",
+      "JUG": "UC1540CI4SLJ",
+      "2X5 QTS JUG": "UC1540CI4SL-2J",
+      "GAL": "UC1540CI4SGG",
+      "BOX (2G)": "UC1540CI4SL-2G",
+      "BOX (4G)": "UC1540CI4SL-BG",
+      "QUART": "UC1540CI4SLL",
+      "BOX (3Q)": "UC1540CI4SL-3L",
+      "BOX (6Q)": "UC1540CI4SL-6L",
+      "5 Pack QT (Gal + QT)": "UC1540CI4SL-GL",
+      "BOX (12Q)": "UC1540CI4SL-BL",
+      "BOX (3/5QTS)": "UC1540CI4SL-BJ",
+      "BULK (OIL)": "UC1540CI4SL-oil",
+      "JERRYCAN (20L)": "UC1540CI4SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC1540CI4SL-G2L"
+    }
+  },
+  "UL307": {
+    "name": "U1P-DUTY SAE 20W-50 Heavy-Duty Motor Oil, API CI-4/SL",
+    "presentations": {
+      "TOTE (265G)": "UC2050CI4SLT",
+      "DRUM (55G)": "UC2050CI4SLD",
+      "PAIL (5G)": "UC2050CI4SLP",
+      "JUG": "UC2050CI4SLJ",
+      "2X5 QTS JUG": "UC2050CI4SL-2J",
+      "GAL": "UC2050CI4SLG",
+      "BOX (2G)": "UC2050CI4SL-2G",
+      "BOX (4G)": "UC2050CI4SL-BG",
+      "QUART": "UC2050CI4SLL",
+      "BOX (3Q)": "UC2050CI4SL-3L",
+      "BOX (6Q)": "UC2050CI4SL-6L",
+      "5 Pack QT (Gal + QT)": "UC2050CI4SL-GL",
+      "BOX (12Q)": "UC2050CI4SL-BL",
+      "BOX (3/5QTS)": "UC2050CI4SL-BJ",
+      "BULK (OIL)": "UC2050CI4SL-oil",
+      "JERRYCAN (20L)": "UC2050CI4SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC2050CI4SL-G2L"
+    }
+  },
+  "UL308": {
+    "name": "U1P-DUTY SAE 15W-40 HDMO, API CK-4/SN",
+    "presentations": {
+      "TOTE (265G)": "UC1540CK4SNT",
+      "DRUM (55G)": "UC1540CK4SND",
+      "PAIL (5G)": "UC1540CK4SNP",
+      "JUG": "UC1540CK4SNJ",
+      "2X5 QTS JUG": "UC1540CK4SN-2J",
+      "GAL": "UC1540CK4SNG",
+      "BOX (2G)": "UC1540CK4SN-2G",
+      "BOX (4G)": "UC1540CK4SN-BG",
+      "QUART": "UC1540CK4SNL",
+      "BOX (3Q)": "UC1540CK4SN-3L",
+      "BOX (6Q)": "UC1540CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "UC1540CK4SN-GL",
+      "BOX (12Q)": "UC1540CK4SN-BL",
+      "BOX (3/5QTS)": "UC1540CK4SN-BJ",
+      "BULK (OIL)": "UC1540CK4SN-oil",
+      "JERRYCAN (20L)": "UC1540CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC1540CK4SN-G2L"
+    }
+  },
+  "UL309": {
+    "name": "U1P-DRIVE SAE 20W-50 Motor Oil, API SN",
+    "presentations": {
+      "TOTE (265G)": "UC2050SNT",
+      "DRUM (55G)": "UC2050SND",
+      "PAIL (5G)": "UC2050SNP",
+      "JUG": "UC2050SNJ",
+      "2X5 QTS JUG": "UC2050SN-2J",
+      "GAL": "UC2050SNG",
+      "BOX (2G)": "UC2050SN-2G",
+      "BOX (4G)": "UC2050SN-BG",
+      "QUART": "UC2050SNL",
+      "BOX (3Q)": "UC2050SN-3L",
+      "BOX (6Q)": "UC2050SN-6L",
+      "5 Pack QT (Gal + QT)": "UC2050SN-GL",
+      "BOX (12Q)": "UC2050SN-BL",
+      "BOX (3/5QTS)": "UC2050SN-BJ",
+      "BULK (OIL)": "UC2050SN-oil",
+      "JERRYCAN (20L)": "UC2050SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC2050SN-G2L"
+    }
+  },
+  "UL310": {
+    "name": "U1P-DRIVE SAE 40 Heavy-Duty Motor Oil, API SN/CF",
+    "presentations": {
+      "TOTE (265G)": "UC40SNCFT",
+      "DRUM (55G)": "UC40SNCFD",
+      "PAIL (5G)": "UC40SNCFP",
+      "JUG": "UC40SNCFJ",
+      "2X5 QTS JUG": "UC40SNCF-2J",
+      "GAL": "UC40SNCFG",
+      "BOX (2G)": "UC40SNCF-2G",
+      "BOX (4G)": "UC40SNCF-BG",
+      "QUART": "UC40SNCFL",
+      "BOX (3Q)": "UC40SNCF-3L",
+      "BOX (6Q)": "UC40SNCF-6L",
+      "5 Pack QT (Gal + QT)": "UC40SNCF-GL",
+      "BOX (12Q)": "UC40SNCF-BL",
+      "BOX (3/5QTS)": "UC40SNCF-BJ",
+      "BULK (OIL)": "UC40SNCF-oil",
+      "JERRYCAN (20L)": "UC40SNCFJC",
+      "6 Pack QT (Gal + 2QT)": "UC40SNCF-G2L"
+    }
+  },
+  "UL311": {
+    "name": "U1P-DUTY SAE 40 Heavy-Duty Motor Oil, API CF",
+    "presentations": {
+      "TOTE (265G)": "UC40CFT",
+      "DRUM (55G)": "UC40CFD",
+      "PAIL (5G)": "UC40CFP",
+      "JUG": "UC40CFJ",
+      "2X5 QTS JUG": "UC40CF-2J",
+      "GAL": "UC40CFG",
+      "BOX (2G)": "UC40CF-2G",
+      "BOX (4G)": "UC40CF-BG",
+      "QUART": "UC40CFL",
+      "BOX (3Q)": "UC40CF-3L",
+      "BOX (6Q)": "UC40CF-6L",
+      "5 Pack QT (Gal + QT)": "UC40CF-GL",
+      "BOX (12Q)": "UC40CF-BL",
+      "BOX (3/5QTS)": "UC40CF-BJ",
+      "BULK (OIL)": "UC40CF-oil",
+      "JERRYCAN (20L)": "UC40CFJC",
+      "6 Pack QT (Gal + 2QT)": "UC40CF-G2L"
+    }
+  },
+  "UL312": {
+    "name": "U1P-DUTY SAE 50 Heavy-Duty Motor Oil, API CF",
+    "presentations": {
+      "TOTE (265G)": "UC50CFT",
+      "DRUM (55G)": "UC50CFD",
+      "PAIL (5G)": "UC50CFP",
+      "JUG": "UC50CFJ",
+      "2X5 QTS JUG": "UC50CF-2J",
+      "GAL": "UC50CFG",
+      "BOX (2G)": "UC50CF-2G",
+      "BOX (4G)": "UC50CF-BG",
+      "QUART": "UC50CFL",
+      "BOX (3Q)": "UC50CF-3L",
+      "BOX (6Q)": "UC50CF-6L",
+      "5 Pack QT (Gal + QT)": "UC50CF-GL",
+      "BOX (12Q)": "UC50CF-BL",
+      "BOX (3/5QTS)": "UC50CF-BJ",
+      "BULK (OIL)": "UC50CF-oil",
+      "JERRYCAN (20L)": "UC50CFJC",
+      "6 Pack QT (Gal + 2QT)": "UC50CF-G2L"
+    }
+  },
+  "UL313": {
+    "name": "U1P-DRIVE SAE 10W-40 Motor Oil, API SL",
+    "presentations": {
+      "TOTE (265G)": "UC1040SLT",
+      "DRUM (55G)": "UC1040SLD",
+      "PAIL (5G)": "UC1040SLP",
+      "JUG": "UC1040SLJ",
+      "2X5 QTS JUG": "UC1040SL-2J",
+      "GAL": "UC1040SGG",
+      "BOX (2G)": "UC1040SL-2G",
+      "BOX (4G)": "UC1040SL-BG",
+      "QUART": "UC1040SLL",
+      "BOX (3Q)": "UC1040SL-3L",
+      "BOX (6Q)": "UC1040SL-6L",
+      "5 Pack QT (Gal + QT)": "UC1040SL-GL",
+      "BOX (12Q)": "UC1040SL-BL",
+      "BOX (3/5QTS)": "UC1040SL-BJ",
+      "BULK (OIL)": "UC1040SL-oil",
+      "JERRYCAN (20L)": "UC1040SLJC",
+      "6 Pack QT (Gal + 2QT)": "UC1040SL-G2L"
+    }
+  },
+  "UL314": {
+    "name": "U1P-DRIVE SAE 25W-60 High Mileage Motor Oil, API SN (Amber)",
+    "presentations": {
+      "TOTE (265G)": "UC2560SNT",
+      "DRUM (55G)": "UC2560SND",
+      "PAIL (5G)": "UC2560SNP",
+      "JUG": "UC2560SNJ",
+      "2X5 QTS JUG": "UC2560SN-2J",
+      "GAL": "UC2560SNG",
+      "BOX (2G)": "UC2560SN-2G",
+      "BOX (4G)": "UC2560SN-BG",
+      "QUART": "UC2560SNL",
+      "BOX (3Q)": "UC2560SN-3L",
+      "BOX (6Q)": "UC2560SN-6L",
+      "5 Pack QT (Gal + QT)": "UC2560SN-GL",
+      "BOX (12Q)": "UC2560SN-BL",
+      "BOX (3/5QTS)": "UC2560SN-BJ",
+      "BULK (OIL)": "UC2560SN-oil",
+      "JERRYCAN (20L)": "UC2560SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC2560SN-G2L"
+    }
+  },
+  "UL315": {
+    "name": "U1P-DRIVE SAE 5W-20 Motor Oil, API SN",
+    "presentations": {
+      "BULK (OIL)": "UC0520SN-Oil",
+      "BOX (12Q)": "UC0520SN-BL",
+      "BOX (3/5QTS)": "UC0520SN-BJ"
+    }
+  },
+  "UL316": {
+    "name": "U1P-DRIVE SAE 5W-30 Motor Oil, API SN",
+    "presentations": {
+      "BULK (OIL)": "UC0530SN-Oil",
+      "BOX (12Q)": "UC0530SN-BL",
+      "BOX (3/5QTS)": "UC0530SN-BJ"
+    }
+  },
+  "UL317": {
+    "name": "U1P-DRIVE SAE 10W-30 Motor Oil, API SN",
+    "presentations": {
+      "BULK (OIL)": "UC1030SN-Oil",
+      "TOTE (265G)": "UC1030SNT",
+      "DRUM (55G)": "UC1030SND",
+      "PAIL (5G)": "UC1030SNP",
+      "JUG": "UC1030SNJ",
+      "2X5 QTS JUG": "UC1030SN-2J",
+      "GAL": "UC1030SNG",
+      "BOX (2G)": "UC1030SN-2G",
+      "BOX (4G)": "UC1030SN-BG",
+      "QUART": "UC1030SNL",
+      "BOX (3Q)": "UC1030SN-3L",
+      "BOX (6Q)": "UC1030SN-6L",
+      "5 Pack QT (Gal + QT)": "UC1030SN-GL",
+      "BOX (12Q)": "UC1030SN-BL",
+      "BOX (3/5QTS)": "UC1030SN-BJ",
+      "JERRYCAN (20L)": "UC1030SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC1030SN-G2L"
+    }
+  },
+  "UL318": {
+    "name": "U1P-DRIVE SAE 10W-40 Motor Oil, API SN",
+    "presentations": {
+      "BULK (OIL)": "UC1040SN-Oil",
+      "TOTE (265G)": "UC1040SNT",
+      "DRUM (55G)": "UC1040SND",
+      "PAIL (5G)": "UC1040SNP",
+      "JUG": "UC1040SNJ",
+      "2X5 QTS JUG": "UC1040SN-2J",
+      "GAL": "UC1040SNG",
+      "BOX (2G)": "UC1040SN-2G",
+      "BOX (4G)": "UC1040SN-BG",
+      "QUART": "UC1040SNL",
+      "BOX (3Q)": "UC1040SN-3L",
+      "BOX (6Q)": "UC1040SN-6L",
+      "5 Pack QT (Gal + QT)": "UC1040SN-GL",
+      "BOX (12Q)": "UC1040SN-BL",
+      "BOX (3/5QTS)": "UC1040SN-BJ",
+      "JERRYCAN (20L)": "UC1040SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC1040SN-G2L"
+    }
+  },
+  "UL319": {
+    "name": "U1P-DUTY SAE 15W-50 HDMO, API CK-4/SN",
+    "presentations": {
+      "BULK (OIL)": "UC1550CK4SN-oil",
+      "GAL": "UC1550CK4SNG",
+      "BOX (4G)": "UC1550CK4SNBG",
+      "PAIL (5G)": "UC1550CK4SNP",
+      "JERRYCAN (20L)": "UC1550CK4SNJC"
+    }
+  },
+  "UL320": {
+    "name": "U1P-DUTY SAE 15W-40 Heavy Duty 4 Motor Oil, API CK-4/SN",
+    "presentations": {
+      "BULK (OIL)": "UC1540CK4SN-oil",
+      "TOTE (265G)": "UC1540CK4SNT",
+      "DRUM (55G)": "UC1540CK4SND",
+      "PAIL (5G)": "UC1540CK4SNP",
+      "JUG": "UC1540CK4SNJ",
+      "2X5 QTS JUG": "UC1540CK4SN-2J",
+      "GAL": "UC1540CK4SNG",
+      "BOX (2G)": "UC1540CK4SN-2G",
+      "BOX (4G)": "UC1540CK4SN-BG",
+      "QUART": "UC1540CK4SNL",
+      "BOX (3Q)": "UC1540CK4SN-3L",
+      "BOX (6Q)": "UC1540CK4SN-6L",
+      "5 Pack QT (Gal + QT)": "UC1540CK4SN-GL",
+      "BOX (12Q)": "UC1540CK4SN-BL",
+      "BOX (3/5QTS)": "UC1540CK4SN-BJ",
+      "JERRYCAN (20L)": "UC1540CK4SNJC",
+      "6 Pack QT (Gal + 2QT)": "UC1540CK4SN-G2L"
+    }
+  },
+  "UL320F": {
+    "name": "",
+    "presentations": {
+      "BULK (OIL)": "UC1540CK4SNF-oil",
+      "TOTE (265G)": "UC1540CK4SNFT",
+      "DRUM (55G)": "UC1540CK4SNFD",
+      "PAIL (5G)": "UC1540CK4SNFP",
+      "JUG": "UC1540CK4SNFJ",
+      "2X5 QTS JUG": "UC1540CK4SNF-2J",
+      "GAL": "UC1540CK4SNFG",
+      "BOX (2G)": "UC1540CK4SNF-2G",
+      "BOX (4G)": "UC1540CK4SNF-BG",
+      "QUART": "UC1540CK4SNFL",
+      "BOX (3Q)": "UC1540CK4SNF-3L",
+      "5 Pack QT (Gal + QT)": "UC1540CK4SNF-GL",
+      "BOX (12Q)": "UC1540CK4SNF-BL",
+      "BOX (3/5QTS)": "UC1540CK4SNF-BJ",
+      "JERRYCAN (20L)": "UC1540CK4SNFJC"
+    }
+  },
+  "UL400": {
+    "name": "U1P-RIDE SAE 10W-30 Synthetic Blend 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "USB10304TSLMA2T",
+      "DRUM (55G)": "USB10304TSLMA2D",
+      "PAIL (5G)": "USB10434TSLMA2P",
+      "JUG": "USB10434TSLMA2J",
+      "2X5 QTS JUG": "USB10304TSLMA2-2J",
+      "GAL": "USB10304TSGMA2G",
+      "BOX (2G)": "USB10304TSLMA2-2G",
+      "BOX (4G)": "USB10304TSLMA2-BG",
+      "QUART": "USB10304TSLMA2L",
+      "BOX (3Q)": "USB10304TSLMA2-3L",
+      "BOX (6Q)": "USB10304TSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "USB10304TSLMA2-GL",
+      "BOX (12Q)": "USB10304TSLMA2-BL",
+      "BOX (3/5QTS)": "USB10304TSLMA2-BJ",
+      "BULK (OIL)": "USB10304TSLMA2-oil",
+      "JERRYCAN (20L)": "USB10434TSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "USB10304TSLMA2-G2L"
+    }
+  },
+  "UL401": {
+    "name": "U1P-RIDE SAE 10W-40 Synthetic Blend 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "USB10404TSLMA2T",
+      "DRUM (55G)": "USB10404TSLMA2D",
+      "PAIL (5G)": "USB10404TSLMA2P",
+      "JUG": "USB10404TSLMA2J",
+      "2X5 QTS JUG": "USB10404TSLMA2-2J",
+      "GAL": "USB10404TSLMA2G",
+      "BOX (2G)": "USB10404TSLMA2-2G",
+      "BOX (4G)": "USB10404TSLMA2-BG",
+      "QUART": "USB10404TSLMA2L",
+      "BOX (3Q)": "USB10404TSLMA2-3L",
+      "BOX (6Q)": "USB10404TSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "USB10404TSLMA2-GL",
+      "BOX (12Q)": "USB10404TSLMA2-BL",
+      "BOX (3/5QTS)": "USB10404TSLMA2-BJ",
+      "BULK (OIL)": "USB10404TSLMA2-oil",
+      "JERRYCAN (20L)": "USB10404TSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "USB10404TSLMA2-G2L"
+    }
+  },
+  "UL402": {
+    "name": "U1P-RIDE SAE 20W-50 Synthetic Blend 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "USB20504TSLMA2T",
+      "DRUM (55G)": "USB20504TSLMA2D",
+      "PAIL (5G)": "USB20504TSLMA2P",
+      "JUG": "USB20504TSLMA2J",
+      "2X5 QTS JUG": "USB20504TSLMA2-2J",
+      "GAL": "USB20504TSGMA2G",
+      "BOX (2G)": "USB20504TSLMA2-2G",
+      "BOX (4G)": "USB20504TSLMA2-BG",
+      "QUART": "USB20504TSLMA2L",
+      "BOX (3Q)": "USB20504TSLMA2-3L",
+      "BOX (6Q)": "USB20504TSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "USB20504TSLMA2-GL",
+      "BOX (12Q)": "USB20504TSLMA2-BL",
+      "BOX (3/5QTS)": "USB20504TSLMA2-BJ",
+      "BULK (OIL)": "USB20504TSLMA2-oil",
+      "JERRYCAN (20L)": "USB20504TSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "USB20504TSLMA2-G2L"
+    }
+  },
+  "UL403": {
+    "name": "U1P-RIDE SAE 10W-40 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UC10404TSLMA2T",
+      "DRUM (55G)": "UC10404TSLMA2D",
+      "PAIL (5G)": "UC10404TSLMA2P",
+      "JUG": "UC10404TSLMA2J",
+      "2X5 QTS JUG": "UC10404TSLMA2-2J",
+      "GAL": "UC10404TSGMA2G",
+      "BOX (2G)": "UC10404TSLMA2-2G",
+      "BOX (4G)": "UC10404TSLMA2-BG",
+      "QUART": "UC10404TSLMA2L",
+      "BOX (3Q)": "UC10404TSLMA2-3L",
+      "BOX (6Q)": "UC10404TSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "UC10404TSLMA2-GL",
+      "BOX (12Q)": "UC10404TSLMA2-BL",
+      "BOX (3/5QTS)": "UC10404TSLMA2-BJ",
+      "BULK (OIL)": "UC10404TSLMA2-oil",
+      "JERRYCAN (20L)": "UC10404TSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UC10404TSLMA2-G2L"
+    }
+  },
+  "UL404": {
+    "name": "U1P-RIDE SAE 20W-50 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UC20504TSLMA2T",
+      "DRUM (55G)": "UC20504TSLMA2D",
+      "PAIL (5G)": "UC20504TSLMA2P",
+      "JERRYCAN (20L)": "UC20504TSLMA2JC",
+      "JUG": "UC20504TSLMA2J",
+      "2X5 QTS JUG": "UC20504TSLMA2-2J",
+      "GAL": "UC20504TSGMA2G",
+      "BOX (2G)": "UC20504TSLMA2-2G",
+      "BOX (4G)": "UC20504TSLMA2-BG",
+      "QUART": "UC20504TSLMA2L",
+      "BOX (3Q)": "UC20504TSLMA2-3L",
+      "BOX (6Q)": "UC20504TSLMA2B-6L",
+      "5 Pack QT (Gal + QT)": "UC20504TSLMA2B-GL",
+      "BOX (12Q)": "UC20504TSLMA2-BL",
+      "BOX (3/5QTS)": "UC20504TSLMA2-BJ",
+      "BULK (OIL)": "UC20504TSLMA2-oil",
+      "6 Pack QT (Gal + 2QT)": "UC20504TSLMA2B-G2L"
+    }
+  },
+  "UL405": {
+    "name": "U1P-AQUA 2-Cycle Full Synthetic Marine 2T Motor Oil, TC-W3",
+    "presentations": {
+      "TOTE (265G)": "US2CTCW3T",
+      "DRUM (55G)": "US2CTCW3D",
+      "JERRYCAN (20L)": "US2CTCW3JC",
+      "PAIL (5G)": "US2CTCW3P",
+      "JUG": "US2CTCW3J",
+      "2X5 QTS JUG": "US2CTCW3-2J",
+      "GAL": "US2CTCW3G",
+      "BOX (2G)": "US2CTCW3-2G",
+      "BOX (4G)": "US2CTCW3-BG",
+      "QUART": "US2CTCW3L",
+      "BOX (3Q)": "US2CTCW3-3L",
+      "BOX (6Q)": "US2CTCW3-6L",
+      "5 Pack QT (Gal + QT)": "US2CTCW3-GL",
+      "BOX (12Q)": "US2CTCW3-BL",
+      "BOX (3/5QTS)": "US2CTCW3-BJ",
+      "BULK (OIL)": "US2CTCW3-oil",
+      "6 Pack QT (Gal + 2QT)": "US2CTCW3-G2L"
+    }
+  },
+  "UL406": {
+    "name": "U1P-RIDE SAE 10W-30 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UC10304TSLMA2T",
+      "DRUM (55G)": "UC10304TSLMA2D",
+      "PAIL (5G)": "UC10304TSLMA2P",
+      "JUG": "UC10304TSLMA2J",
+      "2X5 QTS JUG": "UC10304TSLMA2-2J",
+      "GAL": "UC10304TSGMA2G",
+      "BOX (2G)": "UC10304TSLMA2-2G",
+      "BOX (4G)": "UC10304TSLMA2-BG",
+      "QUART": "UC10304TSLMA2L",
+      "BOX (3Q)": "UC10304TSLMA2-3L",
+      "BOX (6Q)": "UC10304TSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "UC10304TSLMA2-GL",
+      "BOX (12Q)": "UC10304TSLMA2-BL",
+      "BOX (3/5QTS)": "UC10304TSLMA2-BJ",
+      "BULK (OIL)": "UC10304TSLMA2-oil",
+      "JERRYCAN (20L)": "UC10304TSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UC10304TSLMA2-G2L"
+    }
+  },
+  "UL407": {
+    "name": "U1P-DUTY 2-Cycle Engine Oil, API TC",
+    "presentations": {
+      "TOTE (265G)": "UC2CTCT",
+      "DRUM (55G)": "UC2CTCD",
+      "PAIL (5G)": "UC2CTCP",
+      "JUG": "UC2CTCJ",
+      "2X5 QTS JUG": "UC2CTC-2J",
+      "GAL": "UC2CTCG",
+      "BOX (2G)": "UC2CTC-2G",
+      "BOX (4G)": "UC2CTC-BG",
+      "QUART": "UC2CTCL",
+      "BOX (3Q)": "UC2CTC-3L",
+      "BOX (6Q)": "UC2CTC-6L",
+      "5 Pack QT (Gal + QT)": "UC2CTC-GL",
+      "BOX (12Q)": "UC2CTC-BL",
+      "BOX (3/5QTS)": "UC2CTC-BJ",
+      "BULK (OIL)": "UC2CTC-oil",
+      "JERRYCAN (20L)": "UC2CTCJC",
+      "6 Pack QT (Gal + 2QT)": "UC2CTC-G2L"
+    }
+  },
+  "UL408": {
+    "name": "U1P-RIDE SAE 5W-40 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS05404TSNMA2T",
+      "DRUM (55G)": "UFS05404TSNMA2D",
+      "PAIL (5G)": "UFS05404TSNMA2P",
+      "JUG": "UFS05404TSNMA2J",
+      "2X5 QTS JUG": "UFS05404TSNMA2-2J",
+      "GAL": "UFS05404TSNMA2G",
+      "BOX (2G)": "UFS05404TSNMA2-2G",
+      "BOX (4G)": "UFS05404TSNMA2-BG",
+      "QUART": "UFS05404TSNMA2L",
+      "BOX (3Q)": "UFS05404TSNMA2-3L",
+      "BOX (6Q)": "UFS05404TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS05404TSNMA2-GL",
+      "BOX (12Q)": "UFS05404TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS05404TSNMA2-BJ",
+      "BULK (OIL)": "UFS05404TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS05404TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS05404TSNMA2-G2L"
+    }
+  },
+  "UL409": {
+    "name": "U1P-RIDE SAE 10W-40 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS10404TSNMA2T",
+      "DRUM (55G)": "UFS10404TSNMA2D",
+      "PAIL (5G)": "UFS10404TSNMA2P",
+      "JUG": "UFS10404TSNMA2J",
+      "2X5 QTS JUG": "UFS10404TSNMA2-2J",
+      "GAL": "UFS10404TSNMA2G",
+      "BOX (2G)": "UFS10404TSNMA2-2G",
+      "BOX (4G)": "UFS10404TSNMA2-BG",
+      "QUART": "UFS10404TSNMA2L",
+      "BOX (3Q)": "UFS10404TSNMA2-3L",
+      "BOX (6Q)": "UFS10404TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS10404TSNMA2-GL",
+      "BOX (12Q)": "UFS10404TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS10404TSNMA2-BJ",
+      "BULK (OIL)": "UFS10404TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS10404TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS10404TSNMA2-G2L"
+    }
+  },
+  "UL410": {
+    "name": "U1P-RIDE SAE 10W-50 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS10504TSNMA2T",
+      "DRUM (55G)": "UFS10504TSNMA2D",
+      "PAIL (5G)": "UFS10504TSNMA2P",
+      "JUG": "UFS10504TSNMA2J",
+      "2X5 QTS JUG": "UFS10504TSNMA2-2J",
+      "GAL": "UFS10504TSNMA2G",
+      "BOX (2G)": "UFS10504TSNMA2-2G",
+      "BOX (4G)": "UFS10504TSNMA2-BG",
+      "QUART": "UFS10504TSNMA2L",
+      "BOX (3Q)": "UFS10504TSNMA2-3L",
+      "BOX (6Q)": "UFS10504TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS10504TSNMA2-GL",
+      "BOX (12Q)": "UFS10504TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS10504TSNMA2-BJ",
+      "BULK (OIL)": "UFS10504TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS10504TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS10504TSNMA2-G2L"
+    }
+  },
+  "UL411": {
+    "name": "U1P-RIDE SAE 15W-50 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS15504TSNMA2T",
+      "DRUM (55G)": "UFS15504TSNMA2D",
+      "PAIL (5G)": "UFS15504TSNMA2P",
+      "JUG": "UFS15504TSNMA2J",
+      "2X5 QTS JUG": "UFS15504TSNMA2-2J",
+      "GAL": "UFS15504TSNMA2G",
+      "BOX (2G)": "UFS15504TSNMA2-2G",
+      "BOX (4G)": "UFS15504TSNMA2-BG",
+      "QUART": "UFS15504TSNMA2L",
+      "BOX (3Q)": "UFS15504TSNMA2-3L",
+      "BOX (6Q)": "UFS15504TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS15504TSNMA2-GL",
+      "BOX (12Q)": "UFS15504TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS15504TSNMA2-BJ",
+      "BULK (OIL)": "UFS15504TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS15504TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS15504TSNMA2-G2L"
+    }
+  },
+  "UL412": {
+    "name": "U1P-RIDE SAE 20W-50 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS20504TSNMA2T",
+      "DRUM (55G)": "UFS20504TSNMA2D",
+      "PAIL (5G)": "UFS20504TSNMA2P",
+      "JUG": "UFS20504TSNMA2J",
+      "2X5 QTS JUG": "UFS20504TSNMA2-2J",
+      "GAL": "UFS20504TSNMA2G",
+      "BOX (2G)": "UFS20504TSNMA2-2G",
+      "BOX (4G)": "UFS20504TSNMA2-BG",
+      "QUART": "UFS20504TSNMA2L",
+      "BOX (3Q)": "UFS20504TSNMA2-3L",
+      "BOX (6Q)": "UFS20504TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS20504TSNMA2-GL",
+      "BOX (12Q)": "UFS20504TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS20504TSNMA2-BJ",
+      "BULK (OIL)": "UFS20504TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS20504TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS20504TSNMA2-G2L"
+    }
+  },
+  "UL413": {
+    "name": "U1P-RIDE SAE 20W-50 Full Synthetic 4T Engine Oil, V-Twin, API SJ, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS20504TVTSJMA2T",
+      "DRUM (55G)": "UFS20504TVTSJMA2D",
+      "PAIL (5G)": "UFS20504TVTSJMA2P",
+      "JUG": "UFS20504TVTSJMA2J",
+      "2X5 QTS JUG": "UFS20504TVTSJMA2-2J",
+      "GAL": "UFS20504TVTSJMA2G",
+      "BOX (2G)": "UFS20504TVTSJMA2-2G",
+      "BOX (4G)": "UFS20504TVTSJMA2-BG",
+      "QUART": "UFS20504TVTSJMA2L",
+      "BOX (3Q)": "UFS20504TVTSJMA2-3L",
+      "BOX (6Q)": "UFS20504TVTSJMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS20504TVTSJMA2-GL",
+      "BOX (12Q)": "UFS20504TVTSJMA2-BL",
+      "BOX (3/5QTS)": "UFS20504TVTSJMA2-BJ",
+      "BULK (OIL)": "UFS20504TVTSJMA2-oil",
+      "JERRYCAN (20L)": "UFS20504TVTSJMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS20504TVTSJMA2-G2L"
+    }
+  },
+  "UL414": {
+    "name": "U1P-RIDE SAE 10W-40 Full Synthetic 4T Engine Oil with Ester, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS10404TESNMA2T",
+      "DRUM (55G)": "UFS10404TESNMA2D",
+      "PAIL (5G)": "UFS10404TESNMA2P",
+      "JUG": "UFS10404TESNMA2J",
+      "2X5 QTS JUG": "UFS10404TESNMA2-2J",
+      "GAL": "UFS10404TESNMA2G",
+      "BOX (2G)": "UFS10404TESNMA2-2G",
+      "BOX (4G)": "UFS10404TESNMA2-BG",
+      "QUART": "UFS10404TESNMA2L",
+      "BOX (3Q)": "UFS10404TESNMA2-3L",
+      "BOX (6Q)": "UFS10404TESNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS10404TESNMA2-GL",
+      "BOX (12Q)": "UFS10404TESNMA2-BL",
+      "BOX (3/5QTS)": "UFS10404TESNMA2-BJ",
+      "BULK (OIL)": "UFS10404TESNMA2-oil",
+      "JERRYCAN (20L)": "UFS10404TESNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS10404TESNMA2-G2L"
+    }
+  },
+  "UL415": {
+    "name": "U1P-RIDE SAE 15W-50 Full Synthetic 4T Engine Oil with Ester, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS15504TESNMA2T",
+      "DRUM (55G)": "UFS15504TESNMA2D",
+      "PAIL (5G)": "UFS15504TESNMA2P",
+      "JUG": "UFS15504TESNMA2J",
+      "2X5 QTS JUG": "UFS15504TESNMA2-2J",
+      "GAL": "UFS15504TESNMA2G",
+      "BOX (2G)": "UFS15504TESNMA2-2G",
+      "BOX (4G)": "UFS15504TESNMA2-BG",
+      "QUART": "UFS15504TESNMA2L",
+      "BOX (3Q)": "UFS15504TESNMA2-3L",
+      "BOX (6Q)": "UFS15504TESNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS15504TESNMA2-GL",
+      "BOX (12Q)": "UFS15504TESNMA2-BL",
+      "BOX (3/5QTS)": "UFS15504TESNMA2-BJ",
+      "BULK (OIL)": "UFS15504TESNMA2-oil",
+      "JERRYCAN (20L)": "UFS15504TESNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS15504TESNMA2-G2L"
+    }
+  },
+  "UL416": {
+    "name": "U1P-AQUA SAE 10W-30 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB10304TFCWT",
+      "DRUM (55G)": "USB10304TFCWD",
+      "PAIL (5G)": "USB10304TFCWP",
+      "JUG": "USB10304TFCWJ",
+      "2X5 QTS JUG": "USB10304TFCW-2J",
+      "GAL": "USB10304TFCWG",
+      "BOX (2G)": "USB10304TFCW-2G",
+      "BOX (4G)": "USB10304TFCWG",
+      "QUART": "USB10304TFCWG",
+      "BOX (3Q)": "USB10304TFCWG-3L",
+      "BOX (6Q)": "USB10304TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB10304TFCW-GL",
+      "BOX (12Q)": "USB10304TFCW-BL",
+      "BOX (3/5QTS)": "USB10304TFCWL",
+      "BULK (OIL)": "USB10304TFCW-oil",
+      "JERRYCAN (20L)": "USB10304TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB10304TFCW-G2L"
+    }
+  },
+  "UL417": {
+    "name": "U1P-AQUASAE 10W-40 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB10404TFCWT",
+      "DRUM (55G)": "USB10404TFCWD",
+      "PAIL (5G)": "USB10404TFCWP",
+      "JUG": "USB10404TFCWJ",
+      "2X5 QTS JUG": "USB10404TFCW-2J",
+      "GAL": "USB10404TFCWG",
+      "BOX (2G)": "USB10404TFCW-2G",
+      "BOX (4G)": "USB10404TFCW-BG",
+      "QUART": "USB10404TFCWL",
+      "BOX (3Q)": "USB10404TFCW-3L",
+      "BOX (6Q)": "USB10404TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB10404TFCW-GL",
+      "BOX (12Q)": "USB10404TFCW-BL",
+      "BOX (3/5QTS)": "USB10404TFCW-BJ",
+      "BULK (OIL)": "USB10404TFCW-oil",
+      "JERRYCAN (20L)": "USB10404TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB10404TFCW-G2L"
+    }
+  },
+  "UL418": {
+    "name": "U1P-AQUA SAE 20W-40 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB20404TFCWT",
+      "DRUM (55G)": "USB20404TFCWD",
+      "PAIL (5G)": "USB20404TFCWP",
+      "JUG": "USB20404TFCWJ",
+      "2X5 QTS JUG": "USB20404TFCW-2J",
+      "GAL": "USB20404TFCWG",
+      "BOX (2G)": "USB20404TFCW-2G",
+      "BOX (4G)": "USB20404TFCW-BG",
+      "QUART": "USB20404TFCWL",
+      "BOX (3Q)": "USB20404TFCW-3L",
+      "BOX (6Q)": "USB20404TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB20404TFCW-GL",
+      "BOX (12Q)": "USB20404TFCW-BL",
+      "BOX (3/5QTS)": "USB20404TFCW-BJ",
+      "BULK (OIL)": "USB20404TFCW-oil",
+      "JERRYCAN (20L)": "USB20404TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB20404TFCW-G2L"
+    }
+  },
+  "UL419": {
+    "name": "U1P-AQUA SAE 25W-40 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB25404TFCWT",
+      "DRUM (55G)": "USB25404TFCWD",
+      "PAIL (5G)": "USB25404TFCWP",
+      "JUG": "USB25404TFCWJ",
+      "2X5 QTS JUG": "USB25404TFCW-2J",
+      "GAL": "USB25404TFCWG",
+      "BOX (2G)": "USB25404TFCW-2G",
+      "BOX (4G)": "USB25404TFCW-BG",
+      "QUART": "USB25404TFCWL",
+      "BOX (3Q)": "USB25404TFCW-3L",
+      "BOX (6Q)": "USB25404TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB25404TFCW-GL",
+      "BOX (12Q)": "USB25404TFCW-BL",
+      "BOX (3/5QTS)": "USB25404TFCW-BJ",
+      "BULK (OIL)": "USB25404TFCW-oil",
+      "JERRYCAN (20L)": "USB25404TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB25404TFCW-G2L"
+    }
+  },
+  "UL420": {
+    "name": "U1P-AQUA SAE 20W-50 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB20504TFCWT",
+      "DRUM (55G)": "USB20504TFCWD",
+      "PAIL (5G)": "USB20504TFCWP",
+      "JUG": "USB20504TFCWJ",
+      "2X5 QTS JUG": "USB20504TFCW-2J",
+      "GAL": "USB20504TFCWG",
+      "BOX (2G)": "USB20504TFCW-2G",
+      "BOX (4G)": "USB20504TFCW-BG",
+      "QUART": "USB20504TFCWL",
+      "BOX (3Q)": "USB20504TFCW-3L",
+      "BOX (6Q)": "USB20504TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB20504TFCW-GL",
+      "BOX (12Q)": "USB20504TFCW-BL",
+      "BOX (3/5QTS)": "USB20504TFCW-BJ",
+      "BULK (OIL)": "USB20504TFCW-oil",
+      "JERRYCAN (20L)": "USB20504TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB20504TFCW-G2L"
+    }
+  },
+  "UL421": {
+    "name": "U1P-AQUA SAE 25W-50 Synthetic Blend 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "USB25504TFCWT",
+      "DRUM (55G)": "USB25504TFCWD",
+      "PAIL (5G)": "USB25504TFCWP",
+      "JUG": "USB25504TFCWJ",
+      "2X5 QTS JUG": "USB25504TFCW-2J",
+      "GAL": "USB25504TFCWG",
+      "BOX (2G)": "USB25504TFCW-2G",
+      "BOX (4G)": "USB25504TFCW-BG",
+      "QUART": "USB25504TFCWL",
+      "BOX (3Q)": "USB25504TFCW-3L",
+      "BOX (6Q)": "USB25504TFCW-6L",
+      "5 Pack QT (Gal + QT)": "USB25504TFCW-GL",
+      "BOX (12Q)": "USB25504TFCW-BL",
+      "BOX (3/5QTS)": "USB25504TFCW-BJ",
+      "BULK (OIL)": "USB25504TFCW-oil",
+      "JERRYCAN (20L)": "USB25504TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "USB25504TFCW-G2L"
+    }
+  },
+  "UL422": {
+    "name": "U1P-AQUA SAE 5W-30 Full Synthetic 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "UFS05304TFCWT",
+      "DRUM (55G)": "UFS05304TFCWD",
+      "PAIL (5G)": "UFS05304TFCWP",
+      "JUG": "UFS05304TFCWJ",
+      "2X5 QTS JUG": "UFS05304TFCW-2J",
+      "GAL": "UFS05304TFCWG",
+      "BOX (2G)": "UFS05304TFCW-2G",
+      "BOX (4G)": "UFS05304TFCW-BG",
+      "QUART": "UFS05304TFCWL",
+      "BOX (3Q)": "UFS05304TFCW-3L",
+      "BOX (6Q)": "UFS05304TFCWB-6L",
+      "5 Pack QT (Gal + QT)": "UFS05304TFCWB-GL",
+      "BOX (12Q)": "UFS05304TFCW-BL",
+      "BOX (3/5QTS)": "UFS05304TFCWBL",
+      "BULK (OIL)": "UFS05304TFCW-oil",
+      "JERRYCAN (20L)": "UFS05304TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "UFS05304TFCWB-G2L"
+    }
+  },
+  "UL423": {
+    "name": "U1P-AQUA SAE 10W-30 Full Synthetic 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "UFS10304TFCWT",
+      "DRUM (55G)": "UFS10304TFCWD",
+      "PAIL (5G)": "UFS10304TFCWP",
+      "JUG": "UFS10304TFCWJ",
+      "2X5 QTS JUG": "UFS10304TFCW-2J",
+      "GAL": "UFS10304TFCWG",
+      "BOX (2G)": "UFS10304TFCW-2G",
+      "BOX (4G)": "UFS10304TFCW-BG",
+      "QUART": "UFS10304TFCWL",
+      "BOX (3Q)": "UFS10304TFCW-3L",
+      "BOX (6Q)": "UFS10304TFCW-6L",
+      "5 Pack QT (Gal + QT)": "UFS10304TFCW-GL",
+      "BOX (12Q)": "UFS10304TFCW-BL",
+      "BOX (3/5QTS)": "UFS10304TFCW-BJ",
+      "BULK (OIL)": "UFS10304TFCW-oil",
+      "JERRYCAN (20L)": "UFS10304TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "UFS10304TFCW-G2L"
+    }
+  },
+  "UL424": {
+    "name": "U1P-AQUA SAE 10W-40 Full Synthetic 4T Engine Oil, NMMA FC-W",
+    "presentations": {
+      "TOTE (265G)": "UFS10404TFCWT",
+      "DRUM (55G)": "UFS10404TFCWD",
+      "PAIL (5G)": "UFS10404TFCWP",
+      "JUG": "UFS10404TFCWJ",
+      "2X5 QTS JUG": "UFS10404TFCW-2J",
+      "GAL": "UFS10404TFCWG",
+      "BOX (2G)": "UFS10404TFCW-2G",
+      "BOX (4G)": "UFS10404TFCW-BG",
+      "QUART": "UFS10404TFCWL",
+      "BOX (3Q)": "UFS10404TFCW-3L",
+      "BOX (6Q)": "UFS10404TFCW-6L",
+      "5 Pack QT (Gal + QT)": "UFS10404TFCW-GL",
+      "BOX (12Q)": "UFS10404TFCW-BL",
+      "BOX (3/5QTS)": "UFS10404TFCW-BJ",
+      "BULK (OIL)": "UFS10404TFCW-oil",
+      "JERRYCAN (20L)": "UFS10404TFCWJC",
+      "6 Pack QT (Gal + 2QT)": "UFS10404TFCW-G2L"
+    }
+  },
+  "UL425": {
+    "name": "U1P-RIDE SAE 15W-60 Full Synthetic 4T Engine Oil, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS15604TSNMA2T",
+      "DRUM (55G)": "UFS15604TSNMA2D",
+      "PAIL (5G)": "UFS15604TSNMA2P",
+      "JUG": "UFS15604TSNMA2J",
+      "2X5 QTS JUG": "UFS15604TSNMA2-2J",
+      "GAL": "UFS15604TSNMA2G",
+      "BOX (2G)": "UFS15604TSNMA2-2G",
+      "BOX (4G)": "UFS15604TSNMA2-BG",
+      "QUART": "UFS15604TSNMA2L",
+      "BOX (3Q)": "UFS15604TSNMA2-3L",
+      "BOX (6Q)": "UFS15604TSNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS15604TSNMA2-GL",
+      "BOX (12Q)": "UFS15604TSNMA2-BL",
+      "BOX (3/5QTS)": "UFS15604TSNMA2-BJ",
+      "BULK (OIL)": "UFS15604TSNMA2-oil",
+      "JERRYCAN (20L)": "UFS15604TSNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS15604TSNMA2-G2L"
+    }
+  },
+  "UL426": {
+    "name": "U1P-RIDE SAE 60 V-Twin Full Synthetic 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS604TVTSLMA2T",
+      "DRUM (55G)": "UFS604TVTSLMA2D",
+      "PAIL (5G)": "UFS604TVTSLMA2P",
+      "JUG": "UFS604TVTSLMA2J",
+      "2X5 QTS JUG": "UFS604TVTSLMA2-2J",
+      "GAL": "UFS604TVTSGMA2G",
+      "BOX (2G)": "UFS604TVTSLMA2G",
+      "BOX (4G)": "UFS604TVTSLMA2G",
+      "QUART": "UFS604TVTSLMA2G",
+      "BOX (3Q)": "UFS604TVTSLMA2G-3L",
+      "BOX (6Q)": "UFS604TVTSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS604TVTSLMA2-GL",
+      "BOX (12Q)": "UFS604TVTSLMA2-BL",
+      "BOX (3/5QTS)": "UFS604TVTSLMA2L-BJ",
+      "BULK (OIL)": "UFS60VTSLMA2-oil",
+      "JERRYCAN (20L)": "UFS604TVTSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS604TVTSLMA2-G2L"
+    }
+  },
+  "UL427": {
+    "name": "U1P-RIDE SAE 60 V-Twin Conventional 4T Engine Oil, API SL, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UC604TVTSLMA2T",
+      "DRUM (55G)": "UC604TVTSLMA2D",
+      "PAIL (5G)": "UC604TVTSLMA2P",
+      "JUG": "UC604TVTSLMA2J",
+      "2X5 QTS JUG": "UC604TVTSLMA2-2J",
+      "GAL": "UC604TVTSGMA2G",
+      "BOX (2G)": "UC604TVTSLMA2-2G",
+      "BOX (4G)": "UC604TVTSLMA2-BG",
+      "QUART": "UC604TVTSLMA2L",
+      "BOX (3Q)": "UC604TVTSLMA2-3L",
+      "BOX (6Q)": "UC604TVTSLMA2-6L",
+      "5 Pack QT (Gal + QT)": "UC604TVTSLMA2-GL",
+      "BOX (12Q)": "UC604TVTSLMA2-BL",
+      "BOX (3/5QTS)": "UC604TVTSLMA2-BJ",
+      "BULK (OIL)": "UC60VTPSLMA2-oil",
+      "JERRYCAN (20L)": "UC604TVTSLMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UC604TVTSLMA2-G2L"
+    }
+  },
+  "UL428": {
+    "name": "U1P-RIDE SAE 5W-40 Full Synthetic 4T Engine Oil with Ester, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS05404TESNMA2T",
+      "DRUM (55G)": "UFS05404TESNMA2D",
+      "PAIL (5G)": "UFS05404TESNMA2P",
+      "JUG": "UFS05404TESNMA2J",
+      "2X5 QTS JUG": "UFS05404TESNMA2-2J",
+      "GAL": "UFS05404TESNMA2G",
+      "BOX (2G)": "UFS05404TESNMA2-2G",
+      "BOX (4G)": "UFS05404TESNMA2-BG",
+      "QUART": "UFS05404TESNMA2L",
+      "BOX (3Q)": "UFS05404TESNMA2-3L",
+      "BOX (6Q)": "UFS05404TESNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS05404TESNMA2-GL",
+      "BOX (12Q)": "UFS05404TESNMA2-BL",
+      "BOX (3/5QTS)": "UFS05404TESNMA2-BJ",
+      "BULK (OIL)": "UFS05404TESNMA2-oil",
+      "JERRYCAN (20L)": "UFS05404TESNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS05404TESNMA2-G2L"
+    }
+  },
+  "UL429": {
+    "name": "U1P-RIDE SAE 5W-50 Full Synthetic 4T Engine Oil with Ester, API SN, JASO MA2",
+    "presentations": {
+      "TOTE (265G)": "UFS05504TESNMA2T",
+      "DRUM (55G)": "UFS05504TESNMA2D",
+      "PAIL (5G)": "UFS05504TESNMA2P",
+      "JUG": "UFS05504TESNMA2J",
+      "2X5 QTS JUG": "UFS05504TESNMA2-2J",
+      "GAL": "UFS05504TESNMA2G",
+      "BOX (2G)": "UFS05504TESNMA2-2G",
+      "BOX (4G)": "UFS05504TESNMA2-BG",
+      "QUART": "UFS05504TESNMA2L",
+      "BOX (3Q)": "UFS05504TESNMA2-3L",
+      "BOX (6Q)": "UFS05504TESNMA2-6L",
+      "5 Pack QT (Gal + QT)": "UFS05504TESNMA2-GL",
+      "BOX (12Q)": "UFS05504TESNMA2-BL",
+      "BOX (3/5QTS)": "UFS05504TESNMA2-BJ",
+      "BULK (OIL)": "UFS05504TESNMA2-oil",
+      "JERRYCAN (20L)": "UFS05504TESNMA2JC",
+      "6 Pack QT (Gal + 2QT)": "UFS05504TESNMA2-G2L"
+    }
+  },
+  "UL501": {
+    "name": "U1P-DRIVE ATF Dexron III/Mercon Multi-Purpose",
+    "presentations": {
+      "TOTE (265G)": "UCDIIIMMPT",
+      "DRUM (55G)": "UCDIIIMMPD",
+      "PAIL (5G)": "UCDIIIMMPP",
+      "JUG": "UCDIIIMMPJ",
+      "2X5 QTS JUG": "UCDIIIMMP-J2",
+      "GAL": "UCDIIIMMPG",
+      "BOX (2G)": "UCDIIIMMP-2G",
+      "BOX (4G)": "UCDIIIMMP-BG",
+      "QUART": "UCDIIIMMPL",
+      "BOX (3Q)": "UCDIIIMMP-3L",
+      "BOX (6Q)": "UCDIIIMMP-6L",
+      "5 Pack QT (Gal + QT)": "UCDIIIMMP-GL",
+      "BOX (12Q)": "UCDIIIMMP-BL",
+      "BOX (3/5QTS)": "UCDIIIMMP-BJ",
+      "BULK (OIL)": "UCDIIIMMP-oil",
+      "JERRYCAN (20L)": "UCDIIIMMPJC",
+      "6 Pack QT (Gal + 2QT)": "UCDIIIMMP-G2L"
+    }
+  },
+  "UL502": {
+    "name": "U1P-DRIVE Power Steering Fluid",
+    "presentations": {
+      "TOTE (265G)": "UCPST",
+      "DRUM (55G)": "UCPSD",
+      "PAIL (5G)": "UCPSP",
+      "JUG": "UCPSJ",
+      "2X5 QTS JUG": "UCPS-2J",
+      "GAL": "UCPSG",
+      "BOX (2G)": "UCPS-2G",
+      "BOX (4G)": "UCPS-BG",
+      "QUART": "UCPSL",
+      "BOX (3Q)": "UCPS-3L",
+      "BOX (6Q)": "UCPS-6L",
+      "5 Pack QT (Gal + QT)": "UCPS-GL",
+      "BOX (12Q)": "UCPS-BL",
+      "BOX (3/5QTS)": "UCPS-BJ",
+      "BULK (OIL)": "UCPS-oil",
+      "JERRYCAN (20L)": "UCPSJC",
+      "6 Pack QT (Gal + 2QT)": "UCPS-G2L"
+    }
+  },
+  "UL503": {
+    "name": "U1P-DRIVE Full Synthetic ATF Dexron VI Multi-Vehicle",
+    "presentations": {
+      "TOTE (265G)": "UFSDVIMVT",
+      "DRUM (55G)": "UFSDVIMVD",
+      "PAIL (5G)": "UFSDVIMVP",
+      "JUG": "UFSDVIMVJ",
+      "2X5 QTS JUG": "UFSDVIMV-2J",
+      "GAL": "UFSDVIMVG",
+      "BOX (2G)": "UFSDVIMVL",
+      "BOX (4G)": "UFSDVIMV-BG",
+      "QUART": "UFSDVIMVL",
+      "BOX (3Q)": "UFSDVIMVL-3L",
+      "BOX (6Q)": "UFSDVIMV-6L",
+      "5 Pack QT (Gal + QT)": "UFSDVIMV-GL",
+      "BOX (12Q)": "UFSDVIMV-BL",
+      "BOX (3/5QTS)": "UFSDVIMV-BJ",
+      "BULK (OIL)": "UFSDVIMV-oil",
+      "JERRYCAN (20L)": "UFSDVIMVJC",
+      "6 Pack QT (Gal + 2QT)": "UFSDVIMV-G2L"
+    }
+  },
+  "UL504": {
+    "name": "U1P-DRIVE Full Synthetic ATF Universal",
+    "presentations": {
+      "TOTE (265G)": "UFSATFUT",
+      "DRUM (55G)": "UFSATFUD",
+      "PAIL (5G)": "UFSATFUP",
+      "JUG": "UFSATFUJ",
+      "2X5 QTS JUG": "UFSATFU-2J",
+      "GAL": "UFSATFUG",
+      "BOX (2G)": "UFSATFU-2G",
+      "BOX (4G)": "UFSATFU-BG",
+      "QUART": "UFSATFUL",
+      "BOX (3Q)": "UFSATFU-3L",
+      "BOX (6Q)": "UFSATFU-6L",
+      "5 Pack QT (Gal + QT)": "UFSATFU-GL",
+      "BOX (12Q)": "UFSATFU-BL",
+      "BOX (3/5QTS)": "UFSATFU-BJ",
+      "BULK (OIL)": "UFSATFU-oil",
+      "JERRYCAN (20L)": "UFSATFUJC",
+      "6 Pack QT (Gal + 2QT)": "UFSATFU-G2L"
+    }
+  },
+  "UL505": {
+    "name": "U1P-DRIVE Full Synthetic CVT Universal",
+    "presentations": {
+      "TOTE (265G)": "UFSCUT",
+      "DRUM (55G)": "UFSCUD",
+      "PAIL (5G)": "UFSCUP",
+      "JUG": "UFSCUJ",
+      "2X5 QTS JUG": "UFSCU-2J",
+      "GAL": "UFSCUG",
+      "BOX (2G)": "UFSCU-2G",
+      "BOX (4G)": "UFSCU-BG",
+      "QUART": "UFSCUL",
+      "BOX (3Q)": "UFSCU-3L",
+      "BOX (6Q)": "UFSCU-6L",
+      "5 Pack QT (Gal + QT)": "UFSCU-GL",
+      "BOX (12Q)": "UFSCU-BL",
+      "BOX (3/5QTS)": "UFSCU-BJ",
+      "BULK (OIL)": "UFSCU-oil",
+      "JERRYCAN (20L)": "UFSCUJC",
+      "6 Pack QT (Gal + 2QT)": "UFSCU-G2L"
+    }
+  },
+  "UL506": {
+    "name": "U1P-DRIVE SAE 50 Full Synthetic Manual Transmission Fluid (CD-50)",
+    "presentations": {
+      "TOTE (265G)": "UFS50MTT",
+      "DRUM (55G)": "UFS50MTD",
+      "PAIL (5G)": "UFS50MTP",
+      "JUG": "UFS50MTJ",
+      "2X5 QTS JUG": "UFS50MT-2J",
+      "GAL": "UFS50MTG",
+      "BOX (2G)": "UFS50MT-2G",
+      "BOX (4G)": "UFS50MT-BG",
+      "QUART": "UFS50MTL",
+      "BOX (3Q)": "UFS50MT-3L",
+      "BOX (6Q)": "UFS50MT-6L",
+      "5 Pack QT (Gal + QT)": "UFS50MT-GL",
+      "BOX (12Q)": "UFS50MT-BL",
+      "BOX (3/5QTS)": "UFS50MT-BJ",
+      "BULK (OIL)": "UFS50MT-oil",
+      "JERRYCAN (20L)": "UFS50MTJC",
+      "6 Pack QT (Gal + 2QT)": "UFS50MT-G2L"
+    }
+  },
+  "UL507": {
+    "name": "U1P-DRIVE Full Synthetic DCT Universal (Amber)",
+    "presentations": {
+      "TOTE (265G)": "UFSDCTT",
+      "DRUM (55G)": "UFSDCTD",
+      "PAIL (5G)": "UFSDCTP",
+      "JUG": "UFSDCTJ",
+      "2X5 QTS JUG": "UFSDCT-2J",
+      "GAL": "UFSDCTG",
+      "BOX (2G)": "UFSDCT-2G",
+      "BOX (4G)": "UFSDCT-BG",
+      "QUART": "UFSDCTL",
+      "BOX (3Q)": "UFSDCT-3L",
+      "BOX (6Q)": "UFSDCT-6L",
+      "5 Pack QT (Gal + QT)": "UFSDCT-GL",
+      "BOX (12Q)": "UFSDCT-BL",
+      "BOX (3/5QTS)": "UFSDCT-BJ",
+      "BULK (OIL)": "UFSDCTU-oil",
+      "JERRYCAN (20L)": "UFSDCTJC",
+      "6 Pack QT (Gal + 2QT)": "UFSDCT-G2L"
+    }
+  },
+  "UL508": {
+    "name": "U1P-DRIVE SAE 75W-80 Synthetic HD Transmission Fluid",
+    "presentations": {
+      "TOTE (265G)": "UFS7580HDTFT",
+      "DRUM (55G)": "UFS7580HDTFD",
+      "PAIL (5G)": "UFS7580HDTFP",
+      "JUG": "UFS7580HDTFJ",
+      "2X5 QTS JUG": "UFS7580HDTF-2J",
+      "GAL": "UFS7580HDTFG",
+      "BOX (2G)": "UFS7580HDTF-2G",
+      "BOX (4G)": "UFS7580HDTF-BG",
+      "QUART": "UFS7580HDTFL",
+      "BOX (3Q)": "UFS7580HDTF-3L",
+      "BOX (6Q)": "UFS7580HDTF-6L",
+      "5 Pack QT (Gal + QT)": "UFS7580HDTF-GL",
+      "BOX (12Q)": "UFS7580HDTF-BL",
+      "BOX (3/5QTS)": "UFS7580HDTF-BJ",
+      "BULK (OIL)": "UFS7580HDTF-oil",
+      "JERRYCAN (20L)": "UFS7580HDTFJC",
+      "6 Pack QT (Gal + 2QT)": "UFS7580HDTF-G2L"
+    }
+  },
+  "UL509": {
+    "name": "U1P-DRIVE Euro Rennsport Full Synthetic ATF MB",
+    "presentations": {
+      "TOTE (265G)": "UFSAUTOMBT",
+      "DRUM (55G)": "UFSAUTOMBD",
+      "PAIL (5G)": "UFSAUTOMBP",
+      "BOX (6Q)": "UFSAUTOMB-6L",
+      "BOX (12Q)": "UFSAUTOMB-BL",
+      "BOX (4G)": "UFSAUTOMB-BG",
+      "BOX (3/5QTS)": "UFSAUTOMB-BJ",
+      "BULK (OIL)": "UFSAUTOMB-oil",
+      "JERRYCAN (20L)": "UFSAUTOMBJC",
+      "6 Pack QT (Gal + 2QT)": "UFSAUTOMB-G2L"
+    }
+  },
+  "UL510": {
+    "name": "U1P-DRIVE Rennsport Full Synthetic ATF LV",
+    "presentations": {
+      "TOTE (265G)": "UFSATFLVT",
+      "BULK (COOL)": "UFSATFLV-oil",
+      "DRUM (55G)": "UFSATFLVD",
+      "PAIL (5G)": "UFSATFLVP",
+      "BOX (6Q)": "UFSATFLV-6L",
+      "BOX (12Q)": "UFSATFLV-BL",
+      "BOX (4G)": "UFSATFLV-BG",
+      "BOX (3/5QTS)": "UFSATFLV-BJ",
+      "BULK (OIL)": "UFSATFLV-oil",
+      "JERRYCAN (20L)": "UFSATFLVJC",
+      "6 Pack QT (Gal + 2QT)": "UFSATFLV-G2L"
+    }
+  },
+  "UL511": {
+    "name": "U1P-DRIVE Full Synthetic ATF +4",
+    "presentations": {
+      "TOTE (265G)": "UFSATF4T",
+      "DRUM (55G)": "UFSATF4D",
+      "PAIL (5G)": "UFSATF4P",
+      "QUART": "UFSATF4L",
+      "BOX (12Q)": "UFSATF4-BL",
+      "BULK (OIL)": "UFSATF4-Oil",
+      "JERRYCAN (20L)": "UFSATF4JC"
+    }
+  },
+  "UL601": {
+    "name": "U1P-DUTY Premium 1000 Universal Tractor HF (J20C)",
+    "presentations": {
+      "TOTE (265G)": "UCPTHFJ20CT",
+      "DRUM (55G)": "UCPTHFJ20CD",
+      "PAIL (5G)": "UCPTHFJ20CP",
+      "JUG": "UCPTHFJ20CJ",
+      "2X5 QTS JUG": "UCPTHFJ20C-2J",
+      "GAL": "UCPTHFJ20CG",
+      "BOX (2G)": "UCPTHFJ20C-2G",
+      "BOX (4G)": "UCPTHFJ20C-BG",
+      "QUART": "UCPTHFJ20CL",
+      "BOX (3Q)": "UCPTHFJ20C-3L",
+      "BOX (6Q)": "UCPTHFJ20C-6L",
+      "5 Pack QT (Gal + QT)": "UCPTHFJ20C-GL",
+      "BOX (12Q)": "UCPTHFJ20C-BL",
+      "BOX (3/5QTS)": "UCPTHFJ20C-BJ",
+      "BULK (OIL)": "UCPTHFJ20C-oil",
+      "JERRYCAN (20L)": "UCPTHFJ20CJC",
+      "6 Pack QT (Gal + 2QT)": "UCPTHFJ20C-G2L"
+    }
+  },
+  "UL602": {
+    "name": "U1P-DUTY SAE 10W Transmission Drivetrain Torque Fluid, TO-4",
+    "presentations": {
+      "TOTE (265G)": "UC10WTDTO4T",
+      "DRUM (55G)": "UC10WTDTO4D",
+      "PAIL (5G)": "UC10WTDTO4P",
+      "JUG": "UC10WTDTO4J",
+      "2X5 QTS JUG": "UC10WTDTO4-2J",
+      "GAL": "UC10WTDTO4G",
+      "BOX (2G)": "UC10WTDTO4-2G",
+      "BOX (4G)": "UC10WTDTO4-BG",
+      "QUART": "UC10WTDTO4L",
+      "BOX (3Q)": "UC10WTDTO4-3L",
+      "BOX (6Q)": "UC10WTDTO4-6L",
+      "5 Pack QT (Gal + QT)": "UC10WTDTO4-GL",
+      "BOX (12Q)": "UC10WTDTO4-BL",
+      "BOX (3/5QTS)": "UC10WTDTO4-BJ",
+      "BULK (OIL)": "UC10WTDTO4-oil",
+      "JERRYCAN (20L)": "UC10WTDTO4JC",
+      "6 Pack QT (Gal + 2QT)": "UC10WTDTO4-G2L"
+    }
+  },
+  "UL603": {
+    "name": "U1P-DUTY SAE 30 Transmission Drivetrain Torque Fluid, TO-4",
+    "presentations": {
+      "TOTE (265G)": "UC30TDTO4T",
+      "DRUM (55G)": "UC30TDTO4D",
+      "PAIL (5G)": "UC30TDTO4P",
+      "JUG": "UC30TDTO4J",
+      "2X5 QTS JUG": "UC30TDTO4-2J",
+      "GAL": "UC30TDTO4G",
+      "BOX (2G)": "UC30TDTO4-2G",
+      "BOX (4G)": "UC30TDTO4-BG",
+      "QUART": "UC30TDTO4L",
+      "BOX (3Q)": "UC30TDTO4-3L",
+      "BOX (6Q)": "UC30TDTO4-6L",
+      "5 Pack QT (Gal + QT)": "UC30TDTO4-GL",
+      "BOX (12Q)": "UC30TDTO4-BL",
+      "BOX (3/5QTS)": "UC30TDTO4-BJ",
+      "BULK (OIL)": "UC30TDTO4-oil",
+      "JERRYCAN (20L)": "UC30TDTO4JC",
+      "6 Pack QT (Gal + 2QT)": "UC30TDTO4-G2L"
+    }
+  },
+  "UL604": {
+    "name": "U1P-DUTY SAE 50 Transmission Drivetrain Torque Fluid, TO-4",
+    "presentations": {
+      "TOTE (265G)": "UC50TDTO4T",
+      "DRUM (55G)": "UC50TDTO4D",
+      "PAIL (5G)": "UC50TDTO4P",
+      "JUG": "UC50TDTO4J",
+      "2X5 QTS JUG": "UC50TDTO4-2J",
+      "GAL": "UC50TDTO4G",
+      "BOX (2G)": "UC50TDTO4-2G",
+      "BOX (4G)": "UC50TDTO4-BG",
+      "QUART": "UC50TDTO4L",
+      "BOX (3Q)": "UC50TDTO4-3L",
+      "BOX (6Q)": "UC50TDTO4-6L",
+      "5 Pack QT (Gal + QT)": "UC50TDTO4-GL",
+      "BOX (12Q)": "UC50TDTO4-BL",
+      "BOX (3/5QTS)": "UC50TDTO4-BJ",
+      "BULK (OIL)": "UC50TDTO4-oil",
+      "JERRYCAN (20L)": "UC50TDTO4JC",
+      "6 Pack QT (Gal + 2QT)": "UC50TDTO4-G2L"
+    }
+  },
+  "UL605": {
+    "name": "U1P-DUTY Synthetic Tractor Hydraulic Fluid (J20D)",
+    "presentations": {
+      "TOTE (265G)": "UFSTHFT",
+      "DRUM (55G)": "UFSTHFD",
+      "PAIL (5G)": "UFSTHFP",
+      "BULK (OIL)": "UFSTHF-Oil"
+    }
+  },
+  "UL701": {
+    "name": "U1P-GEAR SAE 80W-90 Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UC8090GL5T",
+      "DRUM (55G)": "UC8090GL5D",
+      "PAIL (5G)": "UC8090GL5P",
+      "JUG": "UC8090GL5J",
+      "2X5 QTS JUG": "UC8090FL5-2J",
+      "GAL": "UC8090GL5G",
+      "BOX (2G)": "UC8090GL5-2G",
+      "BOX (4G)": "UC8090GL5-BG",
+      "QUART": "UC8090GL5L",
+      "BOX (3Q)": "UC8090GL5-3L",
+      "BOX (6Q)": "UC8090GL5-6L",
+      "5 Pack QT (Gal + QT)": "UC8090GL5-GL",
+      "BOX (12Q)": "UC8090GL5-BL",
+      "BOX (3/5QTS)": "UC8090GL5-BJ",
+      "BULK (OIL)": "UC8090GL5-oil",
+      "JERRYCAN (20L)": "UC8090GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UC8090GL5-G2L"
+    }
+  },
+  "UL702": {
+    "name": "U1P-GEAR SAE 85W-140 Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UC85140GL5T",
+      "DRUM (55G)": "UC85140GL5D",
+      "PAIL (5G)": "UC85140GL5P",
+      "JUG": "UC85140GL5J",
+      "2X5 QTS JUG": "UC85140GL5-2J",
+      "GAL": "UC85140GL5G",
+      "BOX (2G)": "UC85140GL5-2G",
+      "BOX (4G)": "UC85140GL5-BG",
+      "QUART": "UC85140GL5L",
+      "BOX (3Q)": "UC85140GL5-3L",
+      "BOX (6Q)": "UC85140GL5-6L",
+      "5 Pack QT (Gal + QT)": "UC85140GL5-GL",
+      "BOX (12Q)": "UC85140GL5-BL",
+      "BOX (3/5QTS)": "UC85140GL5-BJ",
+      "BULK (OIL)": "UC85140GL5-oil",
+      "JERRYCAN (20L)": "UC85140GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UC85140GL5-G2L"
+    }
+  },
+  "UL703": {
+    "name": "U1P-GEAR SAE 75W-90 Synthetic Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UFS7590GL5T",
+      "DRUM (55G)": "UFS7590GL5D",
+      "PAIL (5G)": "UFS7590GL5P",
+      "JUG": "UFS7590GL5J",
+      "GAL": "UFS7590GG5G",
+      "2X5 QTS JUG": "UFS7590GL5-2J",
+      "BOX (2G)": "UFS7590GL5-2G",
+      "BOX (4G)": "UFS7590GL5-BG",
+      "QUART": "UFS7590GL5L",
+      "BOX (3Q)": "UFS7590GL5-3L",
+      "BOX (6Q)": "UFS7590GL5-6L",
+      "5 Pack QT (Gal + QT)": "UFS7590GL5-GL",
+      "BOX (12Q)": "UFS7590GL5-BL",
+      "BOX (3/5QTS)": "UFS7590GL5-BJ",
+      "BULK (OIL)": "UFS7590GL5-oil",
+      "JERRYCAN (20L)": "UFS7590GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UFS7590GL5-G2L"
+    }
+  },
+  "TR505": {
+    "name": "GARNER Full Synthetic CVT Universal",
+    "presentations": {
+      "BOX (3/5QTS)": "TRFSCU-BJ"
+    }
+  },
+  "TR703": {
+    "name": "GARNER SAE 75W-90 Synthetic Gear Oil, API GL-5",
+    "presentations": {
+      "BOX (12Q)": "TRFS7590GL5-BL"
+    }
+  },
+  "TR705": {
+    "name": "GARNER SAE 75W-140 Synthetic Gear Oil, API GL-5",
+    "presentations": {
+      "BOX (12Q)": "TRFS75140GL5-BL"
+    }
+  },
+  "UL704": {
+    "name": "U1P-GEAR SAE 80W-140 Synthetic Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UFS80140GL5T",
+      "DRUM (55G)": "UFS80140GL5D",
+      "PAIL (5G)": "UFS80140GL5P",
+      "JUG": "UFS80140GL5J",
+      "2X5 QTS JUG": "UFS80140GL5-2J",
+      "GAL": "UFS80140GG5G",
+      "BOX (2G)": "UFS80140GL5-2G",
+      "BOX (4G)": "UFS80140GL5-BG",
+      "QUART": "UFS80140GL5L",
+      "BOX (3Q)": "UFS80140GL5-3L",
+      "BOX (6Q)": "UFS80140GL5-6L",
+      "5 Pack QT (Gal + QT)": "UFS80140GL5-GL",
+      "BOX (12Q)": "UFS80140GL5-BL",
+      "BOX (3/5QTS)": "UFS80140GL5-BJ",
+      "BULK (OIL)": "UFS80140GL5-oil",
+      "JERRYCAN (20L)": "UFS80140GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UFS80140GL5-G2L"
+    }
+  },
+  "UL705": {
+    "name": "U1P-GEAR SAE 75W-140 Synthetic Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UFS75140GL5T",
+      "DRUM (55G)": "UFS75140GL5D",
+      "PAIL (5G)": "UFS75140GL5P",
+      "JUG": "UFS75140GL5J",
+      "2X5 QTS JUG": "UFS75140GL5-2J",
+      "GAL": "UFS75140GG5G",
+      "BOX (2G)": "UFS75140GL5-2G",
+      "BOX (4G)": "UFS75140GL5-BG",
+      "QUART": "UFS75140GL5L",
+      "BOX (3Q)": "UFS75140GL5-3L",
+      "BOX (6Q)": "UFS75140GL5-6L",
+      "5 Pack QT (Gal + QT)": "UFS75140GL5-GL",
+      "BOX (12Q)": "UFS75140GL5-BL",
+      "BOX (3/5QTS)": "UFS75140GL5-BJ",
+      "BULK (OIL)": "UFS75140GL5-oil",
+      "JERRYCAN (20L)": "UFS75140GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UFS75140GL5-G2L"
+    }
+  },
+  "UL706": {
+    "name": "U1P-GEAR SAE 75W-90 Synthetic Gear Oil, API GL-4",
+    "presentations": {
+      "TOTE (265G)": "UFS7590GL4T",
+      "DRUM (55G)": "UFS7590GL4D",
+      "PAIL (5G)": "UFS7590GL4P",
+      "JUG": "UFS7590GL4J",
+      "2X5 QTS JUG": "UFS7590GL4-2J",
+      "GAL": "UFS7590GL4G",
+      "BOX (2G)": "UFS7590GL4-2G",
+      "BOX (4G)": "UFS7590GL4-BG",
+      "QUART": "UFS7590GL4L",
+      "BOX (3Q)": "UFS759GL4-3L",
+      "BOX (6Q)": "UFS7590GL4-6L",
+      "5 Pack QT (Gal + QT)": "UFS7590GL4-GL",
+      "BOX (12Q)": "UFS7590GL4-BL",
+      "BOX (3/5QTS)": "UFS7590GL4-BJ",
+      "BULK (OIL)": "UFS7590GL4-oil",
+      "JERRYCAN (20L)": "UFS7590GL4JC",
+      "6 Pack QT (Gal + 2QT)": "UFS7590GL4-G2L"
+    }
+  },
+  "UL707": {
+    "name": "U1P-GEAR ISO 220 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC220EPT",
+      "DRUM (55G)": "UC220EPD",
+      "PAIL (5G)": "UC220EPP",
+      "JUG": "UC220EPJ",
+      "2X5 QTS JUG": "UC220EP-2J",
+      "GAL": "UC220EPG",
+      "BOX (2G)": "UC220EP-2G",
+      "BOX (4G)": "UC220EP-BG",
+      "QUART": "UC220EPL",
+      "BOX (3Q)": "UC220EP-3L",
+      "BOX (6Q)": "UC220EP-6L",
+      "5 Pack QT (Gal + QT)": "UC220EP-GL",
+      "BOX (12Q)": "UC220EP-BL",
+      "BOX (3/5QTS)": "UC220EP-BJ",
+      "BULK (OIL)": "UC220EP-oil",
+      "JERRYCAN (20L)": "UC220EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC220EP-G2L"
+    }
+  },
+  "UL708": {
+    "name": "U1P-GEAR ISO 320 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC320EPT",
+      "DRUM (55G)": "UC320EPD",
+      "PAIL (5G)": "UC320EPP",
+      "JUG": "UC320EPJ",
+      "2X5 QTS JUG": "UC320EP-2J",
+      "GAL": "UC320EPG",
+      "BOX (2G)": "UC320EP-2G",
+      "BOX (4G)": "UC320EP-BG",
+      "QUART": "UC320EPL",
+      "BOX (3Q)": "UC320EP-3L",
+      "BOX (6Q)": "UC320EP-6L",
+      "5 Pack QT (Gal + QT)": "UC320EP-GL",
+      "BOX (12Q)": "UC320EP-BL",
+      "BOX (3/5QTS)": "UC320EP-BJ",
+      "BULK (OIL)": "UC320EP-oil",
+      "JERRYCAN (20L)": "UC320EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC320EP-G2L"
+    }
+  },
+  "UL709": {
+    "name": "U1P-GEAR ISO 460 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC460EPT",
+      "DRUM (55G)": "UC460EPD",
+      "PAIL (5G)": "UC460EPP",
+      "JUG": "UC460EPJ",
+      "2X5 QTS JUG": "UC460EP-2J",
+      "GAL": "UC460EPG",
+      "BOX (2G)": "UC460EP-2G",
+      "BOX (4G)": "UC460EP-BG",
+      "QUART": "UC460EPL",
+      "BOX (3Q)": "UC460EP-3L",
+      "BOX (6Q)": "UC460EP-6L",
+      "5 Pack QT (Gal + QT)": "UC460EP-GL",
+      "BOX (12Q)": "UC460EP-BL",
+      "BOX (3/5QTS)": "UC460EP-BJ",
+      "BULK (OIL)": "UC460EP-oil",
+      "JERRYCAN (20L)": "UC460EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC460EP-G2L"
+    }
+  },
+  "UL710": {
+    "name": "U1P-GEAR ISO 68 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC68EPT",
+      "DRUM (55G)": "UC68EPD",
+      "PAIL (5G)": "UC68EPP",
+      "JUG": "UC68EPJ",
+      "2X5 QTS JUG": "UC68EP-2J",
+      "GAL": "UC68EPG",
+      "BOX (2G)": "UC68EP-2G",
+      "BOX (4G)": "UC68EP-BG",
+      "QUART": "UC68EPL",
+      "BOX (3Q)": "UC68EP-3L",
+      "BOX (6Q)": "UC68EP-6L",
+      "5 Pack QT (Gal + QT)": "UC68EP-GL",
+      "BOX (12Q)": "UC68EP-BL",
+      "BOX (3/5QTS)": "UC68EP-BJ",
+      "BULK (OIL)": "UC68EP-oil",
+      "JERRYCAN (20L)": "UC68EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC68EP-G2L"
+    }
+  },
+  "UL711": {
+    "name": "U1P-GEAR ISO 100 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC100EPT",
+      "DRUM (55G)": "UC100EPD",
+      "PAIL (5G)": "UC100EPP",
+      "JUG": "UC100EPJ",
+      "2X5 QTS JUG": "UC100EP-2J",
+      "GAL": "UC100EPG",
+      "BOX (2G)": "UC100EP-2G",
+      "BOX (4G)": "UC100EP-BG",
+      "QUART": "UC100EPL",
+      "BOX (3Q)": "UC100EP-3L",
+      "BOX (6Q)": "UC100EP-6L",
+      "5 Pack QT (Gal + QT)": "UC100EP-GL",
+      "BOX (12Q)": "UC100EP-BL",
+      "BOX (3/5QTS)": "UC100EP-BJ",
+      "BULK (OIL)": "UC100EP-oil",
+      "JERRYCAN (20L)": "UC100EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC100EP-G2L"
+    }
+  },
+  "UL712": {
+    "name": "U1P-GEAR ISO 150 EP Gear Oil",
+    "presentations": {
+      "TOTE (265G)": "UC150EPT",
+      "DRUM (55G)": "UC150EPD",
+      "PAIL (5G)": "UC150EPP",
+      "JUG": "UC150EPJ",
+      "2X5 QTS JUG": "UC150EP-2J",
+      "GAL": "UC150EPG",
+      "BOX (2G)": "UC150EP-2G",
+      "BOX (4G)": "UC150EP-BG",
+      "QUART": "UC150EPL",
+      "BOX (3Q)": "UC150EP-3L",
+      "BOX (6Q)": "UC150EP-6L",
+      "5 Pack QT (Gal + QT)": "UC150EP-GL",
+      "BOX (12Q)": "UC150EP-BL",
+      "BOX (3/5QTS)": "UC150EP-BJ",
+      "BULK (OIL)": "UC150EP-oil",
+      "JERRYCAN (20L)": "UC150EPJC",
+      "6 Pack QT (Gal + 2QT)": "UC150EP-G2L"
+    }
+  },
+  "UL713": {
+    "name": "U1P-GEAR SAE 90 Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UC90GL5T",
+      "DRUM (55G)": "UC90GL5D",
+      "PAIL (5G)": "UC90GL5P",
+      "JUG": "UC90GL5J",
+      "2X5 QTS JUG": "UC90-2JL5-2J",
+      "GAL": "UC90GG5G",
+      "BOX (2G)": "UC90GL5-2G",
+      "BOX (4G)": "UC90GL5-BG",
+      "QUART": "UC90GL5L",
+      "BOX (3Q)": "UC90GL5-3L",
+      "BOX (6Q)": "UC90GL5-6L",
+      "5 Pack QT (Gal + QT)": "UC90GL5-GL",
+      "BOX (12Q)": "UC90GL5-BL",
+      "BOX (3/5QTS)": "UC90GL5-BJ",
+      "BULK (OIL)": "UC90GL5-oil",
+      "JERRYCAN (20L)": "UC90GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UC90GL5-G2L"
+    }
+  },
+  "UL714": {
+    "name": "U1P-GEAR SAE 140 Gear Oil, API GL-5",
+    "presentations": {
+      "TOTE (265G)": "UC140GL5T",
+      "DRUM (55G)": "UC140GL5D",
+      "PAIL (5G)": "UC140GL5P",
+      "JUG": "UC140GL5J",
+      "2X5 QTS JUG": "UC140-2JL5-2J",
+      "GAL": "UC140GG5G",
+      "BOX (2G)": "UC140GL5-2G",
+      "BOX (4G)": "UC140GL5-BG",
+      "QUART": "UC140GL5L",
+      "BOX (3Q)": "UC140GL5-3L",
+      "BOX (6Q)": "UC140GL5-6L",
+      "5 Pack QT (Gal + QT)": "UC140GL5-GL",
+      "BOX (12Q)": "UC140GL5-BL",
+      "BOX (3/5QTS)": "UC140GL5-BJ",
+      "BULK (OIL)": "UC140GL5-oil",
+      "JERRYCAN (20L)": "UC140GL5JC",
+      "6 Pack QT (Gal + 2QT)": "UC140GL5-G2L"
+    }
+  },
+  "UL715": {
+    "name": "U1P-GEAR ISO VG 150 HVI Full Synthetic Circulating Oil",
+    "presentations": {
+      "TOTE (265G)": "UFSVG150T",
+      "DRUM (55G)": "UFSVG150D",
+      "PAIL (5G)": "UFSVG150P",
+      "JUG": "UFSVG15OJ",
+      "2X5 QTS JUG": "UFSV-2J150-2J",
+      "GAL": "UFSVG150G",
+      "BOX (2G)": "UFSVG150-2G",
+      "BOX (4G)": "UFSVG150-BG",
+      "QUART": "UFSVG150L",
+      "BOX (3Q)": "UFSVG150-3L",
+      "BOX (6Q)": "UFSVG150-6L",
+      "5 Pack QT (Gal + QT)": "UFSVG150-GL",
+      "BOX (12Q)": "UFSVG150-BL",
+      "BOX (3/5QTS)": "UFSVG150-BJ",
+      "BULK (OIL)": "UCISOVG150HVI-oil",
+      "JERRYCAN (20L)": "UFSVG150JC",
+      "6 Pack QT (Gal + 2QT)": "UFSVG150-G2L"
+    }
+  },
+  "UL716": {
+    "name": "U1P-GEAR ISO VG 220 HVI Full Synthetic Circulating Oil",
+    "presentations": {
+      "TOTE (265G)": "UFSVG220T",
+      "DRUM (55G)": "UFSVG220D",
+      "PAIL (5G)": "UFSVG220P",
+      "JUG": "UFSVG22OJ",
+      "2X5 QTS JUG": "UFSV-2J220-2J",
+      "GAL": "UFSVG220G",
+      "BOX (2G)": "UFSVG220-2G",
+      "BOX (4G)": "UFSVG220-BG",
+      "QUART": "UFSVG220L",
+      "BOX (3Q)": "UFSVG220-3L",
+      "BOX (6Q)": "UFSVG220-6L",
+      "5 Pack QT (Gal + QT)": "UFSVG220-GL",
+      "BOX (12Q)": "UFSVG220-BL",
+      "BOX (3/5QTS)": "UFSVG220-BJ",
+      "BULK (OIL)": "UCISOVG220HVI-oil",
+      "JERRYCAN (20L)": "UFSVG220JC",
+      "6 Pack QT (Gal + 2QT)": "UFSVG220-G2L"
+    }
+  },
+  "UL717": {
+    "name": "U1P-GEAR ISO 150 Compressor Oil GIII",
+    "presentations": {
+      "TOTE (265G)": "UFSISO150GIIIT",
+      "DRUM (55G)": "UFSISO150GIIID",
+      "PAIL (5G)": "UFSISO150GIIIP",
+      "BULK (OIL)": "UFSISO150GIII-oil",
+      "JERRYCAN (20L)": "UFSISO150GIIIJC"
+    }
+  },
+  "UL718": {
+    "name": "U1P-GEAR ISO 680 EP Gear Oil",
+    "presentations": {
+      "BULK (OIL)": "UC680-oil",
+      "DRUM (55G)": "UC680D"
+    }
+  },
+  "UL719": {
+    "name": "U1P-GEAR ISO 150 Circulating Oil",
+    "presentations": {
+      "TOTE (265G)": "UC150COT",
+      "DRUM (55G)": "UC150COD",
+      "PAIL (5G)": "UC150COP",
+      "BULK (OIL)": "UC150CO-oil"
+    }
+  },
+  "UL801": {
+    "name": "U1P-DUTY ISO 32 AW Hydraulic Oil",
+    "presentations": {
+      "DRUM (55G)": "UC32AWD",
+      "PAIL (5G)": "UC32AWP",
+      "JUG": "UC32AWJ",
+      "2X5 QTS JUG": "UC32AW-2J",
+      "GAL": "UC32AWG",
+      "BOX (2G)": "UC32AW-2G",
+      "BOX (4G)": "UC32AW-BG",
+      "QUART": "UC32AWL",
+      "BOX (3Q)": "UC32AW-3L",
+      "BOX (6Q)": "UC32AW-6L",
+      "5 Pack QT (Gal + QT)": "UC32AW-GL",
+      "BOX (12Q)": "UC32AW-BL",
+      "BOX (3/5QTS)": "UC32AW-BJ",
+      "BULK (OIL)": "UC32AW-oil",
+      "JERRYCAN (20L)": "UC32AWJC",
+      "6 Pack QT (Gal + 2QT)": "UC32AW-G2L"
+    }
+  },
+  "UL802": {
+    "name": "U1P-DUTY ISO 46 AW Hydraulic Oil",
+    "presentations": {
+      "TOTE (265G)": "UC46AWT",
+      "DRUM (55G)": "UC46AWD",
+      "PAIL (5G)": "UC46AWP",
+      "JUG": "UC46AWJ",
+      "2X5 QTS JUG": "UC46AW-2J",
+      "GAL": "UC46AWG",
+      "BOX (2G)": "UC46AW-2G",
+      "BOX (4G)": "UC46AW-BG",
+      "QUART": "UC46AWL",
+      "BOX (3Q)": "UC46AW-3L",
+      "BOX (6Q)": "UC46AW-6L",
+      "5 Pack QT (Gal + QT)": "UC46AW-GL",
+      "BOX (12Q)": "UC46AW-BL",
+      "BOX (3/5QTS)": "UC46AW-BJ",
+      "BULK (OIL)": "UC46AW-oil",
+      "JERRYCAN (20L)": "UC46AWJC",
+      "6 Pack QT (Gal + 2QT)": "UC46AW-G2L"
+    }
+  },
+  "UL803": {
+    "name": "U1P-DUTY ISO 68 AW Hydraulic Oil",
+    "presentations": {
+      "TOTE (265G)": "UC68AWT",
+      "DRUM (55G)": "UC68AWD",
+      "PAIL (5G)": "UC68AWP",
+      "JUG": "UC68AWJ",
+      "2X5 QTS JUG": "UC68AW-2J",
+      "GAL": "UC68AWG",
+      "BOX (2G)": "UC68AW-2G",
+      "BOX (4G)": "UC68AW-BG",
+      "QUART": "UC68AWL",
+      "BOX (3Q)": "UC68AW-3L",
+      "BOX (6Q)": "UC68AW-6L",
+      "5 Pack QT (Gal + QT)": "UC68AW-GL",
+      "BOX (12Q)": "UC68AW-BL",
+      "BOX (3/5QTS)": "UC68AW-BJ",
+      "BULK (OIL)": "UC68AW-oil",
+      "JERRYCAN (20L)": "UC68AWJC",
+      "6 Pack QT (Gal + 2QT)": "UC68AW-G2L"
+    }
+  },
+  "UL804": {
+    "name": "U1P-DUTY SAE 10W Hydraulic Oil, TO-2",
+    "presentations": {
+      "TOTE (265G)": "UC10TO2T",
+      "DRUM (55G)": "UC10TO2D",
+      "PAIL (5G)": "UC10TO2P",
+      "JUG": "UC10TO2J",
+      "2X5 QTS JUG": "UC10TO2-2J",
+      "GAL": "UC10TO2G",
+      "BOX (2G)": "UC10TO2-2G",
+      "BOX (4G)": "UC10TO2-BG",
+      "QUART": "UC10TO2L",
+      "BOX (3Q)": "UC10TO2-3L",
+      "BOX (6Q)": "UC10TO2-6L",
+      "5 Pack QT (Gal + QT)": "UC10TO2-GL",
+      "BOX (12Q)": "UC10TO2-BL",
+      "BOX (3/5QTS)": "UC10TO2-BJ",
+      "BULK (OIL)": "UC10TO2-oil",
+      "JERRYCAN (20L)": "UC10TO2JC",
+      "6 Pack QT (Gal + 2QT)": "UC10TO2-G2L"
+    }
+  },
+  "UL805": {
+    "name": "U1P-DUTY SAE 30 Hydraulic Oil, TO-2",
+    "presentations": {
+      "TOTE (265G)": "UC30TO2T",
+      "DRUM (55G)": "UC30TO2D",
+      "PAIL (5G)": "UC30TO2P",
+      "JUG": "UC30TO2J",
+      "2X5 QTS JUG": "UC30TO2-2J",
+      "GAL": "UC30TO2G",
+      "BOX (2G)": "UC30TO2-2G",
+      "BOX (4G)": "UC30TO2-BG",
+      "QUART": "UC30TO2L",
+      "BOX (3Q)": "UC30TO2-3L",
+      "BOX (6Q)": "UC30TO2-6L",
+      "5 Pack QT (Gal + QT)": "UC30TO2-GL",
+      "BOX (12Q)": "UC30TO2-BL",
+      "BOX (3/5QTS)": "UC30TO2-BJ",
+      "BULK (OIL)": "UC30TO2-oil",
+      "JERRYCAN (20L)": "UC30TO2JC",
+      "6 Pack QT (Gal + 2QT)": "UC30TO2-G2L"
+    }
+  },
+  "UL806": {
+    "name": "U1P-DUTY Heat Transfer Fluid HTF-42",
+    "presentations": {
+      "TOTE (265G)": "UCHTF42T",
+      "DRUM (55G)": "UCHTF42D",
+      "PAIL (5G)": "UCHTF42P",
+      "JUG": "UCHTF42J",
+      "2X5 QTS JUG": "UCHTF42-2J",
+      "GAL": "UCHTF42G",
+      "BOX (2G)": "UCHTF42-2G",
+      "BOX (4G)": "UCHTF42-BG",
+      "QUART": "UCHTF42L",
+      "BOX (3Q)": "UCHTF42G2L-3L",
+      "BOX (6Q)": "UCHTF42-6L",
+      "5 Pack QT (Gal + QT)": "UCHTF42-GL",
+      "BOX (12Q)": "UCHTF42-BL",
+      "BOX (3/5QTS)": "UCHTF42-BJ",
+      "BULK (OIL)": "UCHTF42-oil",
+      "JERRYCAN (20L)": "UCHTF42JC",
+      "6 Pack QT (Gal + 2QT)": "UCHTF42-G2L"
+    }
+  },
+  "UL807": {
+    "name": "U1P-DUTY ISO 100 AW Hydraulic Oil",
+    "presentations": {
+      "TOTE (265G)": "UC100AWT",
+      "DRUM (55G)": "UC100AWD",
+      "PAIL (5G)": "UC100AWP",
+      "JUG": "UC100AWJ",
+      "2X5 QTS JUG": "UC100AW-2J",
+      "GAL": "UC100AWG",
+      "BOX (2G)": "UC100AW-2G",
+      "BOX (4G)": "UC100AW-BG",
+      "QUART": "UC100AWL",
+      "BOX (3Q)": "UC100AW-3L",
+      "BOX (6Q)": "UC100AW-6L",
+      "5 Pack QT (Gal + QT)": "UC100AW-GL",
+      "BOX (12Q)": "UC100AW-BL",
+      "BOX (3/5QTS)": "UC100AW-BJ",
+      "BULK (OIL)": "UC100AW-oil",
+      "JERRYCAN (20L)": "UC100AWJC",
+      "6 Pack QT (Gal + 2QT)": "UC100AW-G2L"
+    }
+  },
+  "UL808": {
+    "name": "",
+    "presentations": {
+      "BULK (OIL)": "UC68GT25-oil"
+    }
+  },
+  "UL809": {
+    "name": "",
+    "presentations": {
+      "BULK (OIL)": "UC68GTC5-oil"
+    }
+  },
+  "UL810": {
+    "name": "ULTRA-DUTY X20S Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "UCX20SP"
+    }
+  },
+  "UL900": {
+    "name": "UltraCool PREMIXED 50/50 EURO-ASIAN BLUE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050B-cool",
+      "BOX (6G)": "UAC5050B-BG",
+      "GAL": "UAC5050BG",
+      "PAIL (5G)": "UAC5050BP",
+      "TOTE (250G)": "UAC5050BT",
+      "DRUM (55G)": "UAC5050BD",
+      "JERRYCAN (20L)": "UAC5050BJC",
+      "BOX (12Q)": "UAC5050B-BL"
+    }
+  },
+  "UL901": {
+    "name": "UltraCool Universal PREMIXED 50/50 GOLD (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050Y-cool",
+      "DRUM (55G)": "UAC5050YD",
+      "BOX (6G)": "UAC5050Y-BG",
+      "GAL": "UAC5050YG",
+      "PAIL (5G)": "UAC5050YP",
+      "JERRYCAN (20L)": "UAC5050YJC",
+      "TOTE (250G)": "UAC5050YT",
+      "BOX (12Q)": "UAC5050Y-BL"
+    }
+  },
+  "UL902": {
+    "name": "UltraCool PREMIXED 50/50 VIOLET-PINK (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050V-cool",
+      "DRUM (55G)": "UAC5050VD",
+      "BOX (6G)": "UAC5050V-BG",
+      "GAL": "UAC5050VG",
+      "PAIL (5G)": "UAC5050VP",
+      "JERRYCAN (20L)": "UAC5050VJC",
+      "TOTE (250G)": "UAC5050VT",
+      "BOX (12Q)": "UAC5050V-BL"
+    }
+  },
+  "UL903": {
+    "name": "UltraCool Universal PREMIXED 50/50 GREEN (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050G-cool",
+      "DRUM (55G)": "UAC5050GD",
+      "BOX (6G)": "UAC5050G-BG",
+      "GAL": "UAC5050GG",
+      "PAIL (5G)": "UAC5050GP",
+      "JERRYCAN (20L)": "UAC5050GJC",
+      "TOTE (250G)": "UAC5050GT",
+      "BOX (12Q)": "UAC5050G-BL"
+    }
+  },
+  "UL904": {
+    "name": "UltraCool Universal PREMIXED 50/50 RED (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050R-cool",
+      "DRUM (55G)": "UAC5050RD",
+      "BOX (6G)": "UAC5050R-BG",
+      "GAL": "UAC5050RG",
+      "PAIL (5G)": "UAC5050RP",
+      "JERRYCAN (20L)": "UAC5050RJC",
+      "TOTE (250G)": "UAC5050RT",
+      "BOX (12Q)": "UAC5050R-BL"
+    }
+  },
+  "UL905": {
+    "name": "UltraCool Universal PREMIXED 50/50 ORANGE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050O-cool",
+      "DRUM (55G)": "UAC5050OD",
+      "BOX (6G)": "UAC5050O-BG",
+      "GAL": "UAC5050OG",
+      "PAIL (5G)": "UAC5050OP",
+      "JERRYCAN (20L)": "UAC5050OJC",
+      "TOTE (250G)": "UAC5050OT",
+      "BOX (12Q)": "UAC5050O-BL"
+    }
+  },
+  "UL906": {
+    "name": "UltraCool Universal PREMIXED 50/50 PURPLE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC5050P-cool",
+      "DRUM (55G)": "UAC5050PD",
+      "BOX (6G)": "UAC5050P-BG",
+      "GAL": "UAC5050PG",
+      "PAIL (5G)": "UAC5050PP",
+      "JERRYCAN (20L)": "UAC5050PJC",
+      "TOTE (250G)": "UAC5050PT",
+      "BOX (12Q)": "UAC5050P-BL"
+    }
+  },
+  "UL910": {
+    "name": "UltraCool CONCENTRATE EURO-ASIAN BLUE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONB-cool",
+      "DRUM (55G)": "UACCONBD",
+      "BOX (6G)": "UACCONB-BG",
+      "GAL": "UACCONBG",
+      "PAIL (5G)": "UACCONBP",
+      "JERRYCAN (20L)": "UACCONBJC",
+      "TOTE (250G)": "UACCONBT",
+      "BOX (12Q)": "UACCONB-BL"
+    }
+  },
+  "UL911": {
+    "name": "UltraCool Universal CONCENTRATE GOLD (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONY-cool",
+      "DRUM (55G)": "UACCONYD",
+      "BOX (6G)": "UACCONY-BG",
+      "GAL": "UACCONYG",
+      "PAIL (5G)": "UACCONYP",
+      "JERRYCAN (20L)": "UACCONYJC",
+      "TOTE (250G)": "UACCONYT",
+      "BOX (12Q)": "UACCONY-BL"
+    }
+  },
+  "UL912": {
+    "name": "UltraCool CONCENTRATE - VIOLET-PINK (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONV-cool",
+      "DRUM (55G)": "UACCONVD",
+      "BOX (6G)": "UACCONV-BG",
+      "GAL": "UACCONVG",
+      "PAIL (5G)": "UACCONVP",
+      "TOTE (250G)": "UACCONVT",
+      "JERRYCAN (20L)": "UACCONVJC",
+      "BOX (12Q)": "UACCONV-BL"
+    }
+  },
+  "UL913": {
+    "name": "UltraCool Universal CONCENTRATE GREEN (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONG-cool",
+      "DRUM (55G)": "UACCONGD",
+      "BOX (6G)": "UACCONG-BG",
+      "GAL": "UACCONGG",
+      "PAIL (5G)": "UACCONGP",
+      "TOTE (250G)": "UACCONGT",
+      "JERRYCAN (20L)": "UACCONGJC",
+      "BOX (12Q)": "UACCONG-BL"
+    }
+  },
+  "UL914": {
+    "name": "UltraCool Universal CONCENTRATE RED (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONR-cool",
+      "DRUM (55G)": "UACCONRD",
+      "BOX (6G)": "UACCONR-BG",
+      "GAL": "UACCONRG",
+      "PAIL (5G)": "UACCONRP",
+      "TOTE (250G)": "UACCONRT",
+      "JERRYCAN (20L)": "UACCONRJC",
+      "BOX (12Q)": "UACCONR-BL"
+    }
+  },
+  "UL915": {
+    "name": "UltraCool Universal CONCENTRATE ORANGE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONO-cool",
+      "DRUM (55G)": "UACCONOD",
+      "BOX (6G)": "UACCONO-BG",
+      "GAL": "UACCONOG",
+      "PAIL (5G)": "UACCONOP",
+      "TOTE (250G)": "UACCONOT",
+      "JERRYCAN (20L)": "UACCONOJC",
+      "BOX (12Q)": "UACCONO-BL"
+    }
+  },
+  "UL916": {
+    "name": "UltraCool Universal CONCENTRATE PURPLE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UACCONP-cool",
+      "DRUM (55G)": "UACCONPD",
+      "BOX (6G)": "UACCONP-BG",
+      "GAL": "UACCONPG",
+      "PAIL (5G)": "UACCONPP",
+      "TOTE (250G)": "UACCONPT",
+      "JERRYCAN (20L)": "UACCONPJC",
+      "BOX (12Q)": "UACCONP-BL"
+    }
+  },
+  "UL920": {
+    "name": "UltraCool PREMIXED 30% EURO-ASIA BLUE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30B-cool",
+      "DRUM (55G)": "UAC30BD",
+      "BOX (6G)": "UAC30B-BG",
+      "GAL": "UAC30BG",
+      "PAIL (5G)": "UAC30BP",
+      "TOTE (250G)": "UAC30BT",
+      "JERRYCAN (20L)": "UAC30BJC",
+      "BOX (12Q)": "UAC30B-BL"
+    }
+  },
+  "UL921": {
+    "name": "UltraCool PREMIXED 30% GOLD (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30Y-cool",
+      "DRUM (55G)": "UAC30YD",
+      "BOX (6G)": "UAC30Y-BG",
+      "GAL": "UAC30YG",
+      "PAIL (5G)": "UAC30YP",
+      "TOTE (250G)": "UAC30YT",
+      "JERRYCAN (20L)": "UAC30YJC",
+      "BOX (12Q)": "UAC30Y-BL"
+    }
+  },
+  "UL922": {
+    "name": "UltraCool PREMIXED 30% VIOLET-PINK (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30V-cool",
+      "DRUM (55G)": "UAC30VD",
+      "BOX (6G)": "UAC30V-BG",
+      "GAL": "UAC30VG",
+      "PAIL (5G)": "UAC30VP",
+      "TOTE (250G)": "UAC30VT",
+      "JERRYCAN (20L)": "UAC30VJC",
+      "BOX (12Q)": "UAC30V-BL"
+    }
+  },
+  "UL923": {
+    "name": "UltraCool Universal PREMIXED 30% GREEN (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30G-cool",
+      "DRUM (55G)": "UAC30GD",
+      "BOX (6G)": "UAC30G-BG",
+      "GAL": "UAC30GG",
+      "PAIL (5G)": "UAC30GP",
+      "TOTE (250G)": "UAC30GT",
+      "JERRYCAN (20L)": "UAC30GJC",
+      "BOX (12Q)": "UAC30G-BL"
+    }
+  },
+  "UL924": {
+    "name": "UltraCool PREMIXED 30% RED (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30R-cool",
+      "DRUM (55G)": "UAC30RD",
+      "BOX (6G)": "UAC30R-BG",
+      "GAL": "UAC30RG",
+      "PAIL (5G)": "UAC30R",
+      "TOTE (250G)": "UAC30RG",
+      "JERRYCAN (20L)": "UAC30RJC",
+      "BOX (12Q)": "UAC30R-BL"
+    }
+  },
+  "UL925": {
+    "name": "UltraCool Universal PREMIXED 30% ORANGE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30O-cool",
+      "DRUM (55G)": "UAC30OD",
+      "BOX (6G)": "UAC30O-BG",
+      "GAL": "UAC30OG",
+      "PAIL (5G)": "UAC30OP",
+      "TOTE (250G)": "UAC30OT",
+      "JERRYCAN (20L)": "UAC30OJC",
+      "BOX (12Q)": "UAC30O-BL"
+    }
+  },
+  "UL926": {
+    "name": "UltraCool Universal PREMIXED 30% PURPLE (FCA-6)",
+    "presentations": {
+      "BULK (COOL)": "UAC30P-cool",
+      "DRUM (55G)": "UAC30PD",
+      "BOX (6G)": "UAC30P-BG",
+      "GAL": "UAC30PG",
+      "PAIL (5G)": "UAC30PP",
+      "TOTE (250G)": "UAC30PT",
+      "JERRYCAN (20L)": "UAC30PJC",
+      "BOX (12Q)": "UAC30P-BL"
+    }
+  },
+  "UL930": {
+    "name": "UltraCool Extended Life OAT 50/50 BLUE EURORENNSPORT (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050B-cool",
+      "DRUM (55G)": "UACEL5050BD",
+      "BOX (6G)": "UACEL5050B-BG",
+      "GAL": "UACEL5050BG",
+      "PAIL (5G)": "UACEL5050BP",
+      "TOTE (250G)": "UACEL5050BT",
+      "BOX (12Q)": "UACEL5050B-BL"
+    }
+  },
+  "UL931": {
+    "name": "UltraCool Extended Life OAT PREMIXED 50/50 GOLD (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050Y-cool",
+      "DRUM (55G)": "UACEL5050YD",
+      "BOX (6G)": "UACEL5050Y-BG",
+      "GAL": "UACEL5050YG",
+      "PAIL (5G)": "UACEL5050YP",
+      "TOTE (250G)": "UACEL5050YT",
+      "BOX (12Q)": "UACEL5050Y-BL"
+    }
+  },
+  "UL932": {
+    "name": "UltraCool Extended Life OAT 50/50 VIOLET-PINK EURORENNSPORT (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050V-cool",
+      "DRUM (55G)": "UACEL5050VD",
+      "BOX (6G)": "UACEL5050V-BG",
+      "GAL": "UACEL5050VG",
+      "PAIL (5G)": "UACEL5050VP",
+      "TOTE (250G)": "UACEL5050VT",
+      "BOX (12Q)": "UACEL5050V-BL"
+    }
+  },
+  "UL933": {
+    "name": "UltraCool Extended Life OAT PREMIXED 50/50 GREEN (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050G-cool",
+      "DRUM (55G)": "UACEL5050GD",
+      "BOX (6G)": "UACEL5050G-BG",
+      "GAL": "UACEL5050GG",
+      "PAIL (5G)": "UACEL5050GP",
+      "TOTE (250G)": "UACEL5050GT",
+      "BOX (12Q)": "UACEL5050G-BL"
+    }
+  },
+  "UL934": {
+    "name": "UltraCool Extended Life OAT PREMIXED 50/50 RED (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050R-cool",
+      "DRUM (55G)": "UACEL5050RD",
+      "BOX (6G)": "UACEL5050R-BG",
+      "GAL": "UACEL5050RG",
+      "PAIL (5G)": "UACEL5050RP",
+      "TOTE (250G)": "UACEL5050RT",
+      "BOX (12Q)": "UACEL5050R-BL"
+    }
+  },
+  "UL935": {
+    "name": "UltraCool Extended Life OAT PREMIXED 50/50 ORANGE (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050O-cool",
+      "DRUM (55G)": "UACEL5050OD",
+      "BOX (6G)": "UACEL5050O-BG",
+      "GAL": "UACEL5050OG",
+      "PAIL (5G)": "UACEL5050OP",
+      "TOTE (250G)": "UACEL5050OT",
+      "BOX (12Q)": "UACEL5050O-BL"
+    }
+  },
+  "UL936": {
+    "name": "UltraCool Extended Life OAT PREMIXED 50/50 PURPLE (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050P-cool",
+      "DRUM (55G)": "UACEL5050PD",
+      "BOX (6G)": "UACEL5050P-BG",
+      "GAL": "UACEL5050PG",
+      "PAIL (5G)": "UACEL5050PP",
+      "TOTE (250G)": "UACEL5050PT",
+      "BOX (12Q)": "UACEL5050P-BL"
+    }
+  },
+  "UL940": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE BLUE EURORENNSPORT (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONB-cool",
+      "DRUM (55G)": "UACELCONBD",
+      "BOX (6G)": "UACELCONB-BG",
+      "GAL": "UACELCONBG",
+      "PAIL (5G)": "UACELCONBP",
+      "TOTE (250G)": "UACELCONBT",
+      "BOX (12Q)": "UACELCONB-BL"
+    }
+  },
+  "UL941": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE GOLD (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONY-cool",
+      "DRUM (55G)": "UACELCONYD",
+      "BOX (6G)": "UACELCONY-BG",
+      "GAL": "UACELCONYG",
+      "PAIL (5G)": "UACELCONYP",
+      "TOTE (250G)": "UACELCONYT",
+      "BOX (12Q)": "UACELCONY-BL"
+    }
+  },
+  "UL942": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE VIOLET-PINK EURORENNSPORT (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONV-cool",
+      "DRUM (55G)": "UACELCONVD",
+      "BOX (6G)": "UACELCONV-BG",
+      "GAL": "UACELCONVG",
+      "PAIL (5G)": "UACELCONVP",
+      "TOTE (250G)": "UACELCONVT",
+      "BOX (12Q)": "UACELCONV-BL"
+    }
+  },
+  "UL943": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE GREEN (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONG-cool",
+      "DRUM (55G)": "UACELCONGD",
+      "BOX (6G)": "UACELCONG-BG",
+      "GAL": "UACELCONGG",
+      "PAIL (5G)": "UACELCONGP",
+      "TOTE (250G)": "UACELCONGT",
+      "BOX (12Q)": "UACELCONG-BL"
+    }
+  },
+  "UL944": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE RED (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONR-cool",
+      "DRUM (55G)": "UACELCONRD",
+      "BOX (6G)": "UACELCONR-BG",
+      "GAL": "UACELCONRG",
+      "PAIL (5G)": "UACELCONRP",
+      "TOTE (250G)": "UACELCONRT",
+      "BOX (12Q)": "UACELCONR-BL"
+    }
+  },
+  "UL945": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE ORANGE (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONO-cool",
+      "DRUM (55G)": "UACELCONOD",
+      "BOX (6G)": "UACELCONO-BG",
+      "GAL": "UACELCONOG",
+      "PAIL (5G)": "UACELCONOP",
+      "TOTE (250G)": "UACELCONOT",
+      "BOX (12Q)": "UACELCONO-BL"
+    }
+  },
+  "UL946": {
+    "name": "UltraCool Extended Life OAT CONCENTRATE PURPLE (D17-A)",
+    "presentations": {
+      "BULK (COOL)": "UACELCONP-cool",
+      "DRUM (55G)": "UACELCONPD",
+      "BOX (6G)": "UACELCONP-BG",
+      "GAL": "UACELCONPG",
+      "PAIL (5G)": "UACELCONPP",
+      "TOTE (250G)": "UACELCONPT",
+      "BOX (12Q)": "UACELCONP-BL"
+    }
+  },
+  "UL950": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% EURO-ASIA BLUE",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050B-cool",
+      "DRUM (55G)": "UACEL5050BD",
+      "BOX (6G)": "UACEL5050B-BG",
+      "GAL": "UACEL5050BG",
+      "PAIL (5G)": "UACEL5050BP",
+      "TOTE (250G)": "UACEL5050BT",
+      "BOX (12Q)": "UACEL5050B-BL"
+    }
+  },
+  "UL951": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% GOLD",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050Y-cool",
+      "DRUM (55G)": "UACEL5050YD",
+      "BOX (6G)": "UACEL5050Y-BG",
+      "GAL": "UACEL5050YG",
+      "PAIL (5G)": "UACEL5050YP",
+      "TOTE (250G)": "UACEL5050YT",
+      "BOX (12Q)": "UACEL5050Y-BL"
+    }
+  },
+  "UL952": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant 30% VIOLET-PINK EURORENNSPORT",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050V-cool",
+      "DRUM (55G)": "UACEL5050VD",
+      "BOX (6G)": "UACEL5050V-BG",
+      "GAL": "UACEL5050VG",
+      "PAIL (5G)": "UACEL5050VP",
+      "TOTE (250G)": "UACEL5050VDT",
+      "BOX (12Q)": "UACEL5050V-BL"
+    }
+  },
+  "UL953": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% GREEN",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050G-cool",
+      "DRUM (55G)": "UACEL5050GD",
+      "BOX (6G)": "UACEL5050G-BG",
+      "GAL": "UACEL5050GG",
+      "PAIL (5G)": "UACEL5050GP",
+      "TOTE (250G)": "UACEL5050GT",
+      "BOX (12Q)": "UACEL5050G-BL"
+    }
+  },
+  "UL954": {
+    "name": "UltraCool Extended Life OAT HEAVY DUTY Antifreeze + Coolant PREMIXED 30% RED",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050R-cool",
+      "DRUM (55G)": "UACEL5050RD",
+      "BOX (6G)": "UACEL5050R-BG",
+      "GAL": "UACEL5050RG",
+      "PAIL (5G)": "UACEL5050RP",
+      "TOTE (250G)": "UACEL5050RT",
+      "BOX (12Q)": "UACEL5050R-BL"
+    }
+  },
+  "UL955": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% ORANGE",
+    "presentations": {
+      "BULK (COOL)": "UACEL5050O-cool",
+      "DRUM (55G)": "UACEL5050OD",
+      "BOX (6G)": "UACEL5050O-BG",
+      "GAL": "UACEL5050OG",
+      "PAIL (5G)": "UACEL5050OP",
+      "TOTE (250G)": "UACEL5050OT",
+      "BOX (12Q)": "UACEL5050O-BL"
+    }
+  },
+  "UL961": {
+    "name": "UltraCool Extended Life NOAT PREMIXED 50/50 GOLD (OCA-2M)",
+    "presentations": {
+      "BULK (COOL)": "UACNOAT5050Y-cool",
+      "DRUM (55G)": "UACNOAT5050YD",
+      "BOX (6G)": "UACNOAT5050Y-BG",
+      "GAL": "UACNOAT5050YG",
+      "PAIL (5G)": "UACNOAT5050YP",
+      "TOTE (250G)": "UACNOAT5050YT",
+      "BOX (12Q)": "UACNOAT5050Y-BL"
+    }
+  },
+  "UL964": {
+    "name": "UltraCool Extended Life NOAT PREMIXED 50/50 RED (OCA-2M)",
+    "presentations": {
+      "BULK (COOL)": "UACNOAT5050R-cool",
+      "DRUM (55G)": "UACNOAT5050RD",
+      "BOX (6G)": "UACNOAT5050R-BG",
+      "GAL": "UACNOAT5050RG",
+      "PAIL (5G)": "UACNOAT5050RP",
+      "TOTE (250G)": "UACNOAT5050RT",
+      "BOX (12Q)": "UACNOAT5050R-BL"
+    }
+  },
+  "UL971": {
+    "name": "UltraCool Extended Life NOAT CONCENTRATE GOLD (OCA-2M)",
+    "presentations": {
+      "BULK (COOL)": "UACNOATCONY-cool",
+      "DRUM (55G)": "UACNOATCONYD",
+      "BOX (6G)": "UACNOATCONY-BG",
+      "GAL": "UACNOATCONYG",
+      "PAIL (5G)": "UACNOATCONYP",
+      "TOTE (250G)": "UACNOATCONYT",
+      "BOX (12Q)": "UACNOATCONY-BL"
+    }
+  },
+  "UL974": {
+    "name": "UltraCool Extended Life NOAT CONCENTRATE RED (OCA-2M)",
+    "presentations": {
+      "BULK (COOL)": "UACNOATCONR-cool",
+      "DRUM (55G)": "UACNOATCONRD",
+      "BOX (6G)": "UACNOATCONR-BG",
+      "GAL": "UACNOATCONRG",
+      "PAIL (5G)": "UACNOATCONRP",
+      "TOTE (250G)": "UACNOATCONRT",
+      "BOX (12Q)": "UACNOATCONR-BL"
+    }
+  },
+  "UL980": {
+    "name": "U1P-Vision Summer Windshield Washer",
+    "presentations": {
+      "QUART": "UVWWFSL",
+      "BOX (12Q)": "UVWWFS-BL",
+      "BULK (COOL)": "UVWWFS-cool",
+      "DRUM (55G)": "UVWWFSD",
+      "BOX (6G)": "UVWWFS-BG",
+      "GAL": "UVWWFSG",
+      "PAIL (5G)": "UVWWFSP",
+      "TOTE (250G)": "UVWWFST"
+    }
+  },
+  "UL981": {
+    "name": "U1P-Vision All-Seasons Windshield Washer",
+    "presentations": {
+      "BULK (COOL)": "UVWWFA-cool",
+      "DRUM (55G)": "UVWWFAD",
+      "BOX (6G)": "UVWWFA-BG",
+      "GAL": "UVWWFAG",
+      "PAIL (5G)": "UVWWFAP",
+      "TOTE (250G)": "UVWWFAT"
+    }
+  },
+  "UL982": {
+    "name": "U1P-Vision De-Icer Windshield Washer -32F",
+    "presentations": {
+      "QUART": "UVWWFDIL",
+      "BOX (12Q)": "UVWWFDI-BL",
+      "BULK (COOL)": "UVWWFDI-cool",
+      "DRUM (55G)": "UVWWFDID",
+      "BOX (6G)": "UVWWFDI-BG",
+      "GAL": "UVWWFDIG",
+      "PAIL (5G)": "UVWWFDIP",
+      "TOTE (250G)": "UVWWFDIT"
+    }
+  },
+  "UL990": {
+    "name": "U1P-CARE DEF",
+    "presentations": {
+      "BULK (COOL)": "U1PDEF-Liquid",
+      "DRUM (55G)": "U1PDEFD",
+      "BOX (1 X 2.5G)": "U1P-DEF-1X2.5G-BG",
+      "BOX (2 X 2.5G)": "U1P-DEF-2X2.5G-BG",
+      "GAL": "U1PDEFG",
+      "PAIL (5G)": "U1PDEFP",
+      "TOTE (330G)": "U1PDEFT",
+      "JERRYCAN (20L)": "U1PDEFJC"
+    }
+  }
+}
