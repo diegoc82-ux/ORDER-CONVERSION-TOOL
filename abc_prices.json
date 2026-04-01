@@ -1,0 +1,23 @@
+{
+  "_note": "Per-unit QB prices. Source: ABC AUTOPARTS PRICING MARCH 2025-2026 QB export.",
+  "_suffix_map": {
+    "G":  "BOX (4G) oils / BOX (6G) coolants / BOX (1X2.5G) DEF — per gallon or per 2.5G container",
+    "P":  "PAIL (5G) — per pail",
+    "D":  "DRUM (55G) — per drum"
+  },
+
+  "UL213": { "G": 12.43,  "P": 53.43  },
+  "UL306": { "P": 48.71   },
+  "UL308": { "G": 9.87,   "P": 46.14  },
+  "UL501": { "P": 44.16,  "D": 429    },
+  "UL506": { "P": 66      },
+  "UL508": { "P": 71.46   },
+  "UL603": { "P": 48.71   },
+  "UL702": { "P": 54,     "D": 573.38 },
+  "UL703": { "P": 60      },
+  "UL705": { "P": 80      },
+  "UL801": { "D": 394.64  },
+  "UL964": { "G": 4.9,    "D": 260    },
+  "UL974": { "G": 8.37,   "D": 415.57 },
+  "UL990": { "G": 5.65,   "D": 125.69 }
+}

@@ -265,6 +265,12 @@ let trebolPrices  = {};
 let maxilubPrices = {};
 let servistarPrices = {};
 let frenoseguroPrices = {};
+let ukrPrices = {};
+let asarayPrices = {};
+let daherPrices = {};
+let abcPrices        = {};
+let proSupplyPrices  = {};
+let diancaPrices     = {};
 let currentClientName = '';
 let toteReturn = false;
 let hasTotes   = false;
@@ -297,7 +303,7 @@ const PRESENTATIONS = Object.keys(PRES_CALC);
 // ── Init ──────────────────────────────────────────────────────────────────
 async function init() {
   try {
-    const [catRes, cntRes, priceRes, a8Res, ceRes, beiRes, garnerRes, pagsaRes, trebolRes, maxilubRes, servistarRes, frenoseguroRes] = await Promise.all([
+    const [catRes, cntRes, priceRes, a8Res, ceRes, beiRes, garnerRes, pagsaRes, trebolRes, maxilubRes, servistarRes, frenoseguroRes, ukrRes, asarayRes, daherRes, abcRes, psRes, diancaRes] = await Promise.all([
       fetch('/products.json'),
       fetch('/api/counter'),
       fetch('/imporcarsa_prices.json'),
@@ -310,6 +316,12 @@ async function init() {
       fetch('/maxilub_prices.json'),
       fetch('/servistar_prices.json'),
       fetch('/frenoseguro_prices.json'),
+      fetch('/ukr_prices.json'),
+      fetch('/asaray_prices.json'),
+      fetch('/daher_prices.json'),
+      fetch('/abc_prices.json'),
+      fetch('/prosupply_prices.json'),
+      fetch('/dianca_prices.json'),
     ]);
     catalog           = await catRes.json();
     imporcarsaPrices  = await priceRes.json();
@@ -322,6 +334,12 @@ async function init() {
     maxilubPrices     = await maxilubRes.json();
     servistarPrices   = await servistarRes.json();
     frenoseguroPrices = await frenoseguroRes.json();
+    ukrPrices         = await ukrRes.json();
+    asarayPrices      = await asarayRes.json();
+    daherPrices       = await daherRes.json();
+    abcPrices         = await abcRes.json();
+    proSupplyPrices   = await psRes.json();
+    diancaPrices      = await diancaRes.json();
     const cnt = await cntRes.json();
     updateDispatchBadge(cnt.last + 1);
   } catch(e) {
@@ -548,6 +566,27 @@ async function parseOrder() {
             })),
           };
 
+        // ── Dispatch note used as input for GARNER ───────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /GARNER/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'GARNER OIL COMPANY',
+            address1:     '10631 HARWIN DRIVE, SUITE 612',
+            address2:     'HOUSTON, TX 77036',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
         // ── Garner order form: coordinate-based column parsing ───────────────
         } else if (/ORDER\s+FORM/i.test(text) && /6\/1-Gal/i.test(text)) {
           const gForm = new FormData();
@@ -594,6 +633,178 @@ async function parseOrder() {
           parsed = parseServistarPO(text);
           if (!parsed || !parsed.items.length) { showError('Could not parse Servistar PO — no items found.'); return; }
 
+        // ── Dispatch note used as input for PRO SUPPLY ───────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /PRO\s+SUPPLY/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'PRO SUPPLY DISTRIBUTION',
+            address1:     '2460 Mclver Lane, Suite 100',
+            address2:     'Carrollton, TX 75006',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for ABC AUTO ─────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /ABC\s+AUTO/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'ABC AUTO PARTS',
+            address1:     '920 W MARSHALL AVE',
+            address2:     'LONGVIEW, TEXAS 75604',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── ABC AUTO PARTS PO PDF ─────────────────────────────────────────────
+        } else if (/Purchase\s+Order/i.test(text) && /ABC\s+AUTO/i.test(text)) {
+          parsed = parseAbcPO(text);
+          if (!parsed.items.length) { showError('Could not parse ABC Auto PO — no items found.'); return; }
+
+        // ── Dispatch note used as input for DAHER ────────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /DAHER/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'GRUPO DAHER S.A.',
+            address1:     'AV FERNANDEZ DE CORDOBA CON CALLE 67 OEST',
+            address2:     'Panama, Panama',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for ASARAY ───────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /ASARAY/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'ASARAY INTERNATIONAL',
+            address1:     'Naser University Road,',
+            address2:     'Tripoli, Libya',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── Dispatch note used as input for DIANCA ───────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /DIANCA/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'DIANCA S.A.',
+            address1:     'CASA PELLAS ACAHUALINCA 1.5 C, AL SUR',
+            address2:     'Managua, Nicaragua',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── DAHER PDF PO ─────────────────────────────────────────────────────
+        } else if (/DAHER/i.test(text)) {
+          parsed = parsePOText(text);
+          parsed.clientName = 'GRUPO DAHER S.A.';
+          parsed.address1   = 'AV FERNANDEZ DE CORDOBA CON CALLE 67 OEST';
+          parsed.address2   = 'Panama, Panama';
+
+        // ── ASARAY INTERNATIONAL PO ──────────────────────────────────────────
+        } else if (/ASARAY/i.test(text)) {
+          parsed = parsePOText(text);
+          parsed.clientName   = 'ASARAY INTERNATIONAL';
+          parsed.address1     = 'Naser University Road,';
+          parsed.address2     = 'Tripoli, Libya';
+
+        // ── Dispatch note used as input for UKR ──────────────────────────────
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /UKR/i.test(text)) {
+          const dForm = new FormData();
+          dForm.append('file', selectedFile);
+          const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
+          const dData = await dRes.json();
+          if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          parsed = {
+            clientName:   'UKR AUTOMOTIVE DISTRIBUTORS',
+            address1:     'PO BOX 70250 PMB 233',
+            address2:     'SAN JUAN, PR 00936',
+            poNumber:     dData.poNumber || '',
+            orderDate:    dData.orderDate || '',
+            deliveryDate: '',
+            items: dData.items.map(it => ({
+              ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
+              po_qty_label: '', unit_price: 0, amount: 0,
+              units_per_case: null, desc_matched: false,
+            })),
+          };
+
+        // ── UKR Automotive Distributors PO ───────────────────────────────────
+        } else if (/UKR\s+AUTOMOTIVE/i.test(text)) {
+          const ukrForm = new FormData();
+          ukrForm.append('file', selectedFile);
+          const ukrRes  = await fetch('/api/extract-ukr', { method: 'POST', body: ukrForm });
+          const ukrData = await ukrRes.json();
+          if (!ukrRes.ok) { showError(ukrData.error || 'UKR extraction failed.'); return; }
+          parsed = {
+            clientName:   'UKR AUTOMOTIVE DISTRIBUTORS',
+            address1:     'PO BOX 70250 PMB 233',
+            address2:     'SAN JUAN, PR 00936',
+            poNumber:     ukrData.poNumber || '',
+            orderDate:    ukrData.orderDate || '',
+            deliveryDate: '',
+            items: ukrData.items.map(it => {
+              let found = findBySkuCode(it.sku);
+              if (!found) found = findBySkuCode(it.sku + 'L');
+              if (!found) return null;
+              return {
+                ul_code: found.ulCode, presentation: found.pres, qty: it.qty,
+                po_qty_label: '', unit_price: 0, amount: 0,
+                units_per_case: null, desc_matched: false,
+              };
+            }).filter(Boolean),
+          };
+          if (!parsed.items.length) { showError('Could not parse UKR PO — no items found.'); return; }
+
         } else {
           parsed = parsePOText(text);
         }
@@ -608,6 +819,19 @@ async function parseOrder() {
       } else if (/IMPORTADORA\s+TREBOL/i.test(text) || /trebol\.com\.do/i.test(text)) {
         parsed = parseTrebolEmail(text);
         if (!parsed || !parsed.items.length) { showError('Could not parse Trebol order — no items found.'); return; }
+      } else if (/ABC\s+AUTO/i.test(text)) {
+        parsed = parseAbcPO(text);
+        if (!parsed.items.length) { showError('Could not parse ABC Auto PO — no items found.'); return; }
+      } else if (/DAHER/i.test(text)) {
+        parsed = parsePOText(text);
+        parsed.clientName = 'GRUPO DAHER S.A.';
+        parsed.address1   = 'AV FERNANDEZ DE CORDOBA CON CALLE 67 OEST';
+        parsed.address2   = 'Panama, Panama';
+      } else if (/ASARAY/i.test(text)) {
+        parsed = parsePOText(text);
+        parsed.clientName = 'ASARAY INTERNATIONAL';
+        parsed.address1   = 'Naser University Road,';
+        parsed.address2   = 'Tripoli, Libya';
       } else {
         parsed = parsePOText(text);
       }
@@ -622,12 +846,20 @@ async function parseOrder() {
 }
 
 // ── Excel PO parser ───────────────────────────────────────────────────────
-// Handles Beicruz "ORDER TEMPLATE" and Imporcarsa-style Excel worksheets.
+// Handles Beicruz "ORDER TEMPLATE", Asaray "Tabelle1", and Imporcarsa-style Excel worksheets.
 function parseExcelPO(workbook) {
   // ── Beicruz detection ──────────────────────────────────────────────────
   if (workbook.SheetNames.includes('ORDER TEMPLATE')) {
     return parseBeicruzExcel(workbook);
   }
+
+  // ── Asaray detection: "Tabelle1" sheet with "Art.Nr." header ───────────
+  const asaraySheet = workbook.SheetNames.find(n => {
+    const ws   = workbook.Sheets[n];
+    const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+    return rows.some(r => r.some(c => String(c ?? '').trim() === 'Art.Nr.'));
+  });
+  if (asaraySheet) return parseAsarayExcel(workbook, asaraySheet);
 
   // ── Imporcarsa format ─────────────────────────────────────────────────
   const SUFFIX_PRES = { Q: 'BOX (12Q)', G: 'BOX (4G)', E: 'DRUM (55G)', C: 'PAIL (5G)' };
@@ -785,6 +1017,91 @@ function parseBeicruzExcel(workbook) {
     orderDate,
     deliveryDate,
     items
+  };
+}
+
+// ── Asaray Excel PO Parser ────────────────────────────────────────────────
+// Template: custom "Tabelle1" sheet with Art.Nr. | Produkt | Units | packing size | Cartons
+// Qty to dispatch = "Cartons" column (number of cases / jerry cans)
+function parseAsarayExcel(workbook, sheetName) {
+  const ws   = workbook.Sheets[sheetName];
+  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, cellDates: true });
+
+  function fmtDate(v) {
+    if (v instanceof Date) {
+      return String(v.getMonth() + 1).padStart(2,'0') + '/' +
+             String(v.getDate()).padStart(2,'0') + '/' + v.getFullYear();
+    }
+    return String(v ?? '').trim();
+  }
+
+  // Find header row (contains "Art.Nr.")
+  let headerIdx = -1;
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].some(c => String(c ?? '').trim() === 'Art.Nr.')) { headerIdx = i; break; }
+  }
+  if (headerIdx < 0) return null;
+
+  // Locate columns
+  const hdr = rows[headerIdx];
+  let ulCol = -1, packCol = -1, cartonsCol = -1;
+  for (let j = 0; j < hdr.length; j++) {
+    const h = String(hdr[j] ?? '').trim();
+    if (h === 'Art.Nr.')           ulCol      = j;
+    if (/packing\s*size/i.test(h)) packCol    = j;
+    if (/^cartons$/i.test(h))      cartonsCol = j;
+  }
+  if (ulCol < 0 || packCol < 0 || cartonsCol < 0) return null;
+
+  // Extract PO number and date from header area (above the header row)
+  let poNumber = '', orderDate = '';
+  for (let i = 0; i < headerIdx; i++) {
+    const row = rows[i];
+    for (let j = 0; j < row.length; j++) {
+      const cell = String(row[j] ?? '').trim();
+      if (/Order\s+No/i.test(cell)) {
+        for (let k = j + 1; k < row.length; k++) {
+          if (row[k] != null && String(row[k]).trim()) { poNumber = String(row[k]).trim(); break; }
+        }
+      }
+      if (/^Date:?$/i.test(cell)) {
+        for (let k = j + 1; k < row.length; k++) {
+          if (row[k] != null) { orderDate = fmtDate(row[k]); break; }
+        }
+      }
+    }
+  }
+
+  const PACKING_PRES = {
+    'BOX OF 12 QUART':   'BOX (12Q)',
+    'BOX OF 4 GALLONS':  'BOX (4G)',
+    'BOX OF 3 / 5QUART': 'BOX (3/5QTS)',
+    '20L BIDON/JERRYCAN':'JERRYCAN (20L)',
+  };
+
+  const items = [];
+  for (let i = headerIdx + 1; i < rows.length; i++) {
+    const row  = rows[i];
+    const code = String(row[ulCol] ?? '').trim().toUpperCase();
+    if (!/^UL\d+$/.test(code)) continue;
+    const packRaw    = String(row[packCol] ?? '').trim();
+    const presentation = PACKING_PRES[packRaw];
+    if (!presentation) continue;
+    const qty = Number(row[cartonsCol]);
+    if (!qty || isNaN(qty) || qty <= 0) continue;
+    items.push({ ul_code: code, presentation, qty,
+      po_qty_label: '', unit_price: 0, amount: 0,
+      units_per_case: null, desc_matched: false });
+  }
+
+  return {
+    clientName:   'ASARAY INTERNATIONAL',
+    address1:     'Naser University Road,',
+    address2:     'Tripoli, Libya',
+    poNumber,
+    orderDate,
+    deliveryDate: '',
+    items,
   };
 }
 
@@ -992,6 +1309,57 @@ function parseTrebolEmail(text) {
 // ── Servistar Construmundo PO Parser ─────────────────────────────────────
 // Detects: "No. OC XXXX" + "ULTRAPLUS" in extracted PDF text
 // Format: UL402-1QT  QT ACEITE ...  84,00  (Spanish comma-decimal, suffix→presentation)
+// ── ABC AUTO PARTS PO parser ──────────────────────────────────────────────
+function parseAbcPO(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+
+  // PO number: "PO #: 99P086473"
+  const poMatch = text.match(/PO\s*#:\s*([A-Z0-9]+)/i);
+  const poNumber = poMatch ? poMatch[1] : '';
+
+  // Order date: first MM/DD/YY or MM/DD/YYYY found
+  const dateMatch = text.match(/(\d{1,2}\/\d{1,2}\/(\d{2,4}))/);
+  let orderDate = '';
+  if (dateMatch) {
+    const p = dateMatch[1].split('/');
+    if (p[2].length === 2) p[2] = '20' + p[2];
+    orderDate = p.join('/');
+  }
+
+  // Delivery date: "Date Req'd: 04/03/26"
+  const delivMatch = text.match(/Date\s+Req.?d:\s*(\d{1,2}\/\d{1,2}\/\d{2,4})/i);
+  let deliveryDate = '';
+  if (delivMatch) {
+    const p = delivMatch[1].split('/');
+    if (p[2].length === 2) p[2] = '20' + p[2];
+    deliveryDate = p.join('/');
+  }
+
+  const PRES_MAP = { P: 'PAIL (5G)', G: 'BOX (4G)', D: 'DRUM (55G)', L: 'BOX (12Q)', J: 'BOX (3/5QTS)' };
+  const items = [];
+  for (const line of lines) {
+    // UL code lines: "56 UL308-P ...", "56 UL506P ..."
+    const ulMatch = line.match(/^(\d+)\s+UL(\d+)-?([PGDLJ])\b/i);
+    if (ulMatch) {
+      const pres = PRES_MAP[ulMatch[3].toUpperCase()];
+      if (pres) items.push({ ul_code: 'UL' + ulMatch[2], presentation: pres, qty: parseInt(ulMatch[1]) });
+      continue;
+    }
+    // DEF 2.5G: "3404 2.5GAL ..."
+    const def25 = line.match(/^(\d+)\s+2\.5GAL\b/i);
+    if (def25) { items.push({ ul_code: 'UL990', presentation: 'BOX (1 X 2.5G)', qty: parseInt(def25[1]) }); continue; }
+    // DEF 55G drum: "8 55GAL ..."
+    const def55 = line.match(/^(\d+)\s+55GAL\b/i);
+    if (def55) { items.push({ ul_code: 'UL990', presentation: 'DRUM (55G)', qty: parseInt(def55[1]) }); continue; }
+  }
+
+  return {
+    clientName: 'ABC AUTO PARTS', address1: '920 W MARSHALL AVE', address2: 'LONGVIEW, TEXAS 75604',
+    poNumber, orderDate, deliveryDate,
+    items: items.map(it => ({ ...it, po_qty_label: '', unit_price: 0, amount: 0, units_per_case: null, desc_matched: false })),
+  };
+}
+
 function parseServistarPO(text) {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l);
 
@@ -1451,9 +1819,12 @@ function mapPresentation(suffix, ulCode = '') {
 // ── Calculations ──────────────────────────────────────────────────────────
 function calcItem(code, presentation, qty) {
   const calc = PRES_CALC[presentation] || {};
-  const dispatchSpec = calc.dispatch_spec || presentation;
-  const unitQty   = qty * (calc.unit_mult || 1);
-  const palletDiv = calc.pallet_div;
+  // For totes: only use bulk spec/multiplier when the Tote Return Program is active
+  const dispatchSpec = (calc.tote && !toteReturn) ? presentation : (calc.dispatch_spec || presentation);
+  const unitMult  = (calc.tote && !toteReturn) ? 1 : (calc.unit_mult || 1);
+  const unitQty   = qty * unitMult;
+  // When no tote return: each tote is 1 pallet position, so divide by 1
+  const palletDiv = (calc.tote && !toteReturn) ? 1 : calc.pallet_div;
   const palletQty = palletDiv ? +(unitQty / palletDiv).toFixed(2) : null;
   const estWeight = palletQty !== null ? +(palletQty * (calc.weight_mult || 0)).toFixed(2) : null;
 
@@ -1591,6 +1962,93 @@ function lookupCasePrice(code, presentation) {
   if (currentClientName.includes('FRENOSEGURO')) {
     return (frenoseguroPrices[code] || {})[presentation] || 0;
   }
+  if (currentClientName.includes('ASARAY')) {
+    const isCoolant = /^UL9\d{2}$/i.test(code);
+    const PRES_TO_ASARAY = {
+      'BOX (12Q)':       { suffix: 'L',  upc: 12 },
+      'BOX (3/5QTS)':    { suffix: 'J',  upc: 3  },
+      'BOX (4G)':        { suffix: 'G',  upc: 4  },
+      'BOX (6G)':        { suffix: 'G',  upc: 6  },
+      'BOX (2 X 2.5G)':  { suffix: 'G',  upc: 2  },
+      'JERRYCAN (20L)':  { suffix: 'JC', upc: 1  },
+    };
+    const map = PRES_TO_ASARAY[presentation];
+    if (!map) return 0;
+    const unitPrice = (asarayPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('PRO SUPPLY')) {
+    const PRES_TO_PS = {
+      'BOX (12Q)':      { suffix: 'L',   upc: 12  },
+      'BOX (3/5QTS)':   { suffix: 'J',   upc: 3   },
+      'BOX (4G)':       { suffix: 'G',   upc: 4   },
+      'BOX (6G)':       { suffix: 'G',   upc: 6   },
+      'PAIL (5G)':      { suffix: 'P',   upc: 1   },
+      'DRUM (55G)':     { suffix: 'D',   upc: 1   },
+      'BULK (OIL)':     { suffix: 'Oil', upc: 265 },
+      'TOTE (265G)':    { suffix: 'T',   upc: 1   },
+    };
+    const map = PRES_TO_PS[presentation];
+    if (!map) return 0;
+    const unitPrice = (proSupplyPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('ABC AUTO')) {
+    const PRES_TO_ABC = {
+      'BOX (12Q)':      { suffix: 'L', upc: 12 },
+      'BOX (3/5QTS)':   { suffix: 'J', upc: 3  },
+      'BOX (4G)':       { suffix: 'G', upc: 4  },
+      'BOX (6G)':       { suffix: 'G', upc: 6  },
+      'BOX (1 X 2.5G)': { suffix: 'G', upc: 1  },
+      'BOX (2 X 2.5G)': { suffix: 'G', upc: 2  },
+      'PAIL (5G)':      { suffix: 'P', upc: 1  },
+      'DRUM (55G)':     { suffix: 'D', upc: 1  },
+    };
+    const map = PRES_TO_ABC[presentation];
+    if (!map) return 0;
+    const unitPrice = (abcPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('DIANCA')) {
+    const PRES_TO_DIANCA = {
+      'BOX (12Q)':    { suffix: 'L', upc: 12 },
+      'BOX (3/5QTS)': { suffix: 'J', upc: 3  },
+      'BOX (4G)':     { suffix: 'G', upc: 4  },
+      'BOX (6G)':     { suffix: 'G', upc: 6  },
+      'PAIL (5G)':    { suffix: 'P', upc: 1  },
+      'DRUM (55G)':   { suffix: 'D', upc: 1  },
+    };
+    const map = PRES_TO_DIANCA[presentation];
+    if (!map) return 0;
+    const unitPrice = (diancaPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('DAHER')) {
+    const PRES_TO_DAHER = {
+      'BOX (12Q)':      { suffix: 'L', upc: 12 },
+      'BOX (3/5QTS)':   { suffix: 'J', upc: 3  },
+      'BOX (4G)':       { suffix: 'G', upc: 4  },
+      'BOX (6G)':       { suffix: 'G', upc: 6  },
+      'BOX (2 X 2.5G)': { suffix: 'G', upc: 2  },
+      'PAIL (5G)':      { suffix: 'P', upc: 1  },
+      'DRUM (55G)':     { suffix: 'D', upc: 1  },
+    };
+    const map = PRES_TO_DAHER[presentation];
+    if (!map) return 0;
+    const unitPrice = (daherPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
+  if (currentClientName.includes('UKR AUTOMOTIVE')) {
+    const PRES_TO_UKR = {
+      'BOX (12Q)':    { suffix: 'L', upc: 12 },
+      'BOX (3/5QTS)': { suffix: 'J', upc: 3  },
+      'BOX (4G)':     { suffix: 'G', upc: 4  },
+    };
+    const map = PRES_TO_UKR[presentation];
+    if (!map) return 0;
+    const unitPrice = (ukrPrices[code] || {})[map.suffix] || 0;
+    return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
+  }
   if (currentClientName.includes('COMPETITIVE EDGE') || currentClientName.includes('COMP EDGE')) {
     const isCoolant = /^UL9\d{2}$/i.test(code);
     const PRES_TO_CE = {
@@ -1719,6 +2177,11 @@ function setToteReturn(val) {
   document.getElementById('tote-prompt').innerHTML =
     `<p>Tote Return Program: <span class="tote-badge ${val?'badge-yes':'badge-no'}">${val?'✅ Approved':'❌ Standard Billing'}</span></p>`;
   document.getElementById('generate-btn').style.display = 'inline-block';
+  // Re-compute all tote rows so SKU/spec reflect the updated choice
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const sel = tr.querySelector('select');
+    if (sel && (PRES_CALC[sel.value] || {}).tote) onRowChange(sel);
+  });
 }
 
 // ── CSV Generation ────────────────────────────────────────────────────────
