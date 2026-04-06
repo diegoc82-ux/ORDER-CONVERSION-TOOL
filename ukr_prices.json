@@ -1,18 +1,25 @@
 {
-  "_note": "Per-unit QB prices. Source: UKR-KOREA PRICING MARCH 2025-2026 QB export + PO#74 cross-check.",
+  "_note": "Per-unit prices. Source: UKR-KOREA PRICING QB export + Quote 113573 (2/17/2026).",
   "_suffix_map": {
     "L": "BOX (12Q) — per quart",
     "J": "BOX (3/5QTS) — per 5-qt jug",
-    "G": "BOX (4G) — per gallon"
+    "G": "BOX (4G) — per gallon",
+    "P": "PAIL (5G) — per pail"
   },
   "UL100": { "L": 2.8,     "J": 12.95    },
   "UL101": { "L": 2.7675,  "J": 12.78333 },
   "UL102": { "L": 2.70167, "J": 12.45667 },
   "UL103": { "L": 2.70167, "J": 12.45667 },
   "UL104": { "L": 2.70167, "J": 12.45667 },
+  "UL105": { "L": 2.70167                },
   "UL201": { "L": 2.37417, "J": 10.81667 },
   "UL202": { "L": 2.37417, "J": 10.81667 },
+  "UL204": { "L": 2.37417                },
+  "UL206": { "P": 38.99                  },
   "UL301": { "L": 2.32417, "G": 8.63     },
+  "UL313": { "L": 2.34083, "J": 10.65333 },
+  "UL315": { "L": 2.30833, "J": 10.48667 },
+  "UL316": { "L": 2.30833, "J": 10.48667 },
   "UL501": { "L": 2.39                   },
   "UL502": { "L": 2.39                   },
   "UL503": { "L": 2.8                    },

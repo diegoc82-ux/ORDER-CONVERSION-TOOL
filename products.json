@@ -21,14 +21,6 @@
       "BULK (OIL)": "UFS016SPGF6B-oil"
     }
   },
-  "UL1000": {
-    "name": "",
-    "presentations": {
-      "14OZ GREASE CARTRIDGE": "UMGLCHTRC",
-      "KEG (120LBS)": "UMGLCHTRK",
-      "CASE 10/1": "UMGLCHTR-BC"
-    }
-  },
   "UL101": {
     "name": "U1P-DRIVE SAE 0W-20 Full Synthetic Motor Oil, API SP, ILSAC GF",
     "presentations": {
@@ -799,6 +791,72 @@
       "PAIL (5G)": "USB2050CK4SNP",
       "BULK (OIL)": "USB2050CK4SN-Oil",
       "JERRYCAN (20L)": "USB2050CK4SNJC"
+    }
+  },
+  "UL221": {
+    "name": "U1P-DRIVE SAE 5W-20 High Mileage Synthetic Blend Motor Oil, API SQ, ILSAC GF-7A",
+    "presentations": {
+      "TOTE (265G)": "USB0520HMSQGF7AT",
+      "DRUM (55G)": "USB0520HMSQGF7AD",
+      "PAIL (5G)": "USB0520HMSQGF7AP",
+      "JUG": "USB0520HMSQGF7AJ",
+      "2X5 QTS JUG": "USB0520HMSQGF7A-2J",
+      "GAL": "USB0520HMSQGF7AG",
+      "BOX (2G)": "USB0520HMSQGF7A-2G",
+      "BOX (4G)": "USB0520HMSQGF7A-BG",
+      "QUART": "USB0520HMSQGF7AL",
+      "BOX (3Q)": "USB0520HMSQGF7A-3L",
+      "BOX (6Q)": "USB0520HMSQGF7A-6L",
+      "5 Pack QT (Gal + QT)": "USB0520HMSQGF7A-GL",
+      "BOX (12Q)": "USB0520HMSQGF7A-BL",
+      "BOX (3/5QTS)": "USB0520HMSQGF7A-BJ",
+      "BULK (OIL)": "USB0520HMSQGF7A-oil",
+      "JERRYCAN (20L)": "USB0520HMSQGF7AJC",
+      "6 Pack QT (Gal + 2QT)": "USB0520HMSQGF7A-G2L"
+    }
+  },
+  "UL222": {
+    "name": "U1P-DRIVE SAE 5W-30 High Mileage Synthetic Blend Motor Oil, API SQ, ILSAC GF-7A",
+    "presentations": {
+      "TOTE (265G)": "USB0530HMSQGF7AT",
+      "DRUM (55G)": "USB0530HMSQGF7AD",
+      "PAIL (5G)": "USB0530HMSQGF7AP",
+      "JUG": "USB0530HMSQGF7AJ",
+      "2X5 QTS JUG": "USB0530HMSQGF7A-2J",
+      "GAL": "USB0530HMSQGF7AG",
+      "BOX (2G)": "USB0530HMSQGF7A-2G",
+      "BOX (4G)": "USB0530HMSQGF7A-BG",
+      "QUART": "USB0530HMSQGF7AL",
+      "BOX (3Q)": "USB0530HMSQGF7A-3L",
+      "BOX (6Q)": "USB0530HMSQGF7A-6L",
+      "5 Pack QT (Gal + QT)": "USB0530HMSQGF7A-GL",
+      "BOX (12Q)": "USB0530HMSQGF7A-BL",
+      "BOX (3/5QTS)": "USB0530HMSQGF7A-BJ",
+      "BULK (OIL)": "USB0530HMSQGF7A-oil",
+      "JERRYCAN (20L)": "USB0530HMSQGF7AJC",
+      "6 Pack QT (Gal + 2QT)": "USB0530HMSQGF7A-G2L"
+    }
+  },
+  "UL223": {
+    "name": "U1P-DRIVE SAE 10W-30 High Mileage Synthetic Blend Motor Oil, API SQ, ILSAC GF-7A",
+    "presentations": {
+      "TOTE (265G)": "USB1030HMSQGF7AT",
+      "DRUM (55G)": "USB1030HMSQGF7AD",
+      "PAIL (5G)": "USB1030HMSQGF7AP",
+      "JUG": "USB1030HMSQGF7AJ",
+      "2X5 QTS JUG": "USB1030HMSQGF7A-2J",
+      "GAL": "USB1030HMSQGF7AG",
+      "BOX (2G)": "USB1030HMSQGF7A-2G",
+      "BOX (4G)": "USB1030HMSQGF7A-BG",
+      "QUART": "USB1030HMSQGF7AL",
+      "BOX (3Q)": "USB1030HMSQGF7A-3L",
+      "BOX (6Q)": "USB1030HMSQGF7A-6L",
+      "5 Pack QT (Gal + QT)": "USB1030HMSQGF7A-GL",
+      "BOX (12Q)": "USB1030HMSQGF7A-BL",
+      "BOX (3/5QTS)": "USB1030HMSQGF7A-BJ",
+      "BULK (OIL)": "USB1030HMSQGF7A-oil",
+      "JERRYCAN (20L)": "USB1030HMSQGF7AJC",
+      "6 Pack QT (Gal + 2QT)": "USB1030HMSQGF7A-G2L"
     }
   },
   "UL301": {
@@ -2263,24 +2321,6 @@
       "6 Pack QT (Gal + 2QT)": "UFS7590GL5-G2L"
     }
   },
-  "TR505": {
-    "name": "GARNER Full Synthetic CVT Universal",
-    "presentations": {
-      "BOX (3/5QTS)": "TRFSCU-BJ"
-    }
-  },
-  "TR703": {
-    "name": "GARNER SAE 75W-90 Synthetic Gear Oil, API GL-5",
-    "presentations": {
-      "BOX (12Q)": "TRFS7590GL5-BL"
-    }
-  },
-  "TR705": {
-    "name": "GARNER SAE 75W-140 Synthetic Gear Oil, API GL-5",
-    "presentations": {
-      "BOX (12Q)": "TRFS75140GL5-BL"
-    }
-  },
   "UL704": {
     "name": "U1P-GEAR SAE 80W-140 Synthetic Gear Oil, API GL-5",
     "presentations": {
@@ -3373,6 +3413,14 @@
       "PAIL (5G)": "U1PDEFP",
       "TOTE (330G)": "U1PDEFT",
       "JERRYCAN (20L)": "U1PDEFJC"
+    }
+  },
+  "UL1000": {
+    "name": "Ultra1Plus Multipurpose Grease LITHIUM COMPLEX HT RED",
+    "presentations": {
+      "14OZ GREASE CARTRIDGE": "UMGLCHTRC",
+      "KEG (120LBS)": "UMGLCHTRK",
+      "CASE 10/1": "UMGLCHTR-BC"
     }
   }
 }

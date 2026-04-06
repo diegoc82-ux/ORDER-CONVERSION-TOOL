@@ -97,6 +97,21 @@ def dianca_prices():
     return send_file(BASE / 'dianca_prices.json', mimetype='application/json')
 
 
+@app.route('/costs.json')
+def costs():
+    return send_file(BASE / 'costs.json', mimetype='application/json')
+
+
+@app.route('/houston_prices.json')
+def houston_prices():
+    return send_file(BASE / 'houston_prices.json', mimetype='application/json')
+
+
+@app.route('/miami_prices.json')
+def miami_prices():
+    return send_file(BASE / 'miami_prices.json', mimetype='application/json')
+
+
 @app.route('/api/extract-dispatch', methods=['POST'])
 def extract_dispatch():
     import re
