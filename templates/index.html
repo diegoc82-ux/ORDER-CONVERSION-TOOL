@@ -950,7 +950,7 @@ async function parseOrder() {
           parsed.address2     = 'Tripoli, Libya';
 
         // ── Dispatch note used as input for UKR ──────────────────────────────
-        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && /UKR/i.test(text)) {
+        } else if (/Dispatch\s+Note\s+\d+/i.test(text) && (/UKR/i.test(text) || /Korea\s+Parts/i.test(text))) {
           const dForm = new FormData();
           dForm.append('file', selectedFile);
           const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
@@ -971,7 +971,7 @@ async function parseOrder() {
           };
 
         // ── UKR Automotive Distributors PO ───────────────────────────────────
-        } else if (/UKR\s+AUTOMOTIVE/i.test(text)) {
+        } else if (/UKR\s+AUTOMOTIVE/i.test(text) || /Korea\s+Parts\s+LLC/i.test(text)) {
           const ukrForm = new FormData();
           ukrForm.append('file', selectedFile);
           const ukrRes  = await fetch('/api/extract-ukr', { method: 'POST', body: ukrForm });
@@ -2131,7 +2131,7 @@ function calcItem(code, presentation, qty) {
 // ── Known-customer check ──────────────────────────────────────────────────
 const KNOWN_CUSTOMER_KEYS = [
   'IMPORCARSA','MAXILUB','PAGSA','SERVISTAR','TREBOL','BEI CRUZ','BEICRUZ',
-  'COMPETITIVE EDGE','COMP EDGE','GARNER','UKR','ASARAY','PRO SUPPLY',
+  'COMPETITIVE EDGE','COMP EDGE','GARNER','UKR','KOREA PARTS','ASARAY','PRO SUPPLY',
   'ABC AUTO','DAHER','DIANCA','FRENOSEGURO','8A AUTO','EIGHT A',
 ];
 function isKnownCustomer(name) {
@@ -2401,7 +2401,7 @@ function lookupCasePrice(code, presentation) {
     const unitPrice = (daherPrices[code] || {})[map.suffix] || 0;
     return unitPrice > 0 ? +(unitPrice * map.upc).toFixed(2) : 0;
   }
-  if (currentClientName.includes('UKR AUTOMOTIVE')) {
+  if (currentClientName.includes('UKR AUTOMOTIVE') || currentClientName.includes('KOREA PARTS')) {
     const PRES_TO_UKR = {
       'BOX (12Q)':    { suffix: 'L', upc: 12 },
       'BOX (3/5QTS)': { suffix: 'J', upc: 3  },
