@@ -1,4 +1,44 @@
 {
+  "TLR801": {
+    "name": "TLR ISO 32 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR32AWP"
+    }
+  },
+  "TLR802": {
+    "name": "TLR ISO 46 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR46AWP"
+    }
+  },
+  "TLR803": {
+    "name": "TLR ISO 68 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR68AWP"
+    }
+  },
+  "TLR810": {
+    "name": "TLR X20S Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLRX20SP"
+    }
+  },
+  "UL050": {
+    "name": "U1P-Care Anhydrous Calcium Soap Grease",
+    "presentations": {}
+  },
+  "UL051": {
+    "name": "U1P-Care Multipurpose Grease LITHIUM EP2",
+    "presentations": {}
+  },
+  "UL052": {
+    "name": "U1P-Care Multipurpose Grease #2 AMBER",
+    "presentations": {}
+  },
+  "UL053": {
+    "name": "U1P-Care Multipurpose Grease LITHIUM COMPLEX HT RED",
+    "presentations": {}
+  },
   "UL100": {
     "name": "U1P-DRIVE SAE 0W-16 Full Synthetic Motor Oil, API SP, ILSAC GF-6B",
     "presentations": {
@@ -313,9 +353,11 @@
       "DRUM (55G)": "UFS0540SNA3B4D",
       "TOTE (265G)": "UFS0540SNA3B4T",
       "PAIL (5G)": "UFS0540SNA3B4P",
+      "JUG": "UFS0540SNA3B4J",
       "BOX (6Q)": "UFS0540SNA3B4-6L",
       "BOX (12Q)": "UFS0540SNA3B4-BL",
       "BOX (4G)": "UFS0540SNA3B4-BG",
+      "QUART": "UFS0540SNA3B4L",
       "BOX (3/5QTS)": "UFS0540SNA3B4-BJ",
       "BULK (OIL)": "UFS0540SNA3B4-oil",
       "JERRYCAN (20L)": "UFS0540SNA3B4JC",
@@ -352,8 +394,12 @@
       "6 Pack QT (Gal + 2QT)": "UFS0530SNA3B4-G2L"
     }
   },
+  "UL117": {
+    "name": "U1P-DRIVE SAE 0W-8 Full Synthetic Motor Oil, JASO GLV-1",
+    "presentations": {}
+  },
   "UL118": {
-    "name": "U1P-Drive SAE 0W-40 Full Synthetic Motor Oil, API SP",
+    "name": "U1P-DRIVE SAE 0W-12 Full Synthetic Motor Oil",
     "presentations": {
       "TOTE (265G)": "UFS040SPT",
       "DRUM (55G)": "UFS040SPD",
@@ -373,6 +419,10 @@
       "BULK (OIL)": "UFS040SP-oil",
       "JERRYCAN (20L)": "UFS040SPJC"
     }
+  },
+  "UL119": {
+    "name": "U1P-DRIVE SAE 0W-40 Full Synthetic Motor Oil, API SQ",
+    "presentations": {}
   },
   "UL121": {
     "name": "U1P-DRIVE SAE 0W-20 High Mileage Full Synthetic Motor Oil, API SQ, ILSAC GF-7",
@@ -775,6 +825,10 @@
       "PAIL (5G)": "USB1540DNGCK4SNP",
       "JERRYCAN (20L)": "USB1540DNGCK4SNJC"
     }
+  },
+  "UL215": {
+    "name": "Ultra1Plus SAE 30 Synthetic Blend HDMO",
+    "presentations": {}
   },
   "UL216": {
     "name": "U1P-DRIVE SAE 15W-40 Synthetic Blend Motor Oil, API SP",
@@ -2136,6 +2190,8 @@
       "TOTE (265G)": "UFSATFLVT",
       "BULK (COOL)": "UFSATFLV-oil",
       "DRUM (55G)": "UFSATFLVD",
+      "JUG": "UFSATFLVJ",
+      "QUART": "UFSATFLVL",
       "PAIL (5G)": "UFSATFLVP",
       "BOX (6Q)": "UFSATFLV-6L",
       "BOX (12Q)": "UFSATFLV-BL",
@@ -3316,6 +3372,10 @@
       "TOTE (250G)": "UACEL5050OT",
       "BOX (12Q)": "UACEL5050O-BL"
     }
+  },
+  "UL956": {
+    "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% PURPLE",
+    "presentations": {}
   },
   "UL961": {
     "name": "UltraCool Extended Life NOAT PREMIXED 50/50 GOLD (OCA-2M)",
