@@ -139,6 +139,19 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
 #generate-btn { display: none; }
 #cost-analysis-btn { display: none; background: #6f42c1; color: #fff; }
 #cost-analysis-btn:hover { background: #5a32a3; }
+#sli-btn { display: none; background: #0d6ebd; color: #fff; }
+#sli-btn:hover { background: #0a52a0; }
+#sli-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:1000; justify-content:center; align-items:center; }
+#sli-modal-box { background:#fff; border-radius:12px; padding:28px 32px; max-width:560px; width:94%; max-height:90vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,.22); }
+#sli-modal-box h2 { margin:0 0 18px; font-size:1.15rem; color:#1a3c5c; }
+.sli-section { font-size:.78rem; font-weight:700; color:#666; text-transform:uppercase; margin:16px 0 6px; border-bottom:1px solid #eee; padding-bottom:4px; letter-spacing:.04em; }
+.sli-form-row { margin-bottom:10px; }
+.sli-form-row label { display:block; font-size:.82rem; color:#444; margin-bottom:3px; }
+.sli-form-row input { width:100%; box-sizing:border-box; padding:7px 10px; border:1px solid #ccc; border-radius:6px; font-size:.88rem; }
+.sli-form-row input:focus { outline:none; border-color:#0d6ebd; box-shadow:0 0 0 2px rgba(13,110,189,.15); }
+.sli-actions { display:flex; gap:10px; margin-top:20px; }
+.btn-sli-ok { background:#1a7a3c; color:#fff; border:none; padding:9px 22px; border-radius:7px; cursor:pointer; font-weight:bold; font-size:.9rem; }
+.btn-sli-cancel { background:#6c757d; color:#fff; border:none; padding:9px 18px; border-radius:7px; cursor:pointer; }
 
 /* ── Cost Analysis Modal ─────────────────────────────────────────────────── */
 #cost-modal-overlay {
@@ -290,6 +303,52 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
       </div>
     </div>
 
+    <!-- SLI Modal -->
+    <div id="sli-modal">
+      <div id="sli-modal-box">
+        <h2>✈️ Shipper's Letter of Instructions (SLI)</h2>
+        <div class="sli-section">Consignee Details</div>
+        <div class="sli-form-row">
+          <label>Tax ID / RTN (optional)</label>
+          <input type="text" id="sli-taxid" placeholder="e.g. RTN. 05019995128965">
+        </div>
+        <div class="sli-form-row">
+          <label>Country of Ultimate Destination *</label>
+          <input type="text" id="sli-country" placeholder="e.g. HONDURAS">
+        </div>
+        <div class="sli-section">Forwarding Agent</div>
+        <div class="sli-form-row">
+          <label>Agent Company Name *</label>
+          <input type="text" id="sli-agent-name" placeholder="e.g. PLUS CARGO">
+        </div>
+        <div class="sli-form-row">
+          <label>Address Line 1</label>
+          <input type="text" id="sli-agent-addr1" placeholder="e.g. 8725 NW 18 Ter,">
+        </div>
+        <div class="sli-form-row">
+          <label>Address Line 2</label>
+          <input type="text" id="sli-agent-addr2" placeholder="e.g. Suite 300,">
+        </div>
+        <div class="sli-form-row">
+          <label>City, State, ZIP</label>
+          <input type="text" id="sli-agent-addr3" placeholder="e.g. Miami, FL 33172.">
+        </div>
+        <div class="sli-section">Document Info</div>
+        <div class="sli-form-row">
+          <label>Reference # (Dispatch / PO)</label>
+          <input type="text" id="sli-ref" placeholder="e.g. D2942">
+        </div>
+        <div class="sli-form-row">
+          <label>SLI Date</label>
+          <input type="date" id="sli-date">
+        </div>
+        <div class="sli-actions">
+          <button class="btn-sli-ok" onclick="submitSLI()">⬇️ Generate SLI Excel</button>
+          <button class="btn-sli-cancel" onclick="closeSLIModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <div id="customer-setup-prompt">
       <p>&#x1F4BE; Would you like to save <strong id="setup-customer-name-display">this customer</strong> for future orders?</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -362,6 +421,7 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
     <div class="actions-bar">
       <button class="btn btn-success" id="generate-btn" onclick="generateCSV()">&#11015;&#65039; Download Dispatch CSV</button>
       <button class="btn" id="cost-analysis-btn" onclick="openCostAnalysis()">&#128200; Cost Analysis</button>
+      <button class="btn" id="sli-btn" onclick="openSLIModal()">&#128196; Export SLI</button>
       <button class="btn btn-neutral"  onclick="recalcAll()" title="Recalculate all rows after manual edits">&#8635; Update</button>
       <button class="btn btn-neutral"  onclick="resetForm()">&#8634; New Order</button>
     </div>
@@ -2154,6 +2214,7 @@ function setLocationList(loc) {
   });
   document.getElementById('generate-btn').style.display = 'inline-block';
   document.getElementById('cost-analysis-btn').style.display = 'inline-block';
+  document.getElementById('sli-btn').style.display = 'inline-block';
   // Show save-customer prompt if a name is typed
   const clientName = document.getElementById('f-client').value.trim();
   if (clientName && !isKnownCustomer(clientName)) {
@@ -2172,6 +2233,7 @@ function resetLocationList() {
     </div>`;
   document.getElementById('generate-btn').style.display = 'none';
   document.getElementById('cost-analysis-btn').style.display = 'none';
+  document.getElementById('sli-btn').style.display = 'none';
   document.getElementById('customer-setup-prompt').style.display = 'none';
 }
 
@@ -2218,11 +2280,13 @@ function renderForm(parsed) {
     prompt.style.display = 'block';
     document.getElementById('generate-btn').style.display = 'none';
     document.getElementById('cost-analysis-btn').style.display = 'none';
+    document.getElementById('sli-btn').style.display = 'none';
   } else {
     prompt.style.display = 'none';
     if (isKnownCustomer(currentClientName)) {
       document.getElementById('generate-btn').style.display = 'inline-block';
       document.getElementById('cost-analysis-btn').style.display = 'inline-block';
+      document.getElementById('sli-btn').style.display = 'inline-block';
     }
     // For unknown customers, buttons appear only after setLocationList() is called
   }
@@ -2560,6 +2624,7 @@ function refreshTotePrompt() {
     if (canShowButtons) {
       document.getElementById('generate-btn').style.display = 'inline-block';
       document.getElementById('cost-analysis-btn').style.display = 'inline-block';
+      document.getElementById('sli-btn').style.display = 'inline-block';
     }
   }
 }
@@ -2571,11 +2636,91 @@ function setToteReturn(val) {
     `<p>Tote Return Program: <span class="tote-badge ${val?'badge-yes':'badge-no'}">${val?'✅ Approved':'❌ Standard Billing'}</span></p>`;
   document.getElementById('generate-btn').style.display = 'inline-block';
   document.getElementById('cost-analysis-btn').style.display = 'inline-block';
+  document.getElementById('sli-btn').style.display = 'inline-block';
   // Re-compute all tote rows so SKU/spec reflect the updated choice
   document.querySelectorAll('#items-body tr').forEach(tr => {
     const sel = tr.querySelector('select');
     if (sel && (PRES_CALC[sel.value] || {}).tote) onRowChange(sel);
   });
+}
+
+// ── SLI Generation ─────────────────────────────────────────────────────────
+function openSLIModal() {
+  const po = document.getElementById('f-po').value.trim();
+  document.getElementById('sli-ref').value  = po || '';
+  document.getElementById('sli-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('sli-taxid').value        = '';
+  document.getElementById('sli-country').value      = '';
+  document.getElementById('sli-agent-name').value   = '';
+  document.getElementById('sli-agent-addr1').value  = '';
+  document.getElementById('sli-agent-addr2').value  = '';
+  document.getElementById('sli-agent-addr3').value  = '';
+  document.getElementById('sli-modal').style.display = 'flex';
+}
+
+function closeSLIModal() {
+  document.getElementById('sli-modal').style.display = 'none';
+}
+
+async function submitSLI() {
+  const country   = document.getElementById('sli-country').value.trim();
+  const agentName = document.getElementById('sli-agent-name').value.trim();
+  if (!country)   { showError('Please enter the country of ultimate destination.'); return; }
+  if (!agentName) { showError('Please enter the forwarding agent name.'); return; }
+
+  const items = [];
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const code = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
+    if (!code) return;
+    const pres     = tr.querySelector('select').value;
+    const qty      = parseInt(tr.querySelector('.cases-input').value) || 0;
+    if (!qty) return;
+    const ewt      = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    const totalVal = parseFloat(tr.querySelector('.total-cell').dataset.raw || 0);
+    items.push({ ul_code: code, presentation: pres, qty, weight_lbs: ewt, value_usd: totalVal });
+  });
+  if (!items.length) { showError('No items in the order to export.'); return; }
+
+  const payload = {
+    reference: document.getElementById('sli-ref').value.trim(),
+    date:      document.getElementById('sli-date').value.trim(),
+    consignee: {
+      name:     document.getElementById('f-client').value.trim(),
+      tax_id:   document.getElementById('sli-taxid').value.trim(),
+      address1: document.getElementById('f-addr1').value.trim(),
+      address2: document.getElementById('f-addr2').value.trim(),
+      country:  country.toUpperCase()
+    },
+    forwarding_agent: {
+      name:     agentName,
+      address1: document.getElementById('sli-agent-addr1').value.trim(),
+      address2: document.getElementById('sli-agent-addr2').value.trim(),
+      address3: document.getElementById('sli-agent-addr3').value.trim()
+    },
+    items
+  };
+
+  try {
+    const resp = await fetch('/api/generate-sli', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      showError('SLI generation failed: ' + (err.error || resp.statusText));
+      return;
+    }
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url;
+    a.download = `SLI - ${payload.consignee.name.replace(/[\/\\]/g,'-')} - ${payload.reference || 'EXPORT'}.xlsx`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    closeSLIModal();
+  } catch(e) {
+    showError('SLI generation error: ' + e.message);
+  }
 }
 
 // ── CSV Generation ────────────────────────────────────────────────────────
@@ -2720,6 +2865,7 @@ function clearAll() {
   document.getElementById('tote-prompt').style.display = 'none';
   document.getElementById('customer-setup-prompt').style.display = 'none';
   document.getElementById('generate-btn').style.display = 'none';
+  document.getElementById('sli-btn').style.display = 'none';
   hideMessages();
   toteReturn = false;
   hasTotes   = false;
