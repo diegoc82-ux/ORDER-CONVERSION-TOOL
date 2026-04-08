@@ -351,7 +351,6 @@ def set_counter():
 def generate_sli():
     import re
     import openpyxl
-    from openpyxl.styles import Font, Alignment
     from datetime import datetime, date
     import io as io_mod
 
@@ -421,109 +420,64 @@ def generate_sli():
 
     total_kg = sum(it.get('weight_lbs', 0) for it in items) / 2.20462
 
-    wb = openpyxl.Workbook()
+    # ── Load the formatted template and fill in variable fields only ──────────
+    template_path = BASE / 'sli_template.xlsx'
+    wb = openpyxl.load_workbook(template_path)
     ws = wb.active
-    ws.title = 'SLI'
 
-    col_widths = {'A':30,'B':24,'C':14,'D':18,'E':24,'F':16,'G':16,'H':9,'I':24,'J':24,'K':14,'L':22,'M':22}
-    for col, w in col_widths.items():
-        ws.column_dimensions[col].width = w
+    def w(cell_ref, value):
+        """Write a value to a cell (top-left of merged range) without touching formatting."""
+        ws[cell_ref] = value
 
-    def s(row, col, val, bold=False, sz=10):
-        c = ws.cell(row=row, column=col, value=val)
-        c.font = Font(name='Arial', bold=bold, size=sz)
-        c.alignment = Alignment(wrap_text=True, vertical='top')
-        return c
+    # ── Forwarding Agent (column J, rows 3-6) ────────────────────────────────
+    w('J3', agent.get('name', ''))
+    w('J4', agent.get('address1', ''))
+    w('J5', agent.get('address2', ''))
+    w('J6', agent.get('address3', ''))
 
-    s(1,  1, "                                          SHIPPER'S LETTER OF INSTRUCTIONS (SLI)            ", bold=True, sz=11)
-    s(2,  1, '1. USPPI Name:', bold=True)
-    s(2,  5, '3. Freight Location Company Name:', bold=True)
-    s(2, 10, '5. Forwarding Agent:   ', bold=True)
-    s(3,  1, 'Ultrachem LLC ')
-    s(3,  5, 'U1Dynamics Manufacturing')
-    s(3, 10, agent.get('name', ''))
-    s(4,  1, '2. USPPI Address Including Zip Code:', bold=True)
-    s(4,  5, '4. Freight Location Address (if not box #2):', bold=True)
-    s(5,  1, '1444 Northwest 82 nd Ave.  ')
-    s(5,  5, '4468 Genoa-Red Bluff Rd,')
-    s(5, 10, agent.get('address1', ''))
-    s(6,  1, 'Doral, FL 33126')
-    s(6,  5, 'Pasadena, TX. 77505')
-    s(6, 10, agent.get('address2', ''))
-    s(7, 10, agent.get('address3', ''))
-    s(8,  1, '6.  USPPI EIN (IRS) No:                                  ', bold=True)
-    s(8,  3, '82-3520413')
-    s(8,  5, '7.   Related Party Indicator (select one):', bold=True)
-    s(9,  1, '8.  USPPI Reference#: ', bold=True)
-    s(9,  3, ref)
-    s(9,  5, '9.   Routed Export Transaction (select one):', bold=True)
-    s(10, 1, '10.  Ultimate Consignee Name & Address: ', bold=True)
-    s(10, 5, '11. Ultimate Consignee Type (select one):', bold=True)
-    s(10,10, '12. Intermediate Consignee Name & Address:', bold=True)
-    s(11, 1, consignee.get('name', ''))
+    # ── Reference # ──────────────────────────────────────────────────────────
+    w('C9', ref)
+
+    # ── Consignee (rows 11-14) ────────────────────────────────────────────────
     tax_id = consignee.get('tax_id', '')
+    w('A11', consignee.get('name', ''))
     if tax_id:
-        s(12, 1, tax_id)
-        s(13, 1, consignee.get('address1', ''))
-        s(14, 1, consignee.get('address2', ''))
+        w('A12', tax_id)
+        w('A13', consignee.get('address1', ''))
+        w('A14', consignee.get('address2', ''))
     else:
-        s(12, 1, consignee.get('address1', ''))
-        s(13, 1, consignee.get('address2', ''))
-    s(16, 1, '13. State of Origin: ', bold=True)
-    s(16, 4, 'TEXAS ')
-    s(16, 7, '16. In-Bond Code:', bold=True)
-    s(16,12, '19. TIB / Carnet?', bold=True)
-    s(17, 1, '14. Country of Ultimate Destination:', bold=True)
-    s(17, 4, consignee.get('country', '').upper())
-    s(17, 7, '17. Entry Number:', bold=True)
-    s(18, 1, '15. Hazardous Material: ', bold=True)
-    s(18, 7, '18. FTZ Identifier:', bold=True)
-    s(19, 1, 'INSTRUCTIONS TO FORWARDER:                                                                                                                                                                              ')
-    s(20, 1, '20. Gross Weight (kilos)', bold=True)
-    s(20, 2, round(total_kg, 3))
-    s(20, 3, '21. SOLAS  Certification', bold=True)
-    s(20, 4, 'By checking the Box 21 certification, I am certifying that the full shipment weight shown in box 20 is the Certified Gross Weight which may be added to the container tare weight and used as the Verified Gross Mass (VGM) under the Method 2 of the SOLAS VGM regulation which becomes effective July 1, 2016.')
-    s(21, 1, '22.          Domestic  or     Foreign (D/F)', bold=True)
-    s(21, 2, '23.                                    Schedule B / HTS Number and Commercial  Commodity Description                                    For Vehicles: VIN/Year, Make, Model and Vehicle Title Number are required', bold=True)
-    s(21, 4, '24.             Quantity in Schedule B / HTS Units ', bold=True)
-    s(21, 5, '25.                       DDTC Quantity and DDTC Unit of Measure', bold=True)
-    s(21, 6, '26.              Shipping Weight             (in Kilos)', bold=True)
-    s(21, 7, '27.                   ECCN, EAR99 or USML Category No.  ', bold=True)
-    s(21, 8, '28 . S    M    E  (Y/ N)', bold=True)
-    s(21, 9, '29.                                            Export License No., License Exception Symbol,                         DDTC Exemption No.,           DDTC ACM No.                              or NLR     ', bold=True)
-    s(21,12, '30.              Value at the Port of Export                (US Dollars)', bold=True)
-    s(21,13, '31.                License Value by item (if applicable)              (US Dollars)', bold=True)
+        w('A12', consignee.get('address1', ''))
+        w('A13', consignee.get('address2', ''))
+        w('A14', '')
+
+    # ── Country of Ultimate Destination ──────────────────────────────────────
+    w('D17', consignee.get('country', '').upper())
+
+    # ── Gross Weight (kg) ────────────────────────────────────────────────────
+    w('B20', round(total_kg, 3))
+
+    # ── Product Lines (rows 22-26) ───────────────────────────────────────────
+    # Clear all 5 data rows first
+    for r in range(22, 27):
+        for col in ['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M']:
+            ws[f'{col}{r}'] = None
 
     for i, (df, hts, bbl_str, units_desc, wkg, eccn, sme, lic, val, licval) in enumerate(product_lines):
         r = 22 + i
-        s(r, 1, df); s(r, 2, hts); s(r, 4, bbl_str); s(r, 5, units_desc)
-        s(r, 6, wkg); s(r, 7, eccn); s(r, 8, sme); s(r, 9, lic)
-        s(r,12, val); s(r,13, licval)
+        w(f'A{r}', df)
+        w(f'B{r}', hts)    # B:C merged
+        w(f'D{r}', bbl_str)
+        w(f'E{r}', units_desc)
+        w(f'F{r}', wkg)
+        w(f'G{r}', eccn)
+        w(f'H{r}', sme)
+        w(f'I{r}', lic)    # I:K merged
+        w(f'L{r}', val)
+        w(f'M{r}', licval)
 
-    s(27, 1, '32. DDTC Applicant Registration Number: ', bold=True)
-    s(27, 7, '33. Eligible Party Certification:', bold=True)
-    s(28, 1, '34.')
-    s(28, 2, 'Check here if there are any remaining non-licensable Schedule B / HTS Numbers that are valued $2500.00 or less and that do not otherwise require AES filing.')
-    s(29, 1, '35.')
-    s(29, 2, 'Check here if the USPPI authorizes the above named forwarder to act as its true and lawful agent for purposes of preparing and filing the Electronic Export Information ("EEI") in accordance with the laws and regulations of the United States. ')
-    s(30, 1, '35 a')
-    s(30, 2, 'Shipper grants carrier consent to screen cargo as may be required by the Transportation Security Administration.')
-    s(31, 1, '36.  I certify that the statements made and all information contained herein are true and correct. I understand that civil and criminal penalties, including forfeiture and sale, may be imposed for making false and fraudulent statements herein., failing to provide the requested information or for violation of U.S. laws on exportation (13 U.S.C. Sec . 305:  22 U.S.C. Sec. 401, 18 U.S.C. Sec 1001, 50 U.S.C. app. 2410).  ')
-    s(32, 1, '37. USPPI E-mail Address: ', bold=True)
-    s(32, 4, 'dcastro@ultra1plus.com')
-    s(32, 7, '38. USPPI Telephone No.: ', bold=True)
-    s(32,11, '305-988-7624')
-    s(33, 1, '39.  Printed Name of Duly authorized officer or employee: ', bold=True)
-    s(33, 7, 'Diego Castro')
-    s(34, 1, '40.  Signature: ', bold=True)
-    s(34, 7, '41. Title: ', bold=True)
-    s(34, 8, 'COO')
-    s(34,12, '42. Date: ', bold=True)
-    dc = ws.cell(row=34, column=13, value=sli_date)
-    dc.number_format = 'MM/DD/YYYY'
-    dc.font = Font(name='Arial', size=10)
-    dc.alignment = Alignment(wrap_text=True, vertical='top')
-    s(35, 1, '43.          Check here to validate Electronic Signature.  Electronic signatures must be typed in all capital letters in Box 39 in order to be valid. ')
+    # ── Date ─────────────────────────────────────────────────────────────────
+    ws['M34'] = sli_date
+    ws['M34'].number_format = 'MM/DD/YYYY'
 
     out = io_mod.BytesIO()
     wb.save(out)
