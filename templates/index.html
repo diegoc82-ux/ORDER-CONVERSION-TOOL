@@ -2178,8 +2178,9 @@ function calcItem(code, presentation, qty) {
   //     Always divide by 265 / 250 to get pallet positions — never use palletDiv = 1.
   const isToteByCount = calc.tote && (calc.unit_mult || 1) > 1;
   const palletDiv = (isToteByCount && !toteReturn) ? 1 : calc.pallet_div;
-  const palletQty = palletDiv ? +(unitQty / palletDiv).toFixed(2) : null;
-  const estWeight = palletQty !== null ? +(palletQty * (calc.weight_mult || 0)).toFixed(2) : null;
+  const palletQtyRaw = palletDiv ? unitQty / palletDiv : null;
+  const palletQty    = palletQtyRaw !== null ? +palletQtyRaw.toFixed(2) : null;
+  const estWeight    = palletQtyRaw !== null ? +(palletQtyRaw * (calc.weight_mult || 0)).toFixed(2) : null;
 
   const product = catalog[code] || {};
   const sku     = (product.presentations || {})[dispatchSpec] || '';
