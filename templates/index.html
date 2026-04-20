@@ -892,14 +892,22 @@ async function parseOrder() {
           const dRes  = await fetch('/api/extract-dispatch', { method:'POST', body: dForm });
           const dData = await dRes.json();
           if (!dRes.ok) { showError(dData.error || 'Dispatch extraction failed.'); return; }
+          // Use coordinate-parsed items; fall back to text parser if empty
+          let dispItems = (dData.items || []);
+          if (!dispItems.length) dispItems = parseOurDispatchText(text);
+          // PO and date: use coordinate results, fall back to text extraction
+          let psPoNumber  = dData.poNumber  || '';
+          let psOrderDate = dData.orderDate || '';
+          if (!psPoNumber)  { const m = text.match(/Customer\s+PO\s+Number\s*:\s*(.+?)(?:\n|$)/i);  if (m) psPoNumber  = m[1].trim(); }
+          if (!psOrderDate) { const m = text.match(/Date\s+of\s+order\s*:\s*([\d\/]+)/i);        if (m) psOrderDate = m[1]; }
           parsed = {
             clientName:   'PRO SUPPLY DISTRIBUTION',
             address1:     '2460 Mclver Lane, Suite 100',
             address2:     'Carrollton, TX 75006',
-            poNumber:     dData.poNumber || '',
-            orderDate:    dData.orderDate || '',
+            poNumber:     psPoNumber,
+            orderDate:    psOrderDate,
             deliveryDate: '',
-            items: dData.items.map(it => ({
+            items: dispItems.map(it => ({
               ul_code: it.ul_code, presentation: it.presentation, qty: it.qty,
               po_qty_label: '', unit_price: 0, amount: 0,
               units_per_case: null, desc_matched: false,
@@ -1711,6 +1719,40 @@ function parseServistarPO(text) {
   };
 }
 
+// ── U1P Dispatch text-based parser ───────────────────────────────────────
+// Fallback for when the coordinate-based /api/extract-dispatch returns no
+// items (e.g. UL code x0 position falls outside the expected < 90px range).
+// Dispatch text format (one physical line per product):
+//   "UL221 SKU-CODE  description ...  BOX (3/5QTS)  60  1.00  1950.00"
+// The presentation string precedes the numeric UNIT QTY column.
+function parseOurDispatchText(text) {
+  const items = [];
+  // Sort presentation keys longest-first to avoid partial matches
+  const PRES_KEYS = Object.keys(PRES_CALC).sort((a, b) => b.length - a.length);
+  for (const line of text.split('\n')) {
+    // Must contain a UL or TR product code anywhere on the line
+    const codeM = line.match(/\b((?:UL|TR)\d+)\b/i);
+    if (!codeM) continue;
+    const code = codeM[1].toUpperCase();
+    // Find which known presentation string appears in this line
+    let foundPres = null;
+    let afterIdx  = -1;
+    for (const pres of PRES_KEYS) {
+      const idx = line.indexOf(pres);
+      if (idx !== -1) { foundPres = pres; afterIdx = idx + pres.length; break; }
+    }
+    if (!foundPres) continue;
+    // First numeric token after the presentation string = UNIT QTY
+    const rest = line.slice(afterIdx).trim();
+    const qtyM = rest.match(/^([\d,]+(?:\.\d+)?)/);
+    if (!qtyM) continue;
+    const qty = parseInt(qtyM[1].replace(/,/g, ''), 10);
+    if (!qty || qty <= 0) continue;
+    items.push({ ul_code: code, presentation: foundPres, qty });
+  }
+  return items;
+}
+
 // ── PO Text Parser ────────────────────────────────────────────────────────
 function parsePOText(text) {
   const lines = text.split('\n').map(l => l.trim());
@@ -2407,14 +2449,17 @@ function lookupCasePrice(code, presentation) {
   }
   if (currentClientName.includes('PRO SUPPLY')) {
     const PRES_TO_PS = {
-      'BOX (12Q)':      { suffix: 'L',   upc: 12  },
-      'BOX (3/5QTS)':   { suffix: 'J',   upc: 3   },
-      'BOX (4G)':       { suffix: 'G',   upc: 4   },
-      'BOX (6G)':       { suffix: 'G',   upc: 6   },
-      'PAIL (5G)':      { suffix: 'P',   upc: 1   },
-      'DRUM (55G)':     { suffix: 'D',   upc: 1   },
-      'BULK (OIL)':     { suffix: 'Oil', upc: 265 },
-      'TOTE (265G)':    { suffix: 'T',   upc: 1   },
+      'BOX (12Q)':       { suffix: 'L',   upc: 12  },
+      'BOX (3/5QTS)':    { suffix: 'J',   upc: 3   },
+      'BOX (4G)':        { suffix: 'G',   upc: 4   },
+      'BOX (6G)':        { suffix: 'G',   upc: 6   },
+      'BOX (2 X 2.5G)':  { suffix: '2X',  upc: 2   },
+      'BOX (1 X 2.5G)':  { suffix: '1X',  upc: 1   },
+      'JERRYCAN (20L)':  { suffix: 'JC',  upc: 1   },
+      'PAIL (5G)':       { suffix: 'P',   upc: 1   },
+      'DRUM (55G)':      { suffix: 'D',   upc: 1   },
+      'BULK (OIL)':      { suffix: 'Oil', upc: 265 },
+      'TOTE (265G)':     { suffix: 'T',   upc: 1   },
     };
     const map = PRES_TO_PS[presentation];
     if (!map) return 0;
