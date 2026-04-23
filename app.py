@@ -178,7 +178,7 @@ def extract_dispatch():
                     if top <= header_top:
                         continue
                     code_words = [w for w in row_words
-                                  if re.match(r'^(UL|TR)\d+$', w['text'], re.I) and w['x0'] < 90]
+                                  if re.match(r'^(UL|TR)\d+$', w['text'], re.I) and w['x0'] < 130]
                     if not code_words:
                         continue
                     code = code_words[0]['text'].upper()
@@ -428,6 +428,17 @@ def generate_sli():
     def w(cell_ref, value):
         """Write a value to a cell (top-left of merged range) without touching formatting."""
         ws[cell_ref] = value
+
+    # ── USPPI — always Ultrachem LLC (boxes 1, 2, 6) ─────────────────────────
+    w('A3', 'Ultrachem LLC')
+    w('A5', '1444 Northwest 82nd Ave.')
+    w('A6', 'Doral, FL 33126')
+    w('C8', '82-3520413')          # USPPI EIN (IRS) No
+
+    # ── Freight Location — always U1Dynamics (boxes 3, 4) ────────────────────
+    w('E3', 'U1Dynamics Manufacturing')
+    w('E5', '4468 Genoa-Red Bluff Rd,')
+    w('E6', 'Pasadena, TX. 77505')
 
     # ── Forwarding Agent (column J, rows 3-6) ────────────────────────────────
     w('J3', agent.get('name', ''))
