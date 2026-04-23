@@ -446,6 +446,24 @@ def generate_sli():
     w('J5', agent.get('address2', ''))
     w('J6', agent.get('address3', ''))
 
+    # ── Checkbox / select-one fields (static defaults) ───────────────────────
+    # Box 7 — Related Party Indicator
+    w('J8', '\u2610  Related')
+    w('L8', '\u2611  Non-Related')
+    # Box 9 — Routed Export Transaction
+    w('J9', '\u2610  Yes')
+    w('L9', '\u2611  No')
+    # Box 11 — Ultimate Consignee Type
+    w('E11', '\u2610  Direct Consumer')
+    w('E12', '\u2610  Government Entity')
+    w('E13', '\u2611  Reseller')
+    w('E14', '\u2610  Other/Unknown')
+    # Box 15 — Hazardous Material
+    w('D18', '\u2610  Yes          \u2611  No')
+    # Box 19 — TIB / Carnet
+    w('L17', '\u2610  Yes')
+    w('L18', '\u2611  No')
+
     # ── Reference # ──────────────────────────────────────────────────────────
     w('C9', ref)
 
