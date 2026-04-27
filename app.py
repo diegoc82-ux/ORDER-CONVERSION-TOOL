@@ -112,6 +112,37 @@ def miami_prices():
     return send_file(BASE / 'miami_prices.json', mimetype='application/json')
 
 
+@app.route('/forwarders.json')
+def forwarders_list():
+    p = BASE / 'forwarders.json'
+    if not p.exists():
+        return jsonify([])
+    return send_file(p, mimetype='application/json')
+
+
+@app.route('/api/save-forwarder', methods=['POST'])
+def save_forwarder():
+    import json as json_mod
+    data = request.get_json()
+    name = (data.get('name') or '').strip()
+    if not name:
+        return jsonify({'error': 'Name required'}), 400
+    p = BASE / 'forwarders.json'
+    existing = json_mod.loads(p.read_text('utf-8')) if p.exists() else []
+    if any(f['name'].upper() == name.upper() for f in existing):
+        return jsonify({'error': 'Forwarder already exists'}), 409
+    fwd_id = name.lower().replace(' ', '_').replace('-', '_')
+    existing.append({
+        'id':       fwd_id,
+        'name':     name,
+        'address1': (data.get('address1') or '').strip(),
+        'address2': (data.get('address2') or '').strip(),
+        'address3': (data.get('address3') or '').strip(),
+    })
+    p.write_text(json_mod.dumps(existing, indent=2, ensure_ascii=False), encoding='utf-8')
+    return jsonify({'ok': True, 'id': fwd_id})
+
+
 @app.route('/api/extract-dispatch', methods=['POST'])
 def extract_dispatch():
     import re

@@ -318,20 +318,35 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
         </div>
         <div class="sli-section">Forwarding Agent</div>
         <div class="sli-form-row">
-          <label>Agent Company Name *</label>
-          <input type="text" id="sli-agent-name" placeholder="e.g. PLUS CARGO">
+          <label>Select Forwarder *</label>
+          <select id="sli-agent-select" onchange="onForwarderSelect()" style="width:100%;padding:7px 10px;border:1px solid #ccc;border-radius:6px;font-size:.93rem;">
+            <option value="">— Select forwarder —</option>
+            <option value="__new__">➕ Add new forwarder...</option>
+          </select>
         </div>
-        <div class="sli-form-row">
-          <label>Address Line 1</label>
-          <input type="text" id="sli-agent-addr1" placeholder="e.g. 8725 NW 18 Ter,">
-        </div>
-        <div class="sli-form-row">
-          <label>Address Line 2</label>
-          <input type="text" id="sli-agent-addr2" placeholder="e.g. Suite 300,">
-        </div>
-        <div class="sli-form-row">
-          <label>City, State, ZIP</label>
-          <input type="text" id="sli-agent-addr3" placeholder="e.g. Miami, FL 33172.">
+        <div id="sli-agent-fields" style="display:none;">
+          <div class="sli-form-row">
+            <label>Company Name *</label>
+            <input type="text" id="sli-agent-name" placeholder="e.g. PLUS CARGO">
+          </div>
+          <div class="sli-form-row">
+            <label>Address Line 1</label>
+            <input type="text" id="sli-agent-addr1" placeholder="e.g. 8725 NW 18 Ter,">
+          </div>
+          <div class="sli-form-row">
+            <label>Address Line 2</label>
+            <input type="text" id="sli-agent-addr2" placeholder="e.g. Suite 300,">
+          </div>
+          <div class="sli-form-row">
+            <label>City, State, ZIP</label>
+            <input type="text" id="sli-agent-addr3" placeholder="e.g. Miami, FL 33172">
+          </div>
+          <div id="sli-save-row" class="sli-form-row" style="display:none;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:normal;">
+              <input type="checkbox" id="sli-save-check" checked>
+              Save this forwarder for future use
+            </label>
+          </div>
         </div>
         <div class="sli-section">Document Info</div>
         <div class="sli-form-row">
@@ -2691,16 +2706,79 @@ function setToteReturn(val) {
 }
 
 // ── SLI Generation ─────────────────────────────────────────────────────────
+let _sliForwarders = [];
+
+async function _loadSliForwarders() {
+  try {
+    const res = await fetch('/forwarders.json');
+    _sliForwarders = await res.json();
+  } catch(e) { _sliForwarders = []; }
+  const sel = document.getElementById('sli-agent-select');
+  if (!sel) return;
+  // Remove all options except placeholder and "Add new"
+  while (sel.options.length > 1) sel.remove(1);
+  // Insert known forwarders before "Add new"
+  const addNewOpt = sel.lastElementChild;
+  for (const f of _sliForwarders) {
+    const opt = document.createElement('option');
+    opt.value = f.id;
+    opt.textContent = f.name;
+    sel.insertBefore(opt, addNewOpt);
+  }
+}
+
+function onForwarderSelect() {
+  const val    = document.getElementById('sli-agent-select').value;
+  const fields = document.getElementById('sli-agent-fields');
+  const saveRow = document.getElementById('sli-save-row');
+
+  if (!val) { fields.style.display = 'none'; return; }
+  fields.style.display = 'block';
+
+  if (val === '__new__') {
+    document.getElementById('sli-agent-name').value  = '';
+    document.getElementById('sli-agent-addr1').value = '';
+    document.getElementById('sli-agent-addr2').value = '';
+    document.getElementById('sli-agent-addr3').value = '';
+    document.getElementById('sli-agent-name').readOnly  = false;
+    document.getElementById('sli-agent-addr1').readOnly = false;
+    document.getElementById('sli-agent-addr2').readOnly = false;
+    document.getElementById('sli-agent-addr3').readOnly = false;
+    saveRow.style.display = 'block';
+    return;
+  }
+
+  // Existing forwarder — fill and lock fields
+  const fwd = _sliForwarders.find(f => f.id === val);
+  if (fwd) {
+    document.getElementById('sli-agent-name').value  = fwd.name;
+    document.getElementById('sli-agent-addr1').value = fwd.address1 || '';
+    document.getElementById('sli-agent-addr2').value = fwd.address2 || '';
+    document.getElementById('sli-agent-addr3').value = fwd.address3 || '';
+    document.getElementById('sli-agent-name').readOnly  = true;
+    document.getElementById('sli-agent-addr1').readOnly = true;
+    document.getElementById('sli-agent-addr2').readOnly = true;
+    document.getElementById('sli-agent-addr3').readOnly = true;
+  }
+  saveRow.style.display = 'none';
+}
+
 function openSLIModal() {
   const po = document.getElementById('f-po').value.trim();
-  document.getElementById('sli-ref').value  = po || '';
-  document.getElementById('sli-date').value = new Date().toISOString().split('T')[0];
-  document.getElementById('sli-taxid').value        = '';
-  document.getElementById('sli-country').value      = '';
-  document.getElementById('sli-agent-name').value   = '';
-  document.getElementById('sli-agent-addr1').value  = '';
-  document.getElementById('sli-agent-addr2').value  = '';
-  document.getElementById('sli-agent-addr3').value  = '';
+  document.getElementById('sli-ref').value   = po || '';
+  document.getElementById('sli-date').value  = new Date().toISOString().split('T')[0];
+  document.getElementById('sli-taxid').value   = '';
+  document.getElementById('sli-country').value = '';
+  // Reset forwarder section
+  const sel = document.getElementById('sli-agent-select');
+  sel.value = '';
+  document.getElementById('sli-agent-fields').style.display = 'none';
+  document.getElementById('sli-save-row').style.display     = 'none';
+  document.getElementById('sli-agent-name').value  = '';
+  document.getElementById('sli-agent-addr1').value = '';
+  document.getElementById('sli-agent-addr2').value = '';
+  document.getElementById('sli-agent-addr3').value = '';
+  _loadSliForwarders();  // refresh dropdown each time modal opens
   document.getElementById('sli-modal').style.display = 'flex';
 }
 
@@ -2711,8 +2789,25 @@ function closeSLIModal() {
 async function submitSLI() {
   const country   = document.getElementById('sli-country').value.trim();
   const agentName = document.getElementById('sli-agent-name').value.trim();
+  const selVal    = document.getElementById('sli-agent-select').value;
   if (!country)   { showError('Please enter the country of ultimate destination.'); return; }
+  if (!selVal)    { showError('Please select or add a forwarding agent.'); return; }
   if (!agentName) { showError('Please enter the forwarding agent name.'); return; }
+
+  // Save new forwarder if requested
+  if (selVal === '__new__' && document.getElementById('sli-save-check').checked) {
+    try {
+      await fetch('/api/save-forwarder', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:     agentName,
+          address1: document.getElementById('sli-agent-addr1').value.trim(),
+          address2: document.getElementById('sli-agent-addr2').value.trim(),
+          address3: document.getElementById('sli-agent-addr3').value.trim(),
+        })
+      });
+    } catch(e) { /* non-fatal */ }
+  }
 
   const items = [];
   document.querySelectorAll('#items-body tr').forEach(tr => {
