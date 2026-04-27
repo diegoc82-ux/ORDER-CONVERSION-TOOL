@@ -61,6 +61,13 @@ textarea:focus { outline: none; border-color: #0d2b4e; }
 .btn-sm { padding: 5px 13px; font-size: .8rem; }
 .btn-add-row { background: #e8f0fe; color: #0d2b4e; border: 1px dashed #0d2b4e; border-radius: 6px; cursor: pointer; padding: 6px 16px; font-size: .82rem; margin-top: 8px; }
 .btn-add-row:hover { background: #d0e0fc; }
+.add-row-wrapper { position: relative; display: inline-block; }
+#add-row-menu { display: none; position: absolute; bottom: calc(100% + 4px); left: 0; background: #fff; border: 1px solid #ccd; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.18); z-index: 200; min-width: 195px; overflow: hidden; }
+#add-row-menu button { display: block; width: 100%; text-align: left; padding: 9px 16px; border: none; border-bottom: 1px solid #f0f0f0; background: none; cursor: pointer; font-size: .88rem; }
+#add-row-menu button:last-child { border-bottom: none; }
+#add-row-menu button:hover { background: #f0f4ff; }
+tr[data-row-type="subtotal"] td { background: #e8edf7 !important; font-style: italic; }
+tr[data-row-type="discount"] td { background: #fff5f5 !important; }
 .btn-del { background: none; border: none; color: #c0392b; cursor: pointer; font-size: 1rem; padding: 0 4px; }
 .btn-del:hover { color: #922b21; }
 
@@ -423,7 +430,14 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
         </tfoot>
       </table>
     </div>
-    <button class="btn-add-row" onclick="addRow()">+ Add Row</button>
+    <div class="add-row-wrapper">
+  <button class="btn-add-row" onclick="toggleAddRowMenu(event)">+ Add Row ▾</button>
+  <div id="add-row-menu">
+    <button onclick="addProductRow()">📦 Product Row</button>
+    <button onclick="addSubtotalRow()">∑&nbsp; Subtotal Line</button>
+    <button onclick="addDiscountRow()">🏷️ Discount Line</button>
+  </div>
+</div>
 
     <!-- MAXILUB-only freight input -->
     <div id="freight-bar" style="display:none; margin:10px 0; align-items:center; gap:10px;">
@@ -2619,6 +2633,7 @@ function onPresChange(select) {
 
 function onRowChange(el) {
   const tr = el.closest('tr');
+  if (tr.dataset.rowType) { recalcSpecialRows(); refreshTotals(); return; }
   const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
   const pres  = tr.querySelector('select').value;
   const qty   = parseInt(tr.querySelector('.cases-input').value) || 1;
@@ -2642,28 +2657,119 @@ function onRowChange(el) {
 
 function deleteRow(btn) {
   btn.closest('tr').remove();
+  recalcSpecialRows();
   refreshTotals();
   refreshTotePrompt();
 }
 
-function addRow() {
+function addRow() { addProductRow(); }  // backward compat
+
+function addProductRow() {
   appendRow('', PRESENTATIONS[0], 1, '', 0, null);
+  closeAddRowMenu();
   refreshTotals();
+}
+
+function addSubtotalRow() {
+  const tbody = document.getElementById('items-body');
+  const tr = document.createElement('tr');
+  tr.dataset.rowType = 'subtotal';
+  tr.innerHTML = `
+    <td colspan="11" style="text-align:right;color:#1a3c5c;padding-right:10px;">∑ SUBTOTAL</td>
+    <td class="derived total-cell num" data-raw="0" style="font-weight:bold;">—</td>
+    <td><button class="btn-del" onclick="deleteRow(this)" title="Remove">&#x2715;</button></td>
+  `;
+  tbody.appendChild(tr);
+  closeAddRowMenu();
+  recalcSpecialRows();
+  refreshTotals();
+}
+
+function addDiscountRow() {
+  const tbody = document.getElementById('items-body');
+  const tr = document.createElement('tr');
+  tr.dataset.rowType = 'discount';
+  tr.innerHTML = `
+    <td style="font-weight:bold;color:#c0392b;font-size:.82rem;white-space:nowrap;">DISCOUNT</td>
+    <td><select class="disc-type tbl-select" style="width:52px;padding:2px 4px" onchange="recalcSpecialRows();refreshTotals()">
+      <option value="%">%</option>
+      <option value="$">$</option>
+    </select></td>
+    <td class="num"><input class="tbl-input disc-input" style="width:50px;text-align:right" type="number" min="0" step="0.01" placeholder="0"
+      oninput="recalcSpecialRows();refreshTotals()" onchange="recalcSpecialRows();refreshTotals()"></td>
+    <td colspan="8" style="color:#aaa;font-size:.75rem;padding-left:6px;">applies to row above</td>
+    <td class="derived total-cell num" data-raw="0" style="color:#c0392b;font-weight:bold;">—</td>
+    <td><button class="btn-del" onclick="deleteRow(this)" title="Remove">&#x2715;</button></td>
+  `;
+  tbody.appendChild(tr);
+  closeAddRowMenu();
+  recalcSpecialRows();
+  refreshTotals();
+}
+
+function toggleAddRowMenu(e) {
+  e.stopPropagation();
+  const m = document.getElementById('add-row-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+function closeAddRowMenu() {
+  const m = document.getElementById('add-row-menu');
+  if (m) m.style.display = 'none';
+}
+// Close the menu on any outside click
+document.addEventListener('click', () => closeAddRowMenu());
+
+function recalcSpecialRows() {
+  const rows = Array.from(document.querySelectorAll('#items-body tr'));
+  let running = 0;
+  for (let i = 0; i < rows.length; i++) {
+    const tr = rows[i];
+    const rowType = tr.dataset.rowType;
+    if (!rowType) {
+      running += parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+    } else if (rowType === 'subtotal') {
+      const cell = tr.querySelector('.total-cell');
+      cell.dataset.raw = running.toFixed(2);
+      cell.innerHTML = running > 0
+        ? '<strong>$' + fmtMoney(running) + '</strong>'
+        : '<span style="color:#aaa">—</span>';
+      running = 0;
+    } else if (rowType === 'discount') {
+      const prevTr = rows[i - 1];
+      const prevAmt = Math.abs(parseFloat(prevTr?.querySelector('.total-cell')?.dataset.raw || 0));
+      const discType = tr.querySelector('.disc-type')?.value || '%';
+      const discVal  = parseFloat(tr.querySelector('.disc-input')?.value) || 0;
+      let discAmt = 0;
+      if (discVal > 0) {
+        discAmt = discType === '%' ? -(prevAmt * discVal / 100) : -discVal;
+      }
+      const cell = tr.querySelector('.total-cell');
+      cell.dataset.raw = discAmt.toFixed(2);
+      cell.innerHTML = discAmt < 0
+        ? '<span style="color:#c0392b;font-weight:bold;">-$' + fmtMoney(Math.abs(discAmt)) + '</span>'
+        : '<span style="color:#aaa">—</span>';
+      running += discAmt;
+    }
+  }
 }
 
 function recalcAll() {
   document.querySelectorAll('#items-body tr').forEach(tr => {
+    if (tr.dataset.rowType) return;
     const sel = tr.querySelector('select');
     if (sel) onRowChange(sel);
   });
+  recalcSpecialRows();
   showOk('✅ All rows recalculated.');
 }
 
 function refreshTotals() {
+  recalcSpecialRows();
   let totalP = 0, totalW = 0, totalAmt = 0;
   document.querySelectorAll('#items-body tr').forEach(tr => {
-    const pqty = parseFloat(tr.querySelector('.pqty-cell').textContent) || 0;
-    const ewt  = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
+    if (tr.dataset.rowType === 'subtotal') return; // skip — already counted in product rows
+    const pqty = parseFloat(tr.querySelector('.pqty-cell')?.textContent) || 0;
+    const ewt  = parseFloat(tr.querySelector('.ewt-cell')?.textContent.replace(/,/g,'')) || 0;
     const amt  = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
     totalP += pqty; totalW += ewt; totalAmt += amt;
   });
@@ -2811,6 +2917,13 @@ async function submitSLI() {
 
   const items = [];
   document.querySelectorAll('#items-body tr').forEach(tr => {
+    const rowType = tr.dataset.rowType;
+    if (rowType === 'subtotal') return; // skip — no goods
+    if (rowType === 'discount') {
+      const discAmt = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+      if (discAmt !== 0) items.push({ ul_code: '__DISCOUNT__', presentation: '', qty: 0, weight_lbs: 0, value_usd: discAmt });
+      return;
+    }
     const code = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
     if (!code) return;
     const pres     = tr.querySelector('select').value;
@@ -2904,6 +3017,23 @@ async function generateCSV() {
   let totalPallets = 0, totalWeight = 0, grandTotal = 0;
   const lineData = [];
   document.querySelectorAll('#items-body tr').forEach(tr => {
+    const rowType = tr.dataset.rowType;
+
+    if (rowType === 'subtotal') {
+      const stAmt = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+      lineData.push({ type: 'subtotal', totalVal: stAmt });
+      return;
+    }
+    if (rowType === 'discount') {
+      const discType = tr.querySelector('.disc-type')?.value || '%';
+      const discVal  = parseFloat(tr.querySelector('.disc-input')?.value) || 0;
+      const discAmt  = parseFloat(tr.querySelector('.total-cell')?.dataset.raw || 0);
+      const label = discType === '%' ? `DISCOUNT ${discVal}%` : `DISCOUNT $${discVal.toFixed(2)}`;
+      lineData.push({ type: 'discount', label, totalVal: discAmt });
+      grandTotal += discAmt;
+      return;
+    }
+
     const code  = tr.querySelector('input:not([type=number])').value.trim().toUpperCase();
     if (!code) return;
     const cases    = tr.querySelector('.cases-input').value.trim();
@@ -2916,13 +3046,25 @@ async function generateCSV() {
     const ewt      = parseFloat(tr.querySelector('.ewt-cell').textContent.replace(/,/g,'')) || 0;
     const priceVal = parseFloat(tr.querySelector('.price-input').value) || 0;
     const totalVal = parseFloat(tr.querySelector('.total-cell').dataset.raw || 0);
-    lineData.push({ code, cases, poQtyRaw, sku, desc, spec, uqty, pqty, ewt, priceVal, totalVal });
+    lineData.push({ type: 'product', code, cases, poQtyRaw, sku, desc, spec, uqty, pqty, ewt, priceVal, totalVal });
     totalPallets += pqty;
     totalWeight  += ewt;
     grandTotal   += totalVal;
   });
 
   lineData.forEach(d => {
+    if (d.type === 'subtotal') {
+      const row = ['SUBTOTAL', '', '', '', '', '', '', '', '', '', d.totalVal > 0 ? d.totalVal.toFixed(2) : '', ''];
+      if (isMaxilub) row.push('', '');
+      rows.push(row);
+      return;
+    }
+    if (d.type === 'discount') {
+      const row = [d.label, '', '', '', '', '', '', '', '', '', d.totalVal !== 0 ? d.totalVal.toFixed(2) : '', ''];
+      if (isMaxilub) row.push('', '');
+      rows.push(row);
+      return;
+    }
     const row = [d.code, d.cases, d.poQtyRaw, d.sku, d.desc, d.spec, d.uqty,
                  d.pqty.toFixed(2), d.ewt.toLocaleString(),
                  d.priceVal > 0 ? d.priceVal.toFixed(2) : '',

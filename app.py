@@ -414,15 +414,26 @@ def generate_sli():
         if re.match(r'^UL9\d{2}$', c): return 'coolant'
         return 'lube'
 
+    # Separate discount pseudo-items from real products
+    discount_total = sum(it.get('value_usd', 0) for it in items if it.get('ul_code') == '__DISCOUNT__')
+    product_items  = [it for it in items if it.get('ul_code') != '__DISCOUNT__']
+
     groups = {'coolant': [], 'lube': [], 'def': []}
-    for it in items:
+    for it in product_items:
         groups[cat(it)].append(it)
 
-    def calc_group(grp):
+    # For proportional discount distribution across HTS categories
+    total_product_value = sum(it.get('value_usd', 0) for grp in groups.values() for it in grp)
+    def grp_discount(grp):
+        if total_product_value <= 0 or discount_total >= 0: return 0
+        grp_val = sum(it.get('value_usd', 0) for it in grp)
+        return round(discount_total * grp_val / total_product_value, 2)
+
+    def calc_group(grp, extra_value=0):
         total_gal = sum(it['qty'] * GALS.get(it['presentation'], 0) for it in grp)
         bbl       = total_gal / 42.0
         weight_kg = sum(it.get('weight_lbs', 0) for it in grp) / 2.20462
-        value_usd = sum(it.get('value_usd', 0) for it in grp)
+        value_usd = sum(it.get('value_usd', 0) for it in grp) + extra_value
         boxes = sum(it['qty'] for it in grp if 'BOX' in it.get('presentation', ''))
         drums = sum(it['qty'] for it in grp if 'DRUM' in it.get('presentation', ''))
         pails = sum(it['qty'] for it in grp if 'PAIL' in it.get('presentation', ''))
@@ -440,13 +451,13 @@ def generate_sli():
 
     product_lines = []
     if groups['coolant']:
-        bbl, wkg, val, desc = calc_group(groups['coolant'])
+        bbl, wkg, val, desc = calc_group(groups['coolant'], grp_discount(groups['coolant']))
         product_lines.append(('D', '3820000000', f'{bbl:.2f} BBL', desc, wkg, 'EAR99', 'N', 'N/A', val, 'N/A'))
     if groups['lube']:
-        bbl, wkg, val, desc = calc_group(groups['lube'])
+        bbl, wkg, val, desc = calc_group(groups['lube'], grp_discount(groups['lube']))
         product_lines.append(('D', '2710193020', f'{bbl:.2f} BBL', desc, wkg, 'EAR99', 'N', 'N/A', val, 'N/A'))
     if groups['def']:
-        bbl, wkg, val, desc = calc_group(groups['def'])
+        bbl, wkg, val, desc = calc_group(groups['def'], grp_discount(groups['def']))
         product_lines.append(('D', '3102100000', f'{bbl:.2f} BBL', desc, wkg, 'EAR99', 'N', 'N/A', val, 'N/A'))
 
     total_kg = sum(it.get('weight_lbs', 0) for it in items) / 2.20462
