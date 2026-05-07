@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<QBWCXML>
+  <AppName>U1P Order Conversion</AppName>
+  <AppID>U1P-ORDER-CONVERSION-001</AppID>
+  <AppURL>http://localhost:8443/qbwc</AppURL>
+  <AppDescription>Pushes sales orders and estimates from U1P Order Conversion Tool into QuickBooks Enterprise.</AppDescription>
+  <AppSupport>http://localhost:5000</AppSupport>
+  <UserName>u1p_qb_connector</UserName>
+  <FileID>{B7E23F4A-91C2-4D58-A3E6-72F1DC8B3049}</FileID>
+  <OwnerID>{C4A17B3E-52D9-4F21-B8C3-96E2DA5F7813}</OwnerID>
+  <QBType>QBFS</QBType>
+  <QBFile>\\192.168.20.9\QuickBooks\Company Files\u1p_ultrachem.qbw</QBFile>
+  <Scheduler>
+    <RunEveryNSeconds>900</RunEveryNSeconds>
+  </Scheduler>
+  <IsReadOnly>false</IsReadOnly>
+</QBWCXML>

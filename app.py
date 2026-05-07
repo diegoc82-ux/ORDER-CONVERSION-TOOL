@@ -1,10 +1,14 @@
 import io
+import time
+import json as _json
 from pathlib import Path
 from flask import Flask, request, jsonify, send_file, render_template
 import pdfplumber
+from qb_queue import init_db, enqueue, get_job, get_recent_jobs
 
 app = Flask(__name__)
 BASE = Path(__file__).parent
+init_db()
 
 
 @app.route('/')
@@ -558,6 +562,460 @@ def generate_sli():
     return send_file(out, as_attachment=True, download_name=filename,
                      mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
+
+@app.route('/api/notion-lookup-dispatch', methods=['POST'])
+def notion_lookup_dispatch():
+    import json as _json
+    try:
+        import requests as _req
+    except ImportError:
+        return jsonify({'error': 'requests library not installed. Run: pip install requests'}), 500
+
+    data = request.get_json()
+    dispatch_num = (data.get('dispatch_num') or '').strip()
+    if not dispatch_num:
+        return jsonify({'error': 'dispatch_num is required'}), 400
+
+    cfg_path = BASE / 'notion_config.json'
+    if not cfg_path.exists():
+        return jsonify({'error': 'notion_config.json not found'}), 500
+    cfg = _json.loads(cfg_path.read_text())
+    token = cfg.get('token', '')
+    db_id = cfg.get('database_id', '2dfa8101-da66-811d-89ab-000b9cc2f16c')
+    if not token or token.startswith('YOUR_'):
+        return jsonify({'error': 'Notion token not configured in notion_config.json'}), 500
+
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+    }
+    payload = {'filter': {'property': 'title', 'title': {'contains': dispatch_num}}}
+    resp = _req.post(f'https://api.notion.com/v1/databases/{db_id}/query',
+                     headers=headers, json=payload, timeout=10)
+    if resp.status_code != 200:
+        return jsonify({'error': f'Notion API error {resp.status_code}: {resp.text[:200]}'}), 500
+
+    results = resp.json().get('results', [])
+    if not results:
+        return jsonify({'found': False, 'message': f'No record found for "{dispatch_num}"'}), 200
+
+    props = results[0].get('properties', {})
+
+    def get_val(name):
+        p = props.get(name, {})
+        t = p.get('type', '')
+        if t == 'rich_text':
+            rt = p.get('rich_text', [])
+            return rt[0]['plain_text'] if rt else ''
+        if t == 'title':
+            ti = p.get('title', [])
+            return ti[0]['plain_text'] if ti else ''
+        if t == 'select':
+            s = p.get('select')
+            return s['name'] if s else ''
+        if t == 'multi_select':
+            return ', '.join(m['name'] for m in p.get('multi_select', []))
+        if t == 'number':
+            v = p.get('number')
+            return str(v) if v is not None else ''
+        return ''
+
+    return jsonify({
+        'found': True,
+        'container_num':      get_val('Container #'),
+        'seal_num':           get_val('Seal #'),
+        'customer_po':        get_val('CUSTOMER PO'),
+        'delivery_location':  get_val('Delivery Location'),
+        'pickup_location':    get_val('Pick-Up Location'),
+        'booking_bol':        get_val('Booking BOL #'),
+        'service_provider':   get_val('Service Provider'),
+        'type_of_load':       get_val('Type of Load'),
+        'pallet_qty':         get_val('Pallet QTY'),
+        'tare_weight':        get_val('Tare Weight'),
+    })
+
+
+@app.route('/api/generate-packing-list', methods=['POST'])
+def generate_packing_list():
+    import openpyxl
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    from openpyxl.utils import get_column_letter
+    from datetime import datetime, date
+    import io as io_mod
+
+    data           = request.get_json()
+    items          = [it for it in data.get('items', []) if it.get('ul_code') not in ('__DISCOUNT__', '__SUBTOTAL__')]
+    consignee      = data.get('consignee', {})
+    reference      = data.get('reference', '')
+    po_number      = data.get('po_number', '')
+    date_str       = data.get('date', date.today().isoformat())
+    container_num  = data.get('container_num', '')
+    seal_num       = data.get('seal_num', '')
+    port_origin    = data.get('port_origin', '')
+    final_dest     = data.get('final_dest', '')
+    mode_transport = data.get('mode_transport', '')
+    container_wt   = float(data.get('container_weight_lbs', 0) or 0)
+    pallets        = int(data.get('pallets', 0) or 0)
+    comments       = data.get('comments', 'Proudly made in the USA')
+
+    try:
+        doc_date     = datetime.strptime(date_str, '%Y-%m-%d')
+        date_display = doc_date.strftime('%B %d, %Y')
+    except Exception:
+        date_display = date_str
+
+    PIECES_MULT = {
+        'BOX (12Q)': 12, 'BOX (4G)': 4,   'BOX (6G)': 6,
+        'BOX (3/5QTS)': 3, 'BOX (2 X 2.5G)': 2, 'BOX (1 X 2.5G)': 1,
+        'PAIL (5G)': 1, 'DRUM (55G)': 1,   'TOTE (265G)': 1,
+        'TOTE (250G)': 1, 'TOTE (330G)': 1, 'JERRYCAN (20L)': 1,
+        'CASE 10/1': 1,
+    }
+
+    NAVY     = '0D2B4E'
+    LT_GRAY  = 'F2F4F6'
+    MED_GRAY = 'D8DDE4'
+    WHITE    = 'FFFFFF'
+    SUM1_BG  = 'E4EBF5'
+    SUM2_BG  = 'C8D8EE'
+    SUM3_BG  = 'A8BFE0'
+
+    def fill(hex_color):
+        return PatternFill('solid', fgColor=hex_color)
+
+    def font(bold=False, color='222222', size=10, italic=False):
+        return Font(bold=bold, color=color, size=size, name='Arial', italic=italic)
+
+    def align(h='left', v='center', wrap=False):
+        return Alignment(horizontal=h, vertical=v, wrap_text=wrap)
+
+    def border(left=False, right=False, top=False, bottom=False, thick_bottom=False):
+        thin = Side(style='thin', color='BBBBBB')
+        thick = Side(style='medium', color=NAVY)
+        n = Side(style=None)
+        return Border(
+            left=thin if left else n,
+            right=thin if right else n,
+            top=thin if top else n,
+            bottom=(thick if thick_bottom else thin) if bottom else n,
+        )
+
+    def set_cell(ws, coord, value, fnt=None, fll=None, aln=None, brd=None):
+        c = ws[coord]
+        c.value = value
+        if fnt: c.font = fnt
+        if fll: c.fill = fll
+        if aln: c.alignment = aln
+        if brd: c.border = brd
+        return c
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = 'Packing List'
+
+    ws.column_dimensions['A'].width = 11
+    ws.column_dimensions['B'].width = 16
+    ws.column_dimensions['C'].width = 16
+    ws.column_dimensions['D'].width = 54
+    ws.column_dimensions['E'].width = 14
+
+    r = 1
+
+    # ── Logo (top-right, above the date, row 1) ───────────────────────────────
+    logo_path = BASE / 'static' / 'u1p_logo.png'
+    _logo_img = None
+    if logo_path.exists():
+        try:
+            from openpyxl.drawing.image import Image as XLImage
+            from PIL import Image as PILImage
+            import io as _io
+            pil = PILImage.open(logo_path).convert('RGB')
+            target_h_px = 52
+            ratio = target_h_px / pil.height
+            pil = pil.resize((int(pil.width * ratio), target_h_px), PILImage.LANCZOS)
+            buf = _io.BytesIO()
+            pil.save(buf, format='PNG')
+            buf.seek(0)
+            _logo_img = XLImage(buf)
+            _logo_img.width  = pil.width
+            _logo_img.height = target_h_px
+            _logo_img.anchor = 'E1'
+        except Exception:
+            _logo_img = None
+
+    # ── Title row (taller to accommodate logo) ────────────────────────────────
+    ws.merge_cells(f'A{r}:D{r}')
+    set_cell(ws, f'A{r}', 'PACKING LIST',
+             fnt=Font(bold=True, color=WHITE, size=16, name='Arial'),
+             fll=fill(NAVY), aln=align('left'))
+    # E1 — navy background behind the logo
+    set_cell(ws, f'E{r}', '', fll=fill(NAVY))
+    ws.row_dimensions[r].height = 58
+    r += 1
+
+    # ── Company + Date ────────────────────────────────────────────────────────
+    ws.merge_cells(f'A{r}:C{r}')
+    set_cell(ws, f'A{r}', 'ULTRACHEM LLC',
+             fnt=Font(bold=True, color=WHITE, size=11, name='Arial'),
+             fll=fill(NAVY), aln=align('left'))
+    ws.merge_cells(f'D{r}:E{r}')
+    set_cell(ws, f'D{r}', f'Date: {date_display}',
+             fnt=font(color=WHITE, size=10), fll=fill(NAVY), aln=align('right'))
+    ws.row_dimensions[r].height = 20
+    r += 1
+
+    # ── Address row ───────────────────────────────────────────────────────────
+    ws.merge_cells(f'A{r}:C{r}')
+    set_cell(ws, f'A{r}', '1444 NW 82nd Ave. Miami, FL 33126  •  United States of America',
+             fnt=Font(color=MED_GRAY, size=8.5, name='Arial'),
+             fll=fill(NAVY), aln=align('left'))
+    ws.merge_cells(f'D{r}:E{r}')
+    set_cell(ws, f'D{r}', 'Ph: 786-953-6132',
+             fnt=Font(color=MED_GRAY, size=8.5, name='Arial'),
+             fll=fill(NAVY), aln=align('right'))
+    ws.row_dimensions[r].height = 15
+    r += 1
+
+    # ── SOLD TO / SHIP TO labels ──────────────────────────────────────────────
+    ws.merge_cells(f'A{r}:B{r}')
+    set_cell(ws, f'A{r}', 'SOLD TO',
+             fnt=Font(bold=True, color=WHITE, size=8.5, name='Arial'),
+             fll=fill('1A4A8A'), aln=align('center'))
+    ws.merge_cells(f'C{r}:E{r}')
+    set_cell(ws, f'C{r}', 'SHIP TO',
+             fnt=Font(bold=True, color=WHITE, size=8.5, name='Arial'),
+             fll=fill('1A4A8A'), aln=align('center'))
+    ws.row_dimensions[r].height = 15
+    r += 1
+
+    # ── SOLD TO / SHIP TO content (3 rows merged) ─────────────────────────────
+    import math as _math
+    addr_parts = list(filter(None, [
+        consignee.get('name', ''),
+        consignee.get('address1', ''),
+        consignee.get('address2', ''),
+    ]))
+    addr_lines = '\n'.join(addr_parts)
+    # estimate lines needed in the narrower left column (A+B = ~27 char units)
+    col_ab_chars = int(ws.column_dimensions['A'].width + ws.column_dimensions['B'].width)
+    total_lines = sum(_math.ceil(len(p) / col_ab_chars) for p in addr_parts) if addr_parts else 1
+    block_height = max(42, total_lines * 14)
+    addr_end = r + 2
+    ws.merge_cells(f'A{r}:B{addr_end}')
+    set_cell(ws, f'A{r}', addr_lines,
+             fnt=font(size=9), fll=fill(LT_GRAY),
+             aln=align('left', 'top', wrap=True),
+             brd=border(left=True, right=True, top=True, bottom=True))
+    ws.merge_cells(f'C{r}:E{addr_end}')
+    set_cell(ws, f'C{r}', addr_lines,
+             fnt=font(size=9), fll=fill(LT_GRAY),
+             aln=align('left', 'top', wrap=True),
+             brd=border(left=True, right=True, top=True, bottom=True))
+    per_row_h = block_height / 3
+    for i in range(r, addr_end + 1):
+        ws.row_dimensions[i].height = per_row_h
+    r = addr_end + 1
+
+    # ── Shipment info grid ────────────────────────────────────────────────────
+    info_rows = [
+        ('Ref Order',          reference,       'Port of Origin',    port_origin),
+        ('Customer PO#',       po_number,       'Container #',       container_num),
+        ('Seal #',             seal_num,        'Final Destination',  final_dest),
+        ('Country of Origin',  'United States', 'Mode of Transport', mode_transport),
+    ]
+    for label1, val1, label2, val2 in info_rows:
+        set_cell(ws, f'A{r}', label1,
+                 fnt=font(bold=True, color=NAVY, size=8.5),
+                 fll=fill(MED_GRAY), aln=align('left'),
+                 brd=border(left=True, top=True, bottom=True))
+        set_cell(ws, f'B{r}', val1,
+                 fnt=font(size=9), fll=fill(WHITE), aln=align('left'),
+                 brd=border(right=True, top=True, bottom=True))
+        set_cell(ws, f'C{r}', label2,
+                 fnt=font(bold=True, color=NAVY, size=8.5),
+                 fll=fill(MED_GRAY), aln=align('left'),
+                 brd=border(left=True, top=True, bottom=True))
+        ws.merge_cells(f'D{r}:E{r}')
+        set_cell(ws, f'D{r}', val2,
+                 fnt=font(size=9), fll=fill(WHITE), aln=align('left'),
+                 brd=border(left=True, right=True, top=True, bottom=True))
+        ws.row_dimensions[r].height = 16
+        r += 1
+
+    # ── Table header ──────────────────────────────────────────────────────────
+    headers = [
+        ('Total QTY',        'center'),
+        ('Package Type',     'center'),
+        ('Total # Of Pieces','center'),
+        ('Part Description', 'left'),
+        ('Weight (LBS)',     'right'),
+    ]
+    for i, (h, ha) in enumerate(headers):
+        col = get_column_letter(i + 1)
+        set_cell(ws, f'{col}{r}', h,
+                 fnt=Font(bold=True, color=WHITE, size=9, name='Arial'),
+                 fll=fill(NAVY), aln=align(ha),
+                 brd=border(left=(i == 0), right=(i == 4), top=True, bottom=True))
+    ws.row_dimensions[r].height = 18
+    r += 1
+
+    # ── Product rows ──────────────────────────────────────────────────────────
+    for idx, it in enumerate(items):
+        qty    = it.get('qty', 0)
+        pres   = it.get('presentation', '')
+        desc   = it.get('description', '')
+        wt     = it.get('weight_lbs', 0)
+        pieces = qty * PIECES_MULT.get(pres, 1)
+        bg     = WHITE if idx % 2 == 0 else LT_GRAY
+
+        row_vals = [
+            (qty,         'center'),
+            (pres,        'center'),
+            (pieces,      'center'),
+            (desc,        'left'),
+            (round(wt),   'right'),
+        ]
+        for i, (v, ha) in enumerate(row_vals):
+            col = get_column_letter(i + 1)
+            set_cell(ws, f'{col}{r}', v,
+                     fnt=font(size=9), fll=fill(bg), aln=align(ha),
+                     brd=border(left=(i == 0), right=(i == 4), bottom=True))
+        ws.row_dimensions[r].height = 15
+        r += 1
+
+    r += 1  # spacer
+
+    # ── Summary rows ──────────────────────────────────────────────────────────
+    net_wt   = round(sum(it.get('weight_lbs', 0) for it in items))
+    gross_wt = round(net_wt + container_wt)
+
+    for label, val, bg_color in [
+        ('QUANTITY OF PALLETS',    pallets,             LT_GRAY),
+        ('CONTAINER WEIGHT (LBS)', round(container_wt), SUM1_BG),
+        ('TOTAL NET WEIGHT (LBS)', net_wt,              SUM2_BG),
+        ('TOTAL GROSS WEIGHT (LBS)', gross_wt,          SUM3_BG),
+    ]:
+        ws.merge_cells(f'A{r}:D{r}')
+        set_cell(ws, f'A{r}', label,
+                 fnt=Font(bold=True, color=NAVY, size=9, name='Arial'),
+                 fll=fill(bg_color), aln=align('right'),
+                 brd=border(left=True, right=True, top=True, bottom=True))
+        set_cell(ws, f'E{r}', val,
+                 fnt=Font(bold=True, color=NAVY, size=10, name='Arial'),
+                 fll=fill(bg_color), aln=align('right'),
+                 brd=border(left=True, right=True, top=True, bottom=True))
+        ws.row_dimensions[r].height = 17
+        r += 1
+
+    # ── Footer ────────────────────────────────────────────────────────────────
+    r += 1
+    ws.merge_cells(f'A{r}:C{r}')
+    set_cell(ws, f'A{r}', f'Comments:  {comments}',
+             fnt=font(italic=True, size=9, color='555555'), aln=align('left'))
+    ws.row_dimensions[r].height = 16
+    r += 1
+
+    set_cell(ws, f'A{r}', f'Date: {date_display}', fnt=font(size=9))
+    ws.merge_cells(f'C{r}:E{r}')
+    set_cell(ws, f'C{r}', 'Authorized Signature:  _________________________________',
+             fnt=font(size=9), aln=align('right'))
+    ws.row_dimensions[r].height = 18
+
+    if _logo_img:
+        ws.add_image(_logo_img)
+
+    ws.page_setup.orientation = 'landscape'
+    ws.page_setup.fitToPage   = True
+    ws.page_setup.fitToWidth  = 1
+    ws.page_setup.fitToHeight = 0
+
+    out = io_mod.BytesIO()
+    wb.save(out)
+    out.seek(0)
+    cn = consignee.get('name', 'EXPORT').replace('/', '-').replace('\\', '-')
+    return send_file(out, as_attachment=True,
+                     download_name=f"Packing List - {cn} - {reference}.xlsx",
+                     mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+
+# ── QuickBooks integration routes ─────────────────────────────────────────────
+
+@app.route('/api/push-to-qb', methods=['POST'])
+def push_to_qb():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'error': 'No JSON body received'}), 400
+    job_type = data.get('job_type', 'sales_order')
+    if job_type not in ('sales_order', 'estimate'):
+        return jsonify({'error': 'job_type must be sales_order or estimate'}), 400
+    customer = (data.get('customer_name') or '').strip()
+    if not customer:
+        return jsonify({'error': 'customer_name is required'}), 400
+    line_items = data.get('line_items', [])
+    if not line_items:
+        return jsonify({'error': 'line_items cannot be empty'}), 400
+    payload = {
+        'customer_name': customer,
+        'ref_number':    data.get('ref_number', ''),
+        'memo':          data.get('memo', ''),
+        'txn_date':      data.get('txn_date', ''),
+        'line_items':    line_items,
+    }
+    job_id = enqueue(job_type, payload)
+    return jsonify({'job_id': job_id, 'status': 'queued'})
+
+
+@app.route('/api/qb-job-status/<job_id>', methods=['GET'])
+def qb_job_status(job_id):
+    job = get_job(job_id)
+    if not job:
+        return jsonify({'error': 'Job not found'}), 404
+    resp = {
+        'status':     job['status'],
+        'created_at': job['created_at'],
+        'updated_at': job['updated_at'],
+    }
+    if job['result']:
+        resp['result'] = _json.loads(job['result'])
+    if job['error']:
+        resp['error'] = job['error']
+    return jsonify(resp)
+
+
+@app.route('/api/qb-inventory', methods=['POST'])
+def qb_inventory():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'error': 'No JSON body received'}), 400
+    item_codes = data.get('item_codes', [])
+    if not item_codes:
+        return jsonify({'error': 'item_codes cannot be empty'}), 400
+    job_id = enqueue('inventory_query', {'item_codes': item_codes})
+    deadline = time.time() + 30
+    while time.time() < deadline:
+        time.sleep(2)
+        job = get_job(job_id)
+        if not job:
+            break
+        if job['status'] == 'done':
+            result = _json.loads(job['result'])
+            return jsonify(result.get('data', {}))
+        if job['status'] == 'error':
+            return jsonify({'error': job['error']}), 502
+    return jsonify({'error': 'QB is not responding. Is QBWC running?', 'job_id': job_id}), 504
+
+
+@app.route('/api/qb-jobs', methods=['GET'])
+def qb_jobs_list():
+    jobs = get_recent_jobs(50)
+    for j in jobs:
+        if j.get('result'):
+            j['result'] = _json.loads(j['result'])
+    return jsonify(jobs)
+
+
+# ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
     if not (BASE / 'products.json').exists():

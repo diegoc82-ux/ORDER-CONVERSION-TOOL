@@ -148,6 +148,19 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
 #cost-analysis-btn:hover { background: #5a32a3; }
 #sli-btn { display: none; background: #0d6ebd; color: #fff; }
 #sli-btn:hover { background: #0a52a0; }
+#packing-btn { display: none; background: #1a7a5e; color: #fff; }
+#packing-btn:hover { background: #155f49; }
+#qb-btn { display: none; background: #2b7a2b; color: #fff; }
+#qb-btn:hover { background: #1f5c1f; }
+#qb-status { display: none; font-size: .85rem; padding: 6px 12px; border-radius: 6px; font-weight: 600; vertical-align: middle; }
+#qb-status.queued    { background: #fff3cd; color: #856404; }
+#qb-status.processing{ background: #cfe2ff; color: #0a4578; }
+#qb-status.done      { background: #d1e7dd; color: #0a3622; }
+#qb-status.error     { background: #f8d7da; color: #58151c; }
+#approve-btn { display: none; background: #e07c00; color: #fff; font-weight: 700; }
+#approve-btn:hover { background: #b86600; }
+#approved-badge { display: none; background: #d1e7dd; color: #0a3622; font-size: .85rem; padding: 5px 12px; border-radius: 6px; font-weight: 600; vertical-align: middle; }
+#new-order-btn { display: none; }
 #sli-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:1000; justify-content:center; align-items:center; }
 #sli-modal-box { background:#fff; border-radius:12px; padding:28px 32px; max-width:560px; width:94%; max-height:90vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,.22); }
 #sli-modal-box h2 { margin:0 0 18px; font-size:1.15rem; color:#1a3c5c; }
@@ -159,6 +172,11 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
 .sli-actions { display:flex; gap:10px; margin-top:20px; }
 .btn-sli-ok { background:#1a7a3c; color:#fff; border:none; padding:9px 22px; border-radius:7px; cursor:pointer; font-weight:bold; font-size:.9rem; }
 .btn-sli-cancel { background:#6c757d; color:#fff; border:none; padding:9px 18px; border-radius:7px; cursor:pointer; }
+
+/* ── Packing List Modal ──────────────────────────────────────────────────── */
+#packing-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:1000; justify-content:center; align-items:center; }
+#packing-modal-box { background:#fff; border-radius:12px; padding:28px 32px; max-width:540px; width:94%; max-height:90vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,.22); }
+#packing-modal-box h2 { margin:0 0 18px; font-size:1.15rem; color:#1a3c5c; }
 
 /* ── Cost Analysis Modal ─────────────────────────────────────────────────── */
 #cost-modal-overlay {
@@ -310,6 +328,74 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
       </div>
     </div>
 
+    <!-- Packing List Modal -->
+    <div id="packing-modal">
+      <div id="packing-modal-box">
+        <h2>&#128230; Generate Packing List</h2>
+
+        <!-- Notion auto-fill -->
+        <div style="background:#eef4fb;border:1px solid #b8d0ec;border-radius:8px;padding:10px 14px;margin-bottom:14px;">
+          <div style="font-size:.8rem;font-weight:600;color:#1a3c5c;margin-bottom:6px;">&#128269; Auto-fill from Notion</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="pk-notion-dispatch" placeholder="Type dispatch # (e.g. 3097)" style="flex:1;padding:6px 10px;border:1px solid #b8d0ec;border-radius:6px;font-size:.88rem;">
+            <button onclick="fetchFromNotion()" id="pk-notion-btn" style="background:#1a3c5c;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:.85rem;cursor:pointer;white-space:nowrap;">&#128269; Fetch</button>
+          </div>
+          <div id="pk-notion-status" style="font-size:.78rem;margin-top:5px;color:#555;"></div>
+        </div>
+
+        <div class="sli-section">Container & Shipment</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;">
+          <div class="sli-form-row">
+            <label>Container #</label>
+            <input type="text" id="pk-container" placeholder="e.g. TCKU7100229">
+          </div>
+          <div class="sli-form-row">
+            <label>Seal #</label>
+            <input type="text" id="pk-seal" placeholder="e.g. 002319">
+          </div>
+          <div class="sli-form-row">
+            <label>Port of Origin</label>
+            <input type="text" id="pk-port-origin" placeholder="e.g. Houston, Texas">
+          </div>
+          <div class="sli-form-row">
+            <label>Final Destination</label>
+            <input type="text" id="pk-final-dest" placeholder="e.g. Guayaquil, Ecuador">
+          </div>
+          <div class="sli-form-row">
+            <label>Mode of Transport</label>
+            <input type="text" id="pk-mode" placeholder="e.g. Ocean">
+          </div>
+          <div class="sli-form-row">
+            <label>Container Tare Weight (LBS)</label>
+            <input type="number" id="pk-container-wt" placeholder="e.g. 8160" min="0">
+          </div>
+          <div class="sli-form-row">
+            <label>Number of Pallets</label>
+            <input type="number" id="pk-pallets" placeholder="e.g. 20" min="0">
+          </div>
+        </div>
+        <div class="sli-section">Document Info</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;">
+          <div class="sli-form-row">
+            <label>Reference # (Dispatch)</label>
+            <input type="text" id="pk-ref" placeholder="e.g. Dispatch 3097">
+          </div>
+          <div class="sli-form-row">
+            <label>Date</label>
+            <input type="date" id="pk-date">
+          </div>
+        </div>
+        <div class="sli-form-row">
+          <label>Comments</label>
+          <input type="text" id="pk-comments" placeholder="e.g. Proudly made in the USA" value="Proudly made in the USA">
+        </div>
+        <div class="sli-actions">
+          <button class="btn-sli-ok" style="background:#1a7a5e;" onclick="submitPackingList()">&#11015;&#65039; Generate Packing List</button>
+          <button class="btn-sli-cancel" onclick="closePackingModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <!-- SLI Modal -->
     <div id="sli-modal">
       <div id="sli-modal-box">
@@ -451,8 +537,13 @@ tfoot td { padding: 8px 8px; font-weight: bold; background: #dde4ef; font-size: 
       <button class="btn btn-success" id="generate-btn" onclick="generateCSV()">&#11015;&#65039; Download Dispatch CSV</button>
       <button class="btn" id="cost-analysis-btn" onclick="openCostAnalysis()">&#128200; Cost Analysis</button>
       <button class="btn" id="sli-btn" onclick="openSLIModal()">&#128196; Export SLI</button>
+      <button class="btn" id="packing-btn" onclick="openPackingModal()">&#128230; Packing List</button>
+      <button class="btn" id="qb-btn" onclick="pushToQB()">&#9729;&#65039; Push to QuickBooks</button>
+      <span id="qb-status"></span>
       <button class="btn btn-neutral"  onclick="recalcAll()" title="Recalculate all rows after manual edits">&#8635; Update</button>
-      <button class="btn btn-neutral"  onclick="resetForm()">&#8634; New Order</button>
+      <button class="btn" id="approve-btn" onclick="approveOrder()">&#10003; Approve Order</button>
+      <span id="approved-badge">&#10003; Order Approved</span>
+      <button class="btn btn-neutral" id="new-order-btn" onclick="resetForm()">&#8634; New Order</button>
     </div>
   </div>
 
@@ -548,6 +639,7 @@ let miamiPrices      = {};
 let locationList     = '';   // '' | 'HOUSTON' | 'MIAMI'
 let currentClientName = '';
 let toteReturn = false;
+let orderApproved = false;
 let hasTotes   = false;
 let activeTab  = 'file';
 let selectedFile = null;
@@ -2262,7 +2354,7 @@ function calcItem(code, presentation, qty) {
 
 // ── Known-customer check ──────────────────────────────────────────────────
 const KNOWN_CUSTOMER_KEYS = [
-  'IMPORCARSA','MAXILUB','PAGSA','SERVISTAR','TREBOL','BEI CRUZ','BEICRUZ',
+  'IMPORCARSA','MAXILUB','PAGSA','PARTES AUTOMOTRICES','SERVISTAR','TREBOL','BEI CRUZ','BEICRUZ',
   'COMPETITIVE EDGE','COMP EDGE','GARNER','UKR','KOREA PARTS','ASARAY','PRO SUPPLY',
   'ABC AUTO','DAHER','DIANCA','FRENOSEGURO','8A AUTO','8A DOMINUS','EIGHT A',
 ];
@@ -2284,9 +2376,8 @@ function setLocationList(loc) {
     const sel = tr.querySelector('select');
     if (sel) { autofillPrice(tr); onRowChange(sel); }
   });
-  document.getElementById('generate-btn').style.display = 'inline-block';
   document.getElementById('cost-analysis-btn').style.display = 'inline-block';
-  document.getElementById('sli-btn').style.display = 'inline-block';
+  document.getElementById('approve-btn').style.display = 'inline-block';
   // Show save-customer prompt if a name is typed
   const clientName = document.getElementById('f-client').value.trim();
   if (clientName && !isKnownCustomer(clientName)) {
@@ -2306,6 +2397,12 @@ function resetLocationList() {
   document.getElementById('generate-btn').style.display = 'none';
   document.getElementById('cost-analysis-btn').style.display = 'none';
   document.getElementById('sli-btn').style.display = 'none';
+  document.getElementById('packing-btn').style.display = 'none';
+  document.getElementById('qb-btn').style.display = 'none';
+  document.getElementById('qb-status').style.display = 'none';
+  document.getElementById('approve-btn').style.display = 'none';
+  document.getElementById('approved-badge').style.display = 'none';
+  document.getElementById('new-order-btn').style.display = 'none';
   document.getElementById('customer-setup-prompt').style.display = 'none';
 }
 
@@ -2313,6 +2410,7 @@ function resetLocationList() {
 function renderForm(parsed) {
   currentClientName = parsed.clientName || '';
   locationList = '';
+  orderApproved = false;
   document.getElementById('f-client').value   = parsed.clientName  || '';
   document.getElementById('f-po').value       = parsed.poNumber    || '';
   document.getElementById('f-addr1').value    = parsed.address1    || '';
@@ -2353,12 +2451,17 @@ function renderForm(parsed) {
     document.getElementById('generate-btn').style.display = 'none';
     document.getElementById('cost-analysis-btn').style.display = 'none';
     document.getElementById('sli-btn').style.display = 'none';
+    document.getElementById('packing-btn').style.display = 'none';
+    document.getElementById('qb-btn').style.display = 'none';
+    document.getElementById('qb-status').style.display = 'none';
+    document.getElementById('approve-btn').style.display = 'none';
+    document.getElementById('approved-badge').style.display = 'none';
+    document.getElementById('new-order-btn').style.display = 'none';
   } else {
     prompt.style.display = 'none';
     if (isKnownCustomer(currentClientName)) {
-      document.getElementById('generate-btn').style.display = 'inline-block';
       document.getElementById('cost-analysis-btn').style.display = 'inline-block';
-      document.getElementById('sli-btn').style.display = 'inline-block';
+      document.getElementById('approve-btn').style.display = 'inline-block';
     }
     // For unknown customers, buttons appear only after setLocationList() is called
   }
@@ -2789,9 +2892,8 @@ function refreshTotePrompt() {
     // For unknown customers, only show action buttons once a location list has been selected
     const canShowButtons = isKnownCustomer(currentClientName) || locationList !== '';
     if (canShowButtons) {
-      document.getElementById('generate-btn').style.display = 'inline-block';
       document.getElementById('cost-analysis-btn').style.display = 'inline-block';
-      document.getElementById('sli-btn').style.display = 'inline-block';
+      document.getElementById('approve-btn').style.display = 'inline-block';
     }
   }
 }
@@ -2801,9 +2903,15 @@ function setToteReturn(val) {
   toteReturn = val;
   document.getElementById('tote-prompt').innerHTML =
     `<p>Tote Return Program: <span class="tote-badge ${val?'badge-yes':'badge-no'}">${val?'✅ Approved':'❌ Standard Billing'}</span></p>`;
-  document.getElementById('generate-btn').style.display = 'inline-block';
+  orderApproved = false;
+  document.getElementById('generate-btn').style.display = 'none';
+  document.getElementById('sli-btn').style.display = 'none';
+  document.getElementById('packing-btn').style.display = 'none';
+  document.getElementById('qb-btn').style.display = 'none';
+  document.getElementById('new-order-btn').style.display = 'none';
+  document.getElementById('approved-badge').style.display = 'none';
   document.getElementById('cost-analysis-btn').style.display = 'inline-block';
-  document.getElementById('sli-btn').style.display = 'inline-block';
+  document.getElementById('approve-btn').style.display = 'inline-block';
   // Re-compute all tote rows so SKU/spec reflect the updated choice
   document.querySelectorAll('#items-body tr').forEach(tr => {
     const sel = tr.querySelector('select');
@@ -2869,6 +2977,168 @@ function onForwarderSelect() {
   saveRow.style.display = 'none';
 }
 
+// ── Approve Order ─────────────────────────────────────────────────────────────
+function approveOrder() {
+  orderApproved = true;
+  document.getElementById('approve-btn').style.display    = 'none';
+  document.getElementById('approved-badge').style.display = 'inline-block';
+  document.getElementById('generate-btn').style.display   = 'inline-block';
+  document.getElementById('sli-btn').style.display        = 'inline-block';
+  document.getElementById('packing-btn').style.display    = 'inline-block';
+  document.getElementById('qb-btn').style.display         = 'inline-block';
+  document.getElementById('new-order-btn').style.display  = 'inline-block';
+}
+
+// ── Push to QuickBooks ────────────────────────────────────────────────────────
+async function pushToQB() {
+  const clientName = document.getElementById('f-client').value.trim();
+  const poNumber   = document.getElementById('f-po').value.trim();
+  const orderDate  = document.getElementById('f-date').value.trim();
+
+  // Collect product rows only (skip subtotals; discounts reduce the unit price)
+  const lineItems = [];
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const rowType = tr.dataset.rowType;
+    if (rowType === 'subtotal') return;
+
+    const code  = tr.dataset.code || '';
+    const cells = tr.querySelectorAll('td');
+    if (!code || cells.length < 2) return;
+
+    if (rowType === 'discount') {
+      // attach discount as a negative line
+      const totalCell = tr.querySelector('.total-cell');
+      const amt = parseFloat(totalCell?.dataset?.raw || 0);
+      if (amt !== 0) {
+        lineItems.push({
+          item_code:   'DISCOUNT',
+          description: cells[0]?.textContent?.trim() || 'Discount',
+          qty:         1,
+          unit_price:  amt,   // already negative
+        });
+      }
+      return;
+    }
+
+    const presEl = tr.querySelector('select');
+    const presentation = presEl ? presEl.value : '';
+    const totalCell = tr.querySelector('.total-cell');
+    const total = parseFloat(totalCell?.dataset?.raw || 0);
+    const qtyEl = tr.querySelector('.cases-input');
+    const qty   = parseInt(qtyEl?.value || 1, 10) || 1;
+    const unitPrice = qty > 0 ? +(total / qty).toFixed(5) : 0;
+
+    const descEl = tr.querySelector('.desc-cell');
+    const desc   = descEl ? descEl.textContent.trim() : '';
+
+    // QB item name lives in .sku-cell (e.g. "USB1540CI4SL-BG")
+    const skuEl  = tr.querySelector('.sku-cell');
+    const sku    = skuEl ? skuEl.textContent.trim() : '';
+    const validSku = sku && sku !== '?' && !sku.startsWith('Not found');
+
+    if (code && validSku && qty > 0 && unitPrice > 0) {
+      // QB Group items have the pattern base-Bx (e.g. UFS020SPGF6A-BL).
+      // They must use SalesOrderLineGroupAdd — flag them by passing individual_sku
+      // so the server builds the right QBXML element with a per-unit price override.
+      const groupMatch = sku.match(/^(.+)-B([A-Z])$/);
+      if (groupMatch) {
+        const individualSku = groupMatch[1] + groupMatch[2]; // e.g. UFS020SPGF6AL
+        const presVal       = presentation || '';
+        const unitsMatch    = presVal.match(/BOX\s*\(?(\d+)/i);
+        const unitsPerCase  = unitsMatch ? parseInt(unitsMatch[1], 10) : 1;
+        const pricePerUnit  = +(unitPrice / unitsPerCase).toFixed(5);
+        lineItems.push({
+          item_code:      sku,            // group item — QB shows this as header
+          individual_sku: individualSku,  // component item — for price override
+          description:    desc,
+          qty:            qty,            // case qty (QB expands to units)
+          unit_price:     pricePerUnit,   // per-unit price
+        });
+      } else {
+        lineItems.push({
+          item_code:   sku,
+          description: desc,
+          qty:         qty,
+          unit_price:  unitPrice,
+        });
+      }
+    }
+  });
+
+  if (!clientName) { alert('Please enter a customer name first.'); return; }
+  if (!lineItems.length) { alert('No priced line items found. Make sure prices are filled in.'); return; }
+
+  // Convert order date to YYYY-MM-DD
+  let txnDate = '';
+  if (orderDate) {
+    const parts = orderDate.split('/');
+    if (parts.length === 3) txnDate = `${parts[2]}-${parts[0].padStart(2,'0')}-${parts[1].padStart(2,'0')}`;
+  }
+
+  const statusEl = document.getElementById('qb-status');
+  const btn      = document.getElementById('qb-btn');
+  btn.disabled   = true;
+  statusEl.textContent = '⏳ Queuing…';
+  statusEl.className   = 'queued';
+  statusEl.style.display = 'inline-block';
+
+  try {
+    const res = await fetch('/api/push-to-qb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        job_type:      'sales_order',
+        customer_name: clientName,
+        ref_number:    poNumber,
+        txn_date:      txnDate,
+        memo:          `Pushed from U1P Order Conversion Tool`,
+        line_items:    lineItems,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) { throw new Error(data.error || 'Server error'); }
+
+    const jobId = data.job_id;
+    statusEl.textContent = '⏳ Waiting for QuickBooks…';
+    statusEl.className   = 'processing';
+
+    // Poll until done or error (max ~90 s)
+    let attempts = 0;
+    const poll = setInterval(async () => {
+      attempts++;
+      if (attempts > 45) {
+        clearInterval(poll);
+        statusEl.textContent = '⚠️ Timed out — is QBWC running?';
+        statusEl.className   = 'error';
+        btn.disabled = false;
+        return;
+      }
+      try {
+        const sr  = await fetch(`/api/qb-job-status/${jobId}`);
+        const job = await sr.json();
+        if (job.status === 'done') {
+          clearInterval(poll);
+          const txnId = job.result?.data?.txn_id || '';
+          const ref   = job.result?.data?.ref_number || poNumber;
+          statusEl.textContent = `✅ Sales Order created in QB${ref ? ' — Ref: ' + ref : ''}`;
+          statusEl.className   = 'done';
+          btn.disabled = false;
+        } else if (job.status === 'error') {
+          clearInterval(poll);
+          statusEl.textContent = `❌ QB error: ${job.error || 'unknown'}`;
+          statusEl.className   = 'error';
+          btn.disabled = false;
+        }
+      } catch(e) { /* network blip — keep polling */ }
+    }, 2000);
+
+  } catch(err) {
+    statusEl.textContent = `❌ ${err.message}`;
+    statusEl.className   = 'error';
+    btn.disabled = false;
+  }
+}
+
 function openSLIModal() {
   const po = document.getElementById('f-po').value.trim();
   document.getElementById('sli-ref').value   = po || '';
@@ -2890,6 +3160,124 @@ function openSLIModal() {
 
 function closeSLIModal() {
   document.getElementById('sli-modal').style.display = 'none';
+}
+
+function openPackingModal() {
+  const po  = document.getElementById('f-po').value.trim();
+  const ref = document.getElementById('sli-ref')?.value.trim() || po;
+  document.getElementById('pk-ref').value  = ref || po;
+  document.getElementById('pk-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('pk-notion-dispatch').value = '';
+  document.getElementById('pk-notion-status').textContent = '';
+  document.getElementById('packing-modal').style.display = 'flex';
+}
+
+async function fetchFromNotion() {
+  const dispatch = document.getElementById('pk-notion-dispatch').value.trim();
+  const status   = document.getElementById('pk-notion-status');
+  const btn      = document.getElementById('pk-notion-btn');
+  if (!dispatch) { status.textContent = 'Enter a dispatch number first.'; status.style.color='#c0392b'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Fetching…';
+  status.textContent = '';
+  try {
+    const res  = await fetch('/api/notion-lookup-dispatch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dispatch_num: dispatch })
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      status.textContent = '⚠ ' + (data.error || 'Unknown error');
+      status.style.color = '#c0392b';
+    } else if (!data.found) {
+      status.textContent = 'No record found for "' + dispatch + '"';
+      status.style.color = '#c0392b';
+    } else {
+      if (data.container_num)     document.getElementById('pk-container').value   = data.container_num;
+      if (data.seal_num)          document.getElementById('pk-seal').value         = data.seal_num;
+      if (data.pickup_location)   document.getElementById('pk-port-origin').value  = data.pickup_location;
+      if (data.delivery_location) document.getElementById('pk-final-dest').value   = data.delivery_location;
+      const modeVal = data.type_of_load || data.service_provider;
+      if (modeVal) document.getElementById('pk-mode').value = modeVal === 'Export Container' ? 'OCEAN' : modeVal;
+      if (data.customer_po)       document.getElementById('pk-ref').value          = 'PO ' + data.customer_po;
+      if (data.pallet_qty)        document.getElementById('pk-pallets').value       = data.pallet_qty;
+      if (data.tare_weight)       document.getElementById('pk-container-wt').value  = data.tare_weight;
+      const filled = ['container_num','seal_num','pickup_location','delivery_location','type_of_load','customer_po','pallet_qty','tare_weight']
+        .filter(k => data[k]).length;
+      status.textContent = '✓ Filled ' + filled + ' field(s) from Notion';
+      status.style.color = '#1a7a5e';
+    }
+  } catch(e) {
+    status.textContent = '⚠ Network error: ' + e.message;
+    status.style.color = '#c0392b';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🔍 Fetch';
+  }
+}
+
+function closePackingModal() {
+  document.getElementById('packing-modal').style.display = 'none';
+}
+
+async function submitPackingList() {
+  const items = [];
+  document.querySelectorAll('#items-body tr').forEach(tr => {
+    const rowType = tr.dataset.rowType;
+    if (rowType === 'subtotal' || rowType === 'discount') return;
+    const code = tr.querySelector('input:not([type=number])')?.value.trim().toUpperCase();
+    if (!code) return;
+    const pres  = tr.querySelector('select')?.value;
+    const qty   = parseInt(tr.querySelector('.cases-input')?.value) || 0;
+    if (!qty) return;
+    const ewt   = parseFloat(tr.querySelector('.ewt-cell')?.textContent.replace(/,/g,'')) || 0;
+    const desc  = tr.querySelector('.desc-cell')?.textContent.trim() || '';
+    items.push({ ul_code: code, presentation: pres, qty, weight_lbs: ewt, description: desc });
+  });
+  if (!items.length) { showError('No items in the order to export.'); return; }
+
+  const payload = {
+    reference:           document.getElementById('pk-ref').value.trim(),
+    po_number:           document.getElementById('f-po').value.trim(),
+    date:                document.getElementById('pk-date').value,
+    container_num:       document.getElementById('pk-container').value.trim(),
+    seal_num:            document.getElementById('pk-seal').value.trim(),
+    port_origin:         document.getElementById('pk-port-origin').value.trim(),
+    final_dest:          document.getElementById('pk-final-dest').value.trim(),
+    mode_transport:      document.getElementById('pk-mode').value.trim(),
+    container_weight_lbs: parseFloat(document.getElementById('pk-container-wt').value) || 0,
+    pallets:             parseInt(document.getElementById('pk-pallets').value) || 0,
+    comments:            document.getElementById('pk-comments').value.trim(),
+    consignee: {
+      name:     document.getElementById('f-client').value.trim(),
+      address1: document.getElementById('f-addr1').value.trim(),
+      address2: document.getElementById('f-addr2').value.trim(),
+    },
+    items,
+  };
+
+  try {
+    const resp = await fetch('/api/generate-packing-list', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      showError('Packing list generation failed: ' + (err.error || resp.statusText));
+      return;
+    }
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url;
+    a.download = `Packing List - ${payload.consignee.name.replace(/[\/\\]/g,'-')} - ${payload.reference || 'EXPORT'}.xlsx`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    closePackingModal();
+  } catch(e) {
+    showError('Packing list generation failed: ' + e.message);
+  }
 }
 
 async function submitSLI() {
@@ -3149,6 +3537,7 @@ function clearAll() {
   document.getElementById('customer-setup-prompt').style.display = 'none';
   document.getElementById('generate-btn').style.display = 'none';
   document.getElementById('sli-btn').style.display = 'none';
+  document.getElementById('packing-btn').style.display = 'none';
   hideMessages();
   toteReturn = false;
   hasTotes   = false;

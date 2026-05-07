@@ -1,28 +1,4 @@
 {
-  "TLR801": {
-    "name": "TLR ISO 32 AW Hydraulic Oil",
-    "presentations": {
-      "PAIL (5G)": "TLR32AWP"
-    }
-  },
-  "TLR802": {
-    "name": "TLR ISO 46 AW Hydraulic Oil",
-    "presentations": {
-      "PAIL (5G)": "TLR46AWP"
-    }
-  },
-  "TLR803": {
-    "name": "TLR ISO 68 AW Hydraulic Oil",
-    "presentations": {
-      "PAIL (5G)": "TLR68AWP"
-    }
-  },
-  "TLR810": {
-    "name": "TLR X20S Hydraulic Oil",
-    "presentations": {
-      "PAIL (5G)": "TLRX20SP"
-    }
-  },
   "UL050": {
     "name": "U1P-Care Anhydrous Calcium Soap Grease",
     "presentations": {}
@@ -98,7 +74,7 @@
       "QUART": "UFS0520SPGF6AL",
       "BOX (3Q)": "UFS0520SPGF6A-3L",
       "BOX (6Q)": "UFS0520SPGF6A-6L",
-      "5 Pack QT (Gal + QT)": "UFS016SPGF6B-GL",
+      "5 Pack QT (Gal + QT)": "UFS0520SPGF6A-GL",
       "6 Pack QT (Gal + 2QT)": "UFS0520SPGF6A-G2L",
       "BOX (12Q)": "UFS0520SPGF6A-BL",
       "BOX (3/5QTS)": "UFS0520SPGF6A-BJ",
@@ -812,7 +788,7 @@
       "BOX (6Q)": "USB1550CK4SN-6L",
       "5 Pack QT (Gal + QT)": "USB1550CK4SN-GL",
       "BOX (12Q)": "USB1550CK4SN-BL",
-      "BOX (3/5QTS)": "USB1550CK4SN-BG",
+      "BOX (3/5QTS)": "USB1550CK4SN-BJ",
       "BULK (OIL)": "USB1550CK4SN-oil",
       "JERRYCAN (20L)": "USB1550CK4SNJC",
       "6 Pack QT (Gal + 2QT)": "USB1550CK4SN-G2L"
@@ -1068,7 +1044,7 @@
     }
   },
   "UL308": {
-    "name": "U1P-DUTY SAE 15W-40 HDMO, API CK-4/SN",
+    "name": "U1P-DUTY SAE 15W-40 Heavy Duty 4 Motor Oil, API CK-4/SN",
     "presentations": {
       "TOTE (265G)": "UC1540CK4SNT",
       "DRUM (55G)": "UC1540CK4SND",
@@ -1289,48 +1265,6 @@
       "BOX (4G)": "UC1550CK4SNBG",
       "PAIL (5G)": "UC1550CK4SNP",
       "JERRYCAN (20L)": "UC1550CK4SNJC"
-    }
-  },
-  "UL320": {
-    "name": "U1P-DUTY SAE 15W-40 Heavy Duty 4 Motor Oil, API CK-4/SN",
-    "presentations": {
-      "BULK (OIL)": "UC1540CK4SN-oil",
-      "TOTE (265G)": "UC1540CK4SNT",
-      "DRUM (55G)": "UC1540CK4SND",
-      "PAIL (5G)": "UC1540CK4SNP",
-      "JUG": "UC1540CK4SNJ",
-      "2X5 QTS JUG": "UC1540CK4SN-2J",
-      "GAL": "UC1540CK4SNG",
-      "BOX (2G)": "UC1540CK4SN-2G",
-      "BOX (4G)": "UC1540CK4SN-BG",
-      "QUART": "UC1540CK4SNL",
-      "BOX (3Q)": "UC1540CK4SN-3L",
-      "BOX (6Q)": "UC1540CK4SN-6L",
-      "5 Pack QT (Gal + QT)": "UC1540CK4SN-GL",
-      "BOX (12Q)": "UC1540CK4SN-BL",
-      "BOX (3/5QTS)": "UC1540CK4SN-BJ",
-      "JERRYCAN (20L)": "UC1540CK4SNJC",
-      "6 Pack QT (Gal + 2QT)": "UC1540CK4SN-G2L"
-    }
-  },
-  "UL320F": {
-    "name": "",
-    "presentations": {
-      "BULK (OIL)": "UC1540CK4SNF-oil",
-      "TOTE (265G)": "UC1540CK4SNFT",
-      "DRUM (55G)": "UC1540CK4SNFD",
-      "PAIL (5G)": "UC1540CK4SNFP",
-      "JUG": "UC1540CK4SNFJ",
-      "2X5 QTS JUG": "UC1540CK4SNF-2J",
-      "GAL": "UC1540CK4SNFG",
-      "BOX (2G)": "UC1540CK4SNF-2G",
-      "BOX (4G)": "UC1540CK4SNF-BG",
-      "QUART": "UC1540CK4SNFL",
-      "BOX (3Q)": "UC1540CK4SNF-3L",
-      "5 Pack QT (Gal + QT)": "UC1540CK4SNF-GL",
-      "BOX (12Q)": "UC1540CK4SNF-BL",
-      "BOX (3/5QTS)": "UC1540CK4SNF-BJ",
-      "JERRYCAN (20L)": "UC1540CK4SNFJC"
     }
   },
   "UL400": {
@@ -1695,13 +1629,13 @@
       "2X5 QTS JUG": "USB10304TFCW-2J",
       "GAL": "USB10304TFCWG",
       "BOX (2G)": "USB10304TFCW-2G",
-      "BOX (4G)": "USB10304TFCWG",
-      "QUART": "USB10304TFCWG",
+      "BOX (4G)": "USB10304TFCW-BG",
+      "QUART": "USB10304TFCWL",
       "BOX (3Q)": "USB10304TFCWG-3L",
       "BOX (6Q)": "USB10304TFCW-6L",
       "5 Pack QT (Gal + QT)": "USB10304TFCW-GL",
       "BOX (12Q)": "USB10304TFCW-BL",
-      "BOX (3/5QTS)": "USB10304TFCWL",
+      "BOX (3/5QTS)": "USB10304TFCW-BJ",
       "BULK (OIL)": "USB10304TFCW-oil",
       "JERRYCAN (20L)": "USB10304TFCWJC",
       "6 Pack QT (Gal + 2QT)": "USB10304TFCW-G2L"
@@ -1914,14 +1848,14 @@
       "JUG": "UFS604TVTSLMA2J",
       "2X5 QTS JUG": "UFS604TVTSLMA2-2J",
       "GAL": "UFS604TVTSGMA2G",
-      "BOX (2G)": "UFS604TVTSLMA2G",
-      "BOX (4G)": "UFS604TVTSLMA2G",
-      "QUART": "UFS604TVTSLMA2G",
+      "BOX (2G)": "UFS604TVTSLMA2-2G",
+      "BOX (4G)": "UFS604TVTSLMA2-BG",
+      "QUART": "UFS604TVTSLMA2L",
       "BOX (3Q)": "UFS604TVTSLMA2G-3L",
       "BOX (6Q)": "UFS604TVTSLMA2-6L",
       "5 Pack QT (Gal + QT)": "UFS604TVTSLMA2-GL",
       "BOX (12Q)": "UFS604TVTSLMA2-BL",
-      "BOX (3/5QTS)": "UFS604TVTSLMA2L-BJ",
+      "BOX (3/5QTS)": "UFS604TVTSLMA2-BJ",
       "BULK (OIL)": "UFS60VTSLMA2-oil",
       "JERRYCAN (20L)": "UFS604TVTSLMA2JC",
       "6 Pack QT (Gal + 2QT)": "UFS604TVTSLMA2-G2L"
@@ -2046,7 +1980,7 @@
       "JUG": "UFSDVIMVJ",
       "2X5 QTS JUG": "UFSDVIMV-2J",
       "GAL": "UFSDVIMVG",
-      "BOX (2G)": "UFSDVIMVL",
+      "BOX (2G)": "UFSDVIMV-2G",
       "BOX (4G)": "UFSDVIMV-BG",
       "QUART": "UFSDVIMVL",
       "BOX (3Q)": "UFSDVIMVL-3L",
@@ -2188,7 +2122,7 @@
     "name": "U1P-DRIVE Rennsport Full Synthetic ATF LV",
     "presentations": {
       "TOTE (265G)": "UFSATFLVT",
-      "BULK (COOL)": "UFSATFLV-oil",
+      "BULK (OIL)": "UFSATFLV-oil",
       "DRUM (55G)": "UFSATFLVD",
       "JUG": "UFSATFLVJ",
       "QUART": "UFSATFLVL",
@@ -2197,7 +2131,6 @@
       "BOX (12Q)": "UFSATFLV-BL",
       "BOX (4G)": "UFSATFLV-BG",
       "BOX (3/5QTS)": "UFSATFLV-BJ",
-      "BULK (OIL)": "UFSATFLV-oil",
       "JERRYCAN (20L)": "UFSATFLVJC",
       "6 Pack QT (Gal + 2QT)": "UFSATFLV-G2L"
     }
@@ -3101,8 +3034,8 @@
       "DRUM (55G)": "UAC30RD",
       "BOX (6G)": "UAC30R-BG",
       "GAL": "UAC30RG",
-      "PAIL (5G)": "UAC30R",
-      "TOTE (250G)": "UAC30RG",
+      "PAIL (5G)": "UAC30RP",
+      "TOTE (250G)": "UAC30RT",
       "JERRYCAN (20L)": "UAC30RJC",
       "BOX (12Q)": "UAC30R-BL"
     }
@@ -3304,78 +3237,86 @@
   "UL950": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% EURO-ASIA BLUE",
     "presentations": {
-      "BULK (COOL)": "UACEL5050B-cool",
-      "DRUM (55G)": "UACEL5050BD",
-      "BOX (6G)": "UACEL5050B-BG",
-      "GAL": "UACEL5050BG",
-      "PAIL (5G)": "UACEL5050BP",
-      "TOTE (250G)": "UACEL5050BT",
-      "BOX (12Q)": "UACEL5050B-BL"
+      "BULK (COOL)": "UACEL30B-cool",
+      "DRUM (55G)": "UACEL30BD",
+      "BOX (6G)": "UACEL30B-BG",
+      "GAL": "UACEL30BG",
+      "PAIL (5G)": "UACEL30BP",
+      "TOTE (250G)": "UACEL30BT",
+      "BOX (12Q)": "UACEL30B-BL"
     }
   },
   "UL951": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% GOLD",
     "presentations": {
-      "BULK (COOL)": "UACEL5050Y-cool",
-      "DRUM (55G)": "UACEL5050YD",
-      "BOX (6G)": "UACEL5050Y-BG",
-      "GAL": "UACEL5050YG",
-      "PAIL (5G)": "UACEL5050YP",
-      "TOTE (250G)": "UACEL5050YT",
-      "BOX (12Q)": "UACEL5050Y-BL"
+      "BULK (COOL)": "UACEL30Y-cool",
+      "DRUM (55G)": "UACEL30YD",
+      "BOX (6G)": "UACEL30Y-BG",
+      "GAL": "UACEL30YG",
+      "PAIL (5G)": "UACEL30YP",
+      "TOTE (250G)": "UACEL30YT",
+      "BOX (12Q)": "UACEL30Y-BL"
     }
   },
   "UL952": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant 30% VIOLET-PINK EURORENNSPORT",
     "presentations": {
-      "BULK (COOL)": "UACEL5050V-cool",
-      "DRUM (55G)": "UACEL5050VD",
-      "BOX (6G)": "UACEL5050V-BG",
-      "GAL": "UACEL5050VG",
-      "PAIL (5G)": "UACEL5050VP",
-      "TOTE (250G)": "UACEL5050VDT",
-      "BOX (12Q)": "UACEL5050V-BL"
+      "BULK (COOL)": "UACEL30V-cool",
+      "DRUM (55G)": "UACEL30VD",
+      "BOX (6G)": "UACEL30V-BG",
+      "GAL": "UACEL30VG",
+      "PAIL (5G)": "UACEL30VP",
+      "TOTE (250G)": "UACEL30VDT",
+      "BOX (12Q)": "UACEL30V-BL"
     }
   },
   "UL953": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% GREEN",
     "presentations": {
-      "BULK (COOL)": "UACEL5050G-cool",
-      "DRUM (55G)": "UACEL5050GD",
-      "BOX (6G)": "UACEL5050G-BG",
-      "GAL": "UACEL5050GG",
-      "PAIL (5G)": "UACEL5050GP",
-      "TOTE (250G)": "UACEL5050GT",
-      "BOX (12Q)": "UACEL5050G-BL"
+      "BULK (COOL)": "UACEL30G-cool",
+      "DRUM (55G)": "UACEL30GD",
+      "BOX (6G)": "UACEL30G-BG",
+      "GAL": "UACEL30GG",
+      "PAIL (5G)": "UACEL30GP",
+      "TOTE (250G)": "UACEL30GT",
+      "BOX (12Q)": "UACEL30G-BL"
     }
   },
   "UL954": {
     "name": "UltraCool Extended Life OAT HEAVY DUTY Antifreeze + Coolant PREMIXED 30% RED",
     "presentations": {
-      "BULK (COOL)": "UACEL5050R-cool",
-      "DRUM (55G)": "UACEL5050RD",
-      "BOX (6G)": "UACEL5050R-BG",
-      "GAL": "UACEL5050RG",
-      "PAIL (5G)": "UACEL5050RP",
-      "TOTE (250G)": "UACEL5050RT",
-      "BOX (12Q)": "UACEL5050R-BL"
+      "BULK (COOL)": "UACEL30R-cool",
+      "DRUM (55G)": "UACEL30RD",
+      "BOX (6G)": "UACEL30R-BG",
+      "GAL": "UACEL30RG",
+      "PAIL (5G)": "UACEL30RP",
+      "TOTE (250G)": "UACEL30RT",
+      "BOX (12Q)": "UACEL30R-BL"
     }
   },
   "UL955": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% ORANGE",
     "presentations": {
-      "BULK (COOL)": "UACEL5050O-cool",
-      "DRUM (55G)": "UACEL5050OD",
-      "BOX (6G)": "UACEL5050O-BG",
-      "GAL": "UACEL5050OG",
-      "PAIL (5G)": "UACEL5050OP",
-      "TOTE (250G)": "UACEL5050OT",
-      "BOX (12Q)": "UACEL5050O-BL"
+      "BULK (COOL)": "UACEL30O-cool",
+      "DRUM (55G)": "UACEL30OD",
+      "BOX (6G)": "UACEL30O-BG",
+      "GAL": "UACEL30OG",
+      "PAIL (5G)": "UACEL30OP",
+      "TOTE (250G)": "UACEL30OT",
+      "BOX (12Q)": "UACEL30O-BL"
     }
   },
   "UL956": {
     "name": "UltraCool Extended Life OAT Antifreeze + Coolant PREMIXED 30% PURPLE",
-    "presentations": {}
+    "presentations": {
+      "BULK (COOL)": "UACEL30P-cool",
+      "DRUM (55G)": "UACEL30PD",
+      "BOX (6G)": "UACEL30P-BG",
+      "GAL": "UACEL30PG",
+      "PAIL (5G)": "UACEL30PP",
+      "TOTE (250G)": "UACEL30PT",
+      "BOX (12Q)": "UACEL30P-BL"
+    }
   },
   "UL961": {
     "name": "UltraCool Extended Life NOAT PREMIXED 50/50 GOLD (OCA-2M)",
@@ -3481,6 +3422,30 @@
       "14OZ GREASE CARTRIDGE": "UMGLCHTRC",
       "KEG (120LBS)": "UMGLCHTRK",
       "CASE 10/1": "UMGLCHTR-BC"
+    }
+  },
+  "TLR801": {
+    "name": "TLR ISO 32 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR32AWP"
+    }
+  },
+  "TLR802": {
+    "name": "TLR ISO 46 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR46AWP"
+    }
+  },
+  "TLR803": {
+    "name": "TLR ISO 68 AW Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLR68AWP"
+    }
+  },
+  "TLR810": {
+    "name": "TLR X20S Hydraulic Oil",
+    "presentations": {
+      "PAIL (5G)": "TLRX20SP"
     }
   }
 }

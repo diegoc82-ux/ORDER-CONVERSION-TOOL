@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime / generated
+qb_jobs.db
+dispatch_counter.json
+
+# Sensitive config
+notion_config.json
+
+# Temp / junk
+*.tmp
+ORDER-CONVERSION-TOOL-2.git/
+C：*
